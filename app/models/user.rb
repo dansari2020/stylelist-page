@@ -4,6 +4,7 @@ class User < ApplicationRecord
     :registerable, :timeoutable, :confirmable
 
   enum role: %w[client hair_stylist barber admin]
+  enum status: %w[pending completed]
 
   has_one_attached :avatar
 

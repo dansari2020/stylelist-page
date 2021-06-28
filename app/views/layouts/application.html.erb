@@ -3,9 +3,11 @@
   <head>
     <%= render 'shared/head' %>
   </head>
-  <body>
+  <body class="overflow-hidden">
     <%= render "shared/header" %>
-    <%= yield %>
+    <main class="flex-1 lg:mt-20">
+      <%= yield %>
+    </main>
     <%= render "shared/footer" %>
   </body>
 </html>

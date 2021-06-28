@@ -6,17 +6,23 @@ class Users::AfterRegisterController < ApplicationController
 
   def show
     @user = current_user
-    case step
-    when :add_twitter
-      skip_step if @user.zip.blank?
+    if step == :final || @user.completed?
+      redirect_to(root_url)
+    else
+      render_wizard
     end
-    render_wizard
   end
 
   def update
+    byebug
     @user = current_user
-    @user.update(user_params)
-    render_wizard @user
+    if step == :final
+      @user.completed!
+      redirect_to(root_url)
+    else
+      @user.update(user_params)
+      render_wizard @user
+    end
   end
 
   def user_params
