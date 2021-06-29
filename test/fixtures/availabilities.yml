@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  day: 1
+  open_at: 2021-06-29 20:30:45
+  close_at: 2021-06-29 20:30:45
+
+two:
+  user: two
+  day: 1
+  open_at: 2021-06-29 20:30:45
+  close_at: 2021-06-29 20:30:45

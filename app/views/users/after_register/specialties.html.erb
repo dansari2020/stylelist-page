@@ -1,0 +1,102 @@
+<div class="pb-10">
+  <h1 class="text-normal font-bold mt-8">What are you an expert at?  (Max 3)</h1>
+</div>
+<%= form_for(@user, :url => wizard_path, :method => :put) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
+  <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full">
+    <div class="w-full block relative">
+      <div x-data @tags-update="console.log('tags updated', $event.detail.tags)" data-tags='[<%= @user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
+        <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+          <div class="relative inline-block bg-white w-full border focus:border-gray-500 rounded px-4 overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+            <div :class="[open ? 'block' : 'hidden']">
+              <div class="absolute z-40 left-0 m-1 w-full">
+                <div class="py-1 text-sm bg-white rounded shadow-lg border border-gray-300">
+                  <a @click.prevent="addTag(textInput)" class="block py-1 px-5 cursor-pointer hover:bg-indigo-600 hover:text-white">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
+                </div>
+              </div>
+            </div>
+            <!-- selections -->
+            <template x-for="(tag, index) in tags">
+              <div class="bg-blue-500 text-white inline-flex items-center text-sm rounded m-1">
+                <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
+                <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs" x-text="tag"></span>
+                <button @click.prevent="removeTag(index)" class="w-6 h-8 inline-block text-white align-middle text-gray-500 hover:text-gray-600 focus:outline-none">
+                  <svg class="w-6 h-6 fill-current mx-auto text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                </button>
+              </div>
+            </template>
+            <div class="inline-flex items-center text-sm rounded m-1" :class="{ hidden : tags.length >= 3 }">
+              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="bg-white rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline inline-block" placeholder="i.e. Fades, Braids, Curly Hair">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= f.fields_for :specialties, @user.specialties do |specialty_form| %>
+    <%= specialty_form.text_field :name, class: "hidden" %>
+    <%= specialty_form.text_field :_destroy, class: "hidden", value: "1" %>
+  <% end %>
+  <div class="actions w-full text-right mt-48">
+    <%= link_to "Cancel", wizard_path(:final), class: "text-black text-white text-blue-500 hover:bg-blue-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium" %>
+    <%= f.submit "Save", class: "text-black text-white lg:bg-blue-500 hover:bg-blue-700 lg:px-4 py-2 rounded-md text-sm font-medium" %>
+  </div>
+<% end %>
+<script>
+  function tagSelect() {
+    return {
+      open: false,
+      textInput: '',
+      tags: [],
+      init() {
+        this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
+      },
+      addTag(tag) {
+        tag = tag.trim()
+        if (this.tags.length >= 3) {
+          console.log('You have already entered more than 3 skills')
+        } else if (tag != "" && !this.hasTag(tag)) {
+          this.tags.push( tag )
+        }
+        this.clearSearch()
+        this.$refs.textInput.focus()
+        this.fireTagsUpdateEvent()
+      },
+      fireTagsUpdateEvent() {
+        this.$el.dispatchEvent(new CustomEvent('tags-update', {
+          detail: { tags: this.tags },
+          bubbles: true,
+        }));
+      },
+      hasTag(tag) {
+        var tag = this.tags.find(e => {
+          return e.toLowerCase() === tag.toLowerCase()
+        })
+        return tag != undefined
+      },
+      removeTag(index) {
+        this.tags.splice(index, 1)
+        this.fireTagsUpdateEvent()
+      },
+      search(q) {
+        if ( q.includes(",") ) {
+          q.split(",").forEach(function(val) {
+            this.addTag(val)
+          }, this)
+        }
+        this.toggleSearch()
+      },
+      clearSearch() {
+        this.textInput = ''
+        this.toggleSearch()
+      },
+      toggleSearch() {
+        this.open = this.textInput != ''
+      },
+      focusTag() {
+        this.clearSearch()
+        this.$refs.textInput.focus()
+      }
+    }
+  }
+</script>

@@ -5,50 +5,75 @@
   <p class="text-sm text-center">Step 4 of 4</p>
 </div>
 <%= form_for(@user, :url => wizard_path, :method => :put) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full mb-4">
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 mr-2" do %>
+    <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/speciality.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_specialties? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Your specialties
     <% end %>
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 ml-2" do %>
+    <%= link_to wizard_path(:services), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/services.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_services? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Services you offer
     <% end %>
   </div>
   <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full mb-4">
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 mr-2" do %>
+    <%= link_to wizard_path(:bio), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/bio.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_bio? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Your biography
     <% end %>
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 ml-2" do %>
+    <%= link_to wizard_path(:education), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/education.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_education? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Your education
     <% end %>
   </div>
   <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full">
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 mr-2" do %>
+    <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/calendar.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_started_at? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Years of Experience
     <% end %>
-    <%= link_to "#", class: "w-1/2 border border-gray-200 p-2 ml-2" do %>
+    <%= link_to wizard_path(:social_media), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/social.png", class: "h-5" %>
-        <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% if @user.has_social_media? %>
+          <%= image_tag "icons/checked-checkbox.png", class: "h-5" %>
+        <% else %>
+          <%= image_tag "icons/empty-checkbox.png", class: "h-5" %>
+        <% end %>
       </div>
       Social Media
     <% end %>

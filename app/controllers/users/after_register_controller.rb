@@ -1,12 +1,13 @@
 class Users::AfterRegisterController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
-  steps :job, :handle, :final
+  before_action :user, only: %i[show update]
+  steps :job, :handle, :final, :bio, :specialties, :services, :education,
+    :experience, :social_media
   layout "register_steps"
 
   def show
-    @user = current_user
-    if @user.completed?
+    if @user.profile_completed?
       redirect_to(root_url)
     else
       render_wizard
@@ -14,17 +15,29 @@ class Users::AfterRegisterController < ApplicationController
   end
 
   def update
-    @user = current_user
     if step == :final
       @user.completed!
       redirect_to(root_url)
     else
+      byebug
       @user.update(user_params)
+      if %i[bio specialties services education experience social_media].include?(step)
+        jump_to(:final)
+      end
       render_wizard @user
     end
   end
 
+  private
+
   def user_params
-    params.require(:user).permit(:role, :username)
+    params.require(:user).permit(:role, :username, :bio, :started_at, :education,
+      specialties_attributes: [:id, :name, :_destroy],
+      services_attributes: [:id, :name, :_destroy],
+      social_media_attributes: [:id, :kind, :url, :_destroy])
+  end
+
+  def user
+    @user ||= current_user
   end
 end

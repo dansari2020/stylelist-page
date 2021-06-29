@@ -3,6 +3,7 @@
   <p class="text-sm text-center">Step 3 of 4</p>
 </div>
 <%= form_for(@user, :url => wizard_path, :method => :put) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full">
     <%= f.label :username, "StylistPage.com/", class: "pr-2" %>
     <%= f.text_field :username, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>

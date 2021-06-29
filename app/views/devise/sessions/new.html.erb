@@ -1,6 +1,3 @@
-<style>
-  /* body {height: min-content!important} */
-</style>
 <section class="flex flex-col md:flex-row min-h-screen items-center">
   <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 px-6 lg:px-16 xl:px-12 min-h-screen flex flex-wrap content-between pt-2">
     <%= render "shared/logo" %>
@@ -8,6 +5,7 @@
       <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">Sign In</h1>
       <p class="text-sm text-center pb-6">Welcome to your online portfolio</p>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "mt-6") do |f| %>
+        <%= render 'shared/notices' %>
         <div class="pb-4">
           <%= f.email_field :email, autofocus: true, placeholder: "Email Address", autocomplete: "email", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
         </div>
