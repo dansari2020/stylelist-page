@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   controllers: {
     registrations: "users/registrations"
   }
+  get "/auth" => redirect("/auth/sign_up")
   resources :after_register, module: "users"
 end
