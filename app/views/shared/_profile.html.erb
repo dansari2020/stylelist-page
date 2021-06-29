@@ -1,6 +1,8 @@
-<div class="w-full bg-cover bg-no-repeat bg-center rounded-md" style="height: 200px; background-color: #4F4F4E;">
-  <%# <img class="opacity-0 w-full h-full" src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200" alt=""> %>
-  <p class="text-white text-sm text-center" style="line-height: 200px">Add Cover Photo</p>
+<div class="w-full bg-cover bg-no-repeat bg-center rounded-lg flex flex-wrap content-center" style="height: 200px; background-color: #4F4F4E;">
+  <div class="flex flex-col w-full">
+    <%= image_tag "icons/background.png", class: "w-6 h-6 mx-auto" %>
+    <p class="text-white text-sm text-center">Add Cover Photo</p>
+  </div>
 </div>
 <div class="p-4">
   <div class="relative flex w-full">
@@ -21,28 +23,122 @@
       </button>
     </div>
   </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b mb-12">
-    <h2 class="pb-4 text-xl leading-6"><%= user.full_name %></h2>
+  <div class="py-2 justify-center w-full ml-3 mb-12">
+    <h2 class="text-xl leading-6"><%= user.full_name %></h2>
     <p class="text-sm leading-5 font-medium text-gray-600"><%= user.role.humanize %></p>
   </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b">
-    <h2 class="pb-4 text-normal leading-3">Bio</h2>
-    <p class="text-sm leading-2 font-medium text-gray-400">Describe who you are</p>
-  </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b">
-    <h2 class="pb-4 text-normal leading-3">Specialties</h2>
-    <p class="text-sm leading-2 font-medium text-gray-400">What are you an expert at? (i.e. fades, curly hair, etc)</p>
-  </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b">
-    <h2 class="pb-4 text-normal leading-3">Experience</h2>
-    <p class="text-sm leading-2 font-medium text-gray-400">When did you start doing hair?</p>
-  </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b">
-    <h2 class="pb-4 text-normal leading-3">Salon Services</h2>
-    <p class="text-sm leading-2 font-medium text-gray-400">What services do you offer (i.e. brow shaping, color, etc)</p>
-  </div>
-  <div class="py-4 justify-center w-full mt-3 ml-3 border-b">
-    <h2 class="pb-4 text-normal leading-3">Education</h2>
-    <p class="text-sm leading-2 font-medium text-gray-400">Where did you learn to do hair?</p>
-  </div>
+  <ul class="list-none mb-20" x-show="tab === 'profile'">
+    <li>
+      <div class="py-4 justify-center flex justify-between w-full mt-3 border-b border-t flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Bio</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">Describe who you are</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Specialties</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">What are you an expert at? (i.e. fades, curly hair, etc)</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Experience</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">When did you start doing hair?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Salon Services</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">What services do you offer (i.e. brow shaping, color, etc)</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Education</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">Where did you learn to do hair?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul class="list-none mb-20" x-show="tab === 'contact'">
+    <li>
+      <div class="py-4 justify-center flex justify-between w-full mt-3 border-b border-t flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Phone</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">What number can clients contact you at?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Address</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">Where is your salon located?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Social Media</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">Where else can clients get to know you (i.e. instagram)?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Availability</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">When are you available to clients?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="py-4 justify-center w-full border-b flex justify-between">
+        <div>
+          <h2 class="pb-4 text-normal leading-3">Languages</h2>
+          <p class="text-sm leading-2 font-medium text-gray-400">What languages do you provide services in?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

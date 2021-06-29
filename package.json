@@ -7,7 +7,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
     "alpine-turbo-drive-adapter": "^1.1.0",
-    "alpinejs": "^3.1.1",
+    "alpinejs": "^2.8.2",
     "autoprefixer": "^9",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",

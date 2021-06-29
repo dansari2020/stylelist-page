@@ -1,17 +1,21 @@
-<div class="container">
-  <div class="flex flex-col md:flex-row space-x-4">
-    <div class="md:w-2/5 h-screen border-r relative block overflow-y-scroll">
-      <div class="flex flex-col sm:flex-row border-b justify-center">
-        <button class="text-gray-600 py-4 px-12 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500">
-          Profile
-        </button>
-        <button class="text-gray-600 py-4 px-12 block hover:text-blue-500 focus:outline-none">
-          Contact
-        </button>
-      </div>
-      <%= render partial: "shared/profile", locals: {user: user} %>
+<div class="flex flex-col md:flex-row space-x-4">
+  <div class="md:w-1/2 lg:w-2/5 min-h-screen border-r relative block md:overflow-y-scroll pt-12 px-2" x-data="{ tab : 'profile' }">
+    <div class="flex flex-col sm:flex-row border-b justify-center mb-2">
+      <button @click.prevent="tab = 'profile'" class="text-gray-600 py-2 px-12 block hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
+        Profile
+      </button>
+      <button @click.prevent="tab = 'contact'" class="text-gray-600 py-2 px-12 block hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
+        Contact
+      </button>
     </div>
-    <div class="md:w-3/5 overflow-y-scroll">
+    <%= render partial: "shared/profile", locals: {user: user} %>
+  </div>
+  <div class="md:w-1/2 lg:w-3/5 pt-12 px-2 md:overflow-y-scroll">
+    <div class="flex flex-col sm:flex-row border-b mb-2">
+      <p class="text-gray-600 pt-4 pb-2 px-12">
+        Portfolio
+      </p>
     </div>
+    <%= render partial: "shared/portfolio", locals: {user: user} %>
   </div>
 </div>

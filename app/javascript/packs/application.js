@@ -9,8 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 // import alpinejs and its necessary rails adaptation
-import "alpine-turbo-drive-adapter"
-require("alpinejs")
+import 'alpine-turbo-drive-adapter'
+import 'alpinejs'
 
 // import tailwind into javascript
 require("stylesheets/application.scss")
