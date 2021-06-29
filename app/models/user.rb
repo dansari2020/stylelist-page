@@ -16,6 +16,10 @@ class User < ApplicationRecord
     [first_name, last_name].compact.join(" ")
   end
 
+  def url
+    [ENV.fetch("WEBSITE_URL", "stylistpage.com/"), username].compact.join(" ")
+  end
+
   protected
 
   def timeout_in
