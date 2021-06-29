@@ -6,7 +6,7 @@ class Users::AfterRegisterController < ApplicationController
 
   def show
     @user = current_user
-    if step == :final || @user.completed?
+    if @user.completed?
       redirect_to(root_url)
     else
       render_wizard
@@ -14,7 +14,6 @@ class Users::AfterRegisterController < ApplicationController
   end
 
   def update
-    byebug
     @user = current_user
     if step == :final
       @user.completed!
