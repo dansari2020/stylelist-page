@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates :username, allow_blank: true, uniqueness: {case_sensitive: false}
+  validates :username, uniqueness: {allow_blank: true, case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, presence: true, confirmation: true, length: {minimum: 8}, on: :create
 
