@@ -1,15 +1,15 @@
-<div class="w-full bg-cover bg-no-repeat bg-center rounded-lg flex flex-wrap content-center" style="height: 200px; background-color: #4F4F4E;">
+<div class="flex flex-wrap content-center w-full bg-center bg-no-repeat bg-cover rounded-lg" style="height: 200px; background-color: #4F4F4E;">
   <div class="flex flex-col w-full">
     <%= image_tag "icons/background.png", class: "w-6 h-6 mx-auto" %>
-    <p class="text-white text-sm text-center">Add Cover Photo</p>
+    <p class="text-sm text-center text-white">Add Cover Photo</p>
   </div>
 </div>
 <div class="p-4">
-  <div class="relative flex w-full">
+  <div class="flex relative w-full">
     <!-- Avatar -->
     <div class="flex flex-1">
       <div style="margin-top: -5rem;">
-        <div style="height:7rem; width:7rem;" class="md rounded-full relative avatar">
+        <div style="height:7rem; width:7rem;" class="relative rounded-full avatar md">
           <%= image_tag "icons/avatar.png", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
           <div class="absolute"></div>
         </div>
@@ -17,22 +17,22 @@
     </div>
     <!-- Follow Button -->
     <div class="flex flex-col text-right">
-      <button class="flex justify-center bg-yellow-200 max-h-max whitespace-nowrap max-w-max border bg-transparent text-black hover:bg-yellow-500 flex rounded-md items-center hover:shadow-lg font-bold py-2 px-4 mr-0 ml-auto">
+      <button class="flex justify-center items-center py-2 px-4 mr-0 ml-auto max-w-max font-bold text-black whitespace-nowrap bg-transparent bg-yellow-200 rounded-md border hover:bg-yellow-500 hover:shadow-lg max-h-max">
         <%= image_tag "icons/share.png", class: "w-4 mr-2" %>
         Share
       </button>
     </div>
   </div>
-  <div class="py-2 justify-center w-full ml-3 mb-12">
+  <div class="justify-center py-2 mb-12 ml-3 w-full">
     <h2 class="text-xl leading-6"><%= user.full_name %></h2>
-    <p class="text-sm leading-5 font-medium text-gray-600"><%= user.role.humanize %></p>
+    <p class="text-sm font-medium leading-5 text-gray-600"><%= user.role.humanize %></p>
   </div>
-  <ul class="list-none mb-20" x-show="tab === 'profile'">
+  <ul class="mb-20 list-none" x-show="tab === 'profile'">
     <li>
-      <div class="py-4 justify-center flex justify-between w-full mt-3 border-b border-t flex justify-between">
+      <div class="flex justify-center justify-between py-4 mt-3 w-full border-t border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Bio</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">Describe who you are</p>
+          <h2 class="pb-4 leading-3 text-normal">Bio</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">Describe who you are</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -40,10 +40,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Specialties</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">What are you an expert at? (i.e. fades, curly hair, etc)</p>
+          <h2 class="pb-4 leading-3 text-normal">Specialties</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">What are you an expert at? (i.e. fades, curly hair, etc)</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -51,10 +51,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Experience</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">When did you start doing hair?</p>
+          <h2 class="pb-4 leading-3 text-normal">Experience</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">When did you start doing hair?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -62,10 +62,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Salon Services</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">What services do you offer (i.e. brow shaping, color, etc)</p>
+          <h2 class="pb-4 leading-3 text-normal">Salon Services</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">What services do you offer (i.e. brow shaping, color, etc)</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -73,10 +73,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Education</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">Where did you learn to do hair?</p>
+          <h2 class="pb-4 leading-3 text-normal">Education</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">Where did you learn to do hair?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -84,12 +84,12 @@
       </div>
     </li>
   </ul>
-  <ul class="list-none mb-20" x-show="tab === 'contact'">
+  <ul class="mb-20 list-none" x-show="tab === 'contact'">
     <li>
-      <div class="py-4 justify-center flex justify-between w-full mt-3 border-b border-t flex justify-between">
+      <div class="flex justify-center justify-between py-4 mt-3 w-full border-t border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Phone</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">What number can clients contact you at?</p>
+          <h2 class="pb-4 leading-3 text-normal">Phone</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">What number can clients contact you at?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -97,10 +97,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Address</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">Where is your salon located?</p>
+          <h2 class="pb-4 leading-3 text-normal">Address</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">Where is your salon located?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -108,10 +108,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Social Media</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">Where else can clients get to know you (i.e. instagram)?</p>
+          <h2 class="pb-4 leading-3 text-normal">Social Media</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">Where else can clients get to know you (i.e. instagram)?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -119,10 +119,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Availability</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">When are you available to clients?</p>
+          <h2 class="pb-4 leading-3 text-normal">Availability</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">When are you available to clients?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
@@ -130,10 +130,10 @@
       </div>
     </li>
     <li>
-      <div class="py-4 justify-center w-full border-b flex justify-between">
+      <div class="flex justify-center justify-between py-4 w-full border-b">
         <div>
-          <h2 class="pb-4 text-normal leading-3">Languages</h2>
-          <p class="text-sm leading-2 font-medium text-gray-400">What languages do you provide services in?</p>
+          <h2 class="pb-4 leading-3 text-normal">Languages</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">What languages do you provide services in?</p>
         </div>
         <div class="flex items-center">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>

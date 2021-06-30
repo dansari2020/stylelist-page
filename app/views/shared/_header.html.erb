@@ -1,52 +1,52 @@
-<header class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 md:fixed md:w-full md:top-0 md:left-0 md:z-40" x-data="{ mobileMenuOpen : false }">
-  <nav class="max-w-screen-2xl mx-auto px-4 py-5 mx-auto space-y-4 md:space-y-0 md:flex md:items-center md:justify-between md:space-x-10">
+<header class="bg-white border-b md:fixed md:top-0 md:left-0 md:z-40 md:w-full dark:bg-gray-900 dark:border-gray-700" x-data="{ mobileMenuOpen : false }">
+  <nav class="py-5 px-4 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:space-y-0 md:space-x-10">
     <%= render "shared/logo" %>
-    <div class="hidden md:flex items-center justify-end">
-      <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:space-x-4">
+    <div class="hidden justify-end items-center md:flex">
+      <div class="flex flex-col space-y-4 md:flex-row md:items-center md:space-y-0 md:space-x-4">
         <% if user_signed_in? %>
           <!-- Profile dropdown -->
-          <div class="ml-3 relative">
-            <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-6 xl:space-x-8 md:items-center">
+          <div class="relative ml-3">
+            <div class="flex flex-col space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-6 xl:space-x-8">
               <%= link_to "#", class: "text-sm text-center text-gray-500 hover:text-blue-500 px-2" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                 </svg>
                 Protfolio
               <% end %>
               <%= link_to "#", class: "text-sm text-center text-gray-500 hover:text-blue-500 px-2" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Upload
               <% end %>
               <%= link_to "#", class: "text-sm text-center text-gray-500 hover:text-blue-500 px-2" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 Settings
               <% end %>
               <div x-data="{ profileMenu : false }">
-                <button type="button" @click="profileMenu = true" @click.away="profileMenu = false"  class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <button type="button" @click="profileMenu = true" @click.away="profileMenu = false"  class="flex text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <% if current_user.avatar.attached? %>
                     <%= image_tag current_user.avatar, class: "h-8 w-8 rounded-full", alt: "avatar" %>
                   <% else %>
-                    <span class="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100">
-                      <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    <span class="inline-block overflow-hidden w-8 h-8 bg-gray-100 rounded-full">
+                      <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
                       </svg>
                     </span>
                   <% end %>
                 </button>
-                <div x-show="profileMenu" class="origin-top-right absolute right-0 mt-2 w-72 rounded-lg shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20 group-hover:block" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                <div x-show="profileMenu" class="absolute right-0 z-20 py-1 mt-2 w-72 bg-white rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right group-hover:block focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                   <%= link_to "#" do %>
-                    <div class="flex w-full px-4 pb-2 items-center">
+                    <div class="flex items-center px-4 pb-2 w-full">
                       <% if current_user.avatar.attached? %>
                         <%= image_tag current_user.avatar, class: "h-8 w-8 rounded-full", alt: "avatar" %>
                       <% else %>
-                        <span class="inline-block h-10 w-10 rounded-full overflow-hidden bg-gray-100">
-                          <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <span class="inline-block overflow-hidden w-10 h-10 bg-gray-100 rounded-full">
+                          <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
                           </svg>
                         </span>

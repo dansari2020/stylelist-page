@@ -1,9 +1,9 @@
-<section class="flex flex-col md:flex-row min-h-screen items-center">
-  <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 px-6 lg:px-16 xl:px-12 min-h-screen flex flex-wrap content-between pt-2">
+<section class="flex flex-col items-center min-h-screen md:flex-row">
+  <div class="flex flex-wrap content-between px-6 pt-2 w-full min-h-screen bg-white md:mx-0 md:mx-auto md:w-1/2 md:max-w-md lg:px-16 lg:max-w-full xl:px-12">
     <%= render "shared/logo" %>
-    <div class="w-full h-100 pb-4">
-      <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">Sign In</h1>
-      <p class="text-sm text-center pb-6">Welcome to your online portfolio</p>
+    <div class="pb-4 w-full h-100">
+      <h1 class="mt-12 text-xl font-bold leading-tight text-center md:text-2xl">Sign In</h1>
+      <p class="pb-6 text-sm text-center">Welcome to your online portfolio</p>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "mt-6") do |f| %>
         <%= render 'shared/notices' %>
         <div class="pb-4">
@@ -20,12 +20,12 @@
         </div>
       <% end %>
     </div>
-    <div class="border-t border-t-gray-200 py-2 mb-8">
+    <div class="py-2 mb-8 border-t border-t-gray-200">
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
         <p class="text-normal">Don't have an account? <%= link_to "Sign up!", new_registration_path(resource_name), class: "text-blue-500" %></p>
       <% end %>
     </div>
   </div>
-  <div class="bg-gray-600 hidden lg:block w-auto md:w-1/2 min-h-screen bg-no-repeat bg-cover" style="background-image: url(<%= image_url "bg/bg-01.jpg" %>); background-position: center top;">
+  <div class="hidden w-auto min-h-screen bg-gray-600 bg-no-repeat bg-cover md:w-1/2 lg:block" style="background-image: url(<%= image_url "bg/bg-01.jpg" %>); background-position: center top;">
   </div>
 </section>

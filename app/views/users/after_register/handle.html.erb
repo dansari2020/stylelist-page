@@ -1,16 +1,16 @@
 <div class="pb-10">
-  <h1 class="text-xl md:text-2xl font-bold leading-tight mt-8 text-center">Create Handle</h1>
+  <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Create Handle</h1>
   <p class="text-sm text-center">Step 3 of 4</p>
 </div>
 <%= form_for(@user, :url => wizard_path, :method => :put) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="flex flex-col md:flex-row md:inline-flex md:items-center w-full">
+  <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
     <%= f.label :username, "StylistPage.com/", class: "pr-2" %>
     <%= f.text_field :username, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
   </div>
-  <p class="text-xs text-gray-400 text-justify mt-6">Note: Your custom URL can contain letters, numbers & dashes.
+  <p class="mt-6 text-xs text-justify text-gray-400">Note: Your custom URL can contain letters, numbers & dashes.
     Please do not use spaces.</p>
-  <div class="actions w-full text-right mt-48">
+  <div class="mt-48 w-full text-right actions">
     <%= f.submit "Next", class: "text-black text-white lg:bg-blue-500 hover:bg-blue-700 lg:px-4 py-2 rounded-md text-sm font-medium" %>
   </div>
 <% end %>
