@@ -3,8 +3,10 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable,
     :registerable, :timeoutable, :confirmable
 
+  enum gender: %w[pronouns mrs mr]
   enum role: %w[client hair_stylist barber admin]
-  enum status: %w[pending completed]
+  enum status: %w[pending completed deactive]
+  enum deactivate_reason: {"Select a reason (optional)": 0, "I will come back soon": 1, "I don't know": 2}
 
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
@@ -19,12 +21,8 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
-  accepts_nested_attributes_for :specialties, allow_destroy: true
-  accepts_nested_attributes_for :languages, allow_destroy: true
-  accepts_nested_attributes_for :address, allow_destroy: true
-  accepts_nested_attributes_for :services, allow_destroy: true
-  accepts_nested_attributes_for :availabilities, allow_destroy: true
-  accepts_nested_attributes_for :social_media, allow_destroy: true
+  accepts_nested_attributes_for :specialties, :languages, :address, :services, :availabilities, :social_media, allow_destroy: true
+
   before_save :destroy_prvious_data
 
   def full_name
@@ -44,6 +42,10 @@ class User < ApplicationRecord
     define_method("has_#{info}?") do
       send(info).present?
     end
+  end
+
+  def self.gender_list
+    genders.keys.map { |g| [g.humanize, g] }
   end
 
   protected

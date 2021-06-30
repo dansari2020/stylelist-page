@@ -1,0 +1,105 @@
+<div class="flex flex-col md:flex-row" x-data="{ tab : '<%= @tab %>', submenu : '<%= @submenu %>' }">
+  <div class="relative block px-4 md:overflow-y-scroll md:w-1/4 md:h-screen lg:w-1/5">
+    <h1 class="py-4 mb-6 text-xl font-bold leading-tight md:text-2xl">tabs</h1>
+    <ul>
+      <li class="px-4 py-4 rounded-md" :class="{'bg-gray-200' : tab === 'profile'}">
+        <a href="#" class="flex justify-between" @click.prevent="tab = 'profile'; submenu = ''">
+          <div class="space-x-2">
+            <%= image_tag "icons/profile.png", class: "h-6 inline-block" %>
+            <span class="inline-block font-normal text-md">Edit Profile</span>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "tab === 'profile'" %>
+        </a>
+      </li>
+      <li class="px-4 py-4 rounded-md" :class="{'bg-gray-200' : tab === 'manage_account'}">
+        <a href="#" class="flex justify-between" @click.prevent="tab = 'manage_account'; submenu = ''">
+          <div class="space-x-2">
+            <%= image_tag "icons/manage_account.png", class: "h-6 inline-block" %>
+            <span class="inline-block font-normal text-md">Manage Account</span>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "tab === 'manage_account'" %>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:h-screen md:w-1/4 lg:w-1/5">
+    <ul class="mt-10" id="profil_submenu" x-show="tab === 'profile'">
+      <li class="px-4 py-4 rounded-md" :class="{'bg-blue-100' : submenu === 'name'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'name'">
+          <div>
+            <h3 class="font-normal text-md ">Name</h3>
+            <p class="text-sm text-gray-400"><%= @user.full_name %></p>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "submenu === 'name'" %>
+        </a>
+      </li>
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'job'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'job'">
+          <div>
+            <h3 class="font-normal text-md ">Job Title</h3>
+            <p class="text-sm text-gray-400"><%= @user.role.humanize %></p>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "submenu === 'job'" %>
+        </a>
+      </li>
+    </ul>
+    <ul class="mt-10" id="manage_account_submenu" x-show="tab === 'manage_account'">
+      <li class="px-4 py-4 rounded-md" :class="{'bg-blue-100' : submenu === 'update_email'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'update_email'">
+          <div>
+            <h3 class="font-normal text-md ">Update Email</h3>
+            <p class="text-sm text-gray-400"><%= @user.email %></p>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "submenu === 'update_email'" %>
+        </a>
+      </li>
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'change_password'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'change_password'">
+          <div>
+            <h3 class="font-normal text-md ">change Password</h3>
+            <p class="text-sm text-gray-400">Create a new password</p>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "submenu === 'change_password'" %>
+        </a>
+      </li>
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'deactivate'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'deactivate'">
+          <div>
+            <h3 class="font-normal text-md ">Deactivate Account</h3>
+            <p class="text-sm text-gray-400">Hide your portfolio from the web</p>
+          </div>
+          <%= image_tag "icons/arrow-right.png", class: "h-6", "x-show": "submenu === 'deactivate'" %>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:h-screen md:w-2/4 lg:w-3/5">
+    <div class="mb-40 md:max-w-md" x-show="submenu !== ''">
+      <%= form_for(@user, url: profile_users_path, html: { method: :put }) do |f| %>
+        <input type="hidden" name="tab" value="<%= @tab %>" x-value="tab" x-text="tab" x-model="tab">
+        <input type="hidden" name="submenu" value="<%= @submenu %>" x-value="submenu" x-text="submenu" x-model="submenu">
+        <%= render "devise/shared/error_messages", resource: @user %>
+        <%= render "shared/notices" %>
+        <div id="change_name" x-show="submenu === 'name'">
+          <%= render partial: "users/change_name", locals: {f: f} %>
+        </div>
+        <div id="change_job" x-show="submenu === 'job'">
+          <%= render partial: "users/change_job", locals: {f: f} %>
+        </div>
+        <div id="update_email" x-show="submenu === 'update_email'">
+          <%= render partial: "users/update_email", locals: {f: f} %>
+        </div>
+        <div id="change_password" x-show="submenu === 'change_password'">
+          <%= render partial: "users/change_password", locals: {f: f} %>
+        </div>
+        <div id="deactive_account" x-show="submenu === 'deactivate'">
+          <%= render partial: "users/deactive_account", locals: {f: f} %>
+        </div>
+        <div class="w-full mt-4 text-right actions">
+          <%= link_to "Cancel", "#", class: "text-black text-white text-blue-500 hover:bg-blue-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium" %>
+          <%= f.submit "Save", class: "text-black text-white lg:bg-blue-500 hover:bg-blue-700 lg:px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
