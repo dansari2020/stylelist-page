@@ -7,6 +7,7 @@ class Users::AfterRegisterController < ApplicationController
   layout "register_steps"
 
   def show
+    byebug
     if @user.profile_completed?
       redirect_to(root_url)
     else
