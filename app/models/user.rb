@@ -6,8 +6,13 @@ class User < ApplicationRecord
   enum gender: %w[pronouns mrs mr]
   enum role: %w[client hair_stylist barber admin]
   enum status: %w[pending completed deactive]
-  enum deactivate_reason: {"Select a reason (optional)": 0, "I will come back soon": 1, "I don't know": 2}
-
+  enum deactivate_reason: {"Select a reason (optional)": 0,
+                           "This is temporary. I'll be back": 1,
+                           "My account was hacked": 2,
+                           "I don't find StylistPage useful": 3,
+                           "I have privacy concerns": 4,
+                           "I don't understand how to use StylistPage": 5,
+                           "I don't do hair anymore": 6}
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, presence: true, confirmation: true, length: {minimum: 8}, on: :create
