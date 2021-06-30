@@ -1,6 +1,9 @@
 {
   "name": "stylist-page",
   "private": true,
+  "scripts": {
+    "rustywind-fix": "rustywind --write ."
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -17,6 +20,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "rustywind": "^0.12.1",
     "webpack-dev-server": "^3.11.2"
   }
 }

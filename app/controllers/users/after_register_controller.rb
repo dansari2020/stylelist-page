@@ -19,7 +19,6 @@ class Users::AfterRegisterController < ApplicationController
       @user.completed!
       redirect_to(root_url)
     else
-      byebug
       @user.update(user_params)
       if %i[bio specialties services education experience social_media].include?(step)
         jump_to(:final)
