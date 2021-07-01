@@ -16,11 +16,22 @@ class UsersController < ApplicationController
     elsif @user.update(user_params)
       if params["user"]["email"].present?
         redirect_to confirm_email_path
+      elsif params["user"]["deactivate_reason"].present?
+        destroy
       else
         redirect_to settings_path(tab: @tab, submenu: @submenu)
       end
     else
       render "index"
+    end
+  end
+
+  def destroy
+    unless @user.deactivated?
+      @user.deactivated!
+      Devise.sign_out_all_scopes ? sign_out : sign_out(@user)
+      # set_flash_message :notice, :destroyed
+      respond_with_navigational(@user) { redirect_to after_sign_out_path_for(@user) }
     end
   end
 

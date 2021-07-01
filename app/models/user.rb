@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   enum gender: %w[pronouns mrs mr]
   enum role: %w[client hair_stylist barber admin]
-  enum status: %w[pending completed deactive]
+  enum status: %w[pending completed deactivated]
   enum deactivate_reason: {"Select a reason (optional)": 0,
                            "This is temporary. I'll be back": 1,
                            "My account was hacked": 2,
@@ -51,6 +51,14 @@ class User < ApplicationRecord
 
   def self.gender_list
     genders.keys.map { |g| [g.humanize, g] }
+  end
+
+  def active_for_authentication?
+    super && !deactivated?
+  end
+
+  def inactive_message
+    !deactivated? ? super : :deactivated_account
   end
 
   protected
