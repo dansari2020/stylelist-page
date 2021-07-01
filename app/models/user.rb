@@ -26,7 +26,8 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
-  accepts_nested_attributes_for :specialties, :languages, :address, :services, :availabilities, :social_media, allow_destroy: true
+  accepts_nested_attributes_for :specialties, :languages, :address, :services,
+    :availabilities, :social_media, allow_destroy: true
 
   before_save :destroy_prvious_data
 
