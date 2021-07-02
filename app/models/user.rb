@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
+  has_many :portfolios, dependent: :destroy
+  has_many :pictures, through: :portfolios
   accepts_nested_attributes_for :specialties, :languages, :address, :services,
     :availabilities, :social_media, allow_destroy: true
 
@@ -65,7 +67,7 @@ class User < ApplicationRecord
   protected
 
   def timeout_in
-    1.hour
+    # 1.hour
   end
 
   def confirmation_required?

@@ -1,0 +1,16 @@
+<div class="flex flex-col items-center justify-center w-screen h-screen md:flex-row">
+  <div class="text-center">
+    <% form_id = dom_id(@portfolio, "picture") %>
+    <%= form_for(@portfolio, url: portfolios_path, html: { method: :post, id: form_id }) do |f| %>
+      <%= f.label :pictures, class: "cursor-pointer" do %>
+        <%= image_tag "icons/upload_portfolio.png", class: "w-36 mx-auto mb-8" %>
+        <h1 class="mb-8 text-2xl">
+          <span class="text-blue-500">Chose a file</span> or drag it here
+        </h1>
+        <p class="mb-24 text-sm">File formats accepted JPG, PNG, JPEG</p>
+      <% end %>
+      <%= f.file_field :pictures, class: "hidden", "x-on:change": "console.log('sssss');document.getElementById('#{form_id}').submit()" %>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </div>
+</div>

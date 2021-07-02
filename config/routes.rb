@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get "/confirm_email", to: "users#confirm_email", as: "confirm_email"
   put "/profile", to: "users#update", as: "profile_users"
   get "/profile" => redirect("/users")
-  resources :upload
+  resources :portfolios
 end

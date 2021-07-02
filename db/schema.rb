@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_150226) do
+ActiveRecord::Schema.define(version: 2021_07_02_162326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,12 +64,37 @@ ActiveRecord::Schema.define(version: 2021_06_30_150226) do
     t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 
+  create_table "hair_types", force: :cascade do |t|
+    t.bigint "portfolio_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_hair_types_on_portfolio_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_languages_on_user_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
+  end
+
+  create_table "service_types", force: :cascade do |t|
+    t.bigint "portfolio_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_service_types_on_portfolio_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -129,7 +154,10 @@ ActiveRecord::Schema.define(version: 2021_06_30_150226) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
   add_foreign_key "availabilities", "users"
+  add_foreign_key "hair_types", "portfolios"
   add_foreign_key "languages", "users"
+  add_foreign_key "portfolios", "users"
+  add_foreign_key "service_types", "portfolios"
   add_foreign_key "services", "users"
   add_foreign_key "social_media", "users"
   add_foreign_key "specialties", "users"
