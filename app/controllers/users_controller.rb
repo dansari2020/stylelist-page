@@ -12,20 +12,33 @@ class UsersController < ApplicationController
   def update
     if params["user"].present?
       if params["user"].has_key?("current_password") && !valid_password?
-        flash[:error] = "Your current password is wrong"
-        render "index"
-      elsif @user.update(user_params)
-        if params["user"]["email"].present?
-          redirect_to confirm_email_path
-        elsif params["user"]["deactivate_reason"].present?
-          destroy
-        elsif params["user"]["background"].present? || params["user"]["avatar"].present?
-          redirect_to root_url
-        else
-          redirect_to settings_path(tab: @tab, submenu: @submenu)
-        end
+        format.html {
+          flash[:error] = "Your current password is wrong"
+          render "index"
+        }
       else
-        redirect_to :back
+
+        respond_to do |format|
+          if @user.update(user_params)
+            format.html do
+              if params["user"]["email"].present?
+                redirect_to confirm_email_path
+              elsif params["user"]["deactivate_reason"].present?
+                destroy
+              elsif params["user"]["background"].present? || params["user"]["avatar"].present?
+                redirect_to root_url
+              end
+            end
+            format.json do
+              if params["user"]["background"].present? || params["user"]["avatar"].present?
+                render json: @user, status: :created, location: root_url
+              end
+            end
+          else
+            redirect_to settings_path(tab: @tab, submenu: @submenu)
+          end
+        end
+
       end
     end
   end

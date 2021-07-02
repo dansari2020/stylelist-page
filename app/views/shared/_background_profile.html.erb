@@ -1,0 +1,15 @@
+<div class="flex flex-col w-full">
+  <% form_id = dom_id(user, "background") %>
+  <%= form_for(user, url: profile_users_path, html: { method: :put, id: form_id  }, remote: true, authenticity_token: true) do |f| %>
+    <%= f.label :background, class: "cursor-pointer" do %>
+      <% if user.background.attached? %>
+        <%= image_tag "icons/attached_background.png", class: "w-10 h-10 mx-auto" %>
+      <% else %>
+        <%= image_tag "icons/background.png", class: "w-6 h-6 mx-auto" %>
+        <p class="text-sm text-center text-white">Add Cover Photo</p>
+      <% end %>
+      <%= f.file_field :background, class: "hidden", "x-on:change": "document.getElementById('#{form_id}').submit()" %>
+      <%= f.submit "", class: "hidden" %>
+    <% end %>
+  <% end %>
+</div>

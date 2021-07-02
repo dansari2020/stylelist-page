@@ -1,10 +1,10 @@
 <div class="flex flex-col space-x-4 md:flex-row">
-  <div class="block relative px-2 pt-12 border-r md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-2/5" x-data="{ tab : 'profile' }">
+  <div class="relative block px-2 pt-12 border-r md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-2/5" x-data="{ tab : 'profile' }">
     <div class="flex flex-row justify-center mb-2 border-b">
-      <button @click.prevent="tab = 'profile'" class="block py-2 px-12 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
+      <button @click.prevent="tab = 'profile'" class="block px-12 py-2 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
         Profile
       </button>
-      <button @click.prevent="tab = 'contact'" class="block py-2 px-12 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
+      <button @click.prevent="tab = 'contact'" class="block px-12 py-2 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
         Contact
       </button>
     </div>
