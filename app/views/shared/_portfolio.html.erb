@@ -1,3 +1,22 @@
+<style>
+  input + label.ediable {
+    position: relative;
+  }
+  input[type="checkbox"] + label.ediable span {
+    background: url('<%= image_url("icons/unselected.png") %>') top left no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top:10px;
+    left:10px;
+    z-index: 10;
+  }
+  input[type="checkbox"]:checked + label.ediable span {
+    background: url('<%= image_url("icons/selected-checkbox.png") %>') top left no-repeat;
+  }
+</style>
 <% if current_user.portfolios.empty? %>
   <div class="flex items-center min-h-full">
     <div class="py-12 mx-auto">
@@ -11,9 +30,11 @@
   <div class="grid grid-cols-3 gap-4 md:grid-cols-4">
     <% current_user.portfolios.with_attached_pictures.each do |p| %>
       <% p.pictures.each do |p| %>
-        <div>
-          <%= image_tag p %>
-        </div>
+        <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden" %>
+        <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
+          <span></span>
+          <%= image_tag p, ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+        </label>
       <% end %>
     <% end %>
   </div>

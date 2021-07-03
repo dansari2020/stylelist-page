@@ -6,7 +6,7 @@
   <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
     <%= f.text_field :education, autofocus: true, placeholder: "i.e. Vancouver Hair Academy", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
   </div>
-  <div class="w-full mt-48 text-right actions">
+  <div class="mt-48 w-full text-right actions">
     <%= link_to "Cancel", wizard_path(:final), class: "text-black text-white text-blue-500 hover:bg-blue-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium" %>
     <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>

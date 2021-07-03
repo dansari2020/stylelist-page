@@ -4,14 +4,14 @@
 <%= form_for(@user, :url => wizard_path, :method => :put) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
-    <div class="relative block w-full">
+    <div class="block relative w-full">
       <div x-data @tags-update="console.log('tags updated', $event.detail.tags)" data-tags='[<%= @user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
         <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
-          <div class="relative inline-block w-full px-4 overflow-y-scroll bg-white border rounded focus:border-gray-500" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+          <div class="inline-block overflow-y-scroll relative px-4 w-full bg-white rounded border focus:border-gray-500" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
             <div :class="[open ? 'block' : 'hidden']">
-              <div class="absolute left-0 z-40 w-full m-1">
-                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
-                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
+              <div class="absolute left-0 z-40 m-1 w-full">
+                <div class="py-1 text-sm bg-white rounded border border-gray-300 shadow-lg">
+                  <a @click.prevent="addTag(textInput)" class="block py-1 px-5 cursor-pointer hover:text-white hover:bg-indigo-600">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
                 </div>
               </div>
             </div>
@@ -19,14 +19,14 @@
             <template x-for="(tag, index) in tags">
               <div class="inline-flex items-center m-1 text-sm text-white bg-blue-500 rounded">
                 <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
-                <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag"></span>
+                <span class="mr-1 ml-2 max-w-xs leading-relaxed truncate" x-text="tag"></span>
                 <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-white text-gray-500 align-middle hover:text-gray-600 focus:outline-none">
-                  <svg class="w-6 h-6 mx-auto text-white fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                  <svg class="mx-auto w-6 h-6 text-white fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                 </button>
               </div>
             </template>
             <div class="inline-flex items-center m-1 text-sm rounded" :class="{ hidden : tags.length >= 3 }">
-              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full py-2 leading-tight text-gray-700 bg-white rounded focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
+              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block py-2 w-full leading-tight text-gray-700 bg-white rounded focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
     <%= specialty_form.text_field :name, class: "hidden" %>
     <%= specialty_form.text_field :_destroy, class: "hidden", value: "1" %>
   <% end %>
-  <div class="w-full mt-48 text-right actions">
+  <div class="mt-48 w-full text-right actions">
     <%= link_to "Cancel", wizard_path(:final), class: "text-black text-white text-blue-500 hover:bg-blue-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium" %>
     <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>

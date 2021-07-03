@@ -29,6 +29,16 @@ class PortfoliosController < ApplicationController
     @portfolio.destroy
   end
 
+  def destroy_pictures
+    Array.wrap(params[:pictures_ids]).each do |id|
+      picture = ActiveStorage::Attachment.find_by(id: id)
+      portfolio = picture.record
+      picture&.delete
+      portfolio.destroy if portfolio.pictures.empty?
+    end
+    redirect_to root_url
+  end
+
   private
 
   def portfolio
