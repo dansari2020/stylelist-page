@@ -45,8 +45,8 @@ class User < ApplicationRecord
     username.present? && completed?
   end
 
-  ["bio", "username", "social_media", "education", "started_at",
-    "specialties", "services", "social_media"].each do |info|
+  ["bio", "username", "social_media", "education", "started_at", "specialties", "services",
+    "social_media", "phone", "languages"].each do |info|
     define_method("has_#{info}?") do
       send(info).present?
     end

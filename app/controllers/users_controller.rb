@@ -28,6 +28,7 @@ class UsersController < ApplicationController
               elsif params["user"]["background"].present? || params["user"]["avatar"].present?
                 redirect_to root_url
               end
+              redirect_back
             end
             format.json do
               if params["user"]["background"].present? || params["user"]["avatar"].present?
@@ -35,10 +36,11 @@ class UsersController < ApplicationController
               end
             end
           else
-            redirect_to settings_path(tab: @tab, submenu: @submenu)
+            format.html do
+              redirect_back
+            end
           end
         end
-
       end
     end
   end
@@ -56,8 +58,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :gender,
-      :role, :email, :password, :password_confirmation, :background, :avatar,
-      :deactivate_reason, :deactivate_description)
+      :email, :password, :password_confirmation, :background, :avatar,
+      :role, :bio, :started_at, :education, :deactivate_reason, :deactivate_description,
+      specialties_attributes: [:id, :name, :_destroy],
+      services_attributes: [:id, :name, :_destroy],
+      social_media_attributes: [:id, :kind, :url, :_destroy])
   end
 
   def user
@@ -71,5 +76,9 @@ class UsersController < ApplicationController
   def tabs
     @tab = params["tab"]
     @submenu = params["submenu"]
+  end
+
+  def redirect_back
+    redirect_to params[:from_url]
   end
 end

@@ -1,7 +1,7 @@
-<div class="pb-10">
-  <h1 class="mt-8 font-bold text-normal">What are you an expert at?  (Max 3)</h1>
+<div class="py-2">
+  <h1 class="text-normal">What are you an expert at?  (Max 3)</h1>
 </div>
-<%= form_for(user, :url => url, :method => :put) do |f| %>
+<%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
     <div class="relative block w-full">
@@ -37,6 +37,7 @@
     <%= specialty_form.text_field :name, class: "hidden" %>
     <%= specialty_form.text_field :_destroy, class: "hidden", value: "1" %>
   <% end %>
+  <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>
 <script>
   function tagSelect() {

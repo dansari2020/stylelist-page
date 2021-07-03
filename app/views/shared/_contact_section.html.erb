@@ -1,56 +1,105 @@
-<ul class="mb-20 list-none" x-show="tab === 'contact'">
+<ul class="mb-40 list-none" x-show="tab === 'contact'">
   <li>
-    <div class="flex justify-center justify-between py-4 mt-3 w-full border-t border-b">
-      <div>
-        <h2 class="pb-4 leading-3 text-normal">Phone</h2>
-        <p class="text-sm font-medium text-gray-400 leading-2">What number can clients contact you at?</p>
+    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+      <div id="view_phone" class="flex justify-between w-full" x-show="!edit">
+        <div>
+          <h2 class="pb-4 leading-3 text-normal">Phone</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">
+            <% if current_user.has_phone? %>
+              <%= current_user.phone %>
+            <% else %>
+              What number can clients contact you at?
+            <% end %>
+          </p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
       </div>
-      <div class="flex items-center">
-        <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+      <div id="edit_phone" x-show="edit" class="w-full p-2 bg-gray-100">
+        <% phone_form = dom_id(current_user, "phone") %>
+        <%= render partial: "shared/forms/phone", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: phone_form} %>
+        <div class="pt-4 pb-2 text-right actions">
+          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
+          <%= submit_tag "Save", form: phone_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
       </div>
     </div>
   </li>
   <li>
-    <div class="flex justify-center justify-between py-4 w-full border-b">
-      <div>
-        <h2 class="pb-4 leading-3 text-normal">Address</h2>
-        <p class="text-sm font-medium text-gray-400 leading-2">Where is your salon located?</p>
+    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+      <div id="view_languages" class="flex justify-between w-full" x-show="!edit">
+        <div>
+          <h2 class="pb-4 leading-3 text-normal">Spoken Languages</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">
+            <% if current_user.has_languages? %>
+              <ul class="flex mt-2 space-x-4">
+                <% current_user.languages.each do |language| %>
+                  <li>
+                    <span class="p-2 text-sm border border-gray-400 rounded-full">
+                      <%= language.name %>
+                    </span>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              What languages do you provide services in?
+            <% end %>
+          </p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
       </div>
-      <div class="flex items-center">
-        <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+      <div id="edit_languages" x-show="edit" class="w-full p-2 bg-gray-100">
+        <% languages_form = dom_id(current_user, "languages") %>
+        <%= render partial: "shared/forms/languages", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: languages_form} %>
+        <div class="pt-4 pb-2 text-right actions">
+          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
+          <%= submit_tag "Save", form: languages_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
       </div>
     </div>
   </li>
   <li>
-    <div class="flex justify-center justify-between py-4 w-full border-b">
-      <div>
-        <h2 class="pb-4 leading-3 text-normal">Social Media</h2>
-        <p class="text-sm font-medium text-gray-400 leading-2">Where else can clients get to know you (i.e. instagram)?</p>
+    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+      <div id="view_address" class="flex justify-between w-full" x-show="!edit">
+        <div>
+          <h2 class="pb-4 leading-3 text-normal">Address</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">Where is your salon located?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
       </div>
-      <div class="flex items-center">
-        <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+      <div id="edit_address" x-show="edit" class="w-full p-2 bg-gray-100">
+        <% address_form = dom_id(current_user, "address") %>
+        <%= render partial: "shared/forms/address", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: address_form} %>
+        <div class="pt-4 pb-2 text-right actions">
+          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
+          <%= submit_tag "Save", form: address_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
       </div>
     </div>
   </li>
   <li>
-    <div class="flex justify-center justify-between py-4 w-full border-b">
-      <div>
-        <h2 class="pb-4 leading-3 text-normal">Availability</h2>
-        <p class="text-sm font-medium text-gray-400 leading-2">When are you available to clients?</p>
+    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+      <div id="view_availability" class="flex justify-between w-full" x-show="!edit">
+        <div>
+          <h2 class="pb-4 leading-3 text-normal">Availability</h2>
+          <p class="text-sm font-medium text-gray-400 leading-2">When are you available to clients?</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+        </div>
       </div>
-      <div class="flex items-center">
-        <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="flex justify-center justify-between py-4 w-full border-b">
-      <div>
-        <h2 class="pb-4 leading-3 text-normal">Languages</h2>
-        <p class="text-sm font-medium text-gray-400 leading-2">What languages do you provide services in?</p>
-      </div>
-      <div class="flex items-center">
-        <%= link_to "Edit", "#", class: "text-blue-500 text-sm"%>
+      <div id="edit_availability" x-show="edit" class="w-full p-2 bg-gray-100">
+        <% availability_form = dom_id(current_user, "availability") %>
+        <%= render partial: "shared/forms/availability", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: availability_form} %>
+        <div class="pt-4 pb-2 text-right actions">
+          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
+          <%= submit_tag "Save", form: availability_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
       </div>
     </div>
   </li>

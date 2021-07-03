@@ -16,11 +16,10 @@
     background: url('<%= image_url("icons/checkbox-radio-sprite.png") %>') top left no-repeat;
   }
 </style>
-<div class="pb-10">
-  <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Which best describes you</h1>
-  <p class="text-sm text-center">Step 2 of 4</p>
+<div class="py-2">
+  <h1 class="text-normal">Which best describes you</h1>
 </div>
-<%= form_for(user, :url => url, :method => :put) do |f| %>
+<%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="flex flex-col md:flex-row">
     <%= f.radio_button :role, "barber", checked: true, class: "hidden" %>
@@ -34,4 +33,5 @@
       Hair Stylist
     </label>
   </div>
+  <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>
