@@ -1,0 +1,37 @@
+<style>
+  input:checked + label {
+  	border: 1px solid #3374DE;
+    position: relative;
+  }
+  input[type="radio"] + label span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top:5px;
+    left:5px;
+  }
+  input[type="radio"]:checked + label span {
+    background: url('<%= image_url("icons/checkbox-radio-sprite.png") %>') top left no-repeat;
+  }
+</style>
+<div class="pb-10">
+  <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Which best describes you</h1>
+  <p class="text-sm text-center">Step 2 of 4</p>
+</div>
+<%= form_for(user, :url => url, :method => :put) do |f| %>
+  <%= render "devise/shared/error_messages", resource: user %>
+  <div class="flex flex-col md:flex-row">
+    <%= f.radio_button :role, "barber", checked: true, class: "hidden" %>
+    <label for="user_role_barber" class="py-12 mb-6 mr-2 text-center border border-gray-200 rounded-lg md:w-1/2 focus:border-blue-200">
+      <span class=""></span>
+      Barber
+    </label>
+    <%= f.radio_button :role, "hair_stylist", class: "hidden" %>
+    <label for="user_role_hair_stylist" class="py-12 mb-6 ml-2 text-center border border-gray-200 rounded-lg md:w-1/2 focus:border-blue-200">
+      <span class=""></span>
+      Hair Stylist
+    </label>
+  </div>
+<% end %>

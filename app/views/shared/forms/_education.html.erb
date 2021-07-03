@@ -1,0 +1,9 @@
+<div class="pb-10">
+  <h1 class="mt-8 text-xl font-bold leading-tight md:text-2xl">Where did you learn to do hair?</h1>
+</div>
+<%= form_for(user, :url => url,:method => :put) do |f| %>
+  <%= render "devise/shared/error_messages", resource: user %>
+  <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
+    <%= f.text_field :education, autofocus: true, placeholder: "i.e. Vancouver Hair Academy", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+  </div>
+<% end %>

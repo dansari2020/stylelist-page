@@ -19,7 +19,7 @@ class PortfoliosController < ApplicationController
   end
 
   def update
-    if @portfolio.update(portfolio_params)
+    if @portfolio.update(portfolio_params.merge(status: :published))
       upload_pictures
       redirect_to root_url
     end

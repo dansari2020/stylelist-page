@@ -1,28 +1,28 @@
 <div class="flex flex-col space-x-4 md:flex-row">
-  <div class="block relative px-2 pt-12 border-r md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-2/5" x-data="{ tab : 'profile' }">
+  <div class="relative block px-2 pt-12 border-r md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-2/5" x-data="{ tab : 'profile' }">
     <div class="flex flex-row justify-center mb-2 border-b">
-      <button @click.prevent="tab = 'profile'" class="block py-2 px-12 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
+      <button @click.prevent="tab = 'profile'" class="block px-12 py-2 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
         Profile
       </button>
-      <button @click.prevent="tab = 'contact'" class="block py-2 px-12 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
+      <button @click.prevent="tab = 'contact'" class="block px-12 py-2 text-gray-600 hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
         Contact
       </button>
     </div>
     <%= render partial: "shared/profile", locals: {user: user} %>
   </div>
   <div class="px-2 pt-12 md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-3/5" x-data="{ manage : false }">
-    <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, method: :delete) do |f| %>
-      <div class="flex flex-col justify-between mb-2 border-b sm:flex-row">
-        <p class="px-12 pt-4 pb-2 text-gray-600">
-          Portfolio
-        </p>
+    <div class="flex flex-col justify-between mb-2 border-b sm:flex-row">
+      <p class="px-12 pt-4 pb-2 text-gray-600">
+        Portfolio
+      </p>
+      <% if current_user.portfolios.published.present? %>
         <div class="actions">
-          <button class="py-2 text-sm font-medium text-blue-500 rounded-md border border-blue-500 lg:px-4 hover:text-white hover:bg-blue-500"  x-show="!manage" @click.prevent="manage = !manage">Mangae</button>
+          <button class="py-2 text-sm font-medium text-blue-500 border border-blue-500 rounded-md lg:px-4 hover:text-white hover:bg-blue-500"  x-show="!manage" @click.prevent="manage = !manage">Mangae</button>
           <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "x-show": "manage", "@click.prevent": "manage = !manage" %>
-          <%= f.submit "Delete", class: "text-red-500 bg-white border border-red-500 hover:text-white hover:bg-red-500 px-4 py-2 rounded-md text-sm font-medium", "x-show": "manage" %>
+          <%= submit_tag "Delete", form: "portfolio_pictures", class: "text-red-500 bg-white border border-red-500 hover:text-white hover:bg-red-500 px-4 py-2 rounded-md text-sm font-medium", "x-show": "manage" %>
         </div>
-      </div>
-      <%= render partial: "shared/portfolio", locals: {user: user, f: f} %>
+      <% end %>
     </div>
-  <% end %>
+    <%= render partial: "shared/portfolio", locals: {user: user} %>
+  </div>
 </div>
