@@ -5,7 +5,7 @@
   <%= render "devise/shared/error_messages", resource: user %>
   <% @social_data = SocialMedium.kinds.keys.map{|k| user.social_media.find_or_initialize_by(kind: k) }%>
   <%= f.fields_for :social_media, @social_media  do |social_form| %>
-    <div class="flex flex-col w-full px-4 border rounded-lg md:inline-flex md:flex-row md:items-center focus:border-gray-500 focus:outline-none">
+    <div class="flex flex-col px-4 w-full rounded-lg border md:inline-flex md:flex-row md:items-center focus:border-gray-500 focus:outline-none">
       <%= image_tag "icons/#{social_form.object.kind}.png", class: "w-5" %>
       <%= social_form.text_field :url, placeholder: "https://#{social_form.object.kind}.com/username", class: "w-full py-3 px-4 ml-3 focus:border-none autofill:bg-white" %>
       <%= social_form.text_field :kind, class: "hidden" %>
