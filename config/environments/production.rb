@@ -117,4 +117,25 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  # Config Mailgun
+  config.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }}
+  config.action_mailer.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }}
+  config.action_mailer.asset_host = ENV.fetch("DEFAULT_URL") { "stylistpage.com" }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV["MAILGUN_API_KEY"],
+    domain: ENV["MAILGUN_DOMAIN"]
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default charset: "utf-8"
+  config.action_mailer.smtp_settings = {
+    domain: ENV["MAILGUN_DOMAIN"],
+    user_name: ENV["MAILGUN_SMTP_LOGIN"],
+    password: ENV["MAILGUN_SMTP_PASSWORD"],
+    port: ENV["MAILGUN_SMTP_PORT"],
+    address: ENV["MAILGUN_SMTP_SERVER"],
+    authentication: :plain
+  }
 end

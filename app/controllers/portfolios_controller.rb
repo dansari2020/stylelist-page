@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_duck!
   before_action :portfolio, only: %i[edit update destroy]
 
   def index
