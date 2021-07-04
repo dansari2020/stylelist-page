@@ -1,10 +1,59 @@
+<style>
+  input + label.availability {
+    position: relative;
+  }
+  input[type="checkbox"] + label.availability span {
+    background: rgba(0, 0, 0, 0.12);
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    top:10px;
+    left:10px;
+    z-index: 10;
+  }
+  input[type="checkbox"]:checked + label.availability span {
+    background: url('<%= image_url("icons/selected-checkbox.png") %>') center center no-repeat;
+  }
+</style>
 <div class="py-2">
   <h1 class="text-normal">Availability</h1>
 </div>
 <%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="w-full">
-    <%= f.text_area :bio, autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <% availabilities = [] %>
+    <% 0.upto(6) do |day_number| %>
+      <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
+    <% end %>
+    <%= f.fields_for :availabilities, availabilities do |av_form|%>
+      <div class="flex w-full py-4 border-b" x-data="{ work : true }">
+        <div class="w-1/5 pb-16">
+          <input type="checkbox" id="<%= "day_#{av_form.object.day}" %>" class="hidden" @change="work = !work" checked="checked" />
+          <label for="<%= "day_#{av_form.object.day}" %>" class="availability"><span class="w-8 h-8 rounded-full"></span></label>
+        </div>
+        <div class="w-4/5">
+          <div x-show="work">
+            <p class="w-full">
+              <label for="<%= "day_#{av_form.object.day}" %>">
+                <%= Date::DAYNAMES[av_form.object.day].capitalize %>
+              </label>
+            </p>
+            <div class="flex">
+              <div class="flex">
+                <%= av_form.time_select :open_at, {ampm: true}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+              </div>
+              <div class="">
+                <span class="px-4 mx-auto leading-8">-</span>
+              </div>
+              <div class="flex">
+                <%= av_form.time_select :close_at, {ampm: true}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+              </div>
+            </div>
+          </div>
+          <p class="w-full text-center" x-show="!work">Not Available</p>
+        </div>
+      </div>
+    <% end %>
   </div>
   <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>

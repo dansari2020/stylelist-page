@@ -63,6 +63,7 @@ class UsersController < ApplicationController
       specialties_attributes: [:id, :name, :_destroy],
       services_attributes: [:id, :name, :_destroy],
       social_media_attributes: [:id, :kind, :url, :_destroy],
+      availabilities_attributes: [:open_at, :close_at],
       address_attributes: [:id, :country_code, :salon_name, :street, :unit_suit, :city, :province,
         :postal, :privacy])
   end
