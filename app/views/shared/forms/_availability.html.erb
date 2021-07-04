@@ -26,8 +26,8 @@
       <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
     <% end %>
     <%= f.fields_for :availabilities, availabilities do |av_form|%>
-      <div class="flex w-full py-4 border-b" x-data="{ work : true }">
-        <div class="w-1/5 pb-16">
+      <div class="flex py-4 w-full border-b" x-data="{ work : true }">
+        <div class="pb-16 w-1/5">
           <input type="checkbox" id="<%= "day_#{av_form.object.day}" %>" class="hidden" @change="work = !work" checked="checked" />
           <label for="<%= "day_#{av_form.object.day}" %>" class="availability"><span class="w-8 h-8 rounded-full"></span></label>
         </div>
