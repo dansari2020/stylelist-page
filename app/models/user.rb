@@ -76,6 +76,10 @@ class User < ApplicationRecord
     !deactivated? ? super : :deactivated_account
   end
 
+  def has_availabilities?
+    @has_availabilities ||= availabilities.pluck(:opened).any?
+  end
+
   protected
 
   def timeout_in
