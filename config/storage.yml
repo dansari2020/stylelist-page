@@ -13,6 +13,8 @@ wasabi:
   secret_access_key: <%= ENV.fetch("AWS_SECRET_ACCESS_KEY", "vf2ZeE1XBquphJHFz60Qpj3AMV7HeZ48T7c1k6kH") %>
   region: <%= ENV.fetch("AWS_REGION", "us-west-1") %>
   bucket: <%= ENV.fetch("AWS_BUCKET", "stylist-page-staging") %>
+  endpoint: <%= ENV.fetch("AWS_ENDPOINT", "https://s3.us-west-1.wasabisys.com") %>
+  s3_host_name: <%= ENV.fetch("AWS_ENDPOINT", "https://s3.us-west-1.wasabisys.com") %>
 
 # amazon:
 #   service: S3
