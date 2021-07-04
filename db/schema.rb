@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_162326) do
+ActiveRecord::Schema.define(version: 2021_07_03_213953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,13 @@ ActiveRecord::Schema.define(version: 2021_07_02_162326) do
     t.string "street"
     t.string "postal"
     t.string "province"
-    t.string "country"
+    t.string "country_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "salon_name"
+    t.string "unit_suit"
+    t.string "city"
+    t.boolean "privacy", default: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -73,11 +77,18 @@ ActiveRecord::Schema.define(version: 2021_07_02_162326) do
   end
 
   create_table "languages", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_languages_on_user_id"
+  end
+
+  create_table "languages_users", force: :cascade do |t|
+    t.bigint "language_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["language_id"], name: "index_languages_users_on_language_id"
+    t.index ["user_id"], name: "index_languages_users_on_user_id"
   end
 
   create_table "portfolios", force: :cascade do |t|
@@ -146,6 +157,8 @@ ActiveRecord::Schema.define(version: 2021_07_02_162326) do
     t.integer "deactivate_reason", default: 0
     t.text "deactivate_description"
     t.integer "gender", default: 0
+    t.integer "phone_type", default: 0
+    t.integer "phone_method", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -155,7 +168,8 @@ ActiveRecord::Schema.define(version: 2021_07_02_162326) do
   add_foreign_key "addresses", "users"
   add_foreign_key "availabilities", "users"
   add_foreign_key "hair_types", "portfolios"
-  add_foreign_key "languages", "users"
+  add_foreign_key "languages_users", "languages"
+  add_foreign_key "languages_users", "users"
   add_foreign_key "portfolios", "users"
   add_foreign_key "service_types", "portfolios"
   add_foreign_key "services", "users"

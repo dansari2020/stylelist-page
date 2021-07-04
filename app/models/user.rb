@@ -3,9 +3,11 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable,
     :registerable, :timeoutable, :confirmable
 
-  enum gender: %w[pronouns mrs mr]
-  enum role: %w[client hair_stylist barber admin]
-  enum status: %w[pending completed deactivated]
+  enum gender: %i[pronouns mrs mr]
+  enum role: %i[client hair_stylist barber admin]
+  enum status: %i[pending completed deactivated]
+  enum phone_type: %i[mobile home work fax]
+  enum phone_method: %i[text_or_cells text cells]
   enum deactivate_reason: {"Select a reason (optional)": 0,
                            "This is temporary. I'll be back": 1,
                            "My account was hacked": 2,
@@ -20,18 +22,20 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :background
 
+  has_one :address, dependent: :destroy
   has_many :specialties, dependent: :destroy
-  has_many :languages, dependent: :destroy
-  has_many :address, dependent: :destroy
   has_many :services, dependent: :destroy
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
   has_many :portfolios, dependent: :destroy
   has_many :pictures, through: :portfolios
-  accepts_nested_attributes_for :specialties, :languages, :address, :services,
+  accepts_nested_attributes_for :specialties, :address, :services,
     :availabilities, :social_media, allow_destroy: true
+  has_and_belongs_to_many :languages, dependent: :destroy
 
   before_save :destroy_prvious_data
+
+  delegate :full_address, to: :address, allow_nil: true
 
   def full_name
     [first_name, last_name].compact.join(" ")
@@ -46,7 +50,7 @@ class User < ApplicationRecord
   end
 
   ["bio", "username", "social_media", "education", "started_at", "specialties", "services",
-    "social_media", "phone", "languages"].each do |info|
+    "social_media", "phone", "languages", "full_address"].each do |info|
     define_method("has_#{info}?") do
       send(info).present?
     end
@@ -54,6 +58,14 @@ class User < ApplicationRecord
 
   def self.gender_list
     genders.keys.map { |g| [g.humanize, g] }
+  end
+
+  def self.phone_type_list
+    phone_types.keys.map { |g| [g.humanize, g] }
+  end
+
+  def self.phone_method_list
+    phone_methods.keys.map { |g| [g.humanize, g] }
   end
 
   def active_for_authentication?

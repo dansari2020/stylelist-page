@@ -1,10 +1,65 @@
+<style>
+  input:checked ~ .dot {
+    transform: translateX(100%);
+    /* background-color: #48bb78; */
+  }
+  input ~ .bgdot {
+    background-color: #999998;
+    background-image: url('<%= image_url("icons/switch_off.png") %>');
+    background-position-y: center;
+    background-position-x: 80%;
+    background-repeat: no-repeat;
+  }
+  input:checked ~ .bgdot {
+    background-color: #3374DE;
+    background-image: url('<%= image_url("icons/switch_on.png") %>');
+    background-position-x: 20%;
+  }
+</style>
 <div class="py-2">
-  <h1 class="text-normal">Bio</h1>
+  <h1 class="text-normal">Address</h1>
 </div>
 <%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="w-full">
-    <%= f.text_area :bio, autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <%= f.fields_for :address, user.address || user.build_address do |ad| %>
+      <div class="w-full space-y-4">
+        <%= ad.country_select :country_code, {priority_countries: ["US", "CA"], priority_countries_divider: "~~~~~~"}, include_blank: "Country", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= ad.text_field :salon_name, placeholder: "Salon Name (Optional)", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= ad.text_field :street, placeholder: "Street Address", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= ad.text_field :unit_suit, placeholder: "Unit/Suite", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= ad.text_field :city, placeholder: "City", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <div class="space-x-4 md:flex">
+          <div class="md:w-1/2">
+            <%= ad.text_field :province, placeholder: "Province", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+          <div class="md:w-1/2">
+            <%= ad.text_field :postal, placeholder: "Postal Code", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+        </div>
+        <div class="flex justify-between pt-20">
+          <div class="w-full">
+            <h4 class="font-bold">Privacy</h4>
+            <p class="text-sm text-gray-400">Hide your address on profile</p>
+          </div>
+          <div>
+            <div class="flex items-center justify-center w-full mb-12">
+              <label for="toggleB" class="flex items-center cursor-pointer">
+                <!-- toggle -->
+                <div class="relative">
+                  <!-- input -->
+                  <%= ad.check_box :privacy, id: "toggleB", class: "sr-only" %>
+                  <!-- line -->
+                  <div class="block h-8 rounded-full w-14 bgdot"></div>
+                  <!-- dot -->
+                  <div class="absolute w-6 h-6 transition bg-white rounded-full dot left-1 top-1"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <input type="hidden" name="from_url" value="<%= from_url %>">
   </div>
-  <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>

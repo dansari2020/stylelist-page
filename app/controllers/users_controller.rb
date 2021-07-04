@@ -17,7 +17,6 @@ class UsersController < ApplicationController
           render "index"
         }
       else
-
         respond_to do |format|
           if @user.update(user_params)
             format.html do
@@ -57,12 +56,15 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :gender,
-      :email, :password, :password_confirmation, :background, :avatar,
+    params.require(:user).permit(:first_name, :last_name, :gender, :background, :avatar,
+      :email, :password, :password_confirmation, :phone, :phone_method, :phone_type,
       :role, :bio, :started_at, :education, :deactivate_reason, :deactivate_description,
+      language_ids: [],
       specialties_attributes: [:id, :name, :_destroy],
       services_attributes: [:id, :name, :_destroy],
-      social_media_attributes: [:id, :kind, :url, :_destroy])
+      social_media_attributes: [:id, :kind, :url, :_destroy],
+      address_attributes: [:id, :country_code, :salon_name, :street, :unit_suit, :city, :province,
+        :postal, :privacy])
   end
 
   def user
@@ -79,6 +81,6 @@ class UsersController < ApplicationController
   end
 
   def redirect_back
-    redirect_to params[:from_url]
+    redirect_to(params[:from_url] || root_url)
   end
 end

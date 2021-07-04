@@ -3,15 +3,11 @@
   <head>
     <%= render 'shared/head' %>
   </head>
-  <body class="md:overflow-hidden">
-    <div class="md:min-h-screen">
-      <div class="md:flex md:justify-center">
-        <%= render "shared/header" %>
-        <main class="flex-1 mx-auto max-w-screen-2xl md:mt-20">
-          <%= yield %>
-        </main>
-        <%= render "shared/footer" %>
-      </div>
+  <body class="md:h-screen">
+    <%= render "shared/header" %>
+    <div id="main" class="w-full mx-auto max-w-screen-2xl">
+      <%= yield %>
     </div>
+    <%= render "shared/footer" %>
   </body>
 </html>

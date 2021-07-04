@@ -1,8 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-body {
-  min-height: 100vh;
+@media (min-width: 768px) {
+  .h-screen-headless {
+    height: calc(100vh - 5rem);
+  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

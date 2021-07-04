@@ -12,4 +12,4 @@
     <p class="text-sm text-gray-400">We need your current password to verify this update</p>
   </div>
 </div>
-<input type="hidden" name="from_url" value="<%= settings_path(tab: "manage_account", submenu: "update_email") %>">
+<input type="hidden" name="from_url" value="<%= settings_path(tab: "manage_account", submenu: "update_email") %>" :disabled="submenu !== 'update_email'">

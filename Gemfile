@@ -61,3 +61,4 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise"
 gem "wicked"
+gem "country_select", "~> 4.0"

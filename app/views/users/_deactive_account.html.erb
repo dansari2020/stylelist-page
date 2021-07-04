@@ -18,4 +18,4 @@
     <p class="inline-block mt-2 text-gray-400 font-sm text-md">Others can claim your custom URL if you close your account</p>
   </div>
 </div>
-<input type="hidden" name="from_url" value="<%= settings_path(tab: "manage_account", submenu: "deactivate") %>">
+<input type="hidden" name="from_url" value="<%= settings_path(tab: "manage_account", submenu: "deactivate") %>" :disabled="submenu !== 'deactivate'">

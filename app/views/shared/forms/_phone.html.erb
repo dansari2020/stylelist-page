@@ -1,10 +1,58 @@
+<style>
+  input + label {
+    position: relative;
+  }
+  input[type="radio"] + label span.radiobtn {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    height: 25px;
+    width: 25px;
+    z-index: 10;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  input[type="radio"] + label span.radiobtn:after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #2196F3;
+    display: none;
+  }
+  input[type="radio"]:checked + label {
+    border-color: #2196F3;
+  }
+  input[type="radio"]:checked + label span.radiobtn {
+    border-color: #2196F3;
+    background: white;
+  }
+  input[type="radio"]:checked + label span.radiobtn:after {
+    display: block;
+  }
+</style>
 <div class="py-2">
-  <h1 class="text-normal">Bio</h1>
+  <h1 class="text-normal">Phone</h1>
 </div>
 <%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="w-full">
-    <%= f.text_area :bio, autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <%= f.text_field :phone, autofocus: true, placeholder: "(555) 555-5555", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <%= f.select :phone_type, options_for_select(User.phone_type_list, f.object.phone_type), {}, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <div class="flex flex-col py-2 md:flex-row">
+      <% User.phone_method_list.each do |text, key| %>
+        <%= f.radio_button :phone_method, key, class: "hidden", id: "user_phone_method_#{key}" %>
+        <%= f.label "phone_method_#{key}", class: "py-2 pl-12 mr-2 border border-gray-400 rounded-full md:w-1/2 focus:border-blue-200 bg-white" do %>
+          <span class="radiobtn"></span>
+          <%= text %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>
