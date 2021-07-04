@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :languages, dependent: :destroy
 
   before_save :destroy_prvious_data
+  after_update :send_confirmation_instructions, if: :should_send_confirmation
 
   delegate :full_address, to: :address, allow_nil: true
 
@@ -78,6 +79,10 @@ class User < ApplicationRecord
 
   def has_availabilities?
     @has_availabilities ||= availabilities.pluck(:opened).any?
+  end
+
+  def should_send_confirmation
+    !confirmed? && completed? && confirmation_token.nil?
   end
 
   protected
