@@ -14,29 +14,30 @@ class UsersController < ApplicationController
       if params["user"].has_key?("current_password") && !valid_password?
         format.html {
           flash[:error] = "Your current password is wrong"
-          render "index"
+          return render "index"
         }
       else
         respond_to do |format|
           if @user.update(user_params)
             format.html do
               if params["user"]["email"].present?
-                redirect_to confirm_email_path
+                return redirect_to confirm_email_path
               elsif params["user"]["deactivate_reason"].present?
-                destroy
+                return destroy
               elsif params["user"]["background"].present? || params["user"]["avatar"].present?
-                redirect_to root_url
+                return redirect_back
+              else
+                return redirect_back
               end
-              redirect_back
             end
             format.json do
               if params["user"]["background"].present? || params["user"]["avatar"].present?
-                render json: @user, status: :created, location: root_url
+                return render json: @user, status: :created, location: root_url
               end
             end
           else
             format.html do
-              redirect_back
+              return redirect_back
             end
           end
         end
