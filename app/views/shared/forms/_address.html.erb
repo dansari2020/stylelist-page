@@ -23,7 +23,7 @@
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="w-full">
     <%= f.fields_for :address, user.address || user.build_address do |ad| %>
-      <div class="w-full space-y-4">
+      <div class="space-y-4 w-full">
         <%= ad.country_select :country_code, {priority_countries: ["US", "CA"], priority_countries_divider: "~~~~~~"}, include_blank: "Country", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
         <%= ad.text_field :salon_name, placeholder: "Salon Name (Optional)", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
         <%= ad.text_field :street, placeholder: "Street Address", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
@@ -43,16 +43,16 @@
             <p class="text-sm text-gray-400">Hide your address on profile</p>
           </div>
           <div>
-            <div class="flex items-center justify-center w-full mb-12">
+            <div class="flex justify-center items-center mb-12 w-full">
               <label for="toggleB" class="flex items-center cursor-pointer">
                 <!-- toggle -->
                 <div class="relative">
                   <!-- input -->
                   <%= ad.check_box :privacy, id: "toggleB", class: "sr-only" %>
                   <!-- line -->
-                  <div class="block h-8 rounded-full w-14 bgdot"></div>
+                  <div class="block w-14 h-8 rounded-full bgdot"></div>
                   <!-- dot -->
-                  <div class="absolute w-6 h-6 transition bg-white rounded-full dot left-1 top-1"></div>
+                  <div class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition dot"></div>
                 </div>
               </label>
             </div>

@@ -1,6 +1,6 @@
 <ul class="mb-40 list-none" x-show="tab === 'contact'">
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_phone" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Phone</h2>
@@ -16,7 +16,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_phone" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_phone" x-show="edit" class="p-2 w-full bg-gray-100">
         <% phone_form = dom_id(current_user, "phone") %>
         <%= render partial: "shared/forms/phone", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: phone_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -27,7 +27,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_languages" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Spoken Languages</h2>
@@ -36,7 +36,7 @@
               <ul class="flex mt-2 space-x-4">
                 <% current_user.languages.each do |language| %>
                   <li>
-                    <span class="p-2 text-sm border border-gray-400 rounded-full">
+                    <span class="p-2 text-sm rounded-full border border-gray-400">
                       <%= language.name %>
                     </span>
                   </li>
@@ -51,7 +51,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_languages" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_languages" x-show="edit" class="p-2 w-full bg-gray-100">
         <% languages_form = dom_id(current_user, "languages") %>
         <%= render partial: "shared/forms/languages", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: languages_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -62,7 +62,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_address" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Address</h2>
@@ -78,7 +78,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_address" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_address" x-show="edit" class="p-2 w-full bg-gray-100">
         <% address_form = dom_id(current_user, "address") %>
         <%= render partial: "shared/forms/address", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: address_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -89,7 +89,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_availability" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Availability</h2>
@@ -99,7 +99,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_availability" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_availability" x-show="edit" class="p-2 w-full bg-gray-100">
         <% availability_form = dom_id(current_user, "availability") %>
         <%= render partial: "shared/forms/availability", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: availability_form} %>
         <div class="pt-4 pb-2 text-right actions">
