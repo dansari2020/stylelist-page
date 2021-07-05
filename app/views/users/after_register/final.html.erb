@@ -6,7 +6,7 @@
 </div>
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="flex flex-row items-center w-full mb-4">
+  <div class="flex flex-row items-center mb-4 w-full">
     <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/speciality.png", class: "h-5" %>
@@ -30,7 +30,7 @@
       Services you offer
     <% end %>
   </div>
-  <div class="flex flex-row items-center w-full mb-4">
+  <div class="flex flex-row items-center mb-4 w-full">
     <%= link_to wizard_path(:bio), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/bio.png", class: "h-5" %>
@@ -54,7 +54,7 @@
       Your education
     <% end %>
   </div>
-  <div class="flex flex-row items-center w-full mb-4">
+  <div class="flex flex-row items-center mb-4 w-full">
     <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
       <div class="flex justify-between mb-4">
         <%= image_tag "icons/calendar.png", class: "h-5" %>
@@ -79,7 +79,7 @@
     <% end %>
   </div>
   <p class="mt-2 text-xs text-center text-gray-400">This information will populate your profile tab</p>
-  <div class="w-full mt-48 actions">
+  <div class="mt-48 w-full actions">
     <%= f.submit "Save", class: "w-full text-blue-500 bg-white hover:text-white hover:bg-blue-500 border border-blue-500 lg:px-4 py-2 rounded-full text-sm font-medium" %>
   </div>
 <% end %>
