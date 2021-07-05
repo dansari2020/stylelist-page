@@ -6,6 +6,9 @@
     height: calc(100vh - 5rem);
   }
 }
+.h-screen-mobile {
+  height: calc(100vh - 58px);
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
