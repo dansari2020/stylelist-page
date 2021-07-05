@@ -6,14 +6,14 @@
     </div>
   </nav>
 </header>
-<div class="w-screen pb-5 font-sans antialiased bg-white md:bg-gray-100 h-screen-mobile md:pt-5">
-  <div class="flex flex-col justify-center w-screen mb-5 sm:m-auto sm:w-96">
-    <div class="flex flex-col p-4 space-y-6 bg-white shadow">
+<div class="w-screen pb-5 font-sans antialiased bg-white md:pt-5 sm:bg-gray-100 h-screen-mobile h-screen-headless">
+  <div class="flex flex-col justify-center w-screen h-full mb-5 sm:m-auto sm:w-96">
+    <div class="flex flex-col h-full p-4 space-y-6 bg-white sm:shadow">
       <div class="">
         <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Create Your Account</h1>
         <p class="text-sm text-center">Step 1 of 4</p>
       </div>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "h-full"}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="flex flex-row w-full space-x-4">
           <div class="w-1/2 mb-6">
