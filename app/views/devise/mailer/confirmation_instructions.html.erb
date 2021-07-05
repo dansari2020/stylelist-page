@@ -1,5 +1,30 @@
-<p>Welcome <%= @email %>!</p>
-
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<table border="0" cellspacing="0" cellpadding="0" style="font-family:sans-serif;color:#575553;border-collapse:collapse;margin:0 auto;padding:0">
+  <tbody>
+    <tr>
+      <td align="top" style="font-family:sans-serif;color:#575553;text-align:center;margin:0;padding:0 0 16px">
+        <h2>Verify your Email Address</h2>
+      </td>
+    </tr>
+    <tr style="font-family:sans-serif;color:#575553;margin:0;padding:0">
+      <td align="top" style="font-family:sans-serif;color:#575553;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#575553;font-weight: 700;font-size: 18px;line-height: 24px;margin:0;padding:0">
+          Thank you for signing up with StylistPage.
+        </p>
+      </td>
+    </tr>
+    <tr style="font-family:sans-serif;color:#575553;padding:0px;margin:0;">
+      <td align="top" style="font-family:sans-serif;color:#575553;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#575553;font-weight:normal;font-size:16px;line-height:1.5;margin:0;padding-bottom:20px">
+          As an extra security precaution, please verify your email address to
+          continue signing up
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to "Complete Verification", user_confirmation_url(confirmation_token: @resource.confirmation_token), style: "background: #FFDE03;color:#000000;
+border-radius: 4px;;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;margin-bottom:20px width:100%; padding:20px", target: "_blank" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
