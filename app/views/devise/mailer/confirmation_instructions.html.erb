@@ -1,20 +1,21 @@
-<table border="0" cellspacing="0" cellpadding="0" style="font-family:sans-serif;color:#575553;border-collapse:collapse;margin:0 auto;padding:0">
+<table border="0" cellspacing="0" cellpadding="0" style="font-family:sans-serif;color:#000000;border-collapse:collapse;margin:0 auto;padding:0">
   <tbody>
     <tr>
-      <td align="top" style="font-family:sans-serif;color:#575553;text-align:center;margin:0;padding:0 0 16px">
-        <h2>Verify your Email Address</h2>
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:center;margin:0;padding:0 0 16px">
+        <h2 style="padding-botton: 20px">Verify your Email Address</h2>
+        <hr/>
       </td>
     </tr>
-    <tr style="font-family:sans-serif;color:#575553;margin:0;padding:0">
-      <td align="top" style="font-family:sans-serif;color:#575553;text-align:left;margin:0;padding:0 0 16px">
-        <p style="font-family:sans-serif;color:#575553;font-weight: 700;font-size: 18px;line-height: 24px;margin:0;padding:0">
+    <tr style="font-family:sans-serif;color:#000000;margin:0;padding:0">
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#000000;font-weight: 700;font-size: 18px;line-height: 24px;margin-bottom:50px;padding:0">
           Thank you for signing up with StylistPage.
         </p>
       </td>
     </tr>
-    <tr style="font-family:sans-serif;color:#575553;padding:0px;margin:0;">
-      <td align="top" style="font-family:sans-serif;color:#575553;text-align:left;margin:0;padding:0 0 16px">
-        <p style="font-family:sans-serif;color:#575553;font-weight:normal;font-size:16px;line-height:1.5;margin:0;padding-bottom:20px">
+    <tr style="font-family:sans-serif;color:#000000;padding:0px;margin:0;">
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#000000;font-weight:normal;font-size:16px;line-height:1.5;margin:0;margin-bottom:50px">
           As an extra security precaution, please verify your email address to
           continue signing up
         </p>
@@ -23,7 +24,7 @@
     <tr>
       <td>
         <%= link_to "Complete Verification", user_confirmation_url(confirmation_token: @resource.confirmation_token), style: "background: #FFDE03;color:#000000;
-border-radius: 4px;;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;margin-bottom:20px width:100%; padding:20px", target: "_blank" %>
+border-radius: 4px;;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;width:100%; padding:20px 0; display: block;text-align: center;", target: "_blank" %>
       </td>
     </tr>
   </tbody>
