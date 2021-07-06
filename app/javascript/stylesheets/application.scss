@@ -8,7 +8,9 @@
 }
 @media (max-width: 767px) {
   .h-screen-mobile {
-    height: calc(100vh - 58px);
+    // height: calc(100vh - 58px);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100 - 58px);
   }
 }
 input:-webkit-autofill,
