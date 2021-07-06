@@ -1,6 +1,17 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+body {
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+}
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  height: -webkit-fill-available;
+}
 @media (min-width: 768px) {
   .h-screen-headless {
     height: calc(100vh - 5rem);
@@ -8,9 +19,10 @@
 }
 @media (max-width: 767px) {
   .h-screen-mobile {
-    // height: calc(100vh - 58px);
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100 - 58px);
+    height: calc(100vh - 58px);
+    // height: 100vh;
+    // height: calc(var(--vh, 1vh) * 100 - 58px);
+    
   }
 }
 input:-webkit-autofill,
