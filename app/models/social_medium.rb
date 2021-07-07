@@ -7,6 +7,6 @@ class SocialMedium < ApplicationRecord
   belongs_to :user
 
   def full_url
-    "https://#{social_form.object.kind}.com/#{url}"
+    "https://#{kind}.com/#{url}"
   end
 end
