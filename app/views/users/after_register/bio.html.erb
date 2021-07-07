@@ -3,10 +3,14 @@
 </div>
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="w-full">
-    <%= f.text_area :bio, autofocus: true, placeholder: "Describe who you are", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+  <div class="w-full" x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
+    <%= f.text_area :bio, "x-ref": "countme", "x-on:keyup": "count = $refs.countme.value.length", maxlength: "56", autofocus: true, placeholder: "Describe who you are", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <div class="text-right">
+      <span x-html="count"></span> /
+      <span x-html="$refs.countme.maxLength"></span>
+    </div>
   </div>
-  <div class="mt-48 w-full text-right actions">
+  <div class="w-full mt-48 text-right actions">
     <%= link_to "Cancel", wizard_path(:final), class: "text-black text-blue-500 border border-transparent hover:border-blue-500 px-4 py-2 rounded-md md:text-sm text-xs font-medium" %>
     <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>

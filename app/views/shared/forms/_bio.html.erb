@@ -3,8 +3,12 @@
 </div>
 <%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
-  <div class="w-full">
-    <%= f.text_area :bio, autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+  <div class="w-full" x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
+    <%= f.text_area :bio, "x-ref": "countme", "x-on:keyup": "count = $refs.countme.value.length", maxlength: "56", autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    <div class="text-right">
+      <span x-html="count"></span> /
+      <span x-html="$refs.countme.maxLength"></span>
+    </div>
   </div>
   <input type="hidden" name="from_url" value="<%= from_url %>">
 <% end %>

@@ -16,9 +16,9 @@ class Users::AfterRegisterController < ApplicationController
 
   def update
     if step == :final
-      @user.user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
+      @user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
       @user.completed!
-      user.save
+      @user.save
       redirect_to(root_url)
     else
       @user.update(user_params)
