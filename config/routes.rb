@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     defaults: {tab: "profile", subment: ""}
   get "/confirm_email", to: "users#confirm_email", as: "confirm_email"
   put "/profile", to: "users#update", as: "profile_users"
-  get "/profile" => redirect("/users")
+  get "/profile" => redirect("/settings")
   resources :portfolios do
     collection do
       delete :destroy_pictures
