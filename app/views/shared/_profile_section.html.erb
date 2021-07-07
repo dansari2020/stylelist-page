@@ -1,6 +1,6 @@
 <ul class="mb-40 list-none" x-show="tab === 'profile'">
   <li>
-    <div class="flex justify-center w-full py-4 mt-3 border-t border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 mt-3 w-full border-t border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_bio" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Bio</h2>
@@ -16,7 +16,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_bio" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_bio" x-show="edit" class="p-2 w-full bg-gray-100">
         <% bio_form = dom_id(current_user, "bio") %>
         <%= render partial: "shared/forms/bio", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: bio_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -27,7 +27,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_specialties" class="flex justify-between w-full" x-show="!edit">
         <div >
           <h2 class="pb-4 leading-3 text-normal">Specialties</h2>
@@ -36,7 +36,7 @@
               <ul class="flex mt-2 space-x-4">
                 <% current_user.specialties.each do |specialty| %>
                   <li>
-                    <span class="p-2 text-sm border border-gray-400 rounded-full">
+                    <span class="p-2 text-sm rounded-full border border-gray-400">
                       <%= specialty.name %>
                     </span>
                   </li>
@@ -51,7 +51,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_specialties" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_specialties" x-show="edit" class="p-2 w-full bg-gray-100">
         <% specialties_form = dom_id(current_user, "specialty") %>
         <%= render partial: "shared/forms/specialties", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: specialties_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -62,7 +62,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_experience" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Experience</h2>
@@ -80,7 +80,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_experience" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_experience" x-show="edit" class="p-2 w-full bg-gray-100">
         <% experience_form = dom_id(current_user, "experience") %>
         <%= render partial: "shared/forms/experience", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: experience_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -91,7 +91,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_service" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 mt-2 leading-3 text-normal">Salon Services</h2>
@@ -100,7 +100,7 @@
               <ul class="flex space-x-4">
                 <% current_user.services.each do |service| %>
                   <li>
-                    <span class="p-2 text-sm border border-gray-400 rounded-full">
+                    <span class="p-2 text-sm rounded-full border border-gray-400">
                       <%= service.name %>
                     </span>
                   </li>
@@ -115,7 +115,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_service" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_service" x-show="edit" class="p-2 w-full bg-gray-100">
         <% service_form = dom_id(current_user, "service") %>
         <%= render partial: "shared/forms/services", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: service_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -126,7 +126,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_education" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Education</h2>
@@ -142,7 +142,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_education" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_education" x-show="edit" class="p-2 w-full bg-gray-100">
         <% education_form = dom_id(current_user, "education") %>
         <%= render partial: "shared/forms/education", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: education_form} %>
         <div class="pt-4 pb-2 text-right actions">
@@ -153,7 +153,7 @@
     </div>
   </li>
   <li>
-    <div class="flex justify-center w-full py-4 border-b border-gray-100" x-data="{ edit : false }">
+    <div class="flex justify-center py-4 w-full border-b border-gray-100" x-data="{ edit : false }">
       <div id="view_social_media" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Social</h2>
@@ -178,7 +178,7 @@
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm", "@click.prevent": "edit = true" %>
         </div>
       </div>
-      <div id="edit_education" x-show="edit" class="w-full p-2 bg-gray-100">
+      <div id="edit_education" x-show="edit" class="p-2 w-full bg-gray-100">
         <% social_media_form = dom_id(current_user, "social_media") %>
         <%= render partial: "shared/forms/social_media", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: social_media_form} %>
         <div class="pt-4 pb-2 text-right actions">
