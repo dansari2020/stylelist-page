@@ -7,7 +7,7 @@
           <% if user.avatar.attached? %>
             <%= image_tag user.avatar, style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
           <% else %>
-            <%= image_tag "icons/avatar.png", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
+            <%= image_tag "icons/avatar.svg", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
           <% end %>
           <div class="absolute">
             <%= image_tag "icons/attached_background.png", class: "w-4 h-4 mx-auto" %>

@@ -13,7 +13,7 @@
     left:5px;
   }
   input[type="radio"]:checked + label span {
-    background: url('<%= image_url("icons/checkbox-radio-sprite.png") %>') top left no-repeat;
+    background: url('<%= image_url("icons/checkbox-radio-sprite.svg") %>') top left no-repeat;
   }
 </style>
 <div class="pb-10">
@@ -24,12 +24,12 @@
   <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-row w-full">
     <%= f.radio_button :role, "barber", checked: true, class: "hidden" %>
-    <label for="user_role_barber" class="py-12 mr-2 mb-6 w-1/2 text-center rounded-lg border border-gray-200 focus:border-blue-200">
+    <label for="user_role_barber" class="w-1/2 py-12 mb-6 mr-2 text-center border border-gray-200 rounded-lg focus:border-blue-200">
       <span class=""></span>
       Barber
     </label>
     <%= f.radio_button :role, "hair_stylist", class: "hidden" %>
-    <label for="user_role_hair_stylist" class="py-12 mb-6 ml-2 w-1/2 text-center rounded-lg border border-gray-200 focus:border-blue-200">
+    <label for="user_role_hair_stylist" class="w-1/2 py-12 mb-6 ml-2 text-center border border-gray-200 rounded-lg focus:border-blue-200">
       <span class=""></span>
       Hair Stylist
     </label>
