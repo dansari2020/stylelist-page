@@ -5,7 +5,7 @@
       <% if user.background.attached? %>
         <%= image_tag "icons/attached_background.png", class: "w-10 h-10 mx-auto" %>
       <% else %>
-        <%= image_tag "icons/background.png", class: "w-6 h-6 mx-auto" %>
+        <%= image_tag "icons/background.svg", class: "w-6 h-6 mx-auto" %>
         <p class="text-sm text-center text-white">Add Cover Photo</p>
       <% end %>
       <%= f.file_field :background, class: "hidden", "x-on:change": "document.getElementById('#{form_id}').submit()" %>

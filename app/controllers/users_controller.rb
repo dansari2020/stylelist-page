@@ -12,10 +12,8 @@ class UsersController < ApplicationController
   def update
     if params["user"].present?
       if params["user"].has_key?("current_password") && !valid_password?
-        format.html {
-          flash[:error] = "Your current password is wrong"
-          return render "index"
-        }
+        flash[:error] = "Your current password is wrong"
+        redirect_back
       else
         respond_to do |format|
           if @user.update(user_params)
@@ -36,6 +34,7 @@ class UsersController < ApplicationController
               end
             end
           else
+            flash[:error] = @user.errors.full_messages
             format.html do
               return redirect_back
             end
@@ -50,7 +49,7 @@ class UsersController < ApplicationController
       @user.deactivated!
       Devise.sign_out_all_scopes ? sign_out : sign_out(@user)
       # set_flash_message :notice, :destroyed
-      respond_with_navigational(@user) { redirect_to after_sign_out_path_for(@user) }
+      redirect_to after_sign_out_path_for(@user)
     end
   end
 

@@ -66,13 +66,13 @@ class User < ApplicationRecord
     phone_methods.keys.map { |g| [g.humanize, g] }
   end
 
-  def active_for_authentication?
-    super && !deactivated?
-  end
+  # def active_for_authentication?
+  #   super && !deactivated?
+  # end
 
-  def inactive_message
-    !deactivated? ? super : :deactivated_account
-  end
+  # def inactive_message
+  #   !deactivated? ? super : :deactivated_account
+  # end
 
   def has_availabilities?
     @has_availabilities ||= availabilities.pluck(:opened).any?

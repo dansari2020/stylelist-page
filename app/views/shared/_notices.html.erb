@@ -2,8 +2,16 @@
   <% next if msg_type.to_s == "timedout" || message.blank?  %>
   <div class="alert <%= alert_class_for(msg_type) %>">
     <div class="container">
-      <button class="close" data-dismiss="alert"><span>×</span></button>
-      <%= message %>
+      <%# <button class="close" data-dismiss="alert"><span>×</span></button> %>
+      <% if message.is_a?(Array) %>
+        <ul class="list-disc list-inside">
+          <% message.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= message %>
+      <% end %>
     </div>
   </div>
 <% end %>
