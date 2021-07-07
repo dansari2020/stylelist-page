@@ -3,11 +3,10 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable,
     :registerable, :timeoutable, :confirmable
 
-  enum gender: %i[pronouns mrs mr]
   enum role: %i[client hair_stylist barber admin]
   enum status: %i[pending completed deactivated]
-  enum phone_type: %i[mobile home work fax]
-  enum phone_method: %i[text_or_cells text cells]
+  enum phone_type: %i[mobile salon]
+  enum phone_method: %i[text_or_cells text calls]
   enum deactivate_reason: {"Select a reason (optional)": 0,
                            "This is temporary. I'll be back": 1,
                            "My account was hacked": 2,
@@ -18,6 +17,8 @@ class User < ApplicationRecord
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, presence: true, confirmation: true, length: {minimum: 8}, on: :create
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   has_one_attached :avatar
   has_one_attached :background
@@ -36,14 +37,14 @@ class User < ApplicationRecord
   before_save :destroy_prvious_data
   after_update :send_confirmation_instructions, if: :should_send_confirmation
 
-  delegate :full_address, to: :address, allow_nil: true
+  delegate :full_address, :short_address, to: :address, allow_nil: true
 
   def full_name
     [first_name, last_name].compact.join(" ")
   end
 
   def url
-    [ENV.fetch("WEBSITE_URL", "stylistpage.com/"), username].compact.join(" ")
+    [ENV.fetch("WEBSITE_URL", "stylistpage.com/").strip, username.strip].compact.join
   end
 
   def profile_completed?
@@ -55,10 +56,6 @@ class User < ApplicationRecord
     define_method("has_#{info}?") do
       send(info).present?
     end
-  end
-
-  def self.gender_list
-    genders.keys.map { |g| [g.humanize, g] }
   end
 
   def self.phone_type_list

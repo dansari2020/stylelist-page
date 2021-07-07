@@ -8,7 +8,7 @@
       <%= f.text_field :last_name, placeholder: "Last Name", autocomplete: "last_name", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'name'" %>
     </div>
     <div class="mb-4">
-      <%= f.select :gender, options_for_select(User.gender_list, @user.gender), {}, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'name'" %>
+      <%= f.text_field :pronoun, placeholder: "Pronoun (Optional)", autocomplete: "pronoun", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'name'" %>
       <p class="mt-2 text-sm text-gray-400">Let others know how to refer to you.</p>
     </div>
   </div>
