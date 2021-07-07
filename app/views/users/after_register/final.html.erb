@@ -7,7 +7,7 @@
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-col"}) do |f| %>
   <div class="flex-1">
     <%= render "devise/shared/error_messages", resource: @user %>
-    <div class="flex flex-row items-center w-full mb-4">
+    <div class="flex flex-row items-center mb-4 w-full">
       <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
         <div class="flex justify-between mb-4">
           <%= image_tag "icons/speciality.svg", class: "h-5" %>
@@ -31,7 +31,7 @@
         Services you offer
       <% end %>
     </div>
-    <div class="flex flex-row items-center w-full mb-4">
+    <div class="flex flex-row items-center mb-4 w-full">
       <%= link_to wizard_path(:bio), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
         <div class="flex justify-between mb-4">
           <%= image_tag "icons/bio.svg", class: "h-5" %>
@@ -55,7 +55,7 @@
         Your education
       <% end %>
     </div>
-    <div class="flex flex-row items-center w-full mb-4">
+    <div class="flex flex-row items-center mb-4 w-full">
       <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
         <div class="flex justify-between mb-4">
           <%= image_tag "icons/calendar.svg", class: "h-5" %>
