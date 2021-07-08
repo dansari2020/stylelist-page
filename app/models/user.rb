@@ -6,7 +6,7 @@ class User < ApplicationRecord
   enum role: %i[client hair_stylist barber admin]
   enum status: %i[pending completed deactivated]
   enum phone_type: %i[mobile salon]
-  enum phone_method: %i[text_or_cells text calls]
+  enum phone_method: %i[text_or_calls text calls]
   enum deactivate_reason: {"Select a reason (optional)": 0,
                            "This is temporary. I'll be back": 1,
                            "My account was hacked": 2,

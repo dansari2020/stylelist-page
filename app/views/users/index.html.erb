@@ -1,9 +1,9 @@
 <div class="flex flex-col md:flex-row" x-data="{ tab : '<%= @tab %>', submenu : '<%= @submenu %>' }">
-  <div class="flex relative flex-col px-4 md:overflow-y-scroll md:w-1/4 lg:w-1/5 h-screen-headless h-screen-mobile">
+  <div class="relative flex flex-col px-4 md:overflow-y-scroll md:w-1/4 lg:w-1/5 h-screen-headless h-screen-mobile">
     <div class="flex-1">
       <h1 class="py-4 mb-6 text-xl font-bold leading-tight md:text-2xl">Settings</h1>
       <ul>
-        <li class="py-4 px-4 rounded-md" :class="{'bg-gray-200' : tab === 'profile'}">
+        <li class="px-4 py-4 rounded-md" :class="{'bg-gray-200' : tab === 'profile'}">
           <a href="#" class="flex justify-between" @click.prevent="tab = 'profile'; submenu = ''">
             <div class="space-x-2">
               <%= image_tag "icons/profile.svg", class: "h-6 inline-block" %>
@@ -12,7 +12,7 @@
             <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "tab === 'profile'" %>
           </a>
         </li>
-        <li class="py-4 px-4 rounded-md" :class="{'bg-gray-200' : tab === 'manage_account'}">
+        <li class="px-4 py-4 rounded-md" :class="{'bg-gray-200' : tab === 'manage_account'}">
           <a href="#" class="flex justify-between" @click.prevent="tab = 'manage_account'; submenu = ''">
             <div class="space-x-2">
               <%= image_tag "icons/manage_account.svg", class: "h-6 inline-block" %>
@@ -23,14 +23,14 @@
         </li>
       </ul>
     </div>
-    <button class="flex justify-center items-center py-2 px-4 mx-auto mb-10 max-w-max font-bold text-black whitespace-nowrap bg-transparent rounded-md hover:bg-yellow-500 hover:shadow-lg bg-yellow-light">
+    <button class="flex items-center justify-center w-full px-4 py-2 mb-10 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light">
       Got Feedback
     </button>
   </div>
   <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/4 lg:w-1/5 h-screen-headless h-screen-mobile">
     <ul class="mt-10" id="profil_submenu" x-show="tab === 'profile'">
-      <li class="py-4 px-4 rounded-md" :class="{'bg-blue-100' : submenu === 'name'}">
-        <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'name'">
+      <li class="px-4 py-4 rounded-md" :class="{'bg-blue-100' : submenu === 'name'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'name'">
           <div>
             <h3 class="font-normal text-md">Name</h3>
             <p class="text-sm text-gray-400"><%= @user.full_name %></p>
@@ -38,8 +38,8 @@
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'name'" %>
         </a>
       </li>
-      <li class="py-4 px-4 rounded" :class="{'bg-blue-100' : submenu === 'job'}">
-        <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'job'">
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'job'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'job'">
           <div>
             <h3 class="font-normal text-md">Job Title</h3>
             <p class="text-sm text-gray-400"><%= @user.role.humanize %></p>
@@ -49,8 +49,8 @@
       </li>
     </ul>
     <ul class="mt-10" id="manage_account_submenu" x-show="tab === 'manage_account'">
-      <li class="py-4 px-4 rounded-md" :class="{'bg-blue-100' : submenu === 'update_email'}">
-        <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'update_email'">
+      <li class="px-4 py-4 rounded-md" :class="{'bg-blue-100' : submenu === 'update_email'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'update_email'">
           <div>
             <h3 class="font-normal text-md">Update Email</h3>
             <p class="text-sm text-gray-400"><%= @user.email %></p>
@@ -58,8 +58,8 @@
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'update_email'" %>
         </a>
       </li>
-      <li class="py-4 px-4 rounded" :class="{'bg-blue-100' : submenu === 'change_password'}">
-        <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'change_password'">
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'change_password'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'change_password'">
           <div>
             <h3 class="font-normal text-md">Change Password</h3>
             <p class="text-sm text-gray-400">Create a new password</p>
@@ -67,8 +67,8 @@
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'change_password'" %>
         </a>
       </li>
-      <li class="py-4 px-4 rounded" :class="{'bg-blue-100' : submenu === 'deactivate'}">
-        <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'deactivate'">
+      <li class="px-4 py-4 rounded" :class="{'bg-blue-100' : submenu === 'deactivate'}">
+        <a href="#" class="flex items-center justify-between" @click.prevent="submenu = 'deactivate'">
           <div>
             <h3 class="font-normal text-md">Deactivate Account</h3>
             <p class="text-sm text-gray-400">Hide your portfolio from the web</p>
@@ -100,7 +100,7 @@
         <div id="deactive_account" x-show="submenu === 'deactivate'">
           <%= render partial: "users/deactive_account", locals: {f: f} %>
         </div>
-        <div class="mt-4 w-full text-right actions">
+        <div class="w-full mt-4 text-right actions">
           <%= link_to "Cancel", "#", class: "text-black text-white text-blue-500 hover:bg-blue-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium" %>
           <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
         </div>

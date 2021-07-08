@@ -26,33 +26,33 @@
       <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
     <% end %>
     <%= f.fields_for :availabilities, availabilities do |av_form|%>
-      <div class="flex py-4 w-full border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
-        <div class="pb-16 w-1/5">
-          <%= av_form.check_box :opened, class: "hidden", "@change": "work = !work" %>
-          <%= av_form.label :opened, class: "availability" do %>
-            <span class="w-8 h-8 rounded-full"></span>
-          <% end %>
-        </div>
-        <div class="w-4/5">
-          <div>
-            <p class="w-full">
-              <%= av_form.label :opened, class: "availability" do %>
-                <%= Date::DAYNAMES[av_form.object.day].capitalize %>
-                <%= av_form.text_field :day, class: "hidden" %>
-              <% end %>
-            </p>
-            <div class="flex" x-show="work">
-              <div class="flex">
-                <%= av_form.time_select :open_at, {ampm: true, default: av_form.object.open_at || Time.current.change(hour: 9, min: 0), ":disabled": "!work"}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white"  %>
-              </div>
-              <div class="">
-                <span class="px-4 mx-auto leading-8">-</span>
-              </div>
-              <div class="flex">
-                <%= av_form.time_select :close_at, {ampm: true, default: av_form.object.close_at || Time.current.change(hour: 20, min: 0), ":disabled": "!work"}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white"  %>
-              </div>
+      <div class="w-full py-4 border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
+        <div class="flex flex-row w-full">
+          <div class="w-16 h-12">
+            <%= av_form.check_box :opened, class: "hidden", "@change": "work = !work" %>
+            <%= av_form.label :opened, class: "availability" do %>
+              <span class="w-8 h-8 rounded-full"></span>
+            <% end %>
+          </div>
+          <div class="flex flex-wrap content-center flex-1">
+            <div class="flex flex-row w-full">
+              <p class="pr-2">
+                <%= av_form.label :opened, class: "availability" do %>
+                  <%= Date::DAYNAMES[av_form.object.day].capitalize %>
+                  <%= av_form.text_field :day, class: "hidden" %>
+                <% end %>
+              </p>
+              <p class="flex-1 text-center" x-show="!work">Not Available</p>
             </div>
-            <p class="w-full text-center" x-show="!work">Not Available</p>
+          </div>
+        </div>
+        <div class="flex flex-1 flew-row" x-show="work">
+          <div class="flex flex-1 space-x-4 space-x-reverse">
+            <%= av_form.time_select :open_at, {ampm: true, default: av_form.object.open_at || Time.current.change(hour: 9, min: 0), ":disabled": "!work"}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white"  %>
+          </div>
+          <span class="px-2 mx-auto leading-8">-</span>
+          <div class="flex flex-1 space-x-4 space-x-reverse">
+            <%= av_form.time_select :close_at, {ampm: true, default: av_form.object.close_at || Time.current.change(hour: 20, min: 0), ":disabled": "!work"}, class: "px-4 py-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white"  %>
           </div>
         </div>
       </div>
