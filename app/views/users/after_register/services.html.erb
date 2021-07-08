@@ -4,31 +4,31 @@
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
-    <div class="relative block w-full">
+    <div class="block relative w-full">
       <div x-data data-tags='[<%= @user.services.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
         data-tagIds='[<%= @user.services.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
         <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
-          <div class="relative w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+          <div class="overflow-y-scroll relative w-full" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
             <div :class="[open ? 'block' : 'hidden']">
-              <div class="absolute left-0 z-40 w-full p-1">
-                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
-                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add salon service "<span class="font-semibold" x-text="textInput"></span>"</a>
+              <div class="absolute left-0 z-40 p-1 w-full">
+                <div class="py-1 text-sm bg-white rounded border border-gray-300 shadow-lg">
+                  <a @click.prevent="addTag(textInput)" class="block py-1 px-5 cursor-pointer hover:text-white hover:bg-indigo-600">Add salon service "<span class="font-semibold" x-text="textInput"></span>"</a>
                 </div>
               </div>
             </div>
-            <div class="w-full p-1">
-              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="w-full p-2 leading-tight text-gray-700 bg-white border rounded focus:outline-none focus:shadow-outline" placeholder="i.e. Kids Cuts, Womens Cuts, Perms">
+            <div class="p-1 w-full">
+              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="p-2 w-full leading-tight text-gray-700 bg-white rounded border focus:outline-none focus:shadow-outline" placeholder="i.e. Kids Cuts, Womens Cuts, Perms">
               <p class="text-sm text-gray-400">Seperate skills with a comma</p>
             </div>
             <!-- selections -->
             <template x-for="(tag, index) in tags">
-              <div class="inline-flex items-center m-1 text-sm text-gray-400 bg-white border border-gray-400 rounded-full">
+              <div class="inline-flex items-center m-1 text-sm text-gray-400 bg-white rounded-full border border-gray-400">
                 <input type="hidden" name="user[services_attributes][][id]" />
                 <input type="hidden" name="user[services_attributes][][name]" :value="tag" />
                 <input type="hidden" name="user[services_attributes][][_destroy]" />
-                <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag"></span>
+                <span class="mr-1 ml-2 max-w-xs leading-relaxed truncate" x-text="tag"></span>
                 <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-gray-500 align-middle hover:text-gray-600 focus:outline-none">
-                  <svg class="w-6 h-6 mx-auto text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                  <svg class="mx-auto w-6 h-6 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                 </button>
               </div>
             </template>
@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <div class="w-full mt-48 text-right actions">
+  <div class="mt-48 w-full text-right actions">
     <%= link_to "Cancel", wizard_path(:final), class: "text-black text-blue-500 border border-transparent hover:border-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
     <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>
