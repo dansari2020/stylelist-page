@@ -4,30 +4,30 @@
 <%= form_for(user, url: url, html: {method: :put, id: id}) do |f| %>
   <%= render "devise/shared/error_messages", resource: user %>
   <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
-    <div class="relative block w-full">
+    <div class="block relative w-full">
       <div x-data data-tags='[<%= current_user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
         data-tagIds='[<%= current_user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
         <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
-          <div class="relative inline-block w-full px-4 overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+          <div class="inline-block overflow-y-scroll relative px-4 w-full" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
             <div :class="[open ? 'block' : 'hidden']">
-              <div class="absolute left-0 z-40 w-full p-1">
-                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
-                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
+              <div class="absolute left-0 z-40 p-1 w-full">
+                <div class="py-1 text-sm bg-white rounded border border-gray-300 shadow-lg">
+                  <a @click.prevent="addTag(textInput)" class="block py-1 px-5 cursor-pointer hover:text-white hover:bg-indigo-600">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
                 </div>
               </div>
             </div>
-            <div class="items-center w-full p-1 text-sm" :class="{ hidden : tags.length >= 3 }">
-              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="w-full p-2 leading-tight text-gray-700 bg-white border rounded focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
+            <div class="items-center p-1 w-full text-sm" :class="{ hidden : tags.length >= 3 }">
+              <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="p-2 w-full leading-tight text-gray-700 bg-white rounded border focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
             </div>
             <!-- selections -->
             <template x-for="(tag, index) in tags">
-              <div class="inline-flex items-center m-1 text-sm text-gray-500 bg-white border border-gray-400 rounded-full">
+              <div class="inline-flex items-center m-1 text-sm text-gray-500 bg-white rounded-full border border-gray-400">
                 <input type="hidden" name="user[specialties_attributes][][id]" />
                 <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
                 <input type="hidden" name="user[specialties_attributes][][_destroy]" />
-                <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag"></span>
+                <span class="mr-1 ml-2 max-w-xs leading-relaxed truncate" x-text="tag"></span>
                 <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-gray-400 align-middle hover:text-gray-600 focus:outline-none">
-                  <svg class="w-6 h-6 mx-auto text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                  <svg class="mx-auto w-6 h-6 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                 </button>
               </div>
             </template>
