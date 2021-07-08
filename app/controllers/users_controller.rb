@@ -9,10 +9,16 @@ class UsersController < ApplicationController
   def confirm_email
   end
 
+  def reactivation
+  end
+
   def update
     if params["user"].present?
       if params["user"].has_key?("current_password") && !valid_password?
         flash[:error] = "Your current password is wrong"
+        redirect_back
+      elsif params["user"].has_key?("status") && params["user"]["status"] == "completed"
+        current_user.completed!
         redirect_back
       else
         respond_to do |format|
@@ -50,8 +56,8 @@ class UsersController < ApplicationController
     unless @user.deactivated?
       @user.deactivated!
       Devise.sign_out_all_scopes ? sign_out : sign_out(@user)
-      # set_flash_message :notice, :destroyed
-      redirect_to after_sign_out_path_for(@user)
+      flash[:success] = "You’ve deactivated your account. You can log back in to re-activate. We hope to see you again"
+      redirect_to new_user_session_path
     end
   end
 

@@ -4,6 +4,8 @@ module Authorizable
   def after_login_path_for(resource)
     if resource.pending?
       after_register_path(:job)
+    elsif resource.deactivated?
+      reactivation_path
     elsif resource.completed? && !resource.confirmed?
       confirm_email_path
     end
