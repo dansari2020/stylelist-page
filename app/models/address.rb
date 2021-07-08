@@ -15,6 +15,6 @@ class Address < ApplicationRecord
   end
 
   def short_address
-    [city, country.name].reject { |e| e.to_s.empty? }.compact.join(", ")
+    [province, city].reject { |e| e.to_s.empty? }.compact.join(", ")
   end
 end
