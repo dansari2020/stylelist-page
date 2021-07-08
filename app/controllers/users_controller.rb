@@ -67,6 +67,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :pronoun, :background, :avatar,
       :email, :password, :password_confirmation, :phone, :phone_method, :phone_type,
       :role, :bio, :started_at, :education, :deactivate_reason, :deactivate_description,
+      :client_incentives, :condition_for_incenrive,
       language_ids: [],
       specialties_attributes: [:id, :name, :_destroy],
       services_attributes: [:id, :name, :_destroy],
