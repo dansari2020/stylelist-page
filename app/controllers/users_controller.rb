@@ -41,6 +41,8 @@ class UsersController < ApplicationController
           end
         end
       end
+    else
+      redirect_back
     end
   end
 

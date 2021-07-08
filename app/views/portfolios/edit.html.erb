@@ -29,7 +29,7 @@
         </ul> %>
         <div class="flex flex-col mt-4 w-full md:inline-flex md:flex-row md:items-center">
           <div class="block relative w-full">
-            <div x-data @tags-update="console.log('tags updated', $event.detail.tags)" data-tags='[<%= @portfolio.service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
+            <div x-data  data-tags='[<%= @portfolio.service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
               <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
                 <div class="overflow-y-scroll relative w-full rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                   <div class="w-full">
@@ -69,7 +69,7 @@
         </ul> %>
         <div class="flex flex-col mt-4 w-full md:inline-flex md:flex-row md:items-center">
           <div class="block relative w-full">
-            <div x-data @tags-update="console.log('tags updated', $event.detail.tags)" data-tags='[<%= @portfolio.hair_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
+            <div x-data  data-tags='[<%= @portfolio.hair_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
               <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
                 <div class="overflow-y-scroll relative w-full rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                   <div class="w-full">

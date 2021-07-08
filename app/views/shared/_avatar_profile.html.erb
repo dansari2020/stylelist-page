@@ -4,16 +4,18 @@
       <% form2_id = dom_id(user, "avatar") %>
       <%= form_for(user, url: profile_users_path, html: { method: :put, id: form2_id  }, remote: true, authenticity_token: true) do |f| %>
         <%= f.label :avatar, class: "cursor-pointer" do %>
-          <% if user.avatar.attached? %>
-            <%= image_tag user.avatar, style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
-          <% else %>
-            <%= image_tag "icons/avatar.svg", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
-          <% end %>
-          <div class="absolute">
-            <%= image_tag "icons/attached_background.png", class: "w-4 h-4 mx-auto" %>
+          <div class="relative">
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar, style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
+            <% else %>
+              <%= image_tag "icons/avatar.svg", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
+            <% end %>
+            <div class="absolute w-6 h-6 inset-y-3/4 right-1">
+              <%= image_tag "icons/attached_background.png", class: "w-6 h-6 mx-auto" %>
+            </div>
+            <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{form2_id}').submit()" %>
+            <%= f.submit "", class: "hidden" %>
           </div>
-          <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{form2_id}').submit()" %>
-          <%= f.submit "", class: "hidden" %>
         <% end %>
       <% end %>
     </div>
