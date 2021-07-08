@@ -26,7 +26,7 @@
       <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
     <% end %>
     <%= f.fields_for :availabilities, availabilities do |av_form|%>
-      <div class="w-full py-4 border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
+      <div class="py-4 w-full border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
         <div class="flex flex-row w-full">
           <div class="w-16 h-12">
             <%= av_form.check_box :opened, class: "hidden", "@change": "work = !work" %>
@@ -34,7 +34,7 @@
               <span class="w-8 h-8 rounded-full"></span>
             <% end %>
           </div>
-          <div class="flex flex-wrap content-center flex-1">
+          <div class="flex flex-wrap flex-1 content-center">
             <div class="flex flex-row w-full">
               <p class="pr-2">
                 <%= av_form.label :opened, class: "availability" do %>
