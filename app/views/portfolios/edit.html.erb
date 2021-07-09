@@ -41,7 +41,7 @@
                       </div>
                     </div>
                     <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block p-2 w-full leading-tight text-gray-700 bg-white rounded border" placeholder="i.e. Cut, Color, Style">
-                    <p class="my-2 text-xs text-gray-400">Seperate services with a comma</p>
+                    <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
                   </div>
                   <!-- selections -->
                   <template x-for="(tag, index) in tags">
@@ -81,7 +81,7 @@
                       </div>
                     </div>
                     <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block p-2 w-full leading-tight text-gray-700 bg-white rounded border" placeholder="i.e. Straight, wavy, Curly">
-                    <p class="my-2 text-xs text-gray-400">Seperate hair types with a comma</p>
+                    <p class="my-2 text-xs text-gray-500">Seperate hair types with a comma</p>
                   </div>
                   <!-- selections -->
                   <template x-for="(tag, index) in tags">

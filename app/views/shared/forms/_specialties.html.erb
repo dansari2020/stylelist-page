@@ -18,7 +18,7 @@
             </div>
             <div class="items-center p-1 w-full text-sm" :class="{ hidden : tags.length >= 3 }">
               <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="p-2 w-full leading-tight text-gray-700 bg-white rounded border focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
-              <p class="my-2 text-sm text-gray-400">Seperate skills with a comma</p>
+              <p class="my-2 text-sm text-gray-500">Seperate skills with a comma</p>
             </div>
             <!-- selections -->
             <template x-for="(tag, index) in tags">
@@ -27,7 +27,7 @@
                 <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
                 <input type="hidden" name="user[specialties_attributes][][_destroy]" />
                 <span class="mr-1 ml-2 max-w-xs leading-relaxed truncate" x-text="tag"></span>
-                <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-gray-400 align-middle hover:text-gray-600 focus:outline-none">
+                <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-gray-500 align-middle hover:text-gray-600 focus:outline-none">
                   <svg class="mx-auto w-6 h-6 text-gray-200 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                 </button>
               </div>

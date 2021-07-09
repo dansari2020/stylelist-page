@@ -4,7 +4,7 @@
       <div id="view_bio" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Bio</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_bio? %>
               <%= current_user.bio %>
             <% else %>
@@ -31,7 +31,7 @@
       <div id="view_specialties" class="flex justify-between w-full" x-show="!edit">
         <div >
           <h2 class="pb-4 leading-3 text-normal">Specialties</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_specialties? %>
               <ul class="flex flex-wrap">
                 <% current_user.specialties.each do |specialty| %>
@@ -66,7 +66,7 @@
       <div id="view_experience" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Experience</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_started_at? %>
               <span class="capitalize">
                 <%= distance_of_time_in_words_to_now(current_user.started_at) %>
@@ -95,7 +95,7 @@
       <div id="view_service" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 mt-2 leading-3 text-normal">Salon Services</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_services? %>
               <ul class="flex flex-wrap">
                 <% current_user.services.each do |service| %>
@@ -130,7 +130,7 @@
       <div id="view_education" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Education</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_education? %>
               <%= current_user.education %>
             <% else %>
@@ -157,7 +157,7 @@
       <div id="view_social_media" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Social</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_social_media? %>
               <ul class="flex flex-wrap">
                 <% current_user.social_media.each do |social| %>

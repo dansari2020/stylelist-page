@@ -33,7 +33,7 @@
         <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'name'">
           <div>
             <h3 class="font-normal text-md">Name</h3>
-            <p class="text-sm text-gray-400"><%= @user.full_name %></p>
+            <p class="text-sm text-gray-500"><%= @user.full_name %></p>
           </div>
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'name'" %>
         </a>
@@ -42,7 +42,7 @@
         <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'job'">
           <div>
             <h3 class="font-normal text-md">Job Title</h3>
-            <p class="text-sm text-gray-400"><%= @user.job %></p>
+            <p class="text-sm text-gray-500"><%= @user.job %></p>
           </div>
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'job'" %>
         </a>
@@ -53,7 +53,7 @@
         <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'update_email'">
           <div>
             <h3 class="font-normal text-md">Update Email</h3>
-            <p class="text-sm text-gray-400"><%= @user.email %></p>
+            <p class="text-sm text-gray-500"><%= @user.email %></p>
           </div>
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'update_email'" %>
         </a>
@@ -62,7 +62,7 @@
         <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'change_password'">
           <div>
             <h3 class="font-normal text-md">Change Password</h3>
-            <p class="text-sm text-gray-400">Create a new password</p>
+            <p class="text-sm text-gray-500">Create a new password</p>
           </div>
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'change_password'" %>
         </a>
@@ -71,7 +71,7 @@
         <a href="#" class="flex justify-between items-center" @click.prevent="submenu = 'deactivate'">
           <div>
             <h3 class="font-normal text-md">Deactivate Account</h3>
-            <p class="text-sm text-gray-400">Hide your portfolio from the web</p>
+            <p class="text-sm text-gray-500">Hide your portfolio from the web</p>
           </div>
           <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'deactivate'" %>
         </a>

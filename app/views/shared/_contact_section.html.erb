@@ -4,7 +4,7 @@
       <div id="view_phone" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Phone</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_phone? %>
               <%= current_user.phone %>
             <% else %>
@@ -15,7 +15,7 @@
         <div class="flex flex-col items-top">
           <%= link_to "Edit", "#", class: "text-blue-500 text-sm text-right pb-2", "@click.prevent": "edit = true" %>
           <% if current_user.has_phone? && current_user.mobile?  %>
-            <p class="text-sm text-gray-400"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
+            <p class="text-sm text-gray-500"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
           <% end %>
         </div>
       </div>
@@ -34,7 +34,7 @@
       <div id="view_languages" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Spoken Languages</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if current_user.has_languages? %>
               <ul class="flex flex-wrap">
                 <% current_user.languages.each do |language| %>
@@ -69,7 +69,7 @@
       <div id="view_address" class="flex justify-between w-full" x-show="!edit">
         <div>
           <h2 class="pb-4 leading-3 text-normal">Address</h2>
-          <p class="text-sm font-medium text-gray-400 leading-2">
+          <p class="text-sm font-medium text-gray-500 leading-2">
             <% if user.has_full_address? %>
               <%= user.full_address %>
             <% else %>
@@ -99,7 +99,7 @@
           <div>
             <h2 class="pb-4 leading-3 text-normal">Availability</h2>
             <% unless has_availabilities %>
-              <p class="text-sm font-medium text-gray-400 leading-2" >When are you available to clients?</p>
+              <p class="text-sm font-medium text-gray-500 leading-2" >When are you available to clients?</p>
             <% end %>
           </div>
           <div class="flex items-top">
@@ -110,10 +110,10 @@
           <ul class="w-full">
             <% user.availabilities.each do |availability| %>
               <li class="flex justify-between py-4 w-full border-t">
-                <span class="text-gray-400">
+                <span class="text-gray-500">
                   <%= Date::DAYNAMES[availability.day].capitalize %>
                 </span>
-                <span class="text-right text-gray-400">
+                <span class="text-right text-gray-500">
                   <% if availability.opened? %>
                     <%= "#{availability.open_at.strftime("%I:%M %p")} - #{availability.close_at.strftime("%I:%M %p")}" %>
                   <% else %>

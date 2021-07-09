@@ -16,20 +16,20 @@
     background: url('<%= image_url("icons/checkbox-radio-sprite.svg") %>') top left no-repeat;
   }
 </style>
-<div class="pb-10">
+<div class="pb-4 md:pb-10">
   <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Which best describes you</h1>
-  <p class="text-sm text-center">Step 2 of 4</p>
+  <p class="py-2 text-sm text-center">Step 2 of 4</p>
 </div>
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
   <div class="flex flex-row w-full">
     <%= f.radio_button :role, "barber", checked: true, class: "hidden" %>
-    <label for="user_role_barber" class="py-12 mr-2 mb-6 w-1/2 text-center rounded-lg border border-gray-200 focus:border-blue-200">
+    <label for="user_role_barber" class="w-1/2 py-12 mb-6 mr-2 text-center border border-gray-200 rounded-2xl focus:border-blue-200">
       <span class=""></span>
       Barber
     </label>
     <%= f.radio_button :role, "hair_stylist", class: "hidden" %>
-    <label for="user_role_hair_stylist" class="py-12 mb-6 ml-2 w-1/2 text-center rounded-lg border border-gray-200 focus:border-blue-200">
+    <label for="user_role_hair_stylist" class="w-1/2 py-12 mb-6 ml-2 text-center border border-gray-200 rounded-2xl focus:border-blue-200">
       <span class=""></span>
       Hair Stylist
     </label>
