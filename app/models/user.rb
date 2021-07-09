@@ -66,6 +66,10 @@ class User < ApplicationRecord
     phone_methods.keys.map { |g| [g.humanize, g] }
   end
 
+  def job
+    role.humanize.gsub("stylist", "Stylist")
+  end
+
   # def active_for_authentication?
   #   super && !deactivated?
   # end
