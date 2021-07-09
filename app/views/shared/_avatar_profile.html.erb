@@ -6,11 +6,11 @@
         <%= f.label :avatar, class: "cursor-pointer" do %>
           <div class="relative">
             <% if user.avatar.attached? %>
-              <%= image_tag user.avatar, style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
+              <%= image_tag user.avatar_thumb, style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
             <% else %>
               <%= image_tag "icons/avatar.svg", style: "height:7rem; width:7rem;", class: "md rounded-full relative" %>
             <% end %>
-            <div class="absolute right-1 inset-y-3/4 w-6 h-6">
+            <div class="absolute w-6 h-6 right-1 inset-y-3/4">
               <%= image_tag "icons/attached_background.png", class: "w-6 h-6 mx-auto" %>
             </div>
             <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{form2_id}').submit()" %>

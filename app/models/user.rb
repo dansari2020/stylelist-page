@@ -70,6 +70,10 @@ class User < ApplicationRecord
     role.humanize.gsub("stylist", "Stylist")
   end
 
+  def avatar_thumb
+    avatar.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "112x112^", crop: "112x112+0+0")
+  end
+
   # def active_for_authentication?
   #   super && !deactivated?
   # end
