@@ -1,20 +1,20 @@
-<div class="flex flex-col space-x-4 md:flex-row">
-  <div class="border-r md:px-2 md:-mb-20 md:overflow-y-scroll md:w-1/2 lg:w-2/5 h-screen-headless" x-data="{ tab : 'profile' }">
+<div class="flex flex-col space-x-4 md:flex-row" x-data="{ tab : 'profile' }">
+  <div class="border-r md:px-2 md:-mb-20 md:overflow-y-scroll md:w-1/2 lg:w-2/5 h-screen-headless">
     <div class="flex flex-row justify-center px-2 pt-4 mb-2 border-b border-blue-400 md:pt-12 md:border-gray">
-      <button @click.prevent="tab = 'portfolio'" class="block w-1/3 text-xs text-gray-600 md:w-1/2 md:h-10 md:px-12 md:py-2 md:text-md hover:text-blue-500 focus:outline-none md:hidden" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'portfolio'}">
+      <button @click.prevent="tab = 'portfolio'" class="block w-1/3 text-xs text-gray-600 hover:text-blue-500 focus:outline-none md:hidden" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'portfolio'}">
         Portfolio
       </button>
-      <button @click.prevent="tab = 'profile'" class="block w-1/3 text-xs text-gray-600 md:w-1/2 md:h-10 md:px-12 md:py-2 md:text-md hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
+      <button @click.prevent="tab = 'profile'" class="block w-1/3 text-xs text-gray-600 md:w-1/2 md:h-10 md:mx-12 md:py-2 md:text-md hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'profile'}">
         Profile
       </button>
-      <button @click.prevent="tab = 'contact'" class="block w-1/3 text-xs text-gray-600 md:w-1/2 md:h-10 md:px-12 md:py-2 md:text-md hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
+      <button @click.prevent="tab = 'contact'" class="block w-1/3 text-xs text-gray-600 md:w-1/2 md:h-10 md:mx-12 md:py-2 md:text-md hover:text-blue-500 focus:outline-none" :class="{ 'text-blue-500 border-b-4 font-medium border-blue-500' : tab === 'contact'}">
         Contact
       </button>
     </div>
     <%= render partial: "shared/profile", locals: {user: user} %>
   </div>
-  <div class="flex flex-col px-2 -mb-20 md:overflow-y-scroll md:w-1/2 lg:w-3/5 h-screen-headless" x-data="{ manage : false }" :class="{ 'hidden md:block' : tab !== 'portfolio'}">
-    <div class="flex flex-col justify-between mb-2 md:border-b md:pt-12 sm:flex-row">
+  <div class="flex flex-col px-2 -mb-20 md:overflow-y-scroll md:w-1/2 lg:w-3/5 h-screen-headless" :class="{'hidden md:flex' : tab === 'profile' || tab === 'contact' }">
+    <div class="flex flex-col justify-between mb-2 md:border-b md:pt-12 sm:flex-row"  x-data="{ manage : false }">
       <p class="hidden h-10 px-12 py-2 text-gray-600 md:block">
         Portfolio
       </p>
@@ -28,3 +28,4 @@
     </div>
     <%= render partial: "shared/portfolio", locals: {user: user, id: "portfolio_pictures"} %>
   </div>
+</div>
