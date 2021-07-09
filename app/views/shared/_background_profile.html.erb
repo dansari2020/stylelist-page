@@ -5,8 +5,11 @@
       <% if user.background.attached? %>
         <%= image_tag "icons/attached_background.png", class: "w-10 h-10 mx-auto" %>
       <% else %>
-        <%= image_tag "icons/background.svg", class: "w-6 h-6 mx-auto" %>
-        <p class="text-sm text-center text-white">Add Cover Photo</p>
+        <svg width="38" height="30" viewBox="0 0 38 30" class="mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M36.1111 25.8889C36.1111 26.714 35.7834 27.5053 35.1999 28.0888C34.6165 28.6722 33.8251 29 33 29H5.00003C4.17491 29 3.38359 28.6722 2.80014 28.0888C2.21669 27.5053 1.88892 26.714 1.88892 25.8889V8.77778C1.88892 7.95266 2.21669 7.16134 2.80014 6.57789C3.38359 5.99444 4.17491 5.66667 5.00003 5.66667H11.2222L14.3334 1H23.6667L26.7778 5.66667H33C33.8251 5.66667 34.6165 5.99444 35.1999 6.57789C35.7834 7.16134 36.1111 7.95266 36.1111 8.77778V25.8889Z" stroke="white" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19.0001 22.7779C22.4365 22.7779 25.2223 19.9922 25.2223 16.5557C25.2223 13.1193 22.4365 10.3335 19.0001 10.3335C15.5636 10.3335 12.7778 13.1193 12.7778 16.5557C12.7778 19.9922 15.5636 22.7779 19.0001 22.7779Z" stroke="white" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="py-2 text-xs text-center text-gray-300 md:text-white md:text-sm">Add Cover Photo</p>
       <% end %>
       <%= f.file_field :background, class: "hidden", "x-on:change": "document.getElementById('#{form_id}').submit()" %>
       <%= f.submit "", class: "hidden" %>
