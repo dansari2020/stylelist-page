@@ -1,14 +1,14 @@
 <div class="flex flex-col justify-center">
   <div class="flex flex-col p-4">
-    <h1 class="font-bold leading-tight text-md">Deactivate Account</h1>
-    <p class="mt-2 text-sm text-gray-500">Hide your portfolio from the web</p>
+    <h1 class="font-bold leading-tight text-center text-md md:text-left">Deactivate Account</h1>
+    <p class="mt-2 mb-4 text-xs text-center text-gray-500 md:text-sm md:text-left">Hide your portfolio from the web</p>
     <div class="mt-4 mb-2">
-      <%= f.label :deactivate_reason, "Why are you closing your account?" %>
+      <%= f.label :deactivate_reason, "Why are you closing your account?", class: "text-xs md:text-sm text-gray-500" %>
       <%= f.select :deactivate_reason, options_for_select(User.deactivate_reasons.keys), {}, class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'deactivate'" %>
     </div>
-    <div class="mb-8">
-      <%= f.label :deactivate_description, "Anything else you would like to tell us?" %>
-      <%= f.text_area :deactivate_description, class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'deactivate'" %>
+    <div class="mt-8 mb-8">
+      <%= f.label :deactivate_description, "Anything else you would like to tell us?", class: "text-xs md:text-sm text-gray-500" %>
+      <%= f.text_area :deactivate_description, rows: "5", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white", ":disabled": "submenu !== 'deactivate'" %>
     </div>
     <div class="mb-4 space-x-4">
       <%= image_tag "icons/warning.svg", class: "w-5 inline-block" %>

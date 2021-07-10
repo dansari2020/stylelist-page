@@ -4,7 +4,7 @@
 </div>
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="flex inline-flex flex-row items-center w-full">
+  <div class="inline-flex flex-row items-center w-full">
     <%= f.label :username, "StylistPage.com/", class: "pr-2" %>
     <%= f.text_field :username, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
   </div>

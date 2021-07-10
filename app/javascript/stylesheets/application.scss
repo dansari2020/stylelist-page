@@ -25,6 +25,9 @@ html {
     // height: calc(var(--vh, 1vh) * 100 - 58px);
     
   }
+  .h-screen-mobile-bottom-menu {
+    height: calc(100vh - 111px);
+  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
