@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "bio_form" do %>
+  <div id="edit_bio" class="w-full p-2 bg-gray-100">
+    <div class="py-2">
+      <h1 class="text-normal">Bio</h1>
+    </div>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "bio")}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: user %>
+      <div class="w-full" x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
+        <%= f.text_area :bio, "x-ref": "countme", "x-on:keyup": "count = $refs.countme.value.length", maxlength: "56", autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <div class="text-right">
+          <span x-html="count"></span> /
+          <span x-html="$refs.countme.maxLength"></span>
+        </div>
+      </div>
+      <input type="hidden" name="from_url" value="<%= from_url %>">
+      <input type="hidden" name="frame" value="bio_form">
+      <input type="hidden" name="component" value="bio">
+      <div class="pt-4 pb-2 text-right actions">
+        <%= link_to "Cancel", profile_view_path("bio_form", "bio"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium" %>
+        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

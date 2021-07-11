@@ -6,6 +6,7 @@ body {
   min-height: 100vh;
   /* mobile viewport bug fix */
   min-height: -webkit-fill-available;
+  font-family: 'Raleway', sans-serif;
 }
 
 html {
@@ -78,4 +79,7 @@ select {
 }
 .bg-yellow-light{ 
   background-color: #FFDE03
+}
+turbo-frame{
+  @apply w-full;
 }

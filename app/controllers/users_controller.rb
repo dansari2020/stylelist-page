@@ -6,6 +6,16 @@ class UsersController < ApplicationController
   def index
   end
 
+  def view_component
+    current_user.reload
+    current_user.specialties.reload
+    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+  end
+
+  def edit_component
+    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:frame]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+  end
+
   def confirm_email
   end
 
@@ -39,10 +49,16 @@ class UsersController < ApplicationController
                 return render json: @user, status: :created, location: root_url
               end
             end
+            format.turbo_stream do
+              render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+            end
           else
             flash[:error] = @user.errors.full_messages
             format.html do
               return redirect_back
+            end
+            format.turbo_stream do
+              render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
             end
           end
         end

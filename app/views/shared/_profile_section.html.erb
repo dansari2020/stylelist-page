@@ -1,70 +1,15 @@
 <ul class="mb-40 space-y-2 list-none md:space-y-0" x-show="tab === 'profile'">
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0">
     <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_bio" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 leading-3 md:b-4 text-normal">Bio</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_bio? %>
-              <%= current_user.bio %>
-            <% else %>
-              Describe who you are
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_bio" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% bio_form = dom_id(current_user, "bio") %>
-        <%= render partial: "shared/forms/bio", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: bio_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: bio_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
+      <%= turbo_stream_from "bio" %>
+      <%= render partial: "components/bio/view", locals: { user: current_user } %>
     </div>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_specialties" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 leading-3 md:pb-4 text-normal">Specialties</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_specialties? %>
-              <ul class="flex flex-wrap">
-                <% current_user.specialties.each do |specialty| %>
-                  <li class="mt-6 mr-4">
-                    <span class="block px-2 text-sm border border-gray-200 rounded-full">
-                      <%= specialty.name %>
-                    </span>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              What are you an expert at? (i.e. fades, curly hair, etc)
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_specialties" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% specialties_form = dom_id(current_user, "specialty") %>
-        <%= render partial: "shared/forms/specialties", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: specialties_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: specialties_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
+    <div class="flex justify-center w-full">
+      <%= turbo_stream_from "specialty" %>
+      <%= turbo_stream_from :specialties %>
+      <%= render partial: "components/specialty/view", locals: { user: current_user } %>
     </div>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">

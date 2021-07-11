@@ -39,8 +39,6 @@ class User < ApplicationRecord
 
   delegate :full_address, :short_address, to: :address, allow_nil: true
 
-  # after_commit { broadcast_replace_to "user" }
-
   def full_name
     [first_name, last_name].compact.join(" ")
   end
@@ -103,7 +101,7 @@ class User < ApplicationRecord
   end
 
   def destroy_prvious_data
-    Specialty.where(user_id: id).destroy_all if specialties.any? { |s| s.name_changed? }
+    # Specialty.where(user_id: id).destroy_all if specialties.any? { |s| s.name_changed? }
     Service.where(user_id: id).destroy_all if services.any? { |s| s.name_changed? }
   end
 end

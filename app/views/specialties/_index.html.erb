@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "specialties" do %>
+  <% if specialties.present? %>
+    <ul class="flex flex-wrap">
+      <% specialties.each do |specialty| %>
+        <li class="mt-6 mr-4">
+          <%= turbo_frame_tag dom_id(specialty) do %>
+            <%= render partial: "specialties/specialty", locals: {specialty: specialty} %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    What are you an expert at? (i.e. fades, curly hair, etc)
+  <% end %>
+<% end %>

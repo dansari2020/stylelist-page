@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "bio" do %>
+  <div id="view_bio" class="flex justify-between w-full">
+    <div class="flex-1">
+      <h2 class="pb-2 leading-3 md:b-4 text-normal">Bio</h2>
+      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+        <% if user.has_bio? %>
+          <%= user.bio %>
+        <% else %>
+          Describe who you are
+        <% end %>
+      </p>
+    </div>
+    <div class="flex items-center md:items-start">
+      <%= link_to "Edit", profile_edit_path("bio"), class: "text-blue-500 text-sm hidden md:block" %>
+      <%= link_to profile_edit_path("bio"), class: "md:hidden" do %>
+        <%= image_tag "icons/arrow-right.svg"%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

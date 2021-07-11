@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "/confirm_email", to: "users#confirm_email", as: "confirm_email"
   get "/reactivation", to: "users#reactivation", as: "reactivation"
   put "/profile", to: "users#update", as: "profile_users"
+  get "/profile/edit/:frame", to: "users#edit_component", as: "profile_edit"
+  get "/profile/view/:frame/:component", to: "users#view_component", as: "profile_view"
   get "/profile" => redirect("/settings")
   resources :portfolios do
     collection do

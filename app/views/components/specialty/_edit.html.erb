@@ -1,0 +1,120 @@
+<%= turbo_frame_tag "specialty_form" do %>
+  <div id="edit_specialties" class="w-full p-2 bg-gray-100">
+    <div class="py-2">
+      <h1 class="text-normal">What are you an expert at?  (Max 3)</h1>
+    </div>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "specialty")}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: user %>
+      <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
+        <div class="relative block w-full">
+          <div x-data data-tags='[<%= current_user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+        data-tagIds='[<%= current_user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+            <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+              <div class="relative inline-block w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+                <div :class="[open ? 'block' : 'hidden']">
+                  <div class="absolute left-0 z-40 w-full p-1">
+                    <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
+                      <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add specialty "<span class="font-semibold" x-text="textInput"></span>"</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="items-center w-full p-1 text-sm" :class="{ hidden : tags.length >= 3 }">
+                  <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="w-full p-2 leading-tight text-gray-700 bg-white border rounded focus:outline-none focus:shadow-outline" placeholder="i.e. Fades, Braids, Curly Hair">
+                  <p class="my-2 text-sm text-gray-500">Seperate skills with a comma</p>
+                </div>
+                <!-- selections -->
+                <template x-for="(tag, index) in tags">
+                  <div class="inline-flex items-center m-1 text-sm text-gray-500 bg-white border border-gray-200 rounded-full">
+                    <input type="hidden" name="user[specialties_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
+                    <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
+                    <input type="hidden" name="user[specialties_attributes][][_destroy]" />
+                    <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag"></span>
+                    <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-gray-500 align-middle hover:text-gray-600 focus:outline-none">
+                      <svg class="w-6 h-6 mx-auto text-gray-200 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                    </button>
+                  </div>
+                </template>
+                <template x-for="(tag, index) in removeTags">
+                  <input type="hidden" name="user[specialties_attributes][][id]" :value="tag" />
+                  <input type="hidden" name="user[specialties_attributes][][name]" />
+                  <input type="hidden" name="user[specialties_attributes][][_destroy]" value="true" />
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="from_url" value="<%= from_url %>">
+      <input type="hidden" name="frame" value="specialty_form">
+      <input type="hidden" name="component" value="specialty">
+      <div class="pt-4 pb-2 text-right actions">
+        <%= link_to "Cancel", profile_view_path("specialty_form", "specialty"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium" %>
+        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+      </div>
+    <% end %>
+    <script>
+      function tagSelect() {
+        return {
+          open: false,
+          textInput: '',
+          tags: [],
+          tagIds: [],
+          removeTags: [],
+          init() {
+            this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
+            this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
+          },
+          addTag(tag) {
+            tag = tag.trim()
+            if (this.tags.length >= 3) {
+              console.log('You have already entered more than 3 skills')
+            } else if (tag != "" && !this.hasTag(tag)) {
+              this.tags.push( tag )
+            }
+            this.clearSearch()
+            this.$refs.textInput.focus()
+            this.fireTagsUpdateEvent()
+          },
+          fireTagsUpdateEvent() {
+            this.$el.dispatchEvent(new CustomEvent('tags-update', {
+              detail: { tags: this.tags },
+              bubbles: true,
+            }));
+          },
+          hasTag(tag) {
+            var tag = this.tags.find(e => {
+              return e.toLowerCase() === tag.toLowerCase()
+            })
+            return tag != undefined
+          },
+          removeTag(index) {
+            if (this.tagIds[index] !== undefined) {
+              this.removeTags.push( this.tagIds[index] )
+            }
+            this.tags.splice(index, 1)
+            this.fireTagsUpdateEvent()
+          },
+          search(q) {
+            if ( q.includes(",") ) {
+              q.split(",").forEach(function(val) {
+                this.addTag(val)
+              }, this)
+            }
+            this.toggleSearch()
+          },
+          clearSearch() {
+            this.textInput = ''
+            this.toggleSearch()
+          },
+          toggleSearch() {
+            this.open = this.textInput != ''
+          },
+          focusTag() {
+            this.clearSearch()
+            this.$refs.textInput.focus()
+          }
+        }
+      }
+    </script>
+  </div>
+<% end %>
