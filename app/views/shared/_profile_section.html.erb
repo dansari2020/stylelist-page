@@ -13,142 +13,86 @@
     </div>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_experience" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 leading-3 md:pb-4 text-normal">Experience</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_started_at? %>
-              <span class="capitalize">
-                <%= distance_of_time_in_words_to_now(current_user.started_at) %>
-              </span>
-            <% else %>
-              When did you start doing hair?
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_experience" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% experience_form = dom_id(current_user, "experience") %>
-        <%= render partial: "shared/forms/experience", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: experience_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: experience_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "experience" %>
+    <%= render partial: "components/experience/view", locals: { user: current_user } %>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_service" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 mt-2 leading-3 md:pb-4 text-normal">Salon Services</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_services? %>
-              <ul class="flex flex-wrap">
-                <% current_user.services.each do |service| %>
-                  <li class="mt-6 mr-4">
-                    <span class="block px-2 text-sm border border-gray-200 rounded-full">
-                      <%= service.name %>
-                    </span>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              What services do you offer (i.e. brow shaping, color, etc)
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_service" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% service_form = dom_id(current_user, "service") %>
-        <%= render partial: "shared/forms/services", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: service_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: service_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "service" %>
+    <%= render partial: "components/service/view", locals: { user: current_user } %>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_education" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 leading-3 md:pb-4 text-normal">Education</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_education? %>
-              <%= current_user.education %>
-            <% else %>
-              Where did you learn to do hair?
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_education" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% education_form = dom_id(current_user, "education") %>
-        <%= render partial: "shared/forms/education", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: education_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: education_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "education" %>
+    <%= render partial: "components/education/view", locals: { user: current_user } %>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_social_media" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-2 leading-3 md:pb-4 text-normal">Social</h2>
-          <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-            <% if current_user.has_social_media? %>
-              <ul class="flex flex-wrap">
-                <% current_user.social_media.each do |social| %>
-                  <% next if social.url.blank? %>
-                  <li class="mt-6 mr-4">
-                    <%= link_to social.full_url, target: "_blank" do %>
-                      <%= image_tag "icons/#{social.kind}.svg", class: "h-5" %>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              you can share your social media accounts
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_education" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% social_media_form = dom_id(current_user, "social_media") %>
-        <%= render partial: "shared/forms/social_media", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: social_media_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: social_media_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "social_medium" %>
+    <%= render partial: "components/social_medium/view", locals: { user: current_user } %>
   </li>
 </ul>
+<script>
+  function tagSelect() {
+    return {
+      open: false,
+      textInput: '',
+      tags: [],
+      tagIds: [],
+      removeTags: [],
+      limit: 0,
+      init() {
+        this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
+        this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
+        this.limit = JSON.parse(this.$el.parentNode.getAttribute('data-limit'));
+      },
+      addTag(tag) {
+        tag = tag.trim()
+        if (this.limit > 0 && this.tags.length >= this.limit) {
+          console.log('You have already entered more than limit')
+        } else if (tag != "" && !this.hasTag(tag)) {
+          this.tags.push(tag)
+        }
+        this.clearSearch()
+        this.$refs.textInput.focus()
+        this.fireTagsUpdateEvent()
+      },
+      fireTagsUpdateEvent() {
+        this.$el.dispatchEvent(new CustomEvent('tags-update', {
+          detail: { tags: this.tags },
+          bubbles: true,
+        }));
+      },
+      hasTag(tag) {
+        var tag = this.tags.find(e => {
+          return e.toLowerCase() === tag.toLowerCase()
+        })
+        return tag != undefined
+      },
+      removeTag(index) {
+        if (this.tagIds[index] !== undefined) {
+          this.removeTags.push(this.tagIds[index])
+          this.tagIds.splice(index, 1)
+        }
+        this.tags.splice(index, 1)
+        this.fireTagsUpdateEvent()
+      },
+      search(q) {
+        if (q.includes(",")) {
+          q.split(",").forEach(function (val) {
+            this.addTag(val)
+          }, this)
+        }
+        this.toggleSearch()
+      },
+      clearSearch() {
+        this.textInput = ''
+        this.toggleSearch()
+      },
+      toggleSearch() {
+        this.open = this.textInput != ''
+      },
+      focusTag() {
+        this.clearSearch()
+        this.$refs.textInput.focus()
+      }
+    }
+  }
+</script>

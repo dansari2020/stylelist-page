@@ -1,0 +1,71 @@
+<%= turbo_frame_tag "phone_form" do %>
+  <div id="edit_phone" class="w-full p-2 bg-gray-100">
+    <style>
+      input + label {
+        position: relative;
+      }
+      input[type="radio"] + label span.radiobtn {
+        display: inline-block;
+        vertical-align: middle;
+        position: absolute;
+        top: 4px;
+        left: 7px;
+        height: 25px;
+        width: 25px;
+        z-index: 10;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+      }
+      input[type="radio"] + label span.radiobtn:after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #2196F3;
+        display: none;
+      }
+      input[type="radio"]:checked + label {
+        border-color: #2196F3;
+      }
+      input[type="radio"]:checked + label span.radiobtn {
+        border-color: #2196F3;
+        background: white;
+      }
+      input[type="radio"]:checked + label span.radiobtn:after {
+        display: block;
+      }
+    </style>
+    <div class="py-2">
+      <h1 class="text-normal">Phone</h1>
+    </div>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "phone")}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: user %>
+      <div class="w-full" x-data="{phoneType: '<%= user.phone_type || "mobile" %>'}">
+        <%= f.text_field :phone, autofocus: true, placeholder: "(555) 555-5555", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= f.select :phone_type, options_for_select(User.phone_type_list, user.phone_type), {}, "x-model": "phoneType", class: "px-4 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white md:w-28 w-full" %>
+        <div class="w-full" x-show="phoneType === 'mobile'">
+          <%= f.label :phone_method, "Preferred method of contact", class: "block py-2 mt-8" %>
+          <div class="flex flex-col py-2 md:flex-row">
+            <% User.phone_method_list.each do |text, key| %>
+              <%= f.radio_button :phone_method, key, class: "hidden", id: "user_phone_method_#{key}" %>
+              <%= f.label "phone_method_#{key}", class: "py-2 pl-12 mr-2 border border-gray-200 rounded-full md:w-1/2 focus:border-blue-200 bg-white" do %>
+                <span class="radiobtn"></span>
+                <%= text %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="from_url" value="<%= from_url %>">
+      <input type="hidden" name="frame" value="phone_form">
+      <input type="hidden" name="component" value="phone">
+      <div class="pt-4 pb-2 text-right actions">
+        <%= link_to "Cancel", profile_view_path("phone_form", "phone"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium" %>
+        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

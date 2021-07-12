@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "service" do %>
+  <div class="flex justify-between">
+    <div class="flex-1">
+      <h2 class="pb-1 mt-2 leading-3 text-normal">Salon Services</h2>
+      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+        <% if current_user.has_services? %>
+          <ul class="flex flex-wrap">
+            <% current_user.services.each do |service| %>
+              <li class="mt-2 mr-2">
+                <span class="block px-3 py-1 text-sm border border-gray-200 rounded-full">
+                  <%= service.name %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          What services do you offer (i.e. brow shaping, color, etc)
+        <% end %>
+      </p>
+    </div>
+    <div class="flex items-center md:items-start">
+      <%= link_to "Edit", profile_edit_path("service"), class: "text-blue-500 text-sm hidden md:block" %>
+      <%= link_to profile_edit_path("service"), class: "md:hidden" do %>
+        <%= image_tag "icons/arrow-right.svg"%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

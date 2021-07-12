@@ -49,16 +49,20 @@ class UsersController < ApplicationController
                 return render json: @user, status: :created, location: root_url
               end
             end
-            format.turbo_stream do
-              render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+            if params[:component].present? && params[:frame].present?
+              format.turbo_stream do
+                render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+              end
             end
           else
             flash[:error] = @user.errors.full_messages
             format.html do
               return redirect_back
             end
-            format.turbo_stream do
-              render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+            if params[:component].present? && params[:frame].present?
+              format.turbo_stream do
+                render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+              end
             end
           end
         end

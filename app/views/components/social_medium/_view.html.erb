@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "social_medium" do %>
+  <div id="view_social_media" class="flex justify-between w-full">
+    <div class="flex-1">
+      <h2 class="pb-2 leading-3 text-normal">Social</h2>
+      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+        <% if current_user.has_social_media? %>
+          <ul class="flex flex-wrap">
+            <% current_user.social_media.each do |social| %>
+              <% next if social.url.blank? %>
+              <li class="mt-2 mr-2">
+                <%= link_to social.full_url, target: "_blank" do %>
+                  <%= image_tag "icons/#{social.kind}.svg", class: "h-5" %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          you can share your social media accounts
+        <% end %>
+      </p>
+    </div>
+    <div class="flex items-center md:items-start">
+      <%= link_to "Edit", profile_edit_path("social_medium"), class: "text-blue-500 text-sm hidden md:block" %>
+      <%= link_to profile_edit_path("social_medium"), class: "md:hidden" do %>
+        <%= image_tag "icons/arrow-right.svg"%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

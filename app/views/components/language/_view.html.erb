@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "language" do %>
+  <div class="flex justify-center w-full">
+    <div id="view_languages" class="flex justify-between w-full">
+      <div class="flex-1">
+        <h2 class="pb-1 leading-3 text-normal">Spoken Languages</h2>
+        <p class="text-sm font-medium text-gray-500 leading-2">
+          <% if current_user.has_languages? %>
+            <ul class="flex flex-wrap">
+              <% current_user.languages.each do |language| %>
+                <li class="mt-2 mr-2">
+                  <span class="p-2 text-sm border border-gray-200 rounded-full">
+                    <%= language.name %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            What languages do you provide services in?
+          <% end %>
+        </p>
+      </div>
+      <div class="flex items-center md:items-start">
+        <%= link_to "Edit", profile_edit_path("language"), class: "text-blue-500 text-sm hidden md:block" %>
+        <%= link_to profile_edit_path("language"), class: "md:hidden" do %>
+          <%= image_tag "icons/arrow-right.svg"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

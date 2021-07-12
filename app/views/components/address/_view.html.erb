@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "address" do %>
+  <div class="flex justify-center w-full">
+    <div id="view_address" class="flex justify-between w-full">
+      <div class="flex-1">
+        <h2 class="pb-4 leading-3 text-normal">Address</h2>
+        <p class="text-sm font-medium text-gray-500 leading-2">
+          <% if user.has_full_address? %>
+            <%= user.full_address %>
+          <% else %>
+            Where is your salon located?
+          <% end %>
+        </p>
+      </div>
+      <div class="flex items-center md:items-start">
+        <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm hidden md:block" %>
+        <%= link_to profile_edit_path("address"), class: "md:hidden" do %>
+          <%= image_tag "icons/arrow-right.svg"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

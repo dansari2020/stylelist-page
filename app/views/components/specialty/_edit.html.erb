@@ -7,7 +7,7 @@
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
         <div class="relative block w-full">
-          <div x-data data-tags='[<%= current_user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+          <div x-data data-limit="3" data-tags='[<%= current_user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
         data-tagIds='[<%= current_user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
             <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
               <div class="relative inline-block w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
@@ -52,69 +52,5 @@
         <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
       </div>
     <% end %>
-    <script>
-      function tagSelect() {
-        return {
-          open: false,
-          textInput: '',
-          tags: [],
-          tagIds: [],
-          removeTags: [],
-          init() {
-            this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
-            this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
-          },
-          addTag(tag) {
-            tag = tag.trim()
-            if (this.tags.length >= 3) {
-              console.log('You have already entered more than 3 skills')
-            } else if (tag != "" && !this.hasTag(tag)) {
-              this.tags.push( tag )
-            }
-            this.clearSearch()
-            this.$refs.textInput.focus()
-            this.fireTagsUpdateEvent()
-          },
-          fireTagsUpdateEvent() {
-            this.$el.dispatchEvent(new CustomEvent('tags-update', {
-              detail: { tags: this.tags },
-              bubbles: true,
-            }));
-          },
-          hasTag(tag) {
-            var tag = this.tags.find(e => {
-              return e.toLowerCase() === tag.toLowerCase()
-            })
-            return tag != undefined
-          },
-          removeTag(index) {
-            if (this.tagIds[index] !== undefined) {
-              this.removeTags.push( this.tagIds[index] )
-            }
-            this.tags.splice(index, 1)
-            this.fireTagsUpdateEvent()
-          },
-          search(q) {
-            if ( q.includes(",") ) {
-              q.split(",").forEach(function(val) {
-                this.addTag(val)
-              }, this)
-            }
-            this.toggleSearch()
-          },
-          clearSearch() {
-            this.textInput = ''
-            this.toggleSearch()
-          },
-          toggleSearch() {
-            this.open = this.textInput != ''
-          },
-          focusTag() {
-            this.clearSearch()
-            this.$refs.textInput.focus()
-          }
-        }
-      }
-    </script>
   </div>
 <% end %>

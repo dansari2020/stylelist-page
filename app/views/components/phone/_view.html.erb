@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "phone" do %>
+  <div class="flex justify-center w-full">
+    <div id="view_phone" class="flex justify-between w-full">
+      <div class="flex-1">
+        <h2 class="pb-4 leading-3 text-normal">Phone</h2>
+        <p class="text-sm font-medium text-gray-500 leading-2">
+          <% if current_user.has_phone? %>
+            <%= current_user.phone %>
+          <% else %>
+            What number can clients contact you at?
+          <% end %>
+        </p>
+      </div>
+      <div class="flex flex-col items-start">
+        <%= link_to "Edit", profile_edit_path("phone"), class: "text-blue-500 pb-2 text-sm hidden md:block w-full text-right" %>
+        <%= link_to profile_edit_path("phone"), class: "md:hidden pb-2" do %>
+          <%= image_tag "icons/arrow-right.svg"%>
+        <% end %>
+        <% if current_user.has_phone? && current_user.mobile?  %>
+          <p class="text-sm text-gray-500"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

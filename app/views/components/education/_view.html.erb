@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "education" do %>
+  <div id="view_education" class="flex justify-between w-full">
+    <div class="flex-1">
+      <h2 class="pb-2 leading-3 md:pb-4 text-normal">Education</h2>
+      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+        <% if current_user.has_education? %>
+          <%= current_user.education %>
+        <% else %>
+          Where did you learn to do hair?
+        <% end %>
+      </p>
+    </div>
+    <div class="flex items-center md:items-start">
+      <%= link_to "Edit", profile_edit_path("education"), class: "text-blue-500 text-sm hidden md:block" %>
+      <%= link_to profile_edit_path("education"), class: "md:hidden" do %>
+        <%= image_tag "icons/arrow-right.svg"%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

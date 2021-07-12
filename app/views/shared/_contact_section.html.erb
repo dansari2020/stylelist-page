@@ -1,150 +1,18 @@
 <ul class="mb-40 list-none" x-show="tab === 'contact'">
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_phone" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-4 leading-3 text-normal">Phone</h2>
-          <p class="text-sm font-medium text-gray-500 leading-2">
-            <% if current_user.has_phone? %>
-              <%= current_user.phone %>
-            <% else %>
-              What number can clients contact you at?
-            <% end %>
-          </p>
-        </div>
-        <div class="flex flex-col items-top">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-          <% if current_user.has_phone? && current_user.mobile?  %>
-            <p class="text-sm text-gray-500"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_phone" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% phone_form = dom_id(current_user, "phone") %>
-        <%= render partial: "shared/forms/phone", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: phone_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: phone_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "phone" %>
+    <%= render partial: "components/phone/view", locals: { user: current_user } %>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_languages" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-4 leading-3 text-normal">Spoken Languages</h2>
-          <p class="text-sm font-medium text-gray-500 leading-2">
-            <% if current_user.has_languages? %>
-              <ul class="flex flex-wrap">
-                <% current_user.languages.each do |language| %>
-                  <li class="mb-6 mr-4">
-                    <span class="p-2 text-sm border border-gray-200 rounded-full">
-                      <%= language.name %>
-                    </span>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              What languages do you provide services in?
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_languages" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% languages_form = dom_id(current_user, "languages") %>
-        <%= render partial: "shared/forms/languages", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: languages_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: languages_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "language" %>
+    <%= render partial: "components/language/view", locals: { user: current_user } %>
   </li>
   <li class="p-2 border border-gray-200 md:py-4 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_address" class="flex justify-between w-full" x-show="!edit">
-        <div class="flex-1">
-          <h2 class="pb-4 leading-3 text-normal">Address</h2>
-          <p class="text-sm font-medium text-gray-500 leading-2">
-            <% if user.has_full_address? %>
-              <%= user.full_address %>
-            <% else %>
-              Where is your salon located?
-            <% end %>
-          </p>
-        </div>
-        <div class="flex items-center md:items-start">
-          <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-          <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-            <%= image_tag "icons/arrow-right.svg"%>
-          <% end %>
-        </div>
-      </div>
-      <div id="edit_address" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% address_form = dom_id(current_user, "address") %>
-        <%= render partial: "shared/forms/address", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: address_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: address_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_stream_from "address" %>
+    <%= render partial: "components/address/view", locals: { user: current_user } %>
   </li>
-  <li class="p-2 border border-gray-200 md:py-4 md:border-t-0 md:border-l-0 md:border-r-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
-      <div id="view_availability" class="w-full" x-show="!edit">
-        <%  has_availabilities = user.has_availabilities?  %>
-        <div class="flex justify-between w-full">
-          <div class="flex-1">
-            <h2 class="pb-4 leading-3 text-normal">Availability</h2>
-            <% unless has_availabilities %>
-              <p class="text-sm font-medium text-gray-500 leading-2" >When are you available to clients?</p>
-            <% end %>
-          </div>
-          <div class="flex items-center md:items-start">
-            <%= link_to "Edit", "#", class: "text-blue-500 text-sm hidden md:block", "@click.prevent": "edit = true" %>
-            <%= link_to "#", class: "md:hidden", "@click.prevent": "edit = true" do %>
-              <%= image_tag "icons/arrow-right.svg"%>
-            <% end %>
-          </div>
-        </div>
-        <% if has_availabilities %>
-          <ul class="w-full">
-            <% user.availabilities.each do |availability| %>
-              <li class="flex justify-between w-full py-4 border-t">
-                <span class="text-gray-500">
-                  <%= Date::DAYNAMES[availability.day].capitalize %>
-                </span>
-                <span class="text-right text-gray-500">
-                  <% if availability.opened? %>
-                    <%= "#{availability.open_at.strftime("%I:%M %p")} - #{availability.close_at.strftime("%I:%M %p")}" %>
-                  <% else %>
-                    Not Available
-                  <% end %>
-                </span>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-      <div id="edit_availability" x-show="edit" class="w-full p-2 bg-gray-100">
-        <% availability_form = dom_id(current_user, "availability") %>
-        <%= render partial: "shared/forms/availability", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: availability_form} %>
-        <div class="pt-4 pb-2 text-right actions">
-          <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-          <%= submit_tag "Save", form: availability_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
+  <li class="p-2 border border-gray-200 md:pt-4 md:border-t-0 md:border-l-0 md:border-r-0">
+    <%= turbo_stream_from "availability" %>
+    <%= render partial: "components/availability/view", locals: { user: current_user } %>
   </li>
 </ul>
