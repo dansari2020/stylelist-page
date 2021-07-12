@@ -33,6 +33,11 @@ class UsersController < ApplicationController
       else
         respond_to do |format|
           if @user.update(user_params)
+            if params[:component].present? && params[:frame].present?
+              format.turbo_stream do
+                return render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+              end
+            end
             format.html do
               if params["user"]["email"].present?
                 return redirect_to confirm_email_path
@@ -47,11 +52,6 @@ class UsersController < ApplicationController
             format.json do
               if params["user"]["background"].present? || params["user"]["avatar"].present?
                 return render json: @user, status: :created, location: root_url
-              end
-            end
-            if params[:component].present? && params[:frame].present?
-              format.turbo_stream do
-                render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
               end
             end
           else
