@@ -1,7 +1,5 @@
-<div class="flex flex-wrap content-center w-full bg-center bg-no-repeat bg-cover md:rounded-lg" style="height: 200px; background-color: #4F4F4E; <%=  "background-image: url(#{url_for(user.background)})" if user.background.attached? %>">
-  <%= turbo_stream_from "background" %>
-  <%= render partial: "components/background/view", locals: {user: user} %>
-</div>
+<%= turbo_stream_from "background" %>
+<%= render partial: "components/background/view", locals: {user: user} %>
 <div class="pt-4">
   <div class="relative flex w-full md:flex-row md:-mt-0 md:border-none" :class="{'flex-col -mt-20 bg-white border mb-2': tab == 'profile' || tab == 'contact'}">
     <!-- Avatar -->
