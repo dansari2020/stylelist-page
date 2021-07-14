@@ -20,4 +20,5 @@ Rails.application.routes.draw do
       delete :destroy_pictures
     end
   end
+  get "portfolios" => redirect("/portfolios/new")
 end

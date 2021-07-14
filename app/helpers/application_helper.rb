@@ -7,4 +7,8 @@ module ApplicationHelper
       notice: "alert-info"
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
+
+  def thumb_url(image)
+    image.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "200x200^", crop: "200x200+0+0")
+  end
 end

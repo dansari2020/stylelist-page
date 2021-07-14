@@ -12,7 +12,12 @@ class PortfoliosController < ApplicationController
   def create
     @portfolio = Portfolio.create!(user: current_user)
     upload_pictures
-    redirect_to edit_portfolio_path(@portfolio)
+    respond_to do |format|
+      format.html do
+        redirect_to edit_portfolio_path(@portfolio)
+      end
+      format.json { render json: {location: edit_portfolio_path(@portfolio)} }
+    end
   end
 
   def edit
@@ -50,6 +55,18 @@ class PortfoliosController < ApplicationController
   end
 
   def upload_pictures
-    @portfolio.pictures.attach(params[:portfolio][:pictures]) if params[:portfolio][:pictures].present?
+    if params.dig(:portfolio, :pictures).present?
+      Array.wrap(params[:portfolio][:pictures]).each do |image|
+        if image.is_a?(ActionDispatch::Http::UploadedFile)
+          @portfolio.pictures.attach(image)
+        else
+          image.values.each do |img|
+            if img.is_a?(ActionDispatch::Http::UploadedFile)
+              @portfolio.pictures.attach(img)
+            end
+          end
+        end
+      end
+    end
   end
 end
