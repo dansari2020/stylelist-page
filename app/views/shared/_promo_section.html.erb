@@ -1,22 +1,4 @@
+<%= turbo_stream_from "promo" %>
 <div x-show="tab === 'contact'">
-  <div x-data="{ edit : false }">
-    <div x-show="!edit">
-      <% if user.client_incentives.present? %>
-        <p class="text-xs text-center text-red-500 md:text-sm"><%= user.client_incentives %></p>
-        <p class="text-xs text-center text-gray-600 md:text-sm"><%= user.condition_for_incenrive %></p>
-        <%= link_to "Edit", "#", class: "text-blue-500 text-center block text-xs md:text-sm", "@click.prevent": "edit = true" %>
-      <% else %>
-        <p class="text-xs text-gray-500 md:text-sm">Client Promo</p>
-        <%= link_to "Add Promo", "#", class: "text-blue-500 text-xs md:text-sm", "@click.prevent": "edit = true" %>
-      <% end %>
-    </div>
-    <div id="edit_promo" x-show="edit" class="p-2 ml-8 text-left bg-gray-100">
-      <% promo_form = dom_id(current_user, "promo") %>
-      <%= render partial: "shared/forms/promo", locals: {user: current_user, url: profile_users_path, from_url: root_url, id: promo_form} %>
-      <div class="pt-4 pb-2 text-right actions">
-        <%= link_to "Cancel", "#", class: "text-gray-500 hover:bg-gray-500 hover:text-white lg:px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "edit = false" %>
-        <%= submit_tag "Save", form: promo_form, class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: "components/promo/view", locals: { user: current_user } %>
 </div>

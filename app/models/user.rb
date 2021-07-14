@@ -37,7 +37,7 @@ class User < ApplicationRecord
   before_save :destroy_prvious_data
   after_update :send_confirmation_instructions, if: :should_send_confirmation
 
-  delegate :full_address, :short_address, to: :address, allow_nil: true
+  delegate :full_address, :salon_name, :short_address, to: :address, allow_nil: true
 
   def full_name
     [first_name, last_name].compact.join(" ")

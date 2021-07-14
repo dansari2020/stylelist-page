@@ -5,6 +5,9 @@
         <h2 class="pb-4 leading-3 text-normal">Address</h2>
         <p class="text-sm font-medium text-gray-500 leading-2">
           <% if user.has_full_address? %>
+            <% if user.salon_name.present? %>
+              <%= user.salon_name %><br/>
+            <% end %>
             <%= user.full_address %>
           <% else %>
             Where is your salon located?

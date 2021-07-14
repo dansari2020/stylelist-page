@@ -9,7 +9,7 @@ class Address < ApplicationRecord
     if privacy?
       "Your address has been hidden"
     else
-      [street_number, city, province, postal, country.name].reject { |e| e.blank? }.compact.join(", ")
+      [street_number, unit_suit, city, province, postal, country.name].reject { |e| e.blank? }.compact.join(", ")
     end
   end
 
