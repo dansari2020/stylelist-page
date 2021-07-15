@@ -15,10 +15,16 @@
     </div>
     <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "languages")}) do |f| %>
       <%= render "devise/shared/error_messages", resource: user %>
-      <div class="flex flex-wrap languages-wrapper">
-        <%= collection_check_boxes(:user, :language_ids, Language.all, :id, :name) do |b| %>
+      <div class="flex flex-wrap languages-wrapper" x-data="{languageMore: false}">
+        <%= collection_check_boxes(:user, :language_ids, Language.primary, :id, :name) do |b| %>
           <%= b.check_box(class: "hidden", checked: user.language_ids.include?(b.object.id)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer") { "<span class='p-2 text-sm bg-white rounded-full'>#{b.text}</span>".html_safe } %>
         <% end %>
+        <a href="#" class="w-full pt-2 pb-4 text-sm text-center text-blue-500" class="text-blue-500" @click.prevent="languageMore = !languageMore" x-text="languageMore ? 'Hide Languages' : 'More Languages'">More Languages</a>
+        <div class="flex flex-wrap languages-wrapper" x-show="languageMore">
+          <%= collection_check_boxes(:user, :language_ids, Language.secondary, :id, :name) do |b| %>
+            <%= b.check_box(class: "hidden", checked: user.language_ids.include?(b.object.id)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer") { "<span class='p-2 text-sm bg-white rounded-full'>#{b.text}</span>".html_safe } %>
+          <% end %>
+        </div>
       </div>
       <input type="hidden" name="from_url" value="<%= from_url %>">
       <input type="hidden" name="frame" value="language_form">
