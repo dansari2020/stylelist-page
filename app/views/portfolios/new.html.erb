@@ -15,7 +15,7 @@
           <div class="hidden dz-error-message">
           </div>
         </div>
-        <%= f.file_field :pictures, multiple: true, accept: "image/*", class: "hidden", onchange: "document.getElementById('submit-file').click()", data: {target: "dropzone.input"}  %>
+        <%= f.file_field :pictures, accept: "image/*", class: "hidden", onchange: "document.getElementById('submit-file').click()", data: {target: "dropzone.input"}  %>
       </div>
       <%= f.submit "Submit", class: "hidden", id: "submit-file" %>
     <% end %>
@@ -28,8 +28,8 @@
     url: "<%= portfolios_path %>",
     autoProcessQueue: true,
     uploadMultiple: true,
-    parallelUploads: 5,
-    maxFiles: 5,
+    parallelUploads: 1,
+    maxFiles: 1,
     maxFilesize: 1,
     acceptedFiles: 'image/*',
     addRemoveLinks: false,

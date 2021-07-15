@@ -26,7 +26,11 @@ class PortfoliosController < ApplicationController
   def update
     if @portfolio.update(portfolio_params.merge(status: :published))
       upload_pictures
-      redirect_to root_url
+      if params[:commit] == "Save and add another photo"
+        redirect_to new_portfolio_path
+      else
+        redirect_to root_url
+      end
     end
   end
 
