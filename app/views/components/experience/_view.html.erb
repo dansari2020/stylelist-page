@@ -5,7 +5,8 @@
       <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
         <% if current_user.has_started_at? %>
           <span class="capitalize">
-            <%= distance_of_time_in_words_to_now(current_user.started_at) %>
+            <% #= distance_of_time_in_words_to_now(current_user.started_at) %>
+            <%= current_user.distance_of_time_at_now %>
           </span>
         <% else %>
           When did you start doing hair?
