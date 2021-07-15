@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "setting" do %>
+  <%= form_for(feedback, url: feedbacks_path, html: {method: :post, id: dom_id(feedback)}) do |f| %>
+    <div id="feeback_form" class="w-full p-2 bg-gray-100">
+      <div class="flex flex-col justify-center">
+        <div class="flex flex-col p-4">
+          <h1 class="font-bold leading-tight text-center md:text-left text-md">Got Feedback</h1>
+          <div class="mt-4 mb-2">
+            <%= f.text_field :subject, autofocus: true, placeholder: "Subject", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+          <div class="mb-8">
+            <%= f.text_area :description, rows: "5", placeholder: "Your message", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+        </div>
+      </div>
+      <%= render partial: "devise/shared/error_messages", locals:{resource: feedback} %>
+      <div class="pt-4 pb-2 text-right actions">
+        <%= submit_tag "Send", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

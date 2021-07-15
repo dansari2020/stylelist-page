@@ -1,0 +1,28 @@
+<table border="0" cellspacing="0" cellpadding="0" style="font-family:sans-serif;color:#000000;border-collapse:collapse;margin:0 auto;padding:0">
+  <tbody>
+    <tr>
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:center;margin:0;padding:0 0 16px">
+        <h2 style="padding-botton: 20px">subject: <%= @feedback.subject %></h2>
+        <hr/>
+      </td>
+    </tr>
+    <tr style="font-family:sans-serif;color:#000000;margin:0;padding:0">
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#000000;font-weight: 700;font-size: 18px;line-height: 24px;margin-bottom:50px;padding:0">
+          <%= @feedback.description %>
+        </p>
+      </td>
+    </tr>
+    <tr style="font-family:sans-serif;color:#000000;padding:0px;margin:0;">
+      <td align="top" style="font-family:sans-serif;color:#000000;text-align:left;margin:0;padding:0 0 16px">
+        <p style="font-family:sans-serif;color:#000000;font-weight:normal;font-size:16px;line-height:1.5;margin:0;margin-bottom:50px">
+          <%= @feedback.user.full_name %>,<br/>
+          E-mail: <%= @feedback.user.email %><br/>
+          <% if @feedback.user.has_phone? && @feedback.user.mobile?  %>
+            <%= @feedback.user.phone_type.humanize %>: <%= @feedback.user.phone %><%= " #{@feedback.user.phone_method.humanize} Preferred" %>
+          <% end %>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

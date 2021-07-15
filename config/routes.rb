@@ -21,4 +21,5 @@ Rails.application.routes.draw do
     end
   end
   get "portfolios" => redirect("/portfolios/new")
+  resources :feedbacks, only: %i[new create]
 end
