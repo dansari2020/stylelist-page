@@ -9,7 +9,7 @@ class Address < ApplicationRecord
     if privacy?
       "Your address has been hidden"
     else
-      [street_number, unit_suit, city, province, postal, country.name].reject { |e| e.blank? }.compact.join(", ")
+      [salon_name, street_number, city_address, country.name].reject { |e| e.blank? }.compact
     end
   end
 
@@ -18,6 +18,10 @@ class Address < ApplicationRecord
   end
 
   def street_number
-    [unit_suit, street].reject { |e| e.blank? }.compact.join(" - ").strip
+    [street, unit_suit].reject { |e| e.blank? }.compact.join(", ").strip
+  end
+
+  def city_address
+    [city, province, postal].reject { |e| e.blank? }.compact.join(", ").strip
   end
 end
