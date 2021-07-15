@@ -11,10 +11,7 @@
       </p>
     </div>
     <div class="flex items-center md:items-start">
-      <%= link_to "Edit", profile_edit_path("education"), class: "text-blue-500 text-sm hidden md:block" %>
-      <%= link_to profile_edit_path("education"), class: "md:hidden" do %>
-        <%= image_tag "icons/arrow-right.svg"%>
-      <% end %>
+      <%= link_to "Edit", profile_edit_path("education"), class: "text-blue-500 text-sm" %>
     </div>
   </div>
 <% end %>

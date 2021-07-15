@@ -1,4 +1,4 @@
 <%= turbo_stream_from "promo" %>
-<div x-show="tab === 'contact'">
+<div class="w-full" x-show="tab === 'contact'">
   <%= render partial: "components/promo/view", locals: { user: current_user } %>
 </div>

@@ -12,10 +12,7 @@
         </p>
       </div>
       <div class="flex flex-col items-start">
-        <%= link_to "Edit", profile_edit_path("phone"), class: "text-blue-500 pb-2 text-sm hidden md:block w-full text-right" %>
-        <%= link_to profile_edit_path("phone"), class: "md:hidden pb-2" do %>
-          <%= image_tag "icons/arrow-right.svg"%>
-        <% end %>
+        <%= link_to "Edit", profile_edit_path("phone"), class: "text-blue-500 pb-2 text-sm w-full text-right" %>
         <% if current_user.has_phone? && current_user.mobile?  %>
           <p class="text-sm text-gray-500"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
         <% end %>

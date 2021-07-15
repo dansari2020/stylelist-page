@@ -36,7 +36,7 @@
   </div>
 <% else %>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
-    <div class="grid grid-cols-3 gap-4 mb-40 md:grid-cols-4">
+    <div class="grid grid-cols-3 md:mb-40 md:gap-4 md:grid-cols-4">
       <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |p| %>
         <% p.pictures.each do |p| %>
           <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden" %>
