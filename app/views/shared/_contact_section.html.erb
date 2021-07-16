@@ -1,4 +1,4 @@
-<ul class="mb-20 list-none md:mb-40" x-show="tab === 'contact'">
+<ul class="mb-20 space-y-2 list-none md:mb-40" x-show="tab === 'contact'">
   <li class="p-2 border border-gray-200 md:py-4 md:mt-3 md:border-l-0 md:border-r-0">
     <%= turbo_stream_from "phone" %>
     <%= render partial: "components/phone/view", locals: { user: current_user } %>
