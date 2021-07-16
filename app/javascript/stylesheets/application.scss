@@ -8,7 +8,10 @@ body {
   min-height: -webkit-fill-available;
   font-family: 'Raleway', sans-serif;
 }
-
+.wrapper{
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -20,7 +23,7 @@ html {
   }
   
   .h-screen-headless {
-    height: calc(100vh - 5rem);
+    height: calc(100% - 5rem);
   }
 
   .md-min-h-590 {
@@ -32,11 +35,8 @@ html {
   }
 }
 @media (max-width: 767px) {
-  .h-screen-mobile {
-    height: calc(100vh - 60px);
-  }
-  .h-screen-mobile-bottom-menu {
-    height: calc(100vh - 111px);
+  .h-screen-headless {
+    height: calc(100% - 60px);
   }
 }
 input:-webkit-autofill,
