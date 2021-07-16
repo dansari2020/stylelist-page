@@ -15,8 +15,20 @@ html {
   height: -webkit-fill-available;
 }
 @media (min-width: 768px) {
+  .md-bg-gray-light{
+    background-color: #E5E5E5;
+  }
+  
   .h-screen-headless {
     height: calc(100vh - 5rem);
+  }
+
+  .md-min-h-590 {
+    min-height: 590px;
+  }
+
+  .md-w-375 {
+    width: 375px;
   }
 }
 @media (max-width: 767px) {

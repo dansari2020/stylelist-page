@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users, path: "auth",
   controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    passwords: "users/passwords"
   }
   get "/auth" => redirect("/auth/sign_up")
   resources :after_register, module: "users"
@@ -21,5 +22,7 @@ Rails.application.routes.draw do
     end
   end
   get "portfolios" => redirect("/portfolios/new")
+  get "auth/check-email", to: "auth#check_email", as: "check_email"
+  get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
   resources :feedbacks, only: %i[new create]
 end
