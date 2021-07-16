@@ -17,13 +17,15 @@ html {
   -webkit-text-size-adjust: 100%;
   height: -webkit-fill-available;
 }
+.h-15{
+  height: 3.75rem;
+}
+.h-screen-headless {
+  height: calc(100% - 60px);
+}
 @media (min-width: 768px) {
   .md-bg-gray-light{
     background-color: #E5E5E5;
-  }
-  
-  .h-screen-headless {
-    height: calc(100% - 5rem);
   }
 
   .md-min-h-590 {
@@ -35,9 +37,6 @@ html {
   }
 }
 @media (max-width: 767px) {
-  .h-screen-headless {
-    height: calc(100% - 60px);
-  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
