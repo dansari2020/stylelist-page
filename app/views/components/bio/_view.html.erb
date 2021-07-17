@@ -1,16 +1,19 @@
 <%= turbo_frame_tag "bio" do %>
-  <div id="view_bio" class="flex justify-between w-full">
+  <div id="view_bio" class="flex justify-between w-full mt-5 md:mt-0">
     <div class="flex-1">
-      <h2 class="pb-2 leading-3 md:b-4 text-normal">Bio</h2>
-      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
-        <% if user.has_bio? %>
+      <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Bio</h2>
+      <% if user.has_bio? %>
+        <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2">
           <%= user.bio %>
-        <% else %>
+        </p>
+      <% else %>
+        <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2">
           Describe who you are
-        <% end %>
-      </p>
+        </p>
+        <%= link_to "Add Bio", profile_edit_path("bio"), class: "text-blue-500 text-sm md:hidden text-center block" %>
+      <% end %>
     </div>
-    <div class="flex items-start">
+    <div class="absolute top-0 right-0 mt-2 mr-3 md:flex md:items-start md:mr-0 md:mt-0 <%= " hidden" if !user.has_bio? %>">
       <%= link_to "Edit", profile_edit_path("bio"), class: "text-blue-500 text-sm" %>
     </div>
   </div>

@@ -12,6 +12,12 @@
         </h2>
         <p class="text-sm font-medium leading-5 text-gray-500 md:text-left" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.job %></p>
         <p class="text-sm font-medium leading-5 text-gray-500 md:text-left" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.short_address %></p>
+        <div class="md:hidden" x-show="tab == 'profile'">
+          <div class="flex justify-center w-full" x-data="{ edit : false }">
+            <%= turbo_stream_from "bio" %>
+            <%= render partial: "components/bio/view", locals: { user: current_user } %>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Follow Button -->
