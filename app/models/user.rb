@@ -59,6 +59,10 @@ class User < ApplicationRecord
     end
   end
 
+  def has_promo?
+    client_incentives.present? || condition_for_incenrive.present?
+  end
+
   def self.phone_type_list
     phone_types.keys.map { |g| [g.humanize, g] }
   end
