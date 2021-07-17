@@ -1,11 +1,9 @@
-<% # link_to "Fake Twitter Connect", next_wizard_path, :class => 'btn btn-primary' %>
-<% #link_to 'skip' , next_wizard_path %>
-<div class="md:pb-10">
-  <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Let clients know about you</h1>
-  <p class="py-2 text-sm text-center">Step 4 of 4</p>
-</div>
 <%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-col"}) do |f| %>
   <div class="flex-1">
+    <div class="md:pb-10">
+      <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Let clients know about you</h1>
+      <p class="py-2 text-sm text-center">Step 4 of 4</p>
+    </div>
     <%= render "devise/shared/error_messages", resource: @user %>
     <div class="flex flex-row items-center w-full mb-4">
       <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>

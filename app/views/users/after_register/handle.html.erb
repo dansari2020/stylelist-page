@@ -1,15 +1,17 @@
-<div class="pb-4 md:pb-10">
-  <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Create Handle</h1>
-  <p class="py-2 text-sm text-center">Step 3 of 4</p>
-</div>
-<%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="inline-flex flex-row items-center w-full">
-    <%= f.label :username, "StylistPage.com/", class: "pr-2" %>
-    <%= f.text_field :username, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+<%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full flex flex-col"}) do |f| %>
+  <div class="flex-1">
+    <div class="pb-4 md:pb-10">
+      <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Create Handle</h1>
+      <p class="py-2 text-sm text-center">Step 3 of 4</p>
+    </div>
+    <%= render "devise/shared/error_messages", resource: @user %>
+    <div class="inline-flex flex-row items-center w-full">
+      <%= f.label :username, "StylistPage.com/", class: "pr-2" %>
+      <%= f.text_field :username, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    </div>
+    <p class="mt-6 text-xs text-justify text-gray-500">Note: Your custom URL can contain letters, numbers & dashes.
+      Please do not use spaces.</p>
   </div>
-  <p class="mt-6 text-xs text-justify text-gray-500">Note: Your custom URL can contain letters, numbers & dashes.
-    Please do not use spaces.</p>
   <div class="w-full text-right actions">
     <%= f.submit "Next", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>

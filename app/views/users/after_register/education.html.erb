@@ -1,10 +1,12 @@
-<div class="pb-4 md:pb-10">
-  <h1 class="mt-8 font-bold text-normal">Where did you learn to do hair?</h1>
-</div>
-<%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: @user %>
-  <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
-    <%= f.text_field :education, autofocus: true, placeholder: "i.e. Vancouver Hair Academy", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+<%= form_for(@user, :url => wizard_path, html: {method: :put, class: "h-full flex flex-col"}) do |f| %>
+  <div class="flex-1">
+    <div class="pb-4 md:pb-10">
+      <h1 class="mt-8 font-bold text-normal">Where did you learn to do hair?</h1>
+    </div>
+    <%= render "devise/shared/error_messages", resource: @user %>
+    <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
+      <%= f.text_field :education, autofocus: true, placeholder: "i.e. Vancouver Hair Academy", class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+    </div>
   </div>
   <div class="w-full text-right actions">
     <%= link_to "Cancel", wizard_path(:final), class: "text-black text-gray-500 px-4 py-2 rounded-md md:text-sm text-xs font-medium" %>

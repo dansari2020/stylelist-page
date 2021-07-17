@@ -22,8 +22,8 @@
       <h1 class="mt-8 text-xl font-bold leading-tight text-center md:text-2xl">Which best describes you</h1>
       <p class="py-2 text-sm text-center">Step 2 of 4</p>
     </div>
+    <%= render "devise/shared/error_messages", resource: @user %>
     <div class="flex flex-row flex-1 w-full">
-      <%= render "devise/shared/error_messages", resource: @user %>
       <%= f.radio_button :role, "barber", checked: true, class: "hidden" %>
       <label for="user_role_barber" class="w-1/2 py-12 mb-6 mr-2 text-center border border-gray-200 rounded-2xl focus:border-blue-200">
         <span class=""></span>

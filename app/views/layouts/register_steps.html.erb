@@ -9,8 +9,8 @@
         <%= render "shared/logo" %>
       </nav>
     </header>
-    <div class="md:pt-5 md:pb-5 md:antialiase h-screen-headless">
-      <div class="w-screen h-full p-4 bg-white md-min-h-590 md:shadow md:m-auto md:w-96">
+    <div class="flex flex-col justify-center w-screen antialiased md:pb-5 md:pt-5 h-screen-headless md:mb-5 sm:m-auto md-w-375">
+      <div class="flex flex-col h-full p-4 space-y-6 bg-white md-min-h-590 md:shadow">
         <%= yield %>
       </div>
     </div>
