@@ -22,14 +22,15 @@ html {
 }
 .h-screen-headless {
   height: calc(100% - 60px);
-  max-height: 667px;
-  overflow-y: auto;
 }
 @media (min-width: 768px) {
   .md-bg-gray-light{
     background-color: #E5E5E5;
   }
-
+  .h-screen-headless {
+    max-height: 667px;
+    overflow-y: auto;
+  }
   .md-min-h-590 {
     min-height: 590px;
   }
