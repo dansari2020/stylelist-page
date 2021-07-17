@@ -1,6 +1,6 @@
 <%= turbo_stream_from "setting" %>
-<div class="flex flex-col md:flex-row" x-data="{ tab : '<%= @tab %>', submenu : '<%= @submenu %>', tabSelected: false, submenuSelected: false }">
-  <div class="relative flex-col px-4 md:flex md:overflow-y-scroll md:w-1/5 h-screen-headless -bottom-menu" :class="{'hidden' : tabSelected, 'flex' : !tabSelected}">
+<div class="flex flex-col h-full md:flex-row" x-data="{ tab : '<%= @tab %>', submenu : '<%= @submenu %>', tabSelected: false, submenuSelected: false }">
+  <div class="relative flex-col px-4 h-screen-main md:flex md:overflow-y-scroll md:w-1/5" :class="{'hidden' : tabSelected, 'flex' : !tabSelected}">
     <div class="flex-1">
       <h1 class="py-4 mb-6 text-xl font-bold leading-tight md:text-2xl">Settings</h1>
       <ul>
@@ -31,10 +31,10 @@
       </ul>
     </div>
     <%= turbo_frame_tag "feedback" do %>
-      <%= link_to "Got Feedback", new_feedback_path, class: "flex items-center justify-center w-full px-4 py-2 mb-10 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light", "@click": "submenu = ''" %>
+      <%= link_to "Got Feedback", new_feedback_path, class: "flex items-center justify-center w-full px-4 py-2 mb-20 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light", "@click": "submenu = ''" %>
     <% end %>
   </div>
-  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/5 h-screen-headless -bottom-menu md:flex" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">
+  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/5 md:flex" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">
     <a href="#" class="flex content-center justify-between md:hidden" @click.prevent="tab = 'profile'; tabSelected = !tabSelected; submenu = ''">
       <div class="flex space-x-2 text-blue-500">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,7 +48,7 @@
     </a>
     <ul class="mt-10" id="profil_submenu" x-show="tab === 'profile'">
       <li class="py-4 rounded-md md:px-4" :class="{'bg-blue-100' : submenu === 'name'}">
-        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="submenu = 'name'; submenuSelected = !submenuSelected">
+        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="toggleBottomMenu(); submenu = 'name'; submenuSelected = !submenuSelected">
           <%= image_tag "icons/update_name.svg", class: "h-6 md:hidden" %>
           <div class="flex-1">
             <h3 class="font-normal text-md">Name</h3>
@@ -58,7 +58,7 @@
         </a>
       </li>
       <li class="py-4 rounded md:px-4" :class="{'bg-blue-100' : submenu === 'job'}">
-        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="submenu = 'job'; submenuSelected = !submenuSelected">
+        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="toggleBottomMenu(); submenu = 'job'; submenuSelected = !submenuSelected">
           <%= image_tag "icons/update_job.svg", class: "h-6 md:hidden" %>
           <div class="flex-1">
             <h3 class="font-normal text-md">Job Title</h3>
@@ -70,7 +70,7 @@
     </ul>
     <ul class="mt-10" id="manage_account_submenu" x-show="tab === 'manage_account'">
       <li class="py-4 rounded-md md:px-4" :class="{'bg-blue-100' : submenu === 'update_email'}">
-        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="submenu = 'update_email';submenuSelected = !submenuSelected">
+        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="toggleBottomMenu(); submenu = 'update_email';submenuSelected = !submenuSelected">
           <%= image_tag "icons/email-setting.svg", class: "h-6 md:hidden" %>
           <div class="flex-1">
             <h3 class="font-normal text-md">Update Email</h3>
@@ -80,7 +80,7 @@
         </a>
       </li>
       <li class="py-4 rounded md:px-4" :class="{'bg-blue-100' : submenu === 'change_password'}">
-        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="submenu = 'change_password'; submenuSelected = !submenuSelected">
+        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="toggleBottomMenu(); submenu = 'change_password'; submenuSelected = !submenuSelected">
           <%= image_tag "icons/password-lock.svg", class: "h-6 md:hidden" %>
           <div class="flex-1">
             <h3 class="font-normal text-md">Change Password</h3>
@@ -90,7 +90,7 @@
         </a>
       </li>
       <li class="py-4 rounded md:px-4" :class="{'bg-blue-100' : submenu === 'deactivate'}">
-        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="submenu = 'deactivate'; submenuSelected = !submenuSelected">
+        <a href="#" class="flex items-center justify-between space-x-4" @click.prevent="toggleBottomMenu(); submenu = 'deactivate'; submenuSelected = !submenuSelected">
           <%= image_tag "icons/deactivate-account.svg", class: "h-6 md:hidden" %>
           <div class="flex-1">
             <h3 class="font-normal text-md">Deactivate Account</h3>
@@ -101,9 +101,9 @@
       </li>
     </ul>
   </div>
-  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-2/5 h-screen-headless -bottom-menu md:flex" :class="{'hidden' : !submenuSelected && tab === 'profile'}">
-    <div class="w-full h-full mb-40 md:h-auto">
-      <div x-show="submenu !== ''">
+  <div class="h-full px-2 pt-12 border-l md:overflow-y-scroll md:w-2/5 md:flex" :class="{'hidden' : !submenuSelected && tab === 'profile'}">
+    <div class="w-full h-full md:mb-40 md:h-auto">
+      <div class="w-full h-full" x-show="submenu !== ''">
         <%= form_for(@user, url: profile_users_path, html: { method: :put, class: "flex flex-col h-full flex-wrap content-between md:h-auto" }) do |f| %>
           <div class="flex-1">
             <input type="hidden" name="tab" value="<%= @tab %>" x-value="tab" x-text="tab" x-model="tab">
@@ -127,7 +127,7 @@
             </div>
           </div>
           <div class="w-full my-4 text-right actions">
-            <%= link_to "Cancel", "#", class: "text-black text-white text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-4", "@click.prevent": "submenuSelected = false; submenu = ''" %>
+            <%= link_to "Cancel", "#", class: "text-black text-white text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-4", "@click.prevent": "toggleBottomMenu(); submenuSelected = false; submenu = ''" %>
             <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
           </div>
         <% end %>
@@ -139,3 +139,10 @@
     </div>
   </div>
 </div>
+<script>
+  function toggleBottomMenu(){
+    const bottomMenu = document.getElementById('bottomMenu');
+    const currentValue = bottomMenu.__x.$data.bottomMenu;
+    bottomMenu.__x.$data.bottomMenu = !currentValue;
+  }
+</script>

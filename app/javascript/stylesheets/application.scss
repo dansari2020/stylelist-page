@@ -24,6 +24,10 @@ html {
   height: calc(100% - 60px);
 }
 @media (min-width: 768px) {
+  .h-screen-main {
+    height: calc(100vh - 80px);
+  }
+
   .md-bg-gray-light{
     background-color: #E5E5E5;
   }
@@ -38,7 +42,14 @@ html {
     width: 375px;
   }
 }
-/*@media (max-width: 767px) {}*/
+@media (max-width: 767px) {
+  .min-h-main {
+    height: calc(100% - 60px);
+  }
+  .h-screen-main {
+    height: 100%;
+  }
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
@@ -91,4 +102,11 @@ select {
 }
 turbo-frame{
   width: 100%;
+}
+.dz-preview{
+  @apply flex flex-col items-center justify-center w-full h-full;
+}
+.dz-success-mark,.dz-error-mark,.dz-details
+{
+  display: none;
 }

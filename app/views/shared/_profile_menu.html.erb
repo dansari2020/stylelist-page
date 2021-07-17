@@ -4,32 +4,29 @@
     <% if current_user.avatar.attached? %>
       <%= image_tag current_user.avatar_thumb, class: "h-8 w-8 rounded-full", alt: "avatar" %>
     <% else %>
-      <span class="inline-block overflow-hidden w-8 h-8 bg-gray-100 rounded-full">
+      <span class="inline-block w-8 h-8 overflow-hidden bg-gray-100 rounded-full">
         <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
         </svg>
       </span>
     <% end %>
   </button>
-  <div x-show="profileMenu" class="absolute right-0 z-20 py-1 mt-2 w-72 bg-white rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right group-hover:block focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-    <% #= link_to "#" do %>
-      <div class="flex items-center px-4 pb-2 w-full">
-        <% if current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar_thumb, class: "h-12 w-12 rounded-full", alt: "avatar" %>
-        <% else %>
-          <span class="inline-block overflow-hidden w-12 h-12 bg-gray-100 rounded-full">
-            <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
-            </svg>
-          </span>
-        <% end %>
-        <div class="pl-2">
-          <h3 class="block py-2 text-sm text-gray-700"><%= current_user.full_name %></h3>
-          <%= link_to current_user.url, current_user.url, target: "_blank", class: "text-xs text-gray-500" %>
-        </div>
+  <div x-show="profileMenu" class="absolute right-0 z-20 py-1 mt-2 origin-top-right bg-white rounded-lg shadow-lg w-72 ring-1 ring-black ring-opacity-5 group-hover:block focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+    <div class="flex items-center w-full px-4 pb-2">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar_thumb, class: "h-12 w-12 rounded-full", alt: "avatar" %>
+      <% else %>
+        <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
+          <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </span>
+      <% end %>
+      <div class="pl-2">
+        <h3 class="block py-2 text-sm text-gray-700"><%= current_user.full_name %></h3>
+        <%= link_to current_user.url, current_user.url, target: "_blank", class: "text-xs text-gray-500" %>
       </div>
-      <% # end %>
-      <%= link_to('Sign Out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-center text-gray-700 hover:text-red-500 border-t" ) %>
     </div>
+    <%= link_to('Sign Out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-center text-gray-700 hover:text-red-500 border-t" ) %>
   </div>
 </div>

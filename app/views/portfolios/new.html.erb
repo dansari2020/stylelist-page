@@ -1,9 +1,9 @@
-<div class="flex flex-col items-center justify-center w-screen h-screen md:flex-row">
-  <div class="text-center">
-    <%= form_for(@portfolio, url: portfolios_path, multipart: true, html: { method: :post, id: dom_id(@portfolio, "picture") }) do |f| %>
-      <% @token = form_authenticity_token %>
-      <%= hidden_field_tag :authenticity_token, @token %>
-      <div id="mydropzone">
+<%= form_for(@portfolio, url: portfolios_path, multipart: true, html: { method: :post, id: dom_id(@portfolio, "picture"), class: "w-full h-screen-main" }) do |f| %>
+  <div id="mydropzone" class="h-full">
+    <div id="template-preview" class="flex flex-col items-center justify-center w-full h-full md:flex-row">
+      <div class="text-center">
+        <% @token = form_authenticity_token %>
+        <%= hidden_field_tag :authenticity_token, @token %>
         <%= f.label :pictures, class: "cursor-pointer" do %>
           <%= image_tag "icons/upload_portfolio.png", class: "w-36 mx-auto mb-8" %>
           <h1 class="mb-8 text-2xl">
@@ -11,18 +11,14 @@
           </h1>
           <p class="mb-24 text-sm">File formats accepted JPG, PNG, JPEG</p>
         <% end %>
-        <div class="hidden dz-preview dz-processing dz-image-preview dz-error dz-complete">
-          <div class="hidden dz-error-message">
-          </div>
-        </div>
         <%= f.file_field :pictures, accept: "image/*", class: "hidden", onchange: "document.getElementById('submit-file').click()", data: {target: "dropzone.input"}  %>
+        <%= f.submit "Submit", class: "hidden", id: "submit-file" %>
       </div>
-      <%= f.submit "Submit", class: "hidden", id: "submit-file" %>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 <script type="text/javascript">
-  Dropzone.autoDiscover = false;
+  // Dropzone.autoDiscover = false;
   var AUTH_TOKEN= '<%= @token %>';
   var myDropzone = new Dropzone("div#mydropzone",{
     url: "<%= portfolios_path %>",
@@ -37,7 +33,8 @@
     params:{
       'authenticity_token':  AUTH_TOKEN
     },
-    successmultiple: function(data,response){
+    success: function(data,response){
+      document.getElementById('template-preview').classList.add("hidden");
       window.location = response.location;
     }
   });

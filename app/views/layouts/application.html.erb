@@ -4,10 +4,12 @@
     <%= render 'shared/head' %>
   </head>
   <body>
-    <%= render "shared/header" %>
-    <div id="main" class="w-full mx-auto max-w-screen-2xl">
-      <%= yield %>
+    <div class="md:h-screen wrapper">
+      <%= render "shared/header" %>
+      <div id="main" class="w-full mx-auto min-h-main max-w-screen-2xl">
+        <%= yield %>
+      </div>
+      <%= render "shared/footer" %>
     </div>
-    <%= render "shared/footer" %>
   </body>
 </html>

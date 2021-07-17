@@ -1,4 +1,4 @@
-<header class="z-50 w-full bg-white md:border-b md:h-20 dark:bg-gray-900 dark:border-gray-700" x-data="{ mobileMenuOpen : false }">
+<header class="z-50 w-full bg-white md:border-b h-15 md:h-20 dark:bg-gray-900 dark:border-gray-700" x-data="{ mobileMenuOpen : false }">
   <nav class="px-4 py-3 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:py-5 md:space-y-0 md:space-x-10">
     <div class="flex justify-between">
       <%= render "shared/logo" %>
@@ -13,7 +13,6 @@
     <div class="items-center justify-end hidden md:flex">
       <div class="flex flex-col space-y-4 md:flex-row md:items-center md:space-y-0 md:space-x-4">
         <% if user_signed_in? %>
-          <!-- Profile dropdown -->
           <div class="relative ml-3">
             <div class="flex flex-col space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-6 xl:space-x-8">
               <%= render "shared/menu" %>
@@ -28,7 +27,7 @@
     </div>
   </nav>
 </header>
-<div id="bottom_menu" class="md:hidden">
+<div id="bottomMenu" x-data="{ bottomMenu : true }" class="md:hidden" x-show="bottomMenu">
   <div class="fixed bottom-0 z-10 flex flex-row justify-between w-full p-2 bg-white border-t">
     <%= render "shared/menu" %>
   </div>
