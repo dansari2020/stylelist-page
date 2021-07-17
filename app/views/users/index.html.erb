@@ -1,6 +1,6 @@
 <%= turbo_stream_from "setting" %>
 <div class="flex flex-col md:flex-row" x-data="{ tab : '<%= @tab %>', submenu : '<%= @submenu %>', tabSelected: false, submenuSelected: false }">
-  <div class="relative flex-col px-4 md:flex md:overflow-y-scroll md:w-1/5 h-screen-headless h-screen-mobile-bottom-menu" :class="{'hidden' : tabSelected, 'flex' : !tabSelected}">
+  <div class="relative flex-col px-4 md:flex md:overflow-y-scroll md:w-1/5 h-screen-headless -bottom-menu" :class="{'hidden' : tabSelected, 'flex' : !tabSelected}">
     <div class="flex-1">
       <h1 class="py-4 mb-6 text-xl font-bold leading-tight md:text-2xl">Settings</h1>
       <ul>
@@ -34,7 +34,7 @@
       <%= link_to "Got Feedback", new_feedback_path, class: "flex items-center justify-center w-full px-4 py-2 mb-10 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light", "@click": "submenu = ''" %>
     <% end %>
   </div>
-  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/5 h-screen-headless h-screen-mobile-bottom-menu md:flex" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">
+  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/5 h-screen-headless -bottom-menu md:flex" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">
     <a href="#" class="flex content-center justify-between md:hidden" @click.prevent="tab = 'profile'; tabSelected = !tabSelected; submenu = ''">
       <div class="flex space-x-2 text-blue-500">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +101,7 @@
       </li>
     </ul>
   </div>
-  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-2/5 h-screen-headless h-screen-mobile-bottom-menu md:flex" :class="{'hidden' : !submenuSelected && tab === 'profile'}">
+  <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-2/5 h-screen-headless -bottom-menu md:flex" :class="{'hidden' : !submenuSelected && tab === 'profile'}">
     <div class="w-full h-full mb-40 md:h-auto">
       <div x-show="submenu !== ''">
         <%= form_for(@user, url: profile_users_path, html: { method: :put, class: "flex flex-col h-full flex-wrap content-between md:h-auto" }) do |f| %>
