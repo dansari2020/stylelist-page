@@ -58,7 +58,6 @@ export default class extends Controller {
   }
 
   get acceptedFiles() {
-    console.log('acceptedFiles')
     return this.data.get("acceptedFiles");
   }
 
@@ -76,23 +75,7 @@ class DirectUploadController {
 
   start() {
     const btn = "submit_picture_portfolio";
-    console.log(btn);
     document.getElementById(btn).click()
-    // this.file.controller = this;
-    // this.hiddenInput = this.createHiddenInput();
-
-    // this.directUpload.create((error, attributes) => {
-    //   if (error) {
-    //     removeElement(this.hiddenInput);
-    //     this.emitDropzoneError(error);
-    //   } else {
-    //     this.hiddenInput.value = attributes.signed_id;
-    //     this.emitDropzoneSuccess();
-    //     console.log('Success')
-
-
-    //   }
-    // });
   }
 
   createHiddenInput() {

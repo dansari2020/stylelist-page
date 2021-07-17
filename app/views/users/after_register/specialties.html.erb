@@ -64,7 +64,6 @@
       addTag(tag) {
         tag = tag.trim()
         if (this.tags.length >= 3) {
-          console.log('You have already entered more than 3 skills')
         } else if (tag != "" && !this.hasTag(tag)) {
           this.tags.push( tag )
         }

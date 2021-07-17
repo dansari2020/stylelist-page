@@ -3,7 +3,7 @@
     <div class="w-full -mt-14 md:-mt-16">
       <div class="relative rounded-full w-17 h-17 md:mx-auto md:h-28 md:w-28 avatar" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
         <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "avatar")}) do |f| %>
-          <%= f.label :avatar, class: "cursor-pointer", ":disabled": "disableFunction() && (tab == 'profile' || tab == 'contact')" do %>
+          <%= f.label :avatar, class: "cursor-pointer" do %>
             <div class="relative">
               <% if user.avatar.attached? %>
                 <%= image_tag user.avatar_thumb, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "border-color: #E0E0E0" %>
@@ -16,7 +16,7 @@
               <input type="hidden" name="frame" value="avatar">
               <input type="hidden" name="component" value="avatar">
               <% submit2_id = dom_id(user, "submit_avatar") %>
-              <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{submit2_id}').click()" %>
+              <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{submit2_id}').click()", ":disabled": "disableFunction()" %>
               <%= f.submit "", id: submit2_id, class: "hidden" %>
             </div>
           <% end %>
@@ -27,10 +27,13 @@
 <% end %>
 <script>
   function disableFunction() {
-    var w = window.innerWidth;
-     if (w <= 767) {
-       return true;
-     }
-     return false;
-  }
+      const w = window.innerWidth;
+      if (window.activeTab) {
+        if (w <= 767 && (window.activeTab == 'profile' || window.activeTab == 'contact')) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
 </script>

@@ -46,7 +46,6 @@
       addTag(tag) {
         tag = tag.trim()
         if (this.limit > 0 && this.tags.length >= this.limit) {
-          console.log('You have already entered more than limit')
         } else if (tag != "" && !this.hasTag(tag)) {
           this.tags.push(tag)
         }
