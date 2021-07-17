@@ -4,14 +4,16 @@
     <%= render 'shared/head' %>
   </head>
   <body class="md-bg-gray-light">
-    <header class="w-full bg-white md:border-b h-15 dark:bg-gray-900 md:dark:border-gray-700">
-      <nav class="px-4 py-3 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:space-y-0 md:space-x-10">
-        <%= render "shared/logo" %>
-      </nav>
-    </header>
-    <div class="flex flex-col justify-center w-screen antialiased md:pb-5 md:pt-5 h-screen-headless md:mb-5 sm:m-auto md-w-375">
-      <div class="flex flex-col h-full p-4 space-y-6 bg-white md-min-h-590 md:shadow">
-        <%= yield %>
+    <div class="wrapper">
+      <header class="w-full bg-white md:border-b h-15 dark:bg-gray-900 md:dark:border-gray-700">
+        <nav class="px-4 py-3 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:space-y-0 md:space-x-10">
+          <%= render "shared/logo" %>
+        </nav>
+      </header>
+      <div class="flex flex-col justify-center w-screen antialiased md:pb-5 md:pt-5 h-screen-headless md:mb-5 sm:m-auto md-w-375">
+        <div class="flex flex-col h-full p-4 space-y-6 bg-white md-min-h-590 md:shadow">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>
