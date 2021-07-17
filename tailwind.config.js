@@ -6,7 +6,18 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '15': '3.75rem',
+        '17': '68px',
+        '50': '200px',
+      },
+      height: {
+        '15': '3.75rem',
+        '17': '68px',
+        '50': '200px',
+      },
+    },
   },
   variants: {
     extend: {},

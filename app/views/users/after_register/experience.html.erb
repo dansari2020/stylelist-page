@@ -5,7 +5,7 @@
     </div>
     <%= render "devise/shared/error_messages", resource: @user %>
     <div class="flex flex-col-reverse w-full pt-2 space-y-2 space-y-reverse">
-      <%= f.date_select :started_at, { discard_day: true, default: { day: 1 }, start_year: 1960 }, autofocus: true, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+      <%= f.date_select :started_at, { discard_day: true, default: { day: 1 }, start_year: 1960 }, class: "px-4 py-3 w-full rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
     </div>
   </div>
   <div class="w-full text-right actions">

@@ -6,9 +6,9 @@
     <div class="md:w-1/3" :class="{'w-full': tab == 'profile' || tab == 'contact', 'w-1/2': tab == 'portfolio'}">
       <%= turbo_stream_from "avatar" %>
       <%= render partial: "components/avatar/view", locals: {user: user} %>
-      <div class="justify-center w-32 py-2 md:mx-auto md:mb-12" :class="{'mx-auto': tab == 'profile' || tab == 'contact', 'ml-5': tab == 'portfolio'}">
+      <div class="justify-center py-2 md:mx-auto md:mb-12" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
         <h2 class="leading-6 md:text-md md:text-left whitespace-nowrap" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
-          <%= user.full_name %><span class="pl-2 text-sm text-gray-500"><%= "(#{user.pronoun})" if user.pronoun.present? %></h2>
+          <%= user.full_name %><span class="pl-2 text-xs text-gray-500 md:text-sm"><%= "(#{user.pronoun})" if user.pronoun.present? %></h2>
         </h2>
         <p class="text-sm font-medium leading-5 text-gray-500 md:text-left" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.job %></p>
         <p class="text-sm font-medium leading-5 text-gray-500 md:text-left" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.short_address %></p>
@@ -16,7 +16,7 @@
     </div>
     <!-- Follow Button -->
     <div class="flex flex-col text-right md:w-2/3" :class="{'hidden md:flex' : tab == 'profile', 'w-1/2' : tab == 'portfolio' }">
-      <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max" x-show="tab !== 'contact'" :class="{'-mt-9 mr-5': tab == 'portfolio'}">
+      <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max" x-show="tab !== 'contact'" :class="{'-mt-9': tab == 'portfolio'}">
         <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
         Share
       </button>

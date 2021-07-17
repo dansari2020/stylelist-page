@@ -34,13 +34,11 @@ html {
   .md-min-h-590 {
     min-height: 590px;
   }
-
   .md-w-375 {
     width: 375px;
   }
 }
-@media (max-width: 767px) {
-}
+/*@media (max-width: 767px) {}*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
@@ -92,5 +90,5 @@ select {
   background-color: #FFDE03
 }
 turbo-frame{
-  @apply w-full;
+  width: 100%;
 }

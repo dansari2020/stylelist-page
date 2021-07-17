@@ -3,7 +3,7 @@
     position: relative;
   }
   input[type="checkbox"] + label.ediable span {
-    background: url('<%= image_url("icons/unselected.svg") %>') top left no-repeat;
+    background: url('<%= image_url("icons/unselected-checkbox.svg") %>') top left no-repeat;
     display: inline-block;
     vertical-align: middle;
     width: 45px;
@@ -36,13 +36,13 @@
   </div>
 <% else %>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
-    <div class="grid grid-cols-3 mb-20 md:mb-40 md:gap-4 md:grid-cols-4">
+    <div class="grid grid-cols-2 gap-px mb-20 md:mb-40 md:gap-1.5 md:grid-cols-4">
       <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |p| %>
         <% p.pictures.each do |p| %>
           <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden" %>
           <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
             <span></span>
-            <%= image_tag thumb_url(p), ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+            <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
           </label>
         <% end %>
       <% end %>

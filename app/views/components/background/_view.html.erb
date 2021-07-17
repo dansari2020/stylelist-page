@@ -2,7 +2,7 @@
   <div class="flex flex-wrap content-center w-full bg-center bg-no-repeat bg-cover md:rounded-lg" style="height: 200px; background-color: #4F4F4E; <%=  "background-image: url(#{url_for(user.backgroun_medium)})" if user.background.attached? %>">
     <div class="flex flex-col w-full">
       <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "background")  }, remote: true, authenticity_token: true) do |f| %>
-        <%= f.label :background, class: "cursor-pointer" do %>
+        <%= f.label :background, class: "cursor-pointer", ":disabled": "disableFunction() && (tab == 'profile' || tab == 'contact')" do %>
           <% if user.background.attached? %>
             <%= image_tag "icons/attached_background.png", class: "w-10 h-10 mx-auto md:block", ":class": "{'hidden': tab == 'profile' || tab == 'contact'}" %>
           <% else %>
@@ -22,3 +22,12 @@
     </div>
   </div>
 <% end %>
+<script>
+  function disableFunction() {
+    var w = window.innerWidth;
+     if (w <= 767) {
+       return true;
+     }
+     return false;
+  }
+</script>
