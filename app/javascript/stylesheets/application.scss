@@ -22,6 +22,8 @@ html {
 }
 .h-screen-headless {
   height: calc(100% - 60px);
+  max-height: 667px;
+  overflow-y: auto;
 }
 @media (min-width: 768px) {
   .md-bg-gray-light{

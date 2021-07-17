@@ -1,18 +1,22 @@
-<header class="w-full bg-white md:border-b md:h-16 dark:bg-gray-900 md:dark:border-gray-700" x-data="{ mobileMenuOpen : false }">
-  <nav class="px-4 py-3 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:py-4 md:space-y-0 md:space-x-10">
-    <%= render "shared/logo" %>
+<header class="w-full bg-white h-15 md:border-b md:dark:bg-gray-900 md:dark:border-gray-700">
+  <nav class="w-full h-full px-4 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:space-y-0 md:space-x-10">
+    <div class="flex justify-between w-full">
+      <%= render "shared/logo" %>
+    </div>
   </nav>
 </header>
-<div class="md:pt-5 md:pb-5 md:antialiase h-screen-headless">
-  <div class="flex flex-col justify-center w-screen p-4 bg-white md-min-h-590 md:space-y-4 md:shadow sm:m-auto sm:w-96 ">
-    <div class="pb-4 md:pb-10">
-      <h1 class="mt-8 text-xl text-center mb-2.5">Reset Password</h1>
-      <p class="text-sm text-center text-gray-500">Enter the email address you used at sign up</p>
-    </div>
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "h-full md:h-96 flex flex-wrap content-between"}) do |f| %>
-      <%= render "devise/shared/error_messages", resource: @user %>
-      <div class="w-full">
-        <%= f.email_field :email, autofocus: true, placeholder: "Email Address", autocomplete: "email", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+<div class="flex flex-col justify-center w-screen antialiased md:pb-5 md:pt-5 h-screen-headless md:mb-5 sm:m-auto md-w-375">
+  <div class="flex flex-col h-full p-4 space-y-6 bg-white md-min-h-590 md:shadow">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "h-full flex flex-col"}) do |f| %>
+      <div class="flex-1">
+        <div class="pb-4 md:pb-10">
+          <h1 class="mt-8 text-xl text-center mb-2.5">Reset Password</h1>
+          <p class="text-sm text-center text-gray-500">Enter the email address you used at sign up</p>
+        </div>
+        <%= render "devise/shared/error_messages", resource: @user %>
+        <div class="w-full">
+          <%= f.email_field :email, autofocus: true, placeholder: "Email Address", autocomplete: "email", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        </div>
       </div>
       <div class="w-full text-right actions">
         <%= link_to "Cancel", new_session_path(resource_name), class: "text-black text-gray-500 px-4 py-2 rounded-md md:text-sm text-xs font-medium" %>

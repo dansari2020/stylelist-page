@@ -1,23 +1,27 @@
-<header class="w-full bg-white md:border-b md:h-16 dark:bg-gray-900 md:dark:border-gray-700" x-data="{ mobileMenuOpen : false }">
-  <nav class="px-4 py-3 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:py-4 md:space-y-0 md:space-x-10">
-    <%= render "shared/logo" %>
+<header class="w-full bg-white h-15 md:border-b md:dark:bg-gray-900 md:dark:border-gray-700">
+  <nav class="w-full h-full px-4 mx-auto space-y-4 max-w-screen-2xl md:flex md:justify-between md:items-center md:space-y-0 md:space-x-10">
+    <div class="flex justify-between w-full">
+      <%= render "shared/logo" %>
+    </div>
   </nav>
 </header>
-<div class="md:pt-5 md:pb-5 md:antialiase h-screen-headless md-min-h-667">
-  <div class="flex flex-col justify-center w-screen p-4 bg-white md-min-h-590 md:space-y-4 md:shadow sm:m-auto sm:w-96 ">
-    <div class="pb-4 md:pb-10">
-      <h1 class="mt-8 text-xl text-center mb-2.5 font-bold">Create Password</h1>
-      <p class="text-xs text-center text-gray-500">Use 8 or more characters with a mix of letters & numbers</p>
-    </div>
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "h-full md:h-96 flex w-full flex-wrap content-between"}) do |f| %>
+<div class="flex flex-col justify-center w-screen antialiased md:pb-5 md:pt-5 h-screen-headless md:mb-5 sm:m-auto md-w-375">
+  <div class="flex flex-col h-full p-4 space-y-6 bg-white md-min-h-590 md:shadow">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "h-full flex flex-col"}) do |f| %>
       <%= f.hidden_field :reset_password_token %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="w-full">
-        <div class="pb-4">
-          <%= f.password_field :password, autofocus: true, placeholder: "Create New Password", autocomplete: "new-password", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+      <div class="flex-1">
+        <div class="pb-4 md:pb-10">
+          <h1 class="mt-8 text-xl text-center mb-2.5 font-bold">Create Password</h1>
+          <p class="text-xs text-center text-gray-500">Use 8 or more characters with a mix of letters & numbers</p>
         </div>
-        <div class="pb-4">
-          <%= f.password_field :password_confirmation, placeholder: "Confirm New Password", autocomplete: "confirm-new-password", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="w-full">
+          <div class="pb-4">
+            <%= f.password_field :password, autofocus: true, placeholder: "Create New Password", autocomplete: "new-password", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+          <div class="pb-4">
+            <%= f.password_field :password_confirmation, placeholder: "Confirm New Password", autocomplete: "confirm-new-password", class: "w-full px-4 py-3 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
         </div>
       </div>
       <div class="w-full text-right actions">
