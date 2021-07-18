@@ -55,7 +55,7 @@
       },
       fireTagsUpdateEvent() {
         this.$el.dispatchEvent(new CustomEvent('tags-update', {
-          detail: { tags: this.tags },
+          detail: { tags: this.tags, removeTags: this.removeTags },
           bubbles: true,
         }));
       },

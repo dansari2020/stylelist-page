@@ -35,8 +35,8 @@
     </div>
   </div>
 <% else %>
-  <div x-data="{ imgModal : false, imgModalSrc : '', imgModalDesc : '', imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#'}">
-    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; " x-if="imgModal">
+  <div x-data="{ imgModal : false, imgModalSrc : '', hairLength: '', imgModalDesc : [], imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#'}">
+    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; hairLength = $event.detail.hairLength; " x-if="imgModal">
       <div x-on:click.away="imgModalSrc = ''" 
         class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
         <div @click.away="imgModal = ''" class="flex flex-col max-w-4xl max-h-full overflow-auto">
@@ -48,7 +48,9 @@
               <ul class="my-3 space-y-3 list-none">
                 <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
                   <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
-                  <p x-text="imgModalDesc" class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"></p>
+                  <template x-for="(desc, index) in imgModalDesc">
+                    <p x-text="desc" class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"></p>
+                  </template>
                 </li>
                 <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
                   <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
@@ -68,13 +70,14 @@
                 </li>
                 <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
                   <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+                  <span class="px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairLength"></span>
                 </li>
               </ul>
               <div class="flex flex-col">
                 <a :href="deleteUrl" data-confirm="Are you sure?" class="block px-3 py-2 text-sm text-center text-red-500" rel="nofollow" data-method="delete">Delete</a>
               </div>
             </div>
-            <div style="width:499px">
+            <div class="flex items-center" style="max-width:499px">
               <img :alt="imgModalSrc" class="object-contain" :src="imgModalSrc">
             </div>
           </div>
@@ -91,17 +94,18 @@
             <span></span>
             <a @click="$dispatch('img-modal', {  
               imgModalSrc: '<%= picture_only_url(p) %>', 
-              imgModalDesc: '<%= portfolio.description.gsub(%r{\r\n}, '<br/>') %>', 
+              imgModalDesc: [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
           imgModalServiceTypes: [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
           imgModalHairTypes: [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
+          hairLength: '<%= portfolio.hair_length&.humanize %>',
           editUrl: '<%= edit_portfolio_path(portfolio) %>',
           deleteUrl: '<%= portfolio_path(portfolio) %>',
           })" class="cursor-pointer" :disabled="manage">
-          <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
-        </a>
-      </label>
-    <% end %>
+              <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+            </a>
+          </label>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
-</div>
-<% end %>
 <% end %>

@@ -24,7 +24,7 @@
               <!-- selections -->
               <template x-for="(tag, index) in tags">
                 <div class="inline-flex items-center m-1 text-sm text-gray-500 bg-white border border-gray-200 rounded-full">
-                  <input type="hidden" name="user[specialties_attributes][][id]" />
+                  <input type="hidden" name="user[specialties_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
                   <input type="hidden" name="user[specialties_attributes][][name]" :value="tag" />
                   <input type="hidden" name="user[specialties_attributes][][_destroy]"/>
                   <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag"></span>
@@ -73,7 +73,7 @@
       },
       fireTagsUpdateEvent() {
         this.$el.dispatchEvent(new CustomEvent('tags-update', {
-          detail: { tags: this.tags },
+          detail: { tags: this.tags, removeTags: this.removeTags },
           bubbles: true,
         }));
       },

@@ -1,22 +1,67 @@
-<div class="flex flex-col space-x-4 md:flex-row">
-  <div class="relative block px-2 pt-8 border-r md:w-1/2 lg:w-2/5" x-data="{ tab : 'profile' }">
-    <div class="p-8 mb-2 border-b">
-      <h2 class="mb-4 text-xl leading-6">Length of Hair</h2>
-      <%= image_tag "girl.png", class: "object-contain h-full" %>
-    </div>
-  </div>
-  <div class="px-8 py-12 md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-3/5">
-    <div class="grid grid-cols-3 m-4 space-x-4 md:grid-cols-5">
-      <% Array.wrap(@portfolio.pictures).each do |picture| %>
-        <div class="">
-          <p class="py-2 pt-4 text-gray-600">
-            <%= picture.blob.filename %>
-          </p>
-          <%= image_tag picture, class: "w-36 rounded-md"  %>
+    <style>
+  .length-of-hair-wrapper input[type="radio"] + label span {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    border-radius: 50px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .length-of-hair-wrapper input[type="radio"]:checked + label span {
+    border: 1px solid #3374DE;
+    color: #3374DE;
+  }
+</style>
+<%= form_for(@portfolio, url: portfolio_path(@portfolio), html: { method: :put}) do |f| %>
+  <div class="flex flex-col space-x-4 md:flex-row">
+    <div class="relative block px-2 pt-8 border-r md:w-1/2 lg:w-2/5" x-data="{ tab : 'profile' }">
+      <div class="p-8 mb-2 border-b">
+        <h2 class="mb-4 text-xl leading-6">Length of Hair</h2>
+        <div class="relative">
+          <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
+          <div class="flex flex-col flex-wrap length-of-hair-wrapper">
+            <input type="hidden" name="portfolio[hair_length]" value="">
+            <input class="hidden" type="radio" value="clipper" name="portfolio[hair_length]" id="porfolio_hair_length_clipper">
+            <label data-value="clipper" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: -2px" for="porfolio_hair_length_clipper">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Clipper</span>
+            </label>
+            <input class="hidden" type="radio" value="ear" name="portfolio[hair_length]" id="porfolio_hair_length_ear">
+            <label data-value="ear" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 105px" for="porfolio_hair_length_ear">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full ">Ear</span>
+            </label>
+            <input class="hidden" type="radio" value="chin" name="portfolio[hair_length]" id="porfolio_hair_length_chin">
+            <label data-value="chin" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 194px" for="porfolio_hair_length_chin">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full ">Chin</span>
+            </label>
+            <input class="hidden" type="radio" value="shoulder" name="portfolio[hair_length]" id="porfolio_hair_length_shoulder">
+            <label data-value="shoulder" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 254px" for="porfolio_hair_length_shoulder">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Shoulder</span>
+            </label>
+            <input class="hidden" type="radio" value="armpit" name="portfolio[hair_length]" id="porfolio_hair_length_armpit">
+            <label data-value="armpit" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 318px" for="porfolio_hair_length_armpit">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Armpit</span>
+            </label>
+            <input class="hidden" type="radio" value="mid_back" name="portfolio[hair_length]" id="porfolio_hair_length_mid_back">
+            <label data-value="mid_back" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 386px" for="porfolio_hair_length_mid_back">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Mid back</span>
+            </label>
+            <input class="hidden" type="radio" value="taillbone" name="portfolio[hair_length]" id="porfolio_hair_length_taillbone">
+            <label data-value="taillbone" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="bottom: -10px" for="porfolio_hair_length_taillbone">
+              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Taillbone</span>
+            </label>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
-    <%= form_for(@portfolio, url: portfolio_path(@portfolio), html: { method: :put}) do |f| %>
+    <div class="px-8 py-12 md:overflow-y-scroll md:w-1/2 md:h-screen lg:w-3/5">
+      <div class="grid grid-cols-3 m-4 space-x-4 md:grid-cols-5">
+        <% Array.wrap(@portfolio.pictures).each do |picture| %>
+          <div class="">
+            <p class="py-2 pt-4 text-gray-600">
+              <%= picture.blob.filename %>
+            </p>
+            <%= image_tag picture, class: "w-36 rounded-md"  %>
+          </div>
+        <% end %>
+      </div>
       <div class="w-full">
         <%= f.text_area :description, autofocus: true, placeholder: "Add Description...", class: "w-full rounded-lg mb-4 border-none focus:border-gray-500 focus:outline-none autofill:bg-white" %>
       </div>
@@ -24,7 +69,8 @@
         <label for="" class="font-bold text-md">Services Provided</label>
         <div class="flex flex-col w-full mt-4 md:inline-flex md:flex-row md:items-center">
           <div class="relative block w-full">
-            <div x-data  data-tags='[<%= @portfolio.service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
+            <div x-data  data-tags='[<%= @portfolio.service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+            data-tagIds='[<%= @portfolio.service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
               <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
                 <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                   <div class="w-full">
@@ -41,11 +87,20 @@
                   <!-- selections -->
                   <template x-for="(tag, index) in tags">
                     <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
                       <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
                       <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
                       <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
                         <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                       </button>
+                    </div>
+                  </template>
+                  <template x-for="(tag, index) in removeTags">
+                    <div :data-id="tag">
+                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
                     </div>
                   </template>
                 </div>
@@ -58,7 +113,8 @@
         <label for="" class="font-bold text-md">Hair Type</label>
         <div class="flex flex-col w-full mt-4 md:inline-flex md:flex-row md:items-center">
           <div class="relative block w-full">
-            <div x-data  data-tags='[<%= @portfolio.hair_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'>
+            <div x-data  data-tags='[<%= @portfolio.hair_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+            data-tagIds='[<%= @portfolio.hair_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
               <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
                 <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                   <div class="w-full">
@@ -75,12 +131,19 @@
                   <!-- selections -->
                   <template x-for="(tag, index) in tags">
                     <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                      <input type="hidden" name="portfolio[hair_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
                       <input type="hidden" name="portfolio[hair_types_attributes][][name]" :value="tag" />
+                      <input type="hidden" name="portfolio[hair_types_attributes][][_destroy]"/>
                       <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
                       <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
                         <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
                       </button>
                     </div>
+                  </template>
+                  <template x-for="(tag, index) in removeTags">
+                    <input type="hidden" name="portfolio[hair_types_attributes][][id]" :value="tag" />
+                    <input type="hidden" name="portfolio[hair_types_attributes][][name]" />
+                    <input type="hidden" name="portfolio[hair_types_attributes][][_destroy]" value="true" />
                   </template>
                 </div>
               </div>
@@ -98,17 +161,20 @@
         </div>
       </div>
       <div id="photos" class="flex mb-12 space-x-4"></div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 <script>
   function tagSelect() {
     return {
       open: false,
       textInput: '',
       tags: [],
+      tagIds: [],
+      removeTags: [],
       init() {
         this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
+        this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
       },
       addTag(tag) {
         tag = tag.trim()
@@ -121,7 +187,7 @@
       },
       fireTagsUpdateEvent() {
         this.$el.dispatchEvent(new CustomEvent('tags-update', {
-          detail: { tags: this.tags },
+          detail: { tags: this.tags, removeTags: this.removeTags },
           bubbles: true,
         }));
       },
@@ -132,6 +198,9 @@
         return tag != undefined
       },
       removeTag(index) {
+        if (this.tagIds.length >= (index + 1) && this.tagIds[index] !== undefined) {
+          this.removeTags.push( this.tagIds[index] )
+        }
         this.tags.splice(index, 1)
         this.fireTagsUpdateEvent()
       },
