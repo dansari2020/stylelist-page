@@ -35,17 +35,73 @@
     </div>
   </div>
 <% else %>
+  <div x-data="{ imgModal : false, imgModalSrc : '', imgModalDesc : '', imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#'}">
+    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; " x-if="imgModal">
+      <div x-on:click.away="imgModalSrc = ''" 
+        class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
+        <div @click.away="imgModal = ''" class="flex flex-col max-w-4xl max-h-full overflow-auto">
+          <div class="flex flex-row overflow-hidden bg-white rounded-2xl" style="width: 874px;">
+            <div class="px-3 py-5 overflow-y-scroll" style="width:375px;height: 499px">
+              <div class="flex">
+                <a :href="editUrl" class="px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded">Edit</a>
+              </div>
+              <ul class="my-3 space-y-3 list-none">
+                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
+                  <p x-text="imgModalDesc" class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"></p>
+                </li>
+                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
+                  <ul class="flex flex-wrap">
+                    <template x-for="(service, index) in imgModalServiceTypes">
+                      <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="service"></span></li>
+                    </template>
+                  </ul>
+                </li>
+                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair Type</h2>
+                  <ul class="flex flex-wrap">
+                    <template x-for="(hairType, index) in imgModalHairTypes">
+                      <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairType"></span></li>
+                    </template>
+                  </ul>
+                </li>
+                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+                </li>
+              </ul>
+              <div class="flex flex-col">
+                <a :href="deleteUrl" data-confirm="Are you sure?" class="block px-3 py-2 text-sm text-center text-red-500" rel="nofollow" data-method="delete">Delete</a>
+              </div>
+            </div>
+            <div style="width:499px">
+              <img :alt="imgModalSrc" class="object-contain" :src="imgModalSrc">
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
     <div class="grid grid-cols-2 gap-px mb-20 md:gap-1.5 md:grid-cols-3 lg:grid-cols-4">
-      <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |p| %>
-        <% p.pictures.each do |p| %>
-          <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden" %>
+      <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |portfolio| %>
+        <% portfolio.pictures.each do |p| %>
+          <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden", ":disabled": "!manage" %>
           <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
             <span></span>
-            <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
-          </label>
-        <% end %>
-      <% end %>
-    </div>
+            <a @click="$dispatch('img-modal', {  
+              imgModalSrc: '<%= picture_only_url(p) %>', 
+              imgModalDesc: '<%= portfolio.description.gsub(%r{\r\n}, '<br/>') %>', 
+          imgModalServiceTypes: [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
+          imgModalHairTypes: [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
+          editUrl: '<%= edit_portfolio_path(portfolio) %>',
+          deleteUrl: '<%= portfolio_path(portfolio) %>',
+          })" class="cursor-pointer" :disabled="manage">
+          <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+        </a>
+      </label>
+    <% end %>
   <% end %>
+</div>
+<% end %>
 <% end %>
