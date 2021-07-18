@@ -19,34 +19,13 @@
           <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
           <div class="flex flex-col flex-wrap length-of-hair-wrapper">
             <input type="hidden" name="portfolio[hair_length]" value="">
-            <input class="hidden" type="radio" value="clipper" name="portfolio[hair_length]" id="porfolio_hair_length_clipper">
-            <label data-value="clipper" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: -2px" for="porfolio_hair_length_clipper">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Clipper</span>
-            </label>
-            <input class="hidden" type="radio" value="ear" name="portfolio[hair_length]" id="porfolio_hair_length_ear">
-            <label data-value="ear" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 105px" for="porfolio_hair_length_ear">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full ">Ear</span>
-            </label>
-            <input class="hidden" type="radio" value="chin" name="portfolio[hair_length]" id="porfolio_hair_length_chin">
-            <label data-value="chin" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 194px" for="porfolio_hair_length_chin">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full ">Chin</span>
-            </label>
-            <input class="hidden" type="radio" value="shoulder" name="portfolio[hair_length]" id="porfolio_hair_length_shoulder">
-            <label data-value="shoulder" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 254px" for="porfolio_hair_length_shoulder">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Shoulder</span>
-            </label>
-            <input class="hidden" type="radio" value="armpit" name="portfolio[hair_length]" id="porfolio_hair_length_armpit">
-            <label data-value="armpit" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 318px" for="porfolio_hair_length_armpit">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Armpit</span>
-            </label>
-            <input class="hidden" type="radio" value="mid_back" name="portfolio[hair_length]" id="porfolio_hair_length_mid_back">
-            <label data-value="mid_back" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="top: 386px" for="porfolio_hair_length_mid_back">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Mid back</span>
-            </label>
-            <input class="hidden" type="radio" value="taillbone" name="portfolio[hair_length]" id="porfolio_hair_length_taillbone">
-            <label data-value="taillbone" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="bottom: -10px" for="porfolio_hair_length_taillbone">
-              <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full">Taillbone</span>
-            </label>
+            <% styles = ["top: -2px", "top: 105px", "top: 194px", "top: 254px", "top: 318px", "top: 386px", "bottom: -10px"] %>
+            <% Portfolio.hair_length_list.each_with_index do |(text, value), index|%>
+              <input class="hidden" type="radio" value="<%= value %>" <%= "checked" if value == @portfolio.hair_length %> name="portfolio[hair_length]" id="porfolio_hair_length_<%= value %>">
+              <label data-value="<%= value %>" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="<%= styles[index] %>" for="porfolio_hair_length_<%= value %>">
+                <span style="padding-left: 16px; padding-right: 16px;" class="py-2 text-sm bg-white rounded-full"><%= text %></span>
+              </label>
+            <% end %>
           </div>
         </div>
       </div>

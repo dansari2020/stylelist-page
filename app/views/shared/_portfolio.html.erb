@@ -98,7 +98,7 @@
           <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden", ":disabled": "!manage" %>
           <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
             <span></span>
-            <a @click="$dispatch('img-modal', {  
+            <!--<a @click="$dispatch('img-modal', {  
               imgModalSrc: '<%= picture_only_url(p) %>', 
               imgModalDesc: [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
           imgModalServiceTypes: [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
@@ -108,6 +108,15 @@
           deleteUrl: '<%= portfolio_path(portfolio) %>',
           })" class="cursor-pointer" :disabled="manage">
               <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+            </a>-->
+            <a @click="dispatchFunction($dispatch, '<%= picture_only_url(p) %>', 
+              [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
+              [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
+              [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
+              '<%= portfolio.hair_length&.humanize %>',
+              '<%= edit_portfolio_path(portfolio) %>',
+              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer" :disabled="manage">
+              <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             </a>
           </label>
         <% end %>
@@ -115,3 +124,22 @@
     </div>
   <% end %>
 <% end %>
+<script>
+  function dispatchFunction($dispatch, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
+    const w = window.innerWidth;
+      if (w <= 767) {
+        window.location = deleteUrl
+      } else {
+        $dispatch('img-modal', {
+        imgModalSrc: imgModalSrc,
+        imgModalDesc: imgModalDesc,
+        imgModalServiceTypes: imgModalServiceTypes,
+        imgModalHairTypes: imgModalHairTypes,
+        hairLength: hairLength,
+        editUrl: editUrl,
+        deleteUrl: deleteUrl,
+        })
+  
+    }
+  }
+</script>
