@@ -11,4 +11,8 @@ class Portfolio < ApplicationRecord
   def self.hair_length_list
     hair_lengths.keys.map { |g| [g.humanize, g] }
   end
+
+  def picture
+    pictures.first if pictures.attached?
+  end
 end

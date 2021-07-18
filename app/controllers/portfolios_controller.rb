@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :authenticate_duck!
-  before_action :portfolio, only: %i[edit update destroy]
+  before_action :portfolio, only: %i[edit show update destroy]
 
   def index
   end
@@ -18,6 +18,9 @@ class PortfoliosController < ApplicationController
       end
       format.json { render json: {location: edit_portfolio_path(@portfolio)} }
     end
+  end
+
+  def show
   end
 
   def edit

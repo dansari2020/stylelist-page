@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "avatar", data: { turbo: true } do %>
   <div class="flex flex-1">
-    <div class="w-full -mt-14 md:-mt-16">
+    <div class="w-full -mt-9 md:-mt-16">
       <div class="relative rounded-full w-17 h-17 md:mx-auto md:h-28 md:w-28 avatar" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
         <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "avatar")}) do |f| %>
           <%= f.label :avatar, class: "cursor-pointer" do %>

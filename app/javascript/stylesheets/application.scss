@@ -41,6 +41,16 @@ html {
   .md-w-375 {
     width: 375px;
   }
+  .max-w-image-portfolio {
+    max-width: 499px
+  }
+  .max-w-info-portfolio {
+    max-width: 375px
+  }
+  .portfolio-info {
+    max-width: 874px;
+    max-height: 499px;
+  }
 }
 @media (max-width: 767px) {
   .min-h-main {
@@ -48,6 +58,12 @@ html {
   }
   .h-screen-main {
     height: 100%;
+  }
+  .max-w-image-portfolio {
+    width: 100%;
+  }
+  .max-w-info-portfolio {
+    width: 100%;
   }
 }
 input:-webkit-autofill,
