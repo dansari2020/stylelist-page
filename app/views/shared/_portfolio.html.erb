@@ -40,8 +40,8 @@
       <div x-on:click.away="imgModalSrc = ''" 
         class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
         <div @click.away="imgModal = ''" class="flex flex-col max-w-4xl max-h-full overflow-auto">
-          <div class="flex flex-row overflow-hidden bg-white rounded-2xl" style="width: 874px;">
-            <div class="px-3 py-5 overflow-y-scroll" style="width:375px;height: 499px">
+          <div class="flex flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
+            <div class="px-3 py-5 overflow-y-scroll" style="max-width:375px;height: 499px">
               <div class="flex">
                 <a :href="editUrl" class="px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded">Edit</a>
               </div>
