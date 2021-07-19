@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    after_login_path_for(resource)
+    redirect = after_login_path_for(resource)
+    if redirect.present?
+      redirect
+    else
+      root_path
+    end
   end
 end
