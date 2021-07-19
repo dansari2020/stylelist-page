@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+    # resources :hair_types
+    resources :portfolios
+    # resources :availabilities
+    # resources :languages
+    # resources :languages_users
+    # resources :social_media
+    # resources :service_types
+    resources :feedbacks
+    # resources :specialties
+    # resources :addresses
+    # resources :services
+    root to: "users#index"
+  end
   get "mobile", to: "mobile#index"
   root "home#index"
   devise_for :users, path: "auth",
