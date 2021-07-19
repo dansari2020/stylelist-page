@@ -109,13 +109,13 @@
           })" class="cursor-pointer" :disabled="manage">
               <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             </a>-->
-            <a @click="dispatchFunction($dispatch, '<%= picture_only_url(p) %>', 
+            <a @click="dispatchFunction($dispatch, manage, '<%= picture_only_url(p) %>', 
               [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
               [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
               [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
               '<%= portfolio.hair_length&.humanize %>',
               '<%= edit_portfolio_path(portfolio) %>',
-              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer" :disabled="manage">
+              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer">
               <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             </a>
           </label>
@@ -125,8 +125,11 @@
   <% end %>
 <% end %>
 <script>
-  function dispatchFunction($dispatch, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
-    const w = window.innerWidth;
+  function dispatchFunction($dispatch, manage, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
+    if (manage) {
+      return false;
+    } else {
+      const w = window.innerWidth;
       if (w <= 767) {
         window.location = deleteUrl
       } else {
@@ -139,7 +142,7 @@
         editUrl: editUrl,
         deleteUrl: deleteUrl,
         })
-  
+      }
     }
   }
 </script>
