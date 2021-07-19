@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout :resolve_layout
   before_action :authenticate_user!
   before_action :user
   before_action :tabs
@@ -113,5 +114,16 @@ class UsersController < ApplicationController
 
   def redirect_back
     redirect_to(params[:from_url] || root_url)
+  end
+
+  private
+
+  def resolve_layout
+    case action_name
+    when "confirm_email", "reactivation"
+      "register_steps"
+    else
+      "application"
+    end
   end
 end

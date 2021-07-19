@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "mobile", to: "mobile#index"
   root "home#index"
   devise_for :users, path: "auth",
+  # sessions: "users/sessions",
   controllers: {
     registrations: "users/registrations",
     passwords: "users/passwords"
