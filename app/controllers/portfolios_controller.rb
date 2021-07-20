@@ -50,6 +50,7 @@ class PortfoliosController < ApplicationController
 
   def destroy
     @portfolio.destroy
+    redirect_to root_url
   end
 
   def destroy_pictures
