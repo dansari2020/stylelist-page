@@ -42,12 +42,18 @@ html {
     width: 375px;
   }
   .max-w-image-portfolio {
+    width: 33.333333%;
+  }
+  .popup .max-w-image-portfolio {
     max-width: 499px
   }
   .max-w-info-portfolio {
+    width: 66.666667%;
+  }
+  .popup .max-w-info-portfolio {
     max-width: 375px
   }
-  .portfolio-info {
+  .popup .portfolio-info {
     max-width: 874px;
     max-height: 499px;
   }

@@ -35,62 +35,70 @@
     </div>
   </div>
 <% else %>
-  <div x-data="{ imgModal : false, imgModalSrc : '', hairLength: '', imgModalDesc : [], imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#'}">
-    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; hairLength = $event.detail.hairLength; " x-if="imgModal">
-      <div x-on:click.away="imgModalSrc = ''" 
-        class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
-        <div @click.away="imgModal = ''" class="flex flex-col max-w-4xl max-h-full overflow-auto">
-          <div class="flex flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
-            <div class="px-3 py-5 overflow-y-scroll" style="width:375px;max-height: 499px">
-              <div class="flex">
-                <a :href="editUrl" class="px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded">Edit</a>
+  <div x-data="{ imgModal : false, imgModalSrc : '', hairLength: '', imgModalDesc : [], imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#', popupLeft: '', popupRight: '', linkable: ''}">
+    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; hairLength = $event.detail.hairLength; popupLeft = $event.detail.popupLeft; popupRight = $event.detail.popupRight;" x-if="imgModal">
+      <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
+        <div @click.away="linkable !== '' ? linkable = '' : imgModal = ''; linkable = '';" class="max-h-full overflow-auto">
+          <div class="flex flex-row">
+            <div class="w-15 flex items-center">
+              <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer", "x-show": "popupLeft !== ''", "@click": "linkable = 'true'; document.getElementById(popupLeft).click()" %>
+            </div>
+            <div class="flex flex-1 flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
+              <div class="px-3 py-5 overflow-y-scroll" style="width:375px;max-height: 499px">
+                <div class="flex">
+                  <a :href="editUrl" class="px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded">Edit</a>
+                </div>
+                <ul class="my-3 space-y-3 list-none">
+                  <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                    <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
+                    <template x-for="(desc, index) in imgModalDesc">
+                      <p x-text="desc" class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"></p>
+                    </template>
+                  </li>
+                  <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                    <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
+                    <ul class="flex flex-wrap">
+                      <template x-for="(service, index) in imgModalServiceTypes">
+                        <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="service"></span></li>
+                      </template>
+                    </ul>
+                  </li>
+                  <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                    <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair Type</h2>
+                    <ul class="flex flex-wrap">
+                      <template x-for="(hairType, index) in imgModalHairTypes">
+                        <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairType"></span></li>
+                      </template>
+                    </ul>
+                  </li>
+                  <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+                    <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+                    <span class="px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairLength"></span>
+                  </li>
+                </ul>
+                <div class="flex flex-col">
+                  <a :href="deleteUrl" data-confirm="Are you sure?" class="block px-3 py-2 text-sm text-center text-red-500" rel="nofollow" data-method="delete">Delete</a>
+                </div>
               </div>
-              <ul class="my-3 space-y-3 list-none">
-                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
-                  <template x-for="(desc, index) in imgModalDesc">
-                    <p x-text="desc" class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"></p>
-                  </template>
-                </li>
-                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
-                  <ul class="flex flex-wrap">
-                    <template x-for="(service, index) in imgModalServiceTypes">
-                      <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="service"></span></li>
-                    </template>
-                  </ul>
-                </li>
-                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair Type</h2>
-                  <ul class="flex flex-wrap">
-                    <template x-for="(hairType, index) in imgModalHairTypes">
-                      <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairType"></span></li>
-                    </template>
-                  </ul>
-                </li>
-                <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-                  <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
-                  <span class="px-3 py-1 text-sm border border-gray-200 rounded-full" x-text="hairLength"></span>
-                </li>
-              </ul>
-              <div class="flex flex-col">
-                <a :href="deleteUrl" data-confirm="Are you sure?" class="block px-3 py-2 text-sm text-center text-red-500" rel="nofollow" data-method="delete">Delete</a>
+              <div class="relative flex items-center" style="max-width:499px">
+                <img :alt="imgModalSrc" class="object-contain" :src="imgModalSrc">
+                <div class="absolute bottom-3 right-3">
+                  <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
+                    <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
+                    Share
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="relative flex items-center" style="max-width:499px">
-              <img :alt="imgModalSrc" class="object-contain" :src="imgModalSrc">
-              <div class="absolute bottom-3 right-3">
-                <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
-                  <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
-                  Share
-                </button>
-              </div>
+            <div class="w-15 flex items-center">
+              <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer", "x-show": "popupRight !== ''", "@click": "linkable = 'true'; document.getElementById(popupRight).click()" %>
             </div>
           </div>
         </div>
       </div>
     </template>
   </div>
+  <% link_ids = [] %>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
     <div class="grid grid-cols-2 gap-px mb-20 md:gap-1.5 md:grid-cols-3 lg:grid-cols-4">
       <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |portfolio| %>
@@ -98,24 +106,14 @@
           <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden", ":disabled": "!manage" %>
           <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
             <span></span>
-            <!--<a @click="$dispatch('img-modal', {  
-              imgModalSrc: '<%= picture_only_url(p) %>', 
-              imgModalDesc: [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
-          imgModalServiceTypes: [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
-          imgModalHairTypes: [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
-          hairLength: '<%= portfolio.hair_length&.humanize %>',
-          editUrl: '<%= edit_portfolio_path(portfolio) %>',
-          deleteUrl: '<%= portfolio_path(portfolio) %>',
-          })" class="cursor-pointer" :disabled="manage">
-              <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
-            </a>-->
-            <a @click="dispatchFunction($dispatch, manage, '<%= picture_only_url(p) %>', 
+            <% link_ids << dom_id(portfolio) %>
+            <a id="<%= link_ids[-1] %>" @click="dispatchFunction($dispatch, manage, '<%= link_ids[-1] %>','<%= picture_only_url(p) %>', 
               [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
               [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
               [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
               '<%= portfolio.hair_length&.humanize %>',
               '<%= edit_portfolio_path(portfolio) %>',
-              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer">
+              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer popup-target">
               <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             </a>
           </label>
@@ -125,7 +123,12 @@
   <% end %>
 <% end %>
 <script>
-  function dispatchFunction($dispatch, manage, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
+  const popupTargets = document.querySelectorAll('.popup-target')
+  links = [];
+  for (var i = 0, len = popupTargets.length ; i < len; i++) {
+      links.push(popupTargets[i].id);
+  }
+  function dispatchFunction($dispatch, manage, linkId, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
     if (manage) {
       return false;
     } else {
@@ -133,6 +136,18 @@
       if (w <= 767) {
         window.location = deleteUrl
       } else {
+        const currentIndex = links.indexOf(linkId);
+        if (currentIndex !== -1 && currentIndex - 1 >= 0 ) {
+          popupLeft = links[currentIndex - 1]
+        } else {
+          popupLeft = ''
+        }
+        if (currentIndex !== -1 && currentIndex + 1 < links.length ) {
+          popupRight = links[currentIndex + 1]
+        } else {
+          popupRight = ''
+        }
+  
         $dispatch('img-modal', {
         imgModalSrc: imgModalSrc,
         imgModalDesc: imgModalDesc,
@@ -141,6 +156,8 @@
         hairLength: hairLength,
         editUrl: editUrl,
         deleteUrl: deleteUrl,
+        popupLeft: popupLeft,
+        popupRight: popupRight,
         })
       }
     }

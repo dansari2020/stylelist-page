@@ -21,6 +21,17 @@ class PortfoliosController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("portfolioPopup", partial: "portfolios/portfolio", locals: {portfolio: @portfolio})
+      end
+      format.html do
+        render "portfolios/show"
+      end
+      format.json do
+        render json: @portfolio
+      end
+    end
   end
 
   def edit
