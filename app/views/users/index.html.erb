@@ -31,7 +31,7 @@
       </ul>
     </div>
     <%= turbo_frame_tag "feedback" do %>
-      <%= link_to "Got Feedback", new_feedback_path, class: "flex items-center justify-center w-full px-4 py-2 mb-20 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light", "@click": "submenu = ''" %>
+      <%= link_to "Got Feedback", "mailto:#{ENV.fetch("FEEDBACK_MAIL", "StylistPage <hello@stylistpage.com>")}", target: "_blank", class: "flex items-center justify-center w-full px-4 py-2 mb-20 text-black bg-transparent rounded-md whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light", "@click": "submenu = ''" %>
     <% end %>
   </div>
   <div class="px-2 pt-12 border-l md:overflow-y-scroll md:w-1/5 md:flex" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">

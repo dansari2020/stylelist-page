@@ -6,7 +6,7 @@
           <%= f.label :avatar, class: "cursor-pointer" do %>
             <div class="relative">
               <% if user.avatar.attached? %>
-                <%= image_tag user.avatar_thumb, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "border-color: #E0E0E0" %>
+                <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "border-color: #E0E0E0" %>
               <% else %>
                 <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
               <% end %>

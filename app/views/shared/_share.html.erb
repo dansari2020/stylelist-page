@@ -8,7 +8,13 @@
       <ul class="flex flex-wrap flex-col">
         <% %w[copy_link facebook twitter].each do |social| %>
           <li class="mt-2">
-            <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, "@click.prevent": "shareBtn('#{social}', '#{defined?(resource) && resource}')" do %>
+            <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, 
+            "@click.prevent": "shareBtn('#{social}', 
+            '#{defined?(share_title) && share_title}',
+            '#{defined?(share_link) && share_link}',
+            '#{defined?(share_desc) && share_desc}',
+            '#{defined?(share_image) && share_image}',
+            )" do %>
               <div class="w-1/4">
                 <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3" %>
               </div>
@@ -17,31 +23,53 @@
           </li>
         <% end %>
       </ul>
-      <div id="showUrl" class="hidden"></div>
     </p>
   </div>
 </div>
 <script>
-  function shareBtn(shareType, url) {
+  function shareBtn(shareType, title, url, summary, image) {
+    if (title === '' || !title) {
+      title = window.shareTitle
+    }
     if (url === '' || !url) {
       url = window.shareLink
     }
+    if (summary === '' || !summary) {
+      summary = window.shareDesc
+    }
+    if (image === '' || !image) {
+      image = window.shareImage
+    }
     switch (shareType) {
       case "facebook":
+        shareFacebook(title, url, summary, image)
         break;
       case "twitter":
         break;
   
       default:
-        var copyText = document.createElement("input");
-        copyText.setAttribute("id", "copyText");
-        copyText.setAttribute("type", "text");
-        copyText.setAttribute("value", url);
-        document.getElementById("showUrl").appendChild(copyText)
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        document.execCommand("copy");
+        copyToClipboard(url);
         break;
     }
+  }
+  
+  function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+  }
+  
+  function shareFacebook(title, url, summary, image) {
+    var title = encodeURI(title);
+    var url = encodeURI(url);
+    var summary = encodeURI(summary);
+    var image = encodeURI(image);
+    FB.ui({
+      method: 'send',
+      link: url,
+    });
   }
 </script>

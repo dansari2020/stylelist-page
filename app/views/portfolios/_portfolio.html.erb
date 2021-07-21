@@ -3,7 +3,11 @@
     <%= image_tag picture_url(portfolio.picture), class: "object-contain w-full" %>
     <div class="absolute bottom-3 right-3">
       <% byebug %>
-      <%= render partial: "shared/share", locals: { resource: portfolio.url } %>
+      <%= render partial: "shared/share", locals: { 
+        share_title: portfolio.user_full_name, 
+        share_link: portfolio.url, 
+        share_desc: portfolio.description, 
+        share_image: portfolio.picture_in_url } %>
     </div>
   </div>
   <div class="px-3 py-5 md:overflow-y-scroll max-w-info-portfolio">

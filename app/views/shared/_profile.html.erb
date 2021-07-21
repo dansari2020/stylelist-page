@@ -22,7 +22,7 @@
     </div>
     <!-- Follow Button -->
     <div class="flex flex-col text-right md:w-2/3" :class="{'hidden md:flex' : tab == 'profile', 'w-1/2' : tab == 'portfolio' }">
-      <%= render partial: "shared/share", locals: { resource: user.url } %>
+      <%= render partial: "shared/share", locals: { share_title: user.full_name, share_link: user.url, share_desc: user.bio, share_image: user.avatar_thumb || default_avatar } %>
       <div class="mb-4 text-center md:block">
         <%= render partial: "shared/promo_section", locals: {user: user} %>
       </div>

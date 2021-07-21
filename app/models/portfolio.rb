@@ -21,4 +21,10 @@ class Portfolio < ApplicationRecord
   def url
     [user.url, "porfolios", id].join("/")
   end
+
+  def picture_in_url
+    return if picture.nil?
+
+    picture_url(portfolio.picture)
+  end
 end

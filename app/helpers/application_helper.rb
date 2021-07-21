@@ -21,4 +21,8 @@ module ApplicationHelper
   def picture_url(image, resize = "499x499^", crop = "499x499+0+0")
     thumb_url(image, resize, crop)
   end
+
+  def default_avatar
+    image_url("icons/avatar.svg")
+  end
 end
