@@ -1,1 +1,10 @@
+<div class="flex flex-row py-5 px-3">
+  <%= link_to root_url, class: "text-md font-medium flex-1 flex flex-row items-center" do %>
+    <%= image_tag "icons/flash-l.svg", class: "mr-3 w-4 h-4" %>
+    <span class="text-md font-medium flex-1">Styled by <%= @portfolio.user_first_name %></span>
+  <% end %>
+  <div class="flex">
+    <%= link_to "Edit", edit_portfolio_path(@portfolio), class: "px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded" %>
+  </div>
+</div>
 <%= render partial: "portfolio", locals: {portfolio: @portfolio} %>
