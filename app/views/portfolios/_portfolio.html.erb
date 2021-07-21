@@ -2,10 +2,8 @@
   <div class="relative flex items-center max-w-image-portfolio">
     <%= image_tag picture_url(portfolio.picture), class: "object-contain w-full" %>
     <div class="absolute bottom-3 right-3">
-      <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
-        <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
-        Share
-      </button>
+      <% byebug %>
+      <%= render partial: "shared/share", locals: { resource: portfolio.url } %>
     </div>
   </div>
   <div class="px-3 py-5 md:overflow-y-scroll max-w-info-portfolio">

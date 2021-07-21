@@ -83,10 +83,7 @@
               <div class="relative flex items-center" style="max-width:499px">
                 <img :alt="imgModalSrc" class="object-contain" :src="imgModalSrc">
                 <div class="absolute bottom-3 right-3">
-                  <button class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
-                    <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
-                    Share
-                  </button>
+                  <%= render partial: "shared/share", locals: { classMenu: "bottom-12" } %>
                 </div>
               </div>
             </div>
@@ -113,7 +110,8 @@
               [<%= portfolio.hair_types.map{|s| "'#{s.name}'"}.join(',') %>],
               '<%= portfolio.hair_length&.humanize %>',
               '<%= edit_portfolio_path(portfolio) %>',
-              '<%= portfolio_path(portfolio) %>')" class="cursor-pointer popup-target">
+              '<%= portfolio_path(portfolio) %>', 
+              '<%= portfolio.url %>')" class="cursor-pointer popup-target">
               <%= image_tag thumb_url(p), class: "md:rounded md:w-50 md:h-50 mx-auto",  ":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             </a>
           </label>
@@ -123,12 +121,12 @@
   <% end %>
 <% end %>
 <script>
-  const popupTargets = document.querySelectorAll('.popup-target')
-  links = [];
+  var popupTargets = document.querySelectorAll('.popup-target')
+  var links = [];
   for (var i = 0, len = popupTargets.length ; i < len; i++) {
       links.push(popupTargets[i].id);
   }
-  function dispatchFunction($dispatch, manage, linkId, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl) {
+  function dispatchFunction($dispatch, manage, linkId, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl, shareLink) {
     if (manage) {
       return false;
     } else {
@@ -147,7 +145,7 @@
         } else {
           popupRight = ''
         }
-  
+        window.shareLink = shareLink
         $dispatch('img-modal', {
         imgModalSrc: imgModalSrc,
         imgModalDesc: imgModalDesc,

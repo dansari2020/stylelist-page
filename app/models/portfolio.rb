@@ -17,4 +17,8 @@ class Portfolio < ApplicationRecord
   def picture
     pictures.first if pictures.attached?
   end
+
+  def url
+    [user.url, "porfolios", id].join("/")
+  end
 end

@@ -1,0 +1,47 @@
+<div x-data="{ socialMenu : false }">
+  <button  @click="socialMenu = true" @click.away="socialMenu = false" class="flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
+    <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
+    Share
+  </button>
+  <div x-show="socialMenu" class="w-44 p-4 absolute right-0 z-20 py-1 mt-2 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 group-hover:block focus:outline-none <%= defined?(classMenu) && classMenu %>" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+    <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+      <ul class="flex flex-wrap flex-col">
+        <% %w[copy_link facebook twitter].each do |social| %>
+          <li class="mt-2">
+            <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, "@click.prevent": "shareBtn('#{social}', '#{defined?(resource) && resource}')" do %>
+              <div class="w-1/4">
+                <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3" %>
+              </div>
+              <span class="font-light text-base w-3/4 text-left"><%= social.humanize %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <div id="showUrl" class="hidden"></div>
+    </p>
+  </div>
+</div>
+<script>
+  function shareBtn(shareType, url) {
+    if (url === '' || !url) {
+      url = window.shareLink
+    }
+    switch (shareType) {
+      case "facebook":
+        break;
+      case "twitter":
+        break;
+  
+      default:
+        var copyText = document.createElement("input");
+        copyText.setAttribute("id", "copyText");
+        copyText.setAttribute("type", "text");
+        copyText.setAttribute("value", url);
+        document.getElementById("showUrl").appendChild(copyText)
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        break;
+    }
+  }
+</script>
