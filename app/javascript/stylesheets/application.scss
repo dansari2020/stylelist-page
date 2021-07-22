@@ -57,6 +57,9 @@ html {
     max-width: 874px;
     max-height: 499px;
   }
+  .md-box-shadow-right {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 }
 @media (max-width: 767px) {
   .min-h-main {
