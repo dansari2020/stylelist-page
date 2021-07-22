@@ -15,7 +15,7 @@
         <div class="md:hidden" x-show="tab == 'profile'">
           <div class="flex justify-center w-full" x-data="{ edit : false }">
             <%= turbo_stream_from "bio" %>
-            <%= render partial: "components/bio/view", locals: { user: current_user } %>
+            <%= render partial: "components/bio/view", locals: { user: current_user, bio: "bioMobile" } %>
           </div>
         </div>
       </div>

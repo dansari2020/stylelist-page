@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def edit_component
-    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:frame]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component] || params[:frame]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
   end
 
   def confirm_email
