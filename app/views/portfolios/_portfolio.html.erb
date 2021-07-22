@@ -2,7 +2,6 @@
   <div class="relative flex items-center max-w-image-portfolio">
     <%= image_tag picture_url(portfolio.picture), class: "object-contain w-full" %>
     <div class="absolute bottom-3 right-3">
-      <% byebug %>
       <%= render partial: "shared/share", locals: { 
         share_title: portfolio.user_full_name, 
         share_link: portfolio.url, 
