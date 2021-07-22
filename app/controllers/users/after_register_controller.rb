@@ -19,13 +19,17 @@ class Users::AfterRegisterController < ApplicationController
       @user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
       @user.completed!
       @user.save
-      redirect_to(root_url)
+      render turbo_stream: turbo_stream.replace("register_steps", partial: "shared/handle", locals: {user: current_user})
+      head :created, url: root_url
     else
-      @user.update(user_params)
-      if %i[bio specialties services education experience social_media].include?(step)
-        jump_to(:final)
+      respond_to do |format|
+        if @user.update(user_params) && %i[bio specialties services education experience social_media].include?(step)
+          jump_to(:final)
+        end
+        format.html do
+          render_wizard @user
+        end
       end
-      render_wizard @user
     end
   end
 

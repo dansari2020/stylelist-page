@@ -3,6 +3,9 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable,
     :registerable, :timeoutable, :confirmable
 
+  extend FriendlyId
+  friendly_id :username
+
   enum role: %i[client hair_stylist barber admin]
   enum status: %i[pending completed deactivated]
   enum phone_type: %i[mobile salon]
@@ -39,6 +42,15 @@ class User < ApplicationRecord
   after_update :send_confirmation_instructions, if: :should_send_confirmation
 
   delegate :full_address, :salon_name, :short_address, to: :address, allow_nil: true
+
+  after_validation :validate_reserved
+
+  def validate_reserved
+    if @errors[:friendly_id].present?
+      errors.add(:handle, "is reserved. Please choose something else.")
+      @errors.messages.delete(:friendly_id)
+    end
+  end
 
   def full_name
     [first_name, last_name].compact.join(" ")
