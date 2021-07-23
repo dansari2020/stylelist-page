@@ -25,6 +25,6 @@ class Portfolio < ApplicationRecord
   def picture_in_url
     return if picture.nil?
 
-    picture_url(portfolio.picture)
+    picture_url(picture)
   end
 end
