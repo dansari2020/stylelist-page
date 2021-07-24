@@ -108,7 +108,7 @@
               [<%= portfolio.description.split(%r{\r\n}).map{|desc| "'#{desc}'"}.join(',') %>], 
               [<%= portfolio.service_types.map{|s| "'#{s.name}'"}.join(',') %>],
               [<%= "'#{portfolio.hair_type}'" %>],
-              '<%= portfolio.hair_length&.humanize %>',
+              ['<%= portfolio.hair_length&.humanize %>'],
               '<%= edit_portfolio_path(portfolio) %>',
               '<%= portfolio_path(portfolio) %>', 
               '<%= portfolio.url %>')" class="cursor-pointer popup-target">
