@@ -1,12 +1,12 @@
 class Portfolio < ApplicationRecord
   enum status: %i[draft published]
   enum hair_length: %i[clipper ear chin shoulder armpit mid_back taillbone]
+  enum hair_type: %i[straight wavy curly afro]
 
   belongs_to :user
   has_many :service_types, dependent: :destroy
-  has_many :hair_types, dependent: :destroy
   has_many_attached :pictures
-  accepts_nested_attributes_for :service_types, :hair_types, allow_destroy: true
+  accepts_nested_attributes_for :service_types, allow_destroy: true
 
   delegate :first_name, to: :user, prefix: true
 
@@ -26,5 +26,9 @@ class Portfolio < ApplicationRecord
     return if picture.nil?
 
     picture_url(picture)
+  end
+
+  def self.prefer_service_types
+    %w[Cut Color Style]
   end
 end

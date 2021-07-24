@@ -70,9 +70,8 @@ class PortfoliosController < ApplicationController
   end
 
   def portfolio_params
-    params.require(:portfolio).permit(:description, :hair_length,
-      service_types_attributes: [:id, :name, :_destroy],
-      hair_types_attributes: [:id, :name, :_destroy])
+    params.require(:portfolio).permit(:description, :hair_length, :hair_type,
+      service_types_attributes: [:id, :name, :_destroy])
   end
 
   def upload_pictures

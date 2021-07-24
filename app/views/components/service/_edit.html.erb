@@ -7,8 +7,9 @@
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
         <div class="relative block w-full">
-          <div x-data data-tags='[<%= current_user.services.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-        data-tagIds='[<%= current_user.services.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+          <div x-data 
+            data-tags='[<%= current_user.services.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+            data-tagIds='[<%= current_user.services.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
             <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
               <div class="relative w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                 <div :class="[open ? 'block' : 'hidden']">

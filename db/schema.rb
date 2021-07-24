@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_21_204612) do
+ActiveRecord::Schema.define(version: 2021_07_23_185651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,14 +89,6 @@ ActiveRecord::Schema.define(version: 2021_07_21_204612) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "hair_types", force: :cascade do |t|
-    t.bigint "portfolio_id", null: false
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["portfolio_id"], name: "index_hair_types_on_portfolio_id"
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -120,6 +112,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_204612) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
     t.integer "hair_length"
+    t.integer "hair_type"
     t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
@@ -193,7 +186,6 @@ ActiveRecord::Schema.define(version: 2021_07_21_204612) do
   add_foreign_key "addresses", "users"
   add_foreign_key "availabilities", "users"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "hair_types", "portfolios"
   add_foreign_key "languages_users", "languages"
   add_foreign_key "languages_users", "users"
   add_foreign_key "portfolios", "users"

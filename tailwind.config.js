@@ -17,6 +17,9 @@ module.exports = {
         '17': '68px',
         '50': '200px',
       },
+      padding: {
+        '3.7': '0.938rem',
+      }
     },
   },
   variants: {

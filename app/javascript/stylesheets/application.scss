@@ -23,6 +23,14 @@ html {
 .h-screen-headless {
   height: calc(100% - 60px);
 }
+.border-color-circle
+{
+  border-color: rgba(0, 0, 0, 0.6)
+}
+.color-circle
+{
+  color: rgba(0, 0, 0, 0.6)
+}
 @media (min-width: 768px) {
   .h-screen-main {
     height: calc(100vh - 80px);
