@@ -22,7 +22,7 @@
 <% service_types = portfolio.service_types.where.not(name: Portfolio.prefer_service_types) %>
 <div x-data="{ imgModal : false }" @toggle-modal.window="imgModal = !imgModal">
 <%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
-  <div class="flex flex-col space-x-4 md:flex-row">
+  <div class="flex flex-col md:space-x-4 md:flex-row">
     <div class="relative block px-2 pt-8 border-r md:w-1/3 lg:w-2/6" x-data="{ tab : 'profile' }">
       <div class="p-8 mb-2 border-b">
         <h2 class="mb-4 text-xl leading-6">Length of Hair</h2>
@@ -99,7 +99,7 @@
                         <div class="relative w-full overflow-y-scroll">
                           <!-- selections -->
                           <template x-for="(tag, index) in tags">
-                            <div class="inline-flex items-center m-1 text-sm bg-white border border-blue-500 rounded-full">
+                            <div class="inline-flex items-center md:m-1 text-sm bg-white border border-blue-500 rounded-full">
                               <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
                               <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
                               <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
@@ -160,7 +160,7 @@
                         <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                           <div class="w-full">
                             <div :class="[open ? 'block' : 'hidden']">
-                              <div class="absolute left-0 z-40 w-full m-1">
+                              <div class="absolute left-0 z-40 w-full md:m-1">
                                 <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
                                   <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
                                 </div>
@@ -209,7 +209,7 @@
   <template x-if="imgModal">
     <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="background: rgba(0, 0, 0, 0.8);">
       <div @click.away="imgModal = '';" class="max-h-full overflow-auto modal">
-        <div class="flex-1 py-4 px-3 modal-content">
+        <div class="flex-1 py-4 px-3 modal-content flex flex-col h-5/6">
           <div class="w-full flex flex-col flex-1">
             <label for="" class="font-bold text-md mb-3">Additional services provided</label>
             <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
@@ -221,7 +221,7 @@
                     <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                       <div class="w-full">
                         <div :class="[open ? 'block' : 'hidden']">
-                          <div class="absolute left-0 z-40 w-full m-1">
+                          <div class="absolute left-0 z-40 w-full md:m-1">
                             <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
                               <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
                             </div>
@@ -281,6 +281,7 @@
       init() {
         this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
         this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
+        hideBottomMenu();
       },
       addTag(tag) {
         tag = tag.trim()
@@ -377,7 +378,7 @@
   function hideBottomMenu(){
     const bottomMenu = document.getElementById('bottomMenu');
     const currentValue = bottomMenu.__x.$data.bottomMenu;
-    bottomMenu.__x.$data.bottomMenu = !currentValue;
+    bottomMenu.__x.$data.bottomMenu = '';
   }
 </script>
 <style>
