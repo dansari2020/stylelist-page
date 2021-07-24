@@ -20,6 +20,7 @@
 </style>
 <% prefer_service_types = portfolio.service_types.where(name: Portfolio.prefer_service_types) %>
 <% service_types = portfolio.service_types.where.not(name: Portfolio.prefer_service_types) %>
+<div x-data="{ imgModal : false }" @toggle-modal.window="imgModal = !imgModal">
 <%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
   <div class="flex flex-col space-x-4 md:flex-row">
     <div class="relative block px-2 pt-8 border-r md:w-1/3 lg:w-2/6" x-data="{ tab : 'profile' }">
@@ -40,8 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="flex pt-12 md:overflow-y-scroll md:w-2/3 h-screen-main lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
-      <div class="w-1/2 px-8 flex flex-col">
+    <div class="md:flex pt-12 md:overflow-y-scroll md:w-2/3 h-screen-main lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
+      <div class="md:w-1/2 px-8 flex flex-col w-full">
         <div class="w-full flex-1">
           <% Array.wrap(portfolio.pictures).each do |picture| %>
             <div class="">
@@ -82,7 +83,7 @@
               </div>
             </div>
             <div class="flex items-start">
-              <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType'", "x-show": "portfolioOpt !== 'serviceType'" %>
+              <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType'; $dispatch('toggle-modal');" %>
             </div>
           </div>
           <div class="w-full pb-4 flex justify-between">
@@ -144,10 +145,72 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2 px-8 pt-4 flex flex-col">
-        <div class="w-full flex-1 pb-4">
-          <template x-if="portfolioOpt === 'serviceType'">
-          <div class="w-full flex flex-col">
+      <div class="md:w-1/2 px-8 pt-4 flex flex-col w-full">
+        <div class="flex-1">
+          <div class="w-full flex-1 pb-4">
+            <template x-if="portfolioOpt === 'serviceType' && !isMobile()">
+              <div class="w-full flex flex-col">
+                <label for="" class="font-bold text-md mb-3">Additional services provided</label>
+                <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
+                  <div class="relative block w-full">
+                    <div x-data 
+                      data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                      data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                      <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+                        <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+                          <div class="w-full">
+                            <div :class="[open ? 'block' : 'hidden']">
+                              <div class="absolute left-0 z-40 w-full m-1">
+                                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
+                                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
+                                </div>
+                              </div>
+                            </div>
+                            <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
+                            <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
+                          </div>
+                          <!-- selections -->
+                          <template x-for="(tag, index) in tags">
+                            <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
+                              <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
+                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
+                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                              </button>
+                            </div>
+                          </template>
+                          <template x-for="(tag, index) in removeTags">
+                            <div :data-id="tag">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>      
+        </div>
+        <div class="text-right actions mb-3">
+          <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
+          <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <template x-if="imgModal">
+    <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="background: rgba(0, 0, 0, 0.8);">
+      <div @click.away="imgModal = '';" class="max-h-full overflow-auto modal">
+        <div class="flex-1 py-4 px-3 modal-content">
+          <div class="w-full flex flex-col flex-1">
             <label for="" class="font-bold text-md mb-3">Additional services provided</label>
             <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
               <div class="relative block w-full">
@@ -192,59 +255,22 @@
               </div>
             </div>
           </div>
-          </template>
-        </div>
-        <div class="text-right actions mb-3">
+          <div class="text-right actions mb-3">
           <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
           <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
         </div>
+        </div>
       </div>
     </div>
-  </div>
+  </template>
 <% end %>
+</div>
+
+
 <script>
-  function preferServiceType() {
-    return {
-      tags: [],
-      tagIds: [],
-      init() {
-        this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
-        this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
-        console.log('this.tags', this.tags)
-        console.log('this.tagIds', this.tagIds)
-      },
-      addTag(tag) {
-        tag = tag.trim()
-        console.log('add:', tag)
-        if (this.hasTag(tag)) {
-          console.log('has tag. it should remove')
-          index = this.tags.indexOf(tag)
-          if (this.tagIds.length >= (index + 1) && this.tagIds[index] !== undefined) {
-            this.removeTags.push( this.tagIds[index] )
-          }
-          this.tags.splice(index, 1)
-        } else {
-          console.log('it should add')
-          this.tags.push( tag )
-        }
-        console.log('this.tags', this.tags)
-        console.log('this.tagIds', this.tagIds)
-        this.fireTagsUpdateEvent()
-      },
-      hasTag(tag) {
-        var tag = this.tags.find(e => {
-          return e.toLowerCase() === tag.toLowerCase()
-        })
-        return tag != undefined
-      },
-      fireTagsUpdateEvent() {
-        this.$el.dispatchEvent(new CustomEvent('tags-update', {
-          detail: { tags: this.tags, removeTags: this.removeTags },
-          bubbles: true,
-        }));
-      },
-    }
-  }
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    hideBottomMenu();
+  });
   function tagSelect() {
     return {
       open: false,
@@ -334,4 +360,107 @@
   			}
     }
   }
+  function addMoreFunc($dispatch) {
+    if (isMobile()) {
+      $dispatch('img-modal', {})
+    }
+  }
+
+  function isMobile() {
+    const w = window.innerWidth;
+    if (w <= 767) {
+      return true;
+    }
+    return false;
+  }
+
+  function hideBottomMenu(){
+    const bottomMenu = document.getElementById('bottomMenu');
+    const currentValue = bottomMenu.__x.$data.bottomMenu;
+    bottomMenu.__x.$data.bottomMenu = !currentValue;
+  }
 </script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  left: 5%;
+  right: 5%;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+</style>

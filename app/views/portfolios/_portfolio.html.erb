@@ -6,7 +6,7 @@
         share_title: portfolio.user_first_name, 
         share_link: portfolio.url, 
         share_desc: portfolio.description, 
-        share_image: portfolio.picture_in_url } %>
+        share_image: portfolio.pictures.attached? ? picture_url(portfolio.picture) : "" } %>
     </div>
   </div>
   <div class="px-3 py-5 md:overflow-y-scroll max-w-info-portfolio">
@@ -35,10 +35,10 @@
       <li class="p-2 border border-gray-200 rounded-md md:py-4 md:mt-3">
         <h2 class="pb-2 leading-3 md:b-4 text-normal">Hair Type</h2>
         <ul class="flex flex-wrap">
-          <% portfolio.hair_types.each do |hair_type| %>
+          <% Array.wrap(portfolio.hair_type).each do |hair_type| %>
             <li class="mt-2 mr-2">
               <span class="block px-3 py-1 text-sm border border-gray-200 rounded-full">
-                <%= hair_type.name %>
+                <%= hair_type.humanize %>
               </span>
             </li>
           <% end %>
@@ -60,11 +60,11 @@
 <script>
   function toggleBottomMenu(){
     return {
-    init () {
-    const bottomMenu = document.getElementById('bottomMenu');
-    const currentValue = bottomMenu.__x.$data.bottomMenu;
-    bottomMenu.__x.$data.bottomMenu = !currentValue;
-    }
+      init () {
+        const bottomMenu = document.getElementById('bottomMenu');
+        const currentValue = bottomMenu.__x.$data.bottomMenu;
+        bottomMenu.__x.$data.bottomMenu = !currentValue;
+      }
     }
   }
 </script>

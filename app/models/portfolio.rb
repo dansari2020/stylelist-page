@@ -22,12 +22,6 @@ class Portfolio < ApplicationRecord
     [user.url, "porfolios", id].join("/")
   end
 
-  def picture_in_url
-    return if picture.nil?
-
-    picture_url(picture)
-  end
-
   def self.prefer_service_types
     %w[Cut Color Style]
   end
