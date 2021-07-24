@@ -19,7 +19,7 @@
         <%= collection_check_boxes(:user, :language_ids, Language.primary.order(:name), :id, :name) do |b| %>
           <%= b.check_box(class: "hidden", checked: user.language_ids.include?(b.object.id)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer") { "<span class='p-2 text-sm bg-white rounded-full'>#{b.text}</span>".html_safe } %>
         <% end %>
-        <a href="#" class="w-full pt-2 pb-4 text-sm text-center text-blue-500" class="text-blue-500" @click.prevent="languageMore = !languageMore" x-text="languageMore ? 'Hide Languages' : 'More Languages'">More Languages</a>
+        <a href="#" class="w-full pt-2 pb-4 text-sm md:text-left text-center text-blue-500" class="text-blue-500" @click.prevent="languageMore = !languageMore" x-text="languageMore ? 'Hide Languages' : 'More Languages'">More Languages</a>
         <div class="flex flex-wrap languages-wrapper" x-show="languageMore">
           <%= collection_check_boxes(:user, :language_ids, Language.secondary.order(:name), :id, :name) do |b| %>
             <%= b.check_box(class: "hidden", checked: user.language_ids.include?(b.object.id)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer") { "<span class='p-2 text-sm bg-white rounded-full'>#{b.text}</span>".html_safe } %>
