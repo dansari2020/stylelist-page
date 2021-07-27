@@ -1,4 +1,4 @@
-<%= form_for(current_user, url: profile_users_path, html: { method: :put, class: "h-full flex flex-col" }) do |f| %>
+<%= form_for(current_user, url: profile_users_path, html: { method: :put, class: "h-full flex flex-col" }, data: {"turbo-frame": "_top"}) do |f| %>
   <div class="flex items-center flex-1">
     <div class="pb-4 md:pb-10">
       <h1 class="mb-24 font-bold text-md">Reactivate your account?</h1>

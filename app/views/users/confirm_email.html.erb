@@ -5,9 +5,9 @@
       <p class="mb-24 text-sm">Please check your inbox for a confirmation email.<br/>
         Click the link in the email to confirm your email address</p>
       <% if current_user.confirmed? %>
-        <%= link_to "Return to account settings", settings_path, class: "text-blue-500 text-sm font-medium" %>
+        <%= link_to "Return to account settings", settings_path, class: "text-blue-500 text-sm font-medium", data: { "turbo-frame": "_top" } %>
       <% else %>
-        <%= link_to "Resend confirmation instructions", new_user_confirmation_path, class: "text-blue-500 text-sm font-medium" %>
+        <%= link_to "Resend confirmation instructions", new_user_confirmation_path, class: "text-blue-500 text-sm font-medium", data: { "turbo-frame": "_top" } %>
       <% end %>
     </div>
   </div>

@@ -86,6 +86,7 @@
       removeTag(index) {
         if (this.tagIds.length >= (index + 1) && this.tagIds[index] !== undefined) {
           this.removeTags.push( this.tagIds[index] )
+          this.tagIds.splice(index, 1)
         }
         this.tags.splice(index, 1)
         this.fireTagsUpdateEvent()

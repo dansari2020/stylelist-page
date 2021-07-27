@@ -17,375 +17,7 @@
     border: 1px solid #3374DE;
     color: #3374DE;
   }
-</style>
-<% prefer_service_types = portfolio.service_types.where(name: Portfolio.prefer_service_types) %>
-<% service_types = portfolio.service_types.where.not(name: Portfolio.prefer_service_types) %>
-<div x-data="{ imgModal : false }" @toggle-modal.window="imgModal = !imgModal">
-<%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
-  <div class="flex flex-col md:space-x-4 md:flex-row">
-    <div class="relative block px-2 pt-8 border-r md:w-1/3 lg:w-2/6" x-data="{ tab : 'profile' }">
-      <div class="p-8 mb-2 border-b">
-        <h2 class="mb-4 text-xl leading-6">Length of Hair</h2>
-        <div class="relative">
-          <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
-          <div class="flex flex-col flex-wrap length-of-hair-wrapper">
-            <input type="hidden" name="portfolio[hair_length]" value="">
-            <% styles = ["top: -2px", "top: 105px", "top: 194px", "top: 254px", "top: 318px", "top: 386px", "bottom: -10px"] %>
-            <% Portfolio.hair_length_list.each_with_index do |(text, value), index|%>
-              <input class="hidden" type="radio" value="<%= value %>" <%= "checked" if value == portfolio.hair_length %> name="portfolio[hair_length]" id="porfolio_hair_length_<%= value %>">
-              <label data-value="<%= value %>" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="<%= styles[index] %>" for="porfolio_hair_length_<%= value %>">
-                <span class="py-2 px-3.7 text-sm bg-white color-circle rounded-full"><%= text %></span>
-              </label>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="md:flex pt-12 md:overflow-y-scroll md:w-2/3 h-screen-main lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
-      <div class="md:w-1/2 px-8 flex flex-col w-full">
-        <div class="w-full flex-1">
-          <% Array.wrap(portfolio.pictures).each do |picture| %>
-            <div class="">
-              <p class="py-2 pt-4 text-gray-600">
-                <%= picture.blob.filename %>
-              </p>
-              <%= image_tag picture, class: "w-36 rounded-md"  %>
-            </div>
-          <% end %>
-          <div class="w-full mt-5">
-            <%= f.text_area :description, autofocus: true, placeholder: "Add Description...", class: "w-full rounded-lg mb-4 border-none focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-          </div>
-          <div class="w-full py-4 border-t flex justify-between">
-            <div class="flex-1">
-              <div x-data 
-                data-tags='[<%= prefer_service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-                data-tagIds='[<%= prefer_service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
-                <div x-data="tagSelect()" x-init="init('parentEl')">
-                  <label for="" class="font-bold text-md block mb-2.5">Services Provided</label>
-                  <div class="flex flex-wrap service-wrapper">
-                    <%= collection_check_boxes(:portfolio, :service_type_ids, Portfolio.prefer_service_types.map{|ps| [ps]}, :first, :first) do |b| %>
-                      <%= b.check_box(class: "hidden", checked: prefer_service_types.exists?(name: b.value)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer", "@click": "toggleTag('#{b.value}')") { "<span class='py-2 px-3.7 text-sm bg-white border rounded-full border-color-circle color-circle'>#{b.value}</span>".html_safe } %>
-                    <% end %>
-                    <template x-for="(tag, index) in tags">
-                      <div>
-                        <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
-                        <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
-                        <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
-                      </div>
-                    </template>
-                    <template x-for="(tag, index) in removeTags">
-                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                      <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
-                    </template>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType'; $dispatch('toggle-modal');" %>
-            </div>
-          </div>
-          <div class="w-full pb-4 flex justify-between">
-            <div class="flex flex-col">
-              <% if service_types.present? %>
-                <label for="" class="font-bold text-md mb-2.5">Additional Services</label>
-                <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
-                  <div class="relative block w-full">
-                    <div x-data 
-                        data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-                        data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
-                      <div x-data="tagSelect()" x-init="init('parentEl')">
-                        <div class="relative w-full overflow-y-scroll">
-                          <!-- selections -->
-                          <template x-for="(tag, index) in tags">
-                            <div class="inline-flex items-center md:m-1 text-sm bg-white border border-blue-500 rounded-full">
-                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
-                              <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate text-blue-500" x-text="tag"></span>
-                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-blue-600 focus:outline-none">
-                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
-                              </button>
-                            </div>
-                          </template>
-                          <template x-for="(tag, index) in removeTags">
-                            <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                            <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                            <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
-                          </template>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          <div class="py-4 border-t flex justify-between">
-            <div class="flex flex-col flex-wrap length-of-hair-wrapper">
-              <input type="hidden" name="portfolio[hair_type]" value="">
-              <label for="" class="font-bold text-md mb-2.5">Hair Type</label>
-              <ul class="flex flex-wrap">
-              <% Portfolio.hair_types.each_with_index do |(text, value), index|%>
-                <li class="mt-2 mr-2">
-                  <input class="hidden" type="radio" value="<%= text %>" <%= "checked" if text == portfolio.hair_type %> name="portfolio[hair_type]" id="porfolio_hair_type_<%= value %>">
-                  <label data-value="<%= value %>" class="cursor-pointer" for="porfolio_hair_type_<%= value %>">
-                    <span class="py-2 px-3.7 text-sm bg-white block rounded-full color-circle"><%= text.humanize %></span>
-                  </label>
-                </li>
-              <% end %>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="flex justify-between w-full py-4 border-t">
-          <div>
-            <%= f.submit "Save and add another photo", class: "bg-white text-blue-500 cursor-pointer" %>
-          </div>
-        </div>
-      </div>
-      <div class="md:w-1/2 px-8 pt-4 flex flex-col w-full">
-        <div class="flex-1">
-          <div class="w-full flex-1 pb-4">
-            <template x-if="portfolioOpt === 'serviceType' && !isMobile()">
-              <div class="w-full flex flex-col">
-                <label for="" class="font-bold text-md mb-3">Additional services provided</label>
-                <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
-                  <div class="relative block w-full">
-                    <div x-data 
-                      data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-                      data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
-                      <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
-                        <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
-                          <div class="w-full">
-                            <div :class="[open ? 'block' : 'hidden']">
-                              <div class="absolute left-0 z-40 w-full md:m-1">
-                                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
-                                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
-                                </div>
-                              </div>
-                            </div>
-                            <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
-                            <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
-                          </div>
-                          <!-- selections -->
-                          <template x-for="(tag, index) in tags">
-                            <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
-                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
-                              <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
-                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
-                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
-                              </button>
-                            </div>
-                          </template>
-                          <template x-for="(tag, index) in removeTags">
-                            <div :data-id="tag">
-                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
-                            </div>
-                          </template>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>      
-        </div>
-        <div class="text-right actions mb-3">
-          <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
-          <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <template x-if="imgModal">
-    <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="background: rgba(0, 0, 0, 0.8);">
-      <div @click.away="imgModal = '';" class="max-h-full overflow-auto modal">
-        <div class="flex-1 py-4 px-3 modal-content flex flex-col h-5/6">
-          <div class="w-full flex flex-col flex-1">
-            <label for="" class="font-bold text-md mb-3">Additional services provided</label>
-            <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
-              <div class="relative block w-full">
-                <div x-data 
-                  data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-                  data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
-                  <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
-                    <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
-                      <div class="w-full">
-                        <div :class="[open ? 'block' : 'hidden']">
-                          <div class="absolute left-0 z-40 w-full md:m-1">
-                            <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
-                              <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
-                            </div>
-                          </div>
-                        </div>
-                        <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
-                        <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
-                      </div>
-                      <!-- selections -->
-                      <template x-for="(tag, index) in tags">
-                        <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
-                          <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
-                          <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
-                          <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
-                          <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
-                          <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
-                            <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
-                          </button>
-                        </div>
-                      </template>
-                      <template x-for="(tag, index) in removeTags">
-                        <div :data-id="tag">
-                          <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                          <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                          <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
-                        </div>
-                      </template>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-right actions mb-3">
-          <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
-          <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-        </div>
-        </div>
-      </div>
-    </div>
-  </template>
-<% end %>
-</div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) { 
-    hideBottomMenu();
-  });
-  function tagSelect() {
-    return {
-      open: false,
-      textInput: '',
-      tags: [],
-      tagIds: [],
-      removeTags: [],
-      init() {
-        this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
-        this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
-        hideBottomMenu();
-      },
-      addTag(tag) {
-        tag = tag.trim()
-        if (tag != "" && !this.hasTag(tag)) {
-          this.tags.push( tag )
-        }
-        this.clearSearch()
-        this.$refs.textInput.focus()
-        this.fireTagsUpdateEvent()
-      },
-      toggleTag(tag) {
-        tag = tag.trim()
-        if (this.hasTag(tag)) {
-          index = this.tags.indexOf(tag)
-          this.removeTag(index)
-        } else {
-          this.tags.push( tag )
-        }
-        this.fireTagsUpdateEvent()
-      },
-      fireTagsUpdateEvent() {
-        this.$el.dispatchEvent(new CustomEvent('tags-update', {
-          detail: { tags: this.tags, removeTags: this.removeTags },
-          bubbles: true,
-        }));
-      },
-      hasTag(tag) {
-        var preferTag = ['cut', 'color', 'style'].find(e => {
-          return e.toLowerCase() === tag.toLowerCase()
-        })
-        var tag = this.tags.find(e => {
-          return e.toLowerCase() === tag.toLowerCase()
-        })
-        return tag != undefined && preferTag != undefined
-      },
-      removeTag(index) {
-        if (this.tagIds.length >= (index + 1) && this.tagIds[index] !== undefined) {
-          this.removeTags.push( this.tagIds[index] )
-        }
-        this.tags.splice(index, 1)
-        this.fireTagsUpdateEvent()
-      },
-      search(q) {
-        if ( q.includes(",") ) {
-          q.split(",").forEach(function(val) {
-            this.addTag(val)
-          }, this)
-        }
-        this.toggleSearch()
-      },
-      clearSearch() {
-        this.textInput = ''
-        this.toggleSearch()
-      },
-      toggleSearch() {
-        this.open = this.textInput != ''
-      },
-      focusTag() {
-        this.clearSearch()
-        this.$refs.textInput.focus()
-      }
-    }
-  }
-  
-  function readFile(input) {
-    counter = input.files.length;
-  		for(x = 0; x < counter; x++){
-  			if (input.files && input.files[x]) {
-  
-  				var reader = new FileReader();
-  
-  				reader.onload = function (e) {
-        	document.getElementById("photos").innerHTML += '<div class="w-1/2 md:w-1/3"><img src="'+e.target.result+'" class="img-thumbnail"></div>';
-  				};
-  
-  				reader.readAsDataURL(input.files[x]);
-  			}
-    }
-  }
-  function addMoreFunc($dispatch) {
-    if (isMobile()) {
-      $dispatch('img-modal', {})
-    }
-  }
-
-  function isMobile() {
-    const w = window.innerWidth;
-    if (w <= 767) {
-      return true;
-    }
-    return false;
-  }
-
-  function hideBottomMenu(){
-    const bottomMenu = document.getElementById('bottomMenu');
-    const currentValue = bottomMenu.__x.$data.bottomMenu;
-    bottomMenu.__x.$data.bottomMenu = '';
-  }
-</script>
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-
-/* The Modal (background) */
-.modal {
+  .modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -465,3 +97,369 @@ body {font-family: Arial, Helvetica, sans-serif;}
   to {opacity: 1}
 }
 </style>
+<% prefer_service_types = portfolio.service_types.where(name: Portfolio.prefer_service_types) %>
+<% service_types = portfolio.service_types.where.not(name: Portfolio.prefer_service_types) %>
+<div x-data="{ imgModal : false }" @toggle-modal.window="imgModal = !imgModal">
+<%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
+  <div class="flex flex-col md:space-x-4 md:flex-row">
+    <div class="relative block px-2 pt-8 border-r md:w-1/3 lg:w-2/6" x-data="{ tab : 'profile' }">
+      <div class="p-8 mb-2 border-b">
+        <h2 class="mb-4 text-xl leading-6">Length of Hair</h2>
+        <div class="relative">
+          <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
+          <div class="flex flex-col flex-wrap length-of-hair-wrapper">
+            <input type="hidden" name="portfolio[hair_length]" value="">
+            <% styles = ["top: -2px", "top: 105px", "top: 194px", "top: 254px", "top: 318px", "top: 386px", "bottom: -10px"] %>
+            <% Portfolio.hair_length_list.each_with_index do |(text, value), index|%>
+              <input class="hidden" type="radio" value="<%= value %>" <%= "checked" if value == portfolio.hair_length %> name="portfolio[hair_length]" id="porfolio_hair_length_<%= value %>">
+              <label data-value="<%= value %>" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="<%= styles[index] %>" for="porfolio_hair_length_<%= value %>">
+                <span class="py-2 px-3.7 text-sm bg-white color-circle rounded-full"><%= text %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md:flex pt-12 md:overflow-y-scroll md:w-2/3 h-screen-main lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
+      <div class="md:w-1/2 px-8 flex flex-col w-full">
+        <div class="w-full flex-1">
+          <% Array.wrap(portfolio.pictures).each do |picture| %>
+            <div class="">
+              <p class="py-2 pt-4 text-gray-600">
+                <%= picture.blob.filename %>
+              </p>
+              <%= image_tag picture, class: "w-36 rounded-md"  %>
+            </div>
+          <% end %>
+          <div class="w-full mt-5">
+            <%= f.text_area :description, autofocus: true, placeholder: "Add Description...", class: "w-full rounded-lg mb-4 border-none focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          </div>
+          <div class="w-full py-4 border-t flex justify-between">
+            <div class="flex-1">
+              <div x-data 
+                data-tags='[<%= prefer_service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                data-tagIds='[<%= prefer_service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                <div x-data="tagSelect()" x-init="init('parentEl')">
+                  <label for="" class="font-bold text-md block mb-2.5">Services Provided</label>
+                  <div class="flex flex-wrap service-wrapper">
+                    <%= collection_check_boxes(:portfolio, :service_type_ids, Portfolio.prefer_service_types.map{|ps| [ps]}, :first, :first) do |b| %>
+                      <%= b.check_box(class: "hidden", checked: prefer_service_types.exists?(name: b.value)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer", "@click": "toggleTag('#{b.value}')") { "<span class='py-2 px-3.7 text-sm bg-white border rounded-full border-color-circle color-circle'>#{b.value}</span>".html_safe } %>
+                    <% end %>
+                    <template x-for="(tag, index) in tags">
+                      <div>
+                        <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
+                        <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                        <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
+                      </div>
+                    </template>
+                    <template x-for="(tag, index) in removeTags">
+                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType'; addMoreFunc($dispatch)", ":class": "{ 'md:hidden' : portfolioOpt === 'serviceType' }" %>
+            </div>
+          </div>
+          <div class="w-full pb-4 flex justify-between">
+            <div class="flex flex-col">
+              <% if service_types.present? %>
+                <label for="" class="font-bold text-md mb-2.5">Additional Services</label>
+                <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
+                  <div class="relative block w-full">
+                    <div x-data 
+                        data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                        data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                      <div x-data="tagSelect()" x-init="init('parentEl')">
+                        <div class="relative w-full overflow-y-scroll">
+                          <!-- selections -->
+                          <template x-for="(tag, index) in tags">
+                            <div class="inline-flex items-center md:m-1 text-sm bg-white border border-blue-500 rounded-full">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
+                              <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate text-blue-500" x-text="tag"></span>
+                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-blue-600 focus:outline-none">
+                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                              </button>
+                            </div>
+                          </template>
+                          <template x-for="(tag, index) in removeTags">
+                            <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                            <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                            <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="py-4 border-t flex justify-between">
+            <div class="flex flex-col flex-wrap length-of-hair-wrapper">
+              <input type="hidden" name="portfolio[hair_type]" value="">
+              <label for="" class="font-bold text-md mb-2.5">Hair Type</label>
+              <ul class="flex flex-wrap">
+              <% Portfolio.hair_types.each_with_index do |(text, value), index|%>
+                <li class="mt-2 mr-2">
+                  <input class="hidden" type="radio" value="<%= text %>" <%= "checked" if text == portfolio.hair_type %> name="portfolio[hair_type]" id="porfolio_hair_type_<%= value %>">
+                  <label data-value="<%= value %>" class="cursor-pointer" for="porfolio_hair_type_<%= value %>">
+                    <span class="py-2 px-3.7 text-sm bg-white block rounded-full color-circle"><%= text.humanize %></span>
+                  </label>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between w-full py-4 border-t">
+          <div>
+            <%= f.submit "Save and add another photo", class: "bg-white text-blue-500 cursor-pointer" %>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 px-8 pt-4 flex flex-col w-full">
+        <div class="flex-1">
+          <div class="w-full flex-1 pb-4">
+            <template x-if="portfolioOpt === 'serviceType'">
+              <div class="w-full hidden md:flex md:flex-col">
+                <label for="" class="font-bold text-md mb-3">Additional services provided</label>
+                <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
+                  <div class="relative block w-full">
+                    <div x-data 
+                      data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                      data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                      <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+                        <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+                          <div class="w-full">
+                            <div :class="[open ? 'block' : 'hidden']">
+                              <div class="absolute left-0 z-40 w-full md:m-1">
+                                <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
+                                  <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
+                                </div>
+                              </div>
+                            </div>
+                            <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
+                            <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
+                          </div>
+                          <!-- selections -->
+                          <template x-for="(tag, index) in tags">
+                            <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
+                              <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
+                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
+                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                              </button>
+                            </div>
+                          </template>
+                          <template x-for="(tag, index) in removeTags">
+                            <div :data-id="tag">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>      
+        </div>
+        <div class="text-right actions mb-3">
+          <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
+          <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <template x-if="imgModal">
+  <%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
+    <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="background: rgba(0, 0, 0, 0.8);">
+      <div class="max-h-full overflow-auto modal">
+        <div class="flex-1 py-4 px-3 modal-content flex flex-col h-5/6" @click.away="imgModal = ''; portfolioOpt = '';">
+          <div class="w-full flex flex-col flex-1">
+            <label for="" class="font-bold text-md mb-3">Additional services provided</label>
+            <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
+              <div class="relative block w-full">
+                <div x-data 
+                  data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                  data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                  <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+                    <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+                      <div class="w-full">
+                        <div :class="[open ? 'block' : 'hidden']">
+                          <div class="absolute left-0 z-40 w-full md:m-1">
+                            <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
+                              <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
+                            </div>
+                          </div>
+                        </div>
+                        <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
+                        <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
+                      </div>
+                      <!-- selections -->
+                      <template x-for="(tag, index) in tags">
+                        <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                          <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
+                          <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                          <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
+                          <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
+                          <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
+                            <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                          </button>
+                        </div>
+                      </template>
+                      <template x-for="(tag, index) in removeTags">
+                        <div :data-id="tag">
+                          <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                          <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                          <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-right actions mb-3">
+          <%= link_to "Cancel", "#", class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium", "@click.prevent": "imgModal = ''; portfolioOpt = '';" %>
+          <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </template>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    hideBottomMenu();
+  });
+  function tagSelect() {
+    return {
+      open: false,
+      textInput: '',
+      tags: [],
+      tagIds: [],
+      removeTags: [],
+      init() {
+        this.tags = JSON.parse(this.$el.parentNode.getAttribute('data-tags'));
+        this.tagIds = JSON.parse(this.$el.parentNode.getAttribute('data-tagIds'));
+        hideBottomMenu();
+      },
+      addTag(tag) {
+        tag = tag.trim()
+        if (tag != "" && !this.hasTag(tag)) {
+          this.tags.push( tag )
+        }
+        this.clearSearch()
+        this.$refs.textInput.focus()
+        this.fireTagsUpdateEvent()
+      },
+      toggleTag(tag) {
+        tag = tag.trim()
+        if (this.hasTag(tag)) {
+          index = this.tags.indexOf(tag)
+          this.removeTag(index)
+        } else {
+          this.tags.push( tag )
+        }
+        this.fireTagsUpdateEvent()
+      },
+      fireTagsUpdateEvent() {
+        this.$el.dispatchEvent(new CustomEvent('tags-update', {
+          detail: { tags: this.tags, removeTags: this.removeTags },
+          bubbles: true,
+        }));
+      },
+      hasTag(tag) {
+        var preferTag = ['cut', 'color', 'style'].find(e => {
+          return e.toLowerCase() === tag.toLowerCase()
+        })
+        var tag = this.tags.find(e => {
+          return e.toLowerCase() === tag.toLowerCase()
+        })
+        return tag != undefined && preferTag != undefined
+      },
+      removeTag(index) {
+        if (this.tagIds.length >= (index + 1) && this.tagIds[index] !== undefined) {
+          this.removeTags.push( this.tagIds[index] )
+          this.tagIds.splice(index, 1)
+        }
+        this.tags.splice(index, 1)
+        this.fireTagsUpdateEvent()
+      },
+      search(q) {
+        if ( q.includes(",") ) {
+          q.split(",").forEach(function(val) {
+            this.addTag(val)
+          }, this)
+        }
+        this.toggleSearch()
+      },
+      clearSearch() {
+        this.textInput = ''
+        this.toggleSearch()
+      },
+      toggleSearch() {
+        this.open = this.textInput != ''
+      },
+      focusTag() {
+        this.clearSearch()
+        this.$refs.textInput.focus()
+      }
+    }
+  }
+  
+  function readFile(input) {
+    counter = input.files.length;
+  		for(x = 0; x < counter; x++){
+  			if (input.files && input.files[x]) {
+  
+  				var reader = new FileReader();
+  
+  				reader.onload = function (e) {
+        	document.getElementById("photos").innerHTML += '<div class="w-1/2 md:w-1/3"><img src="'+e.target.result+'" class="img-thumbnail"></div>';
+  				};
+  
+  				reader.readAsDataURL(input.files[x]);
+  			}
+    }
+  }
+  function addMoreFunc($dispatch) {
+    if (isMobile()) {
+      console.log('is mobile')
+      $dispatch('toggle-modal')
+      // $dispatch('img-modal', {})
+    }
+  }
+
+  function isMobile() {
+    const w = window.innerWidth;
+    if (w <= 767) {
+      return true;
+    }
+    return false;
+  }
+
+  function hideBottomMenu(){
+    const bottomMenu = document.getElementById('bottomMenu');
+    const currentValue = bottomMenu.__x.$data.bottomMenu;
+    bottomMenu.__x.$data.bottomMenu = '';
+  }
+</script>
