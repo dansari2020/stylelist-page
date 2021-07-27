@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "experience" do %>
   <div id="view_experience" class="flex justify-between w-full">
     <div class="flex-1">
-      <h2 class="pb-2 leading-3 md:pb-4 text-normal">Experience</h2>
-      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+      <h2 class="pb-2 leading-3 md:pb-4 roboto-font font-medium text-xs">Experience</h2>
+      <p class="leading-2 roboto-font font-light text-sm">
         <% if current_user.has_started_at? %>
           <span class="capitalize">
             <%= current_user.distance_of_time_at_now %>

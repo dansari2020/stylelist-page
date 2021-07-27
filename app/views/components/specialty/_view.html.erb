@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "specialty" do %>
   <div id="view_specialties" class="flex justify-between w-full">
     <div class="flex-1">
-      <h2 class="pb-1 leading-3 text-normal">Specialties</h2>
-      <p class="text-xs font-medium text-gray-500 md:text-sm leading-2">
+      <h2 class="pb-1 leading-3 roboto-font font-medium text-xs">Specialties</h2>
+      <p class="leading-2 roboto-font font-light text-sm">
         <%= render 'specialties/index', specialties: user.specialties %>
       </p>
     </div>

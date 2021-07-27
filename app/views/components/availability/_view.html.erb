@@ -4,9 +4,9 @@
       <%  has_availabilities = user.has_availabilities?  %>
       <div class="flex justify-between w-full">
         <div class="flex-1">
-          <h2 class="pb-4 leading-3 text-normal">Availability</h2>
+          <h2 class="pb-4 leading-3 roboto-font font-medium text-xs">Availability</h2>
           <% unless has_availabilities %>
-            <p class="text-sm font-medium text-gray-500 leading-2" >When are you available to clients?</p>
+            <p class="leading-2 roboto-font font-light text-sm">When are you available to clients?</p>
           <% end %>
         </div>
         <div class="flex items-start">
@@ -14,13 +14,13 @@
         </div>
       </div>
       <% if has_availabilities %>
-        <ul class="w-full">
+        <ul class="w-3/5">
           <% user.availabilities.each do |availability| %>
             <li class="flex justify-between w-full py-4 border-t">
-              <span class="text-gray-500">
+              <span class="roboto-font font-light text-sm">
                 <%= Date::DAYNAMES[availability.day].capitalize %>
               </span>
-              <span class="text-right text-gray-500">
+              <span class="text-right roboto-font font-light text-sm">
                 <% if availability.opened? %>
                   <%= "#{availability.open_at.strftime("%I:%M %p")} - #{availability.close_at.strftime("%I:%M %p")}" %>
                 <% else %>

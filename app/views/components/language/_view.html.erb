@@ -2,13 +2,13 @@
   <div class="flex justify-center w-full">
     <div id="view_languages" class="flex justify-between w-full">
       <div class="flex-1">
-        <h2 class="pb-1 leading-3 text-normal">Spoken Languages</h2>
-        <p class="text-sm font-medium text-gray-500 leading-2">
+        <h2 class="pb-1 leading-3 roboto-font font-medium text-xs">Spoken Languages</h2>
+        <p class="leading-2 roboto-font font-light text-sm">
           <% if current_user.has_languages? %>
             <ul class="flex flex-wrap">
               <% current_user.languages.order(:name).each do |language| %>
                 <li class="mt-2 mr-2">
-                  <span class="block px-3 py-1 text-sm border border-gray-200 rounded-full">
+                  <span class="block px-3 py-1 border border-gray-200 rounded-full roboto-font font-light text-sm">
                     <%= language.name %>
                   </span>
                 </li>

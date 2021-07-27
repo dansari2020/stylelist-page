@@ -2,13 +2,13 @@
 <%= turbo_frame_tag frame do %>
   <div id="view_bio" class="flex justify-between w-full mt-5 md:mt-0">
     <div class="flex-1">
-      <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Bio</h2>
+      <h2 class="hidden pb-2 leading-3 md:b-4 md:block roboto-font font-medium text-xs">Bio</h2>
       <% if user.has_bio? %>
-        <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2">
+        <p class="text-center md:text-left leading-2 roboto-font font-light text-sm">
           <%= user.bio %>
         </p>
       <% else %>
-        <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2">
+        <p class="text-center md:text-left leading-2 roboto-font font-light text-sm">
           Describe who you are
         </p>
         <%= link_to "Add Bio", profile_edit_path(frame, "bio"), class: "text-blue-500 text-sm md:hidden text-center block" %>
