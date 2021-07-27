@@ -25,7 +25,7 @@
       <div class="" :class="{'hidden md:block' : tab == 'profile', 'hidden' : tab == 'contact'}">
         <%= render partial: "shared/share", locals: { share_title: user.full_name, share_link: user.url, share_desc: user.bio, share_image: user.avatar_thumb || default_avatar } %>
       </div>
-      <div class="mb-4 text-center md:block">
+      <div class="mb-4 text-center flex md:justify-end justify-center">
         <%= render partial: "shared/promo_section", locals: {user: user} %>
       </div>
     </div>
