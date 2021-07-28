@@ -40,8 +40,10 @@
       <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
         <div @click.away="linkable !== '' ? linkable = '' : imgModal = ''; linkable = '';" class="max-h-full overflow-auto">
           <div class="flex flex-row">
-            <div class="w-15 flex items-center">
+            <div class="w-15 flex flex-col items-center">
+              <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
               <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer", "x-show": "popupLeft !== ''", "@click": "linkable = 'true'; document.getElementById(popupLeft).click()" %>
+              <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
             </div>
             <div class="flex flex-1 flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
               <div class="px-3 py-5 overflow-y-scroll" style="width:375px;max-height: 499px">
@@ -87,8 +89,10 @@
                 </div>
               </div>
             </div>
-            <div class="w-15 flex items-center">
+            <div class="w-15 flex flex-col items-center">
+              <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
               <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer", "x-show": "popupRight !== ''", "@click": "linkable = 'true'; document.getElementById(popupRight).click()" %>
+              <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
             </div>
           </div>
         </div>
