@@ -31,19 +31,29 @@ class PortfoliosController < ApplicationController
       format.json do
         render json: @portfolio
       end
+      format.js
     end
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
-    if @portfolio.update(portfolio_params.merge(status: :published))
-      upload_pictures
-      if params[:commit] == "Save and add another photo"
-        redirect_to new_portfolio_path
-      else
-        redirect_to root_url
+    respond_to do |format|
+      if @portfolio.update(portfolio_params.merge(status: :published))
+        upload_pictures
+        format.js
+        format.html do
+          if params[:commit] == "Save and add another photo"
+            redirect_to new_portfolio_path
+          else
+            redirect_to root_url
+          end
+        end
       end
     end
   end

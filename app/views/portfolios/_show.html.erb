@@ -1,0 +1,62 @@
+<div class="flex flex-row">
+  <div class="w-15 flex flex-col items-center">
+    <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
+    <% if portfolio.next.present? %>
+      <%= link_to portfolio.next, remote: true do %>
+        <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer", "x-show": "popupLeft !== ''" %>
+      <% end %>
+    <% end %>
+    <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
+  </div>
+  <div class="flex flex-1 flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
+    <div id="portfolioInfoModal" class="px-3 py-5 overflow-y-scroll" style="width:375px;max-height: 499px">
+      <div class="flex">
+        <%= link_to "Edit", edit_portfolio_path(portfolio), remote: true, data: { "turbo-frame": "_top" }, class: "px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded" %>
+      </div>
+      <ul class="my-3 space-y-3 list-none">
+        <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
+            <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"><%= portfolio.description&.html_safe %></p>
+        </li>
+        <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
+          <ul class="flex flex-wrap">
+            <% portfolio.service_types.each do |service_type| %>
+              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full"><%= service_type.name %></span></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair Type</h2>
+          <ul class="flex flex-wrap">
+            <% Array.wrap(portfolio.hair_type).each do |hair_type| %>
+              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full"><%= hair_type&.humanize %></span></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+          <span class="px-3 py-1 text-sm border border-gray-200 rounded-full"><%= portfolio.hair_length&.humanize %></span>
+        </li>
+      </ul>
+      <div class="flex flex-col">
+        <%= link_to "Delete", portfolio_path(portfolio), method: :delete, remote: true, data: { "turbo-frame": "_top", confirm: "Are you sure?" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
+      </div>
+    </div>
+    <div class="relative flex items-center" style="max-width:499px">
+      <%= image_tag picture_url(portfolio.picture), class: "object-contain" %>
+      <div class="absolute bottom-3 right-3">
+        <%= render partial: "shared/share", locals: { classMenu: "bottom-12" } %>
+      </div>
+    </div>
+  </div>
+  <div class="w-15 flex flex-col items-center">
+    <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
+    <% if portfolio.prev.present? %>
+      <%= link_to portfolio.prev, remote: true do %>
+        <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer", "x-show": "popupRight !== ''", "@click": "linkable = 'true'; document.getElementById(popupRight).click()" %>
+      <% end %>
+    <% end %>
+    <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
+  </div>
+</div>

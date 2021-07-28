@@ -1,0 +1,183 @@
+    <style>
+  .length-of-hair-wrapper input[type="radio"] + label span {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    border-radius: 50px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .length-of-hair-wrapper input[type="radio"]:checked + label span {
+    border: 1px solid #3374DE;
+    color: #3374DE;
+  }
+  .service-wrapper input[type="checkbox"] + label span {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .service-wrapper input[type="checkbox"]:checked + label span {
+    border: 1px solid #3374DE;
+    color: #3374DE;
+  }
+</style>
+<% prefer_service_types = portfolio.service_types.where(name: Portfolio.prefer_service_types) %>
+<% service_types = portfolio.service_types.where.not(name: Portfolio.prefer_service_types) %>
+<%= form_for(portfolio, url: portfolio_path(portfolio), remote: true, html: { method: :put }) do |f| %>
+  <div class="flex flex-col">
+    <div class="text-right actions mb-3 flex flex-row space-x-4">
+      <%= f.submit "Apply", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+      <%= link_to "Cancel", portfolio_path(portfolio), remote: true, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
+    </div>
+    <div class="w-full px-1" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
+      <div class="flex flex-col w-full">
+        <div class="w-full mt-5">
+          <%= f.text_area :description, autofocus: true, placeholder: "Add Description...", class: "w-full mb-4 border-none focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+        </div>
+        <div class="w-full py-4 border-t flex justify-between">
+          <div class="flex-1">
+            <div x-data 
+              data-tags='[<%= prefer_service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+              data-tagIds='[<%= prefer_service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+              <div x-data="tagSelect()" x-init="init('parentEl')">
+                <label for="" class="font-bold text-md block mb-2.5">Services Provided</label>
+                <div class="flex flex-wrap service-wrapper">
+                  <%= collection_check_boxes(:portfolio, :service_type_ids, Portfolio.prefer_service_types.map{|ps| [ps]}, :first, :first) do |b| %>
+                    <%= b.check_box(class: "hidden", checked: prefer_service_types.exists?(name: b.value)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer", "@click": "toggleTag('#{b.value}')") { "<span class='py-2 px-3.7 text-sm bg-white border rounded-full border-color-circle color-circle'>#{b.value}</span>".html_safe } %>
+                  <% end %>
+                  <template x-for="(tag, index) in tags">
+                    <div>
+                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
+                    </div>
+                  </template>
+                  <template x-for="(tag, index) in removeTags">
+                    <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                    <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                    <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType';", ":class": "{ 'md:hidden' : portfolioOpt === 'serviceType' }" %>
+          </div>
+        </div>
+        <div class="w-full pb-4 flex justify-between">
+          <div class="flex flex-col">
+            <% if service_types.present? %>
+              <label for="" class="font-bold text-md mb-2.5">Additional Services</label>
+              <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
+                <div class="relative block w-full">
+                  <template x-if="portfolioOpt === ''">
+                    <div x-data 
+                        data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                        data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                      <div x-data="tagSelect()" x-init="init('parentEl')">
+                        <div class="relative w-full overflow-y-scroll">
+                          <template x-for="(tag, index) in tags">
+                            <div class="inline-flex items-center md:m-1 text-sm bg-white border border-blue-500 rounded-full">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tagIds[index] !== undefined ? tagIds[index] : ''" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" />
+                              <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate text-blue-500" x-text="tag"></span>
+                              <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-blue-600 focus:outline-none">
+                                <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                              </button>
+                            </div>
+                          </template>
+                          <template x-for="(tag, index) in removeTags">
+                            <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                            <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                            <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+
+                  <template x-if="portfolioOpt === 'serviceType'">
+                    <div class="w-full hidden md:flex md:flex-col">
+                      <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
+                        <div class="relative block w-full">
+                          <div x-data 
+                            data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+                            data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+                            <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+                              <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
+                                <div class="w-full">
+                                  <div :class="[open ? 'block' : 'hidden']">
+                                    <div class="absolute left-0 z-40 w-full md:m-1">
+                                      <div class="py-1 text-sm bg-white border border-gray-300 rounded shadow-lg">
+                                        <a @click.prevent="addTag(textInput)" class="block px-5 py-1 cursor-pointer hover:text-white hover:bg-indigo-600">Add service type "<span class="font-semibold" x-text="textInput"></span>"</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <input x-model="textInput" x-ref="textInput" @input="search($event.target.value)" class="inline-block w-full p-2 leading-tight text-gray-700 bg-white border rounded" placeholder="i.e. Cut, Color, Style">
+                                  <p class="my-2 text-xs text-gray-500">Seperate services with a comma</p>
+                                </div>
+                                <template x-for="(tag, index) in tags">
+                                  <div class="inline-flex items-center m-1 text-sm text-center border border-blue-500 rounded-full">
+                                    <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="(tagIds !== null && tagIds[index] !== undefined) ? tagIds[index] : ''" />
+                                    <input type="hidden" name="portfolio[service_types_attributes][][name]" :value="tag" />
+                                    <input type="hidden" name="portfolio[service_types_attributes][][_destroy]"/>
+                                    <span class="max-w-xs px-2 ml-2 mr-1 leading-relaxed text-blue-500 truncate" x-text="tag"></span>
+                                    <button @click.prevent="removeTag(index)" class="inline-block w-6 h-8 text-blue-500 align-middle hover:text-gray-600 focus:outline-none">
+                                      <svg class="w-6 h-6 mx-auto text-blue-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
+                                    </button>
+                                  </div>
+                                </template>
+                                <template x-for="(tag, index) in removeTags">
+                                  <div :data-id="tag">
+                                    <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                                    <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                                    <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                                  </div>
+                                </template>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="w-full py-4 border-t flex justify-between">
+          <div class="flex flex-col flex-wrap length-of-hair-wrapper">
+            <input type="hidden" name="portfolio[hair_type]" value="">
+            <label for="" class="font-bold text-md mb-2.5">Hair Type</label>
+            <ul class="flex flex-wrap">
+            <% Portfolio.hair_types.each_with_index do |(text, value), index|%>
+              <li class="mt-2 mr-2">
+                <input class="hidden" type="radio" value="<%= text %>" <%= "checked" if text == portfolio.hair_type %> name="portfolio[hair_type]" id="porfolio_hair_type_<%= value %>">
+                <label data-value="<%= value %>" class="cursor-pointer" for="porfolio_hair_type_<%= value %>">
+                  <span class="py-2 px-3.7 text-sm bg-white block rounded-full color-circle"><%= text.humanize %></span>
+                </label>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="w-full py-4 border-t flex flex-col" x-data="{ tab : 'profile' }">
+          <label for="" class="font-bold text-md mb-2.5">Length of Hair</label>
+          <div class="relative mt-2">
+            <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
+            <div class="flex flex-col flex-wrap length-of-hair-wrapper">
+              <input type="hidden" name="portfolio[hair_length]" value="">
+              <% styles = ["top: -2px", "top: 105px", "top: 194px", "top: 254px", "top: 318px", "top: 386px", "bottom: -10px"] %>
+              <% Portfolio.hair_length_list.each_with_index do |(text, value), index|%>
+                <input class="hidden" type="radio" value="<%= value %>" <%= "checked" if value == portfolio.hair_length %> name="portfolio[hair_length]" id="porfolio_hair_length_<%= value %>">
+                <label data-value="<%= value %>" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="<%= styles[index] %>" for="porfolio_hair_length_<%= value %>">
+                  <span class="py-2 px-3.7 text-sm bg-white color-circle rounded-full"><%= text %></span>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

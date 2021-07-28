@@ -25,4 +25,12 @@ class Portfolio < ApplicationRecord
   def self.prefer_service_types
     %w[Cut Color Style]
   end
+
+  def next
+    @next ||= Portfolio.order(created_at: :desc).where("id > ?", id).last
+  end
+
+  def prev
+    @prev ||= Portfolio.order(created_at: :desc).where("id < ?", id).first
+  end
 end
