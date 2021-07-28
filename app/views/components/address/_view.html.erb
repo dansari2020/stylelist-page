@@ -5,7 +5,7 @@
         <h2 class="pb-4 leading-3 roboto-font font-medium text-xs">Address</h2>
         <p class="leading-2 font-light text-sm">
           <% if user.has_full_address? %>
-            <% user.full_address.each do |p| %>
+            <% Array.wrap(user.full_address).each do |p| %>
               <%= p %><br/>
             <% end %>
           <% else %>
