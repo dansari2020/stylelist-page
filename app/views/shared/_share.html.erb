@@ -11,7 +11,7 @@
             <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, 
             "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_title) && share_title}\", 
             \"https://developers.facebook.com/docs/workplace/sharing/share-dialog/\",
-            \"#{defined?(share_desc) && share_desc.html_safe}\",
+            \"#{defined?(share_desc) && share_desc&.html_safe}\",
             \"#{defined?(share_image) && share_image}\")" do %>
               <div class="w-1/4">
                 <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3" %>
