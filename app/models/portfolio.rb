@@ -27,10 +27,10 @@ class Portfolio < ApplicationRecord
   end
 
   def next
-    @next ||= Portfolio.order(created_at: :desc).where("id > ?", id).last
+    @next ||= user.portfolios.published.order(created_at: :desc).where("id > ?", id).last
   end
 
   def prev
-    @prev ||= Portfolio.order(created_at: :desc).where("id < ?", id).first
+    @prev ||= user.portfolios.published.order(created_at: :desc).where("id < ?", id).first
   end
 end

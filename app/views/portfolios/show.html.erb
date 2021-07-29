@@ -4,9 +4,9 @@
     <span class="text-md font-medium flex-1">Styled by <%= @portfolio.user_first_name %></span>
   <% end %>
   <div class="flex">
-    <% if editable %>
+    <% if @editable %>
       <%= link_to "Edit", edit_portfolio_path(@portfolio), class: "px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded" %>
     <% end %>
   </div>
 </div>
-<%= render partial: "portfolio", locals: {portfolio: @portfolio} %>
+<%= render partial: "portfolio", locals: {portfolio: @portfolio, editable: @editable} %>

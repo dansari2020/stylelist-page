@@ -2,8 +2,8 @@
   <div class="w-15 flex flex-col items-center">
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
     <% if portfolio.next.present? %>
-      <%= link_to portfolio.next, remote: true do %>
-        <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer", "x-show": "popupLeft !== ''" %>
+      <%= link_to portfolio_path(portfolio.next), remote: true do %>
+        <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer" %>
       <% end %>
     <% end %>
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
@@ -57,8 +57,8 @@
   <div class="w-15 flex flex-col items-center">
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
     <% if portfolio.prev.present? %>
-      <%= link_to portfolio.prev, remote: true do %>
-        <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer", "x-show": "popupRight !== ''", "@click": "linkable = 'true'; document.getElementById(popupRight).click()" %>
+      <%= link_to portfolio_path(portfolio.prev), remote: true do %>
+        <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer" %>
       <% end %>
     <% end %>
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>

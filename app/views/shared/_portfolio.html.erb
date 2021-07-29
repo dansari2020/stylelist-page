@@ -35,74 +35,37 @@
     </div>
   </div>
 <% else %>
-  <div x-data="{ imgModal : false, imgModalSrc : '', hairLength: '', imgModalDesc : [], imgModalServiceTypes: [],  imgModalHairTypes: [], editUrl: '#', deleteUrl: '#', popupLeft: '', popupRight: '', linkable: ''}">
-    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc; imgModalServiceTypes = $event.detail.imgModalServiceTypes; imgModalHairTypes = $event.detail.imgModalHairTypes;  editUrl = $event.detail.editUrl;  deleteUrl = $event.detail.deleteUrl; hairLength = $event.detail.hairLength; popupLeft = $event.detail.popupLeft; popupRight = $event.detail.popupRight;" x-if="imgModal">
+  <div x-data="{ imgModal : false, linkable: ''}">
+    <template @img-modal.window="imgModal = true;" x-if="imgModal">
       <div class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden popup h-100" style="backdrop-filter: blur(21px);background: rgba(0, 0, 0, 0.4);">
         <div id="portfolioModal" @click.away="linkable !== '' ? linkable = '' : imgModal = ''; linkable = '';" class="max-h-full overflow-auto">
-          
         </div>
       </div>
     </template>
   </div>
-  <% link_ids = [] %>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
     <div class="grid grid-cols-2 gap-px mb-20 md:gap-1.5 md:grid-cols-3 lg:grid-cols-4">
-      <% user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |portfolio| %>
-        <% portfolio.pictures.each do |p| %>
-          <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden", ":disabled": "!manage" %>
-          <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">
+      <% user.portfolios.published.order(created_at: :desc).each do |portfolio| %>
+          <%= check_box_tag "pictures_ids[]", portfolio.picture.id, false, id: dom_id(portfolio.picture), class: "hidden", ":disabled": "!manage" %>
+          <label for="<%= dom_id(portfolio.picture) %>" :class="{ 'ediable' : manage}">
             <span></span>
-            <% link_ids << dom_id(portfolio) %>
-            <%= link_to portfolio_path(portfolio), remote: true, "id": "#{link_ids[-1]}", "@click": "dispatchFunction($dispatch, manage, '#{link_ids[-1]}')", class: "cursor-pointer popup-target" do %>
-                <%= image_tag thumb_url(p), class: "md:rounded object-contain mx-auto border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+            <%= link_to portfolio_path(portfolio), remote: true, "@click": "dispatchFunction($dispatch, manage, '#{portfolio_path(portfolio)}')", class: "cursor-pointer popup-target w-full" do %>
+                <%= image_tag thumb_url(portfolio.picture), class: "md:rounded object-cover w-full border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
             <% end %>
           </label>
-        <% end %>
       <% end %>
     </div>
   <% end %>
 <% end %>
 <script>
-  var popupTargets = document.querySelectorAll('.popup-target')
-  var links = [];
-  for (var i = 0, len = popupTargets.length ; i < len; i++) {
-      links.push(popupTargets[i].id);
-  }
-  function dispatchFunction($dispatch, manage, linkId, imgModalSrc, imgModalDesc, imgModalServiceTypes, imgModalHairTypes, hairLength, editUrl, deleteUrl, shareLink) {
+  function dispatchFunction($dispatch, manage, url) {
     if (manage) {
       return false;
     } else {
       const w = window.innerWidth;
       if (w <= 767) {
-        window.location = deleteUrl
-      } else {
-        const currentIndex = links.indexOf(linkId);
-        if (currentIndex !== -1 && currentIndex - 1 >= 0 ) {
-          popupLeft = links[currentIndex - 1]
-        } else {
-          popupLeft = ''
-        }
-        if (currentIndex !== -1 && currentIndex + 1 < links.length ) {
-          popupRight = links[currentIndex + 1]
-        } else {
-          popupRight = ''
-        }
-        window.shareLink = shareLink
-        window.shareTitle = "Portfolio StylistPage"
-        window.shareDesc = imgModalDesc
-        window.shareImage = imgModalSrc
-  
-        $dispatch('img-modal', {
-        imgModalSrc: imgModalSrc,
-        imgModalDesc: imgModalDesc,
-        imgModalServiceTypes: imgModalServiceTypes,
-        imgModalHairTypes: imgModalHairTypes,
-        hairLength: hairLength,
-        editUrl: editUrl,
-        deleteUrl: deleteUrl,
-        popupLeft: popupLeft,
-        popupRight: popupRight,
-        })
+        window.location = url
+        return false;
       }
     }
   }
