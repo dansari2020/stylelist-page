@@ -7,15 +7,15 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
+  # user: Field::BelongsTo,
+  # id: Field::Number,
+  # created_at: Field::DateTime,
+  # updated_at: Field::DateTime,
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    id: Field::Number,
     day: Field::Number,
     open_at: Field::Time,
-    close_at: Field::Time,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    opened: Field::Boolean
+    opened: Field::Boolean,
+    close_at: Field::Time
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,31 +23,33 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
+  # user
+  # id
   COLLECTION_ATTRIBUTES = %i[
-    user
-    id
     day
     open_at
+    close_at
+    opened
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
+  # user
+  # id
+  # created_at
+  # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
-    id
     day
     open_at
     close_at
-    created_at
-    updated_at
     opened
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
+  # user
   FORM_ATTRIBUTES = %i[
-    user
     day
     open_at
     close_at

@@ -8,6 +8,8 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    avatar: Field::ActiveStorage,
+    background: Field::ActiveStorage,
     id: Field::Number,
     email: Field::String,
     first_name: Field::String,
@@ -19,15 +21,15 @@ class UserDashboard < Administrate::BaseDashboard
     # avatar_blob: Field::HasOne,
     # background_attachment: Field::HasOne,
     # background_blob: Field::HasOne,
-    # address: Field::HasOne,
-    # specialties: Field::HasMany,
-    # services: Field::HasMany,
-    # availabilities: Field::HasMany,
-    # social_media: Field::HasMany,
     # portfolios: Field::HasMany,
     # pictures: Field::HasMany,
     # feedbacks: Field::HasMany,
-    # languages: Field::HasMany,
+    address: Field::HasOne,
+    specialties: Field::HasMany,
+    services: Field::HasMany,
+    availabilities: Field::HasMany,
+    social_media: Field::HasMany,
+    languages: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
@@ -49,9 +51,12 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    avatar
     email
     first_name
     last_name
+    created_at
+    updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -61,16 +66,10 @@ class UserDashboard < Administrate::BaseDashboard
   # background_attachment
   # background_blob
   # pictures
-  # address
-  # specialties
-  # services
-  # availabilities
-  # social_media
-  # portfolios
-  # feedbacks
-  # languages
   # status
   SHOW_PAGE_ATTRIBUTES = %i[
+    avatar
+    background
     email
     first_name
     last_name
@@ -87,6 +86,12 @@ class UserDashboard < Administrate::BaseDashboard
     pronoun
     client_incentives
     condition_for_incenrive
+    address
+    specialties
+    services
+    availabilities
+    social_media
+    languages
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -97,15 +102,9 @@ class UserDashboard < Administrate::BaseDashboard
   # background_attachment
   # background_blob
   # pictures
-  # address
-  # specialties
-  # services
-  # availabilities
-  # social_media
-  # portfolios
-  # feedbacks
-  # languages
   FORM_ATTRIBUTES = %i[
+    avatar
+    background
     email
     first_name
     last_name
@@ -123,6 +122,12 @@ class UserDashboard < Administrate::BaseDashboard
     pronoun
     client_incentives
     condition_for_incenrive
+    address
+    specialties
+    services
+    availabilities
+    social_media
+    languages
   ].freeze
 
   # COLLECTION_FILTERS
@@ -140,7 +145,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    user.full_name
+  end
 end

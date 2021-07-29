@@ -8,18 +8,18 @@ class AddressDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    id: Field::Number,
+    # user: Field::BelongsTo,
+    # id: Field::Number,
     street: Field::String,
     postal: Field::String,
     province: Field::String,
     country_code: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
     salon_name: Field::String,
     unit_suit: Field::String,
     city: Field::String,
     privacy: Field::Boolean
+    # created_at: Field::DateTime,
+    # updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,24 +27,24 @@ class AddressDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
+  # user
+  # id
   COLLECTION_ATTRIBUTES = %i[
-    user
-    id
     street
     postal
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
+  # user
+  # id
+  # created_at
+  # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
-    id
     street
     postal
     province
     country_code
-    created_at
-    updated_at
     salon_name
     unit_suit
     city
@@ -54,8 +54,8 @@ class AddressDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
+  # user
   FORM_ATTRIBUTES = %i[
-    user
     street
     postal
     province
