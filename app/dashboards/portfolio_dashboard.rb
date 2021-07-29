@@ -10,7 +10,7 @@ class PortfolioDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
     service_types: Field::HasMany,
-    hair_types: Field::HasMany,
+    pictures: Field::ActiveStorage,
     # pictures_attachments: Field::HasMany,
     # pictures_blobs: Field::HasMany,
     id: Field::Number,
@@ -18,7 +18,8 @@ class PortfolioDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    hair_length: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys })
+    hair_length: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    hair_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys })
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,25 +29,29 @@ class PortfolioDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     user
-    service_types
-    hair_types
+    hair_length
+    hair_type
+    created_at
+    updated_at
   ].freeze
+  # hair_types
   # pictures_attachments
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   # pictures_attachments
   # pictures_blobs
+  # id
+  # status
   SHOW_PAGE_ATTRIBUTES = %i[
+    pictures
     user
-    service_types
-    hair_types
-    id
     description
+    hair_type
+    hair_length
+    service_types
     created_at
     updated_at
-    status
-    hair_length
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -54,13 +59,14 @@ class PortfolioDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   # pictures_attachments
   # pictures_blobs
+  # status
   FORM_ATTRIBUTES = %i[
+    pictures
     user
-    service_types
-    hair_types
-    description
-    status
+    hair_type
     hair_length
+    description
+    service_types
   ].freeze
 
   # COLLECTION_FILTERS

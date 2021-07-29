@@ -23,6 +23,11 @@ module Authorizable
 
   def authenticate_duck
     return if current_user.nil?
+    if current_user.admin?
+      redirect_to admin_users_path
+      return
+    end
+
     after_login_path_for!(current_user)
   end
 end

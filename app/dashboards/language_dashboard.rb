@@ -8,12 +8,12 @@ class LanguageDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    users: Field::HasMany,
-    id: Field::Number,
-    name: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    primary: Field::Boolean
+    # users: Field::HasMany,
+    # id: Field::Number,
+    name: Field::String
+    # created_at: Field::DateTime,
+    # updated_at: Field::DateTime,
+    # primary: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -21,31 +21,31 @@ class LanguageDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
+  # users
+  # id
+  # created_at
   COLLECTION_ATTRIBUTES = %i[
-    users
-    id
     name
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
+  # users
+  # id
+  # updated_at
+  # primary
   SHOW_PAGE_ATTRIBUTES = %i[
-    users
-    id
     name
     created_at
-    updated_at
-    primary
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
+  # users
+  # primary
   FORM_ATTRIBUTES = %i[
-    users
     name
-    primary
   ].freeze
 
   # COLLECTION_FILTERS

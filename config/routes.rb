@@ -1,23 +1,20 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :users
-    # resources :hair_types
     resources :portfolios
-    # resources :availabilities
-    # resources :languages
-    # resources :languages_users
-    # resources :social_media
-    # resources :service_types
-    resources :feedbacks
-    # resources :specialties
-    # resources :addresses
-    # resources :services
+    resources :availabilities, except: [:index]
+    resources :languages, except: [:index]
+    resources :languages_users, except: [:index]
+    resources :social_media, except: [:index]
+    resources :service_types, except: [:index]
+    resources :specialties, except: [:index]
+    resources :addresses, except: [:index]
+    resources :services, except: [:index]
     root to: "users#index"
   end
   get "mobile", to: "mobile#index"
   root "home#index"
   devise_for :users, path: "auth",
-  # sessions: "users/sessions",
   controllers: {
     registrations: "users/registrations",
     passwords: "users/passwords"
