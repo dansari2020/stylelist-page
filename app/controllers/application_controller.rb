@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    return admin_path if resource.admin?
+    return admin_users_path if resource.admin?
 
     redirect = after_login_path_for(resource)
     if redirect.present?
