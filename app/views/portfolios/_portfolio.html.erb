@@ -16,7 +16,7 @@
     <ul class="my-3 space-y-3 list-none">
       <li class="p-2 border border-gray-200 rounded-md md:py-4 md:mt-3">
         <h2 class="pb-2 leading-3 md:b-4 text-normal">Description</h2>
-        <% portfolio.description.split(%r{\r\n}).each do |desc| %>
+        <% portfolio.description&.split(%r{\r\n}).each do |desc| %>
           <p class="text-xs font-medium text-gray-500 md:text-sm leading-2"><%= desc %></p>
         <% end %>
       </li>
