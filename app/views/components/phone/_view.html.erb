@@ -4,17 +4,19 @@
       <div class="flex-1">
         <h2 class="pb-4 leading-3 roboto-font font-medium text-xs">Phone</h2>
         <p class="leading-2 roboto-font font-light text-sm">
-          <% if current_user.has_phone? %>
-            <%= current_user.phone %>
+          <% if user.has_phone? %>
+            <%= user.phone %>
           <% else %>
             What number can clients contact you at?
           <% end %>
         </p>
       </div>
       <div class="flex flex-col items-start">
-        <%= link_to "Edit", profile_edit_path("phone"), class: "text-blue-500 pb-2 text-sm w-full text-right" %>
-        <% if current_user.has_phone? && current_user.mobile?  %>
-          <p class="text-sm text-gray-500"> <%= "#{current_user.phone_method.humanize} Preferred" %></p>
+        <% if editable %>
+          <%= link_to "Edit", profile_edit_path("phone"), class: "text-blue-500 pb-2 text-sm w-full text-right" %>
+        <% end %>
+        <% if user.has_phone? && user.mobile?  %>
+          <p class="text-sm text-gray-500"> <%= "#{user.phone_method.humanize} Preferred" %></p>
         <% end %>
       </div>
     </div>

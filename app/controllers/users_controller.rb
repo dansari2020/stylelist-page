@@ -10,11 +10,11 @@ class UsersController < ApplicationController
   def view_component
     current_user.reload
     current_user.specialties.reload
-    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user, editable: true})
   end
 
   def edit_component
-    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component] || params[:frame]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+    render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component] || params[:frame]}/edit", locals: {user: current_user, editable: true, url: profile_users_path, from_url: root_url})
   end
 
   def confirm_email
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
           if @user.update(user_params)
             if params[:component].present? && params[:frame].present?
               format.turbo_stream do
-                return render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user})
+                return render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user, editable: true})
               end
             end
             format.html do
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
             end
             if params[:component].present? && params[:frame].present?
               format.turbo_stream do
-                render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/edit", locals: {user: current_user, url: profile_users_path, from_url: root_url})
+                render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/edit", locals: {user: current_user, editable: true, url: profile_users_path, from_url: root_url})
               end
             end
           end

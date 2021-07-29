@@ -14,7 +14,9 @@
         </p>
       </div>
       <div class="flex items-start">
-        <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
+        <% if editable %>
+          <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
+        <% end %>
       </div>
     </div>
   </div>

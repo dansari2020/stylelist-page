@@ -13,7 +13,7 @@
     <div class="py-2">
       <h1 class="text-normal">What languages do you provide services in?</h1>
     </div>
-    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "languages")}) do |f| %>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(user, "languages")}) do |f| %>
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="flex flex-wrap languages-wrapper" x-data="{languageMore: false}">
         <%= collection_check_boxes(:user, :language_ids, Language.primary.order(:name), :id, :name) do |b| %>

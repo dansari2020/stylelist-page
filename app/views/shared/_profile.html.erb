@@ -1,11 +1,11 @@
 <%= turbo_stream_from "background" %>
-<%= render partial: "components/background/view", locals: {user: user} %>
+<%= render partial: "components/background/view", locals: {user: user, editable: editable} %>
 <div class="px-3 pt-4 md:px-0">
   <div class="relative flex w-full md:flex-row md:-mt-0 md:border-none" :class="{'flex-col -mt-20 bg-white border mb-2 rounded-md': tab == 'profile' || tab == 'contact'}">
     <!-- Avatar -->
     <div class="md:w-1/3" :class="{'w-full': tab == 'profile' || tab == 'contact', 'w-1/2': tab == 'portfolio'}">
       <%= turbo_stream_from "avatar" %>
-      <%= render partial: "components/avatar/view", locals: {user: user} %>
+      <%= render partial: "components/avatar/view", locals: {user: user, editable: editable} %>
       <div class="justify-center p-2 md:mx-auto" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
         <h2 class="leading-6 text-base md:text-left whitespace-nowrap roboto-font font-medium" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
           <%= user.full_name %><span class="pl-2 text-xs text-gray-500 md:text-sm"><%= "(#{user.pronoun})" if user.pronoun.present? %></h2>
@@ -15,7 +15,7 @@
         <div class="md:hidden" x-show="tab == 'profile'">
           <div class="flex justify-center w-full" x-data="{ edit : false }">
             <%= turbo_stream_from "bio" %>
-            <%= render partial: "components/bio/view", locals: { user: current_user, bio: "bioMobile" } %>
+            <%= render partial: "components/bio/view", locals: {user: user, editable: editable, bio: "bioMobile"} %>
           </div>
         </div>
       </div>
@@ -26,10 +26,10 @@
         <%= render partial: "shared/share", locals: { share_title: user.full_name, share_link: user.url, share_desc: user.bio, share_image: user.avatar_thumb || default_avatar } %>
       </div>
       <div class="mb-4 text-center flex md:justify-end justify-center">
-        <%= render partial: "shared/promo_section", locals: {user: user} %>
+        <%= render partial: "shared/promo_section", locals: {user: user, editable: editable} %>
       </div>
     </div>
   </div>
-  <%= render partial: "shared/profile_section", locals: {user: user} %>
-  <%= render partial: "shared/contact_section", locals: {user: user} %>
+  <%= render partial: "shared/profile_section", locals: {user: user, editable: editable} %>
+  <%= render partial: "shared/contact_section", locals: {user: user, editable: editable} %>
 </div>

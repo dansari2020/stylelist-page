@@ -3,15 +3,17 @@
     <div class="flex-1">
       <h2 class="pb-2 leading-3 md:pb-4 roboto-font font-medium text-xs">Education</h2>
       <p class="leading-2 roboto-font font-light text-sm">
-        <% if current_user.has_education? %>
-          <%= current_user.education %>
+        <% if user.has_education? %>
+          <%= user.education %>
         <% else %>
           Where did you learn to do hair?
         <% end %>
       </p>
     </div>
     <div class="flex items-start">
+    <% if editable %>
       <%= link_to "Edit", profile_edit_path("education"), class: "text-blue-500 text-sm" %>
+    <% end %>
     </div>
   </div>
 <% end %>

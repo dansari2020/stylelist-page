@@ -17,13 +17,13 @@
     background: url('<%= image_url("icons/selected-checkbox.svg") %>') top left no-repeat;
   }
 </style>
-<% if current_user.portfolios.published.empty? %>
+<% if user.portfolios.published.empty? %>
   <div class="flex items-center flex-1">
     <div class="py-12 mx-auto mb-14 md:mb-0">
       <p class="mb-4 text-sm text-center text-gray-500">
         Your portfolio is empty
       </p>
-      <% portfolio = current_user.portfolios.new %>
+      <% portfolio = user.portfolios.new %>
       <% form_id = dom_id(portfolio, "pictures") %>
       <%= form_for(portfolio, url: portfolios_path, html: { method: :post, id: form_id }) do |f| %>
         <%= f.label :pictures do %>
@@ -47,7 +47,7 @@
   <% link_ids = [] %>
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
     <div class="grid grid-cols-2 gap-px mb-20 md:gap-1.5 md:grid-cols-3 lg:grid-cols-4">
-      <% current_user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |portfolio| %>
+      <% user.portfolios.published.with_attached_pictures.order(created_at: :desc).each do |portfolio| %>
         <% portfolio.pictures.each do |p| %>
           <%= check_box_tag "pictures_ids[]", p.id, false, id: dom_id(p), class: "hidden", ":disabled": "!manage" %>
           <label for="<%= dom_id(p) %>" :class="{ 'ediable' : manage}">

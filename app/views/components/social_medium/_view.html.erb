@@ -3,9 +3,9 @@
     <div class="flex-1">
       <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Social</h2>
       <p class="leading-2 roboto-font font-light text-sm">
-        <% if current_user.has_social_media? %>
+        <% if user.has_social_media? %>
           <ul class="flex flex-wrap">
-            <% current_user.social_media.each do |social| %>
+            <% user.social_media.each do |social| %>
               <% next if social.url.blank? %>
               <li class="mt-2 mr-2">
                 <%= link_to social.full_url, target: "_blank" do %>
@@ -20,7 +20,9 @@
       </p>
     </div>
     <div class="flex items-start">
+    <% if editable %>
       <%= link_to "Edit", profile_edit_path("social_medium"), class: "text-blue-500 text-sm" %>
+    <% end %>
     </div>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "promo_form" do %>
-  <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "promo")}) do |f| %>
+  <%= form_for(user, url: url, html: {method: :put, id: dom_id(user, "promo")}) do |f| %>
     <div id="edit_promo" class="p-2 text-left bg-gray-100 md:ml-8">
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="w-full py-2">

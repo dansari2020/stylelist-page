@@ -3,12 +3,12 @@
     <div class="py-2">
       <h1 class="text-normal">What are you an expert at?  (Max 3)</h1>
     </div>
-    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "specialty")}) do |f| %>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(user, "specialty")}) do |f| %>
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
         <div class="relative block w-full">
-          <div x-data data-limit="3" data-tags='[<%= current_user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-        data-tagIds='[<%= current_user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+          <div x-data data-limit="3" data-tags='[<%= user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+        data-tagIds='[<%= user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
             <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
               <div class="relative inline-block w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                 <div :class="[open ? 'block' : 'hidden']">

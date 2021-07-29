@@ -4,7 +4,7 @@
     <div class="py-2">
       <h1 class="text-normal">Bio</h1>
     </div>
-    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "bio")}) do |f| %>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(user, "bio")}) do |f| %>
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="w-full" x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
         <%= f.text_area :bio, "x-ref": "countme", "x-on:keyup": "count = $refs.countme.value.length", maxlength: "56", autofocus: true, placeholder: "Describe who you are", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>

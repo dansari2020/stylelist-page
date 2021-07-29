@@ -20,7 +20,7 @@
     <div class="py-2">
       <h1 class="text-normal">Availability</h1>
     </div>
-    <%= form_for(user, url: url, html: {method: :put, id: dom_id(current_user, "availability")}) do |f| %>
+    <%= form_for(user, url: url, html: {method: :put, id: dom_id(user, "availability")}) do |f| %>
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="w-full">
         <% availabilities = [] %>

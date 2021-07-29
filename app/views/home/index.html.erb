@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= render partial: "shared/handle", locals: {user: current_user} %>
+  <%= render partial: "shared/handle", locals: {user: @user, editable: @editable} %>
 <% else %>
   <%= render "mobile" %>
 <% end %>

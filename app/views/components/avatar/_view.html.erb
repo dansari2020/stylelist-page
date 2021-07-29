@@ -2,24 +2,34 @@
   <div class="flex flex-1">
     <div class="w-full md:-mt-16" :class="{'-mt-9': tab == 'profile' || tab == 'contact', '-mt-12': tab == 'portfolio'}">
       <div class="relative rounded-full w-17 h-17 md:mx-auto md:h-28 md:w-28 avatar" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
-        <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "avatar")}) do |f| %>
-          <%= f.label :avatar, class: "cursor-pointer" do %>
-            <div class="relative">
-              <% if user.avatar.attached? %>
-                <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
-              <% else %>
-                <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
-              <% end %>
-              <div class="absolute w-6 h-6 right-1 inset-y-3/4 md:block" :class="{'hidden': tab == 'profile' || tab == 'contact'}">
-                <%= image_tag "icons/attached_background.png", class: "w-6 h-6 mx-auto" %>
+        <% if editable %>
+          <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "avatar")}) do |f| %>
+            <%= f.label :avatar, class: "cursor-pointer" do %>
+              <div class="relative">
+                <% if user.avatar.attached? %>
+                  <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+                <% else %>
+                  <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
+                <% end %>
+                <div class="absolute w-6 h-6 right-1 inset-y-3/4 md:block" :class="{'hidden': tab == 'profile' || tab == 'contact'}">
+                  <%= image_tag "icons/attached_background.png", class: "w-6 h-6 mx-auto" %>
+                </div>
+                <input type="hidden" name="frame" value="avatar">
+                <input type="hidden" name="component" value="avatar">
+                <% submit2_id = dom_id(user, "submit_avatar") %>
+                <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{submit2_id}').click()", ":disabled": "disableFunction()" %>
+                <%= f.submit "", id: submit2_id, class: "hidden" %>
               </div>
-              <input type="hidden" name="frame" value="avatar">
-              <input type="hidden" name="component" value="avatar">
-              <% submit2_id = dom_id(user, "submit_avatar") %>
-              <%= f.file_field :avatar, class: "hidden", "x-on:change": "document.getElementById('#{submit2_id}').click()", ":disabled": "disableFunction()" %>
-              <%= f.submit "", id: submit2_id, class: "hidden" %>
-            </div>
+            <% end %>
           <% end %>
+        <% else %>
+          <div class="relative">
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+            <% else %>
+              <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

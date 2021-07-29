@@ -52,6 +52,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     avatar
+    username
     email
     first_name
     last_name

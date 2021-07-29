@@ -11,7 +11,19 @@ Rails.application.routes.draw do
     resources :addresses, except: [:index]
     resources :services, except: [:index]
     root to: "users#index"
+    devise_scope :user do
+      get "/login", to: "sessions#new"
+      post "/login", to: "sessions#create"
+      delete "/logout", to: "sessions#destroy"
+    end
   end
+  namespace :api do
+    devise_scope :user do
+      post "/login", to: "sessions#create"
+      delete "/logout", to: "sessions#destroy"
+    end
+  end
+
   get "mobile", to: "mobile#index"
   root "home#index"
   devise_for :users, path: "auth",
@@ -37,5 +49,5 @@ Rails.application.routes.draw do
   get "portfolios" => redirect("/portfolios/new")
   get "auth/check-email", to: "auth#check_email", as: "check_email"
   get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
-  resources :feedbacks, only: %i[new create]
+  get "/:username", to: "home#show"
 end

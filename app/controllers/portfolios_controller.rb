@@ -1,6 +1,7 @@
 class PortfoliosController < ApplicationController
-  before_action :authenticate_duck!
+  before_action :authenticate_duck!, only: %i[edit update destroy]
   before_action :portfolio, only: %i[edit show update destroy]
+  before_action :editable, only: %i[edit show update destroy]
 
   def index
   end
@@ -98,5 +99,9 @@ class PortfoliosController < ApplicationController
         end
       end
     end
+  end
+
+  def editable
+    @editable = current_user.present? && current_user == @portfolio.user
   end
 end

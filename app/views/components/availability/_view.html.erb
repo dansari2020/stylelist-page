@@ -10,7 +10,9 @@
           <% end %>
         </div>
         <div class="flex items-start">
+        <% if editable %>
           <%= link_to "Edit", profile_edit_path("availability"), class: "text-blue-500 text-sm" %>
+        <% end %>
         </div>
       </div>
       <% if has_availabilities %>

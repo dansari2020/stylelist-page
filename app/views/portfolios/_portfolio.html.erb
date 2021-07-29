@@ -11,7 +11,9 @@
   </div>
   <div class="px-3 py-5 md:overflow-y-scroll max-w-info-portfolio">
     <div class="hidden md:flex">
-      <%= link_to "Edit", edit_portfolio_path(portfolio), class: "px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded" %>
+      <% if editable %>
+        <%= link_to "Edit", edit_portfolio_path(portfolio), class: "px-5 py-1 text-sm text-blue-500 border border-blue-500 rounded" %>
+      <% end %>
     </div>
     <ul class="my-3 space-y-3 list-none">
       <li class="p-2 border border-gray-200 rounded-md md:py-4 md:mt-3">
@@ -52,8 +54,10 @@
       </li>
     </ul>
     <div class="flex flex-col">
-      <%= link_to "Delete", portfolio_path(portfolio), method: :delete, data: { confirm:
-'Are you sure?' }, class: "block px-3 py-2 mt-4 text-sm text-center md:text-red-500 text-blue-500 border md:border-none rounded-full border-blue-500" %>
+      <% if editable %>
+        <%= link_to "Delete", portfolio_path(portfolio), method: :delete, data: { confirm: 'Are you sure?' }, 
+          class: "block px-3 py-2 mt-4 text-sm text-center md:text-red-500 text-blue-500 border md:border-none rounded-full border-blue-500" %>
+      <% end %>
     </div>
   </div>
 </div>
