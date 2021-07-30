@@ -10,7 +10,7 @@
           <li class="mt-2">
             <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, 
             "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_title) && share_title}\", 
-            \"https://developers.facebook.com/docs/workplace/sharing/share-dialog/\",
+            \"#{defined?(share_link) && share_link&.html_safe}\",
             \"#{defined?(share_desc) && share_desc&.html_safe}\",
             \"#{defined?(share_image) && share_image}\")" do %>
               <div class="w-1/4">

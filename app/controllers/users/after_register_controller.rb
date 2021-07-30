@@ -19,7 +19,7 @@ class Users::AfterRegisterController < ApplicationController
       @user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
       @user.completed!
       @user.save
-      render turbo_stream: turbo_stream.replace("register_steps", partial: "shared/handle", locals: {user: current_user})
+      render turbo_stream: turbo_stream.replace("register_steps", partial: "shared/handle", locals: {user: current_user, editable: true})
       head :created, url: root_url
     else
       respond_to do |format|
