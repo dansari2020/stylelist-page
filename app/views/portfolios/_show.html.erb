@@ -50,7 +50,11 @@
     <div class="relative flex items-center" style="max-width:499px">
       <%= image_tag picture_url(portfolio.picture), class: "object-contain" %>
       <div class="absolute bottom-3 right-3">
-        <%= render partial: "shared/share", locals: { classMenu: "bottom-12" } %>
+        <%= render partial: "shared/share", locals: { classMenu: "bottom-12",
+        share_title: portfolio.user_first_name, 
+        share_link: portfolio.url, 
+        share_desc: portfolio.description, 
+        share_image: portfolio.pictures.attached? ? picture_url(portfolio.picture) : "" } %>
       </div>
     </div>
   </div>
