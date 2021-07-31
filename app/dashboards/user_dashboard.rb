@@ -8,23 +8,29 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    avatar: Field::ActiveStorage,
-    background: Field::ActiveStorage,
+    # avatar: Field::ActiveStorage.with_options(
+    #   index_preview_size: [50, 50]
+    # ),
+    avatar: GravatarField,
+    background: BackgroundImageField,
     id: Field::Number,
     email: Field::String,
     first_name: Field::String,
     last_name: Field::String,
+    full_name: Field::String,
     username: Field::String,
     bio: Field::Text,
     role: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    # avatar_attachment: Field::HasOne,
-    # avatar_blob: Field::HasOne,
-    # background_attachment: Field::HasOne,
-    # background_blob: Field::HasOne,
+    job: Field::String,
     # portfolios: Field::HasMany,
     # pictures: Field::HasMany,
-    # feedbacks: Field::HasMany,
-    address: Field::HasOne,
+    address: Field::HasOne.with_options(
+      searchable: true,
+      searchable_fields: %w[street postal province country_code salon_name unit_suit city],
+      include_blank: true
+    ),
+    short_address: Field::String,
+    active: BooleanIconField,
     specialties: Field::HasMany,
     services: Field::HasMany,
     availabilities: Field::HasMany,
@@ -52,12 +58,10 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     avatar
-    username
-    email
-    first_name
-    last_name
-    created_at
-    updated_at
+    full_name
+    job
+    short_address
+    active
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -69,13 +73,13 @@ class UserDashboard < Administrate::BaseDashboard
   # pictures
   # status
   SHOW_PAGE_ATTRIBUTES = %i[
-    avatar
     background
+    avatar
     email
     first_name
     last_name
     username
-    role
+    job
     bio
     started_at
     education
@@ -141,7 +145,14 @@ class UserDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    hair_stylist: ->(resources) { resources.where(role: :hair_stylist) },
+    barber: ->(resources) { resources.where(role: :barber) },
+    active: ->(resources) { resources.where(status: [:pending, :completed]) },
+    deactivated: ->(resources) { resources.where(status: :deactivated) },
+    no_posts: ->(resources) { resources.where(portfolios_count: 0) },
+    has_posts: ->(resources) { resources.where("portfolios_count > 0") }
+  }.freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.

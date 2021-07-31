@@ -28,15 +28,61 @@ By default, it renders:
 <body>
   <%= render "icons" %>
 
-  <div class="app-container">
+  <div class="h-screen flex flex-row flex-wrap items-stretch">
     <%= render "navigation" -%>
 
-    <main class="main-content" role="main">
-      <%= render "flashes" -%>
-      <%= yield %>
+    <main class="flex flex-col flex-1 min-w-0 bg-white" role="main">
+      <div class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden justify-between">
+        <a class="w-6 cursor-pointer" onclick="toggleNav()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </a>
+        <a class="w-6 cursor-pointer" onclick="openFullscreen()">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="flex flex-col flex-auto min-w-0 overflow-y-scroll" style="height: calc(100vh - 4rem)">
+        <%= render "flashes" -%>
+        <%= yield %>
+      </div>
     </main>
   </div>
 
+<script>
+var elem = document.documentElement;
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
+}
+
+function toggleNav() {
+  var nav = document.getElementById("navigation");
+  // if (nav.classList.contains("hidden")) {
+  // } else {
+  // }
+  nav.classList.toggle("hidden")
+}
+</script>
   <%= render "javascript" %>
 </body>
 </html>

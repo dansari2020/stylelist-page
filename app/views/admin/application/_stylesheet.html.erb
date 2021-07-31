@@ -6,9 +6,14 @@ By default, it includes the application CSS,
 but each page can define additional CSS sources
 by providing a `content_for(:stylesheet)` block.
 %>
-
+<!--
+-->
 <% Administrate::Engine.stylesheets.each do |css_path| %>
   <%= stylesheet_link_tag css_path %>
 <% end %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 
 <%= yield :stylesheet %>

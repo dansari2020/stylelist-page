@@ -1,5 +1,27 @@
 module Admin
   class UsersController < Admin::ApplicationController
+    def index
+      # search_term = params[:search].to_s.strip
+      # resources = Administrate::Search.new(scoped_resource,
+      #                                      dashboard_class,
+      #                                      search_term).run
+      # resources = apply_collection_includes(resources)
+      # resources = order.apply(resources)
+      # resources = resources.page(params[:_page]).per(records_per_page)
+      # page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      # render locals: {
+      #   resources: resources,
+      #   search_term: search_term,
+      #   page: page,
+      #   show_search_bar: show_search_bar?,
+      # }
+      if params[:filter].present?
+        params[:search] = params[:filter].values.compact.uniq.join(" ")
+      end
+      super
+    end
+
     # def scoped_resource
     # resource_class.with_attached_avatars
     # end

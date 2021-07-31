@@ -1,0 +1,9 @@
+<div class="flex flex-auto items-end -mt-16 ml-8 z-20">
+  <div class="flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-white ring-bg-card">
+  <% if field.attached? %>
+    <%= image_tag(field.variant(field.data, auto_orient: true, rotate: 0, resize: "80x80^", crop: "80x80+0+0"), class: "object-cover h-full w-full rounded-full") %>
+  <% else %>
+    <%= image_tag(field.default_url, class: "object-cover h-full w-full  rounded-full") %>
+  <% end %>
+  </div>
+</div>

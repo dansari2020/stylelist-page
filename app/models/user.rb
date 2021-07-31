@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
-  has_many :portfolios, dependent: :destroy
+  has_many :portfolios, dependent: :destroy # , -> { where (status: :published) }
   has_many :pictures, through: :portfolios
   accepts_nested_attributes_for :specialties, :address, :services,
     :availabilities, :social_media, allow_destroy: true
@@ -133,6 +133,15 @@ class User < ApplicationRecord
 
   def should_send_confirmation
     !confirmed? && completed? && confirmation_token.nil?
+  end
+
+  def update_portfolios_count
+    portfolios_count = portfolios.published.count
+    update(portfolios_count: portfolios_count)
+  end
+
+  def active
+    !deactivated?
   end
 
   protected

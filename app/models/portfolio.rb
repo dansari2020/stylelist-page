@@ -10,6 +10,9 @@ class Portfolio < ApplicationRecord
 
   delegate :first_name, to: :user, prefix: true
 
+  after_save :update_counter_cache
+  after_destroy :update_counter_cache
+
   def self.hair_length_list
     hair_lengths.keys.map { |g| [g.humanize, g] }
   end
@@ -32,5 +35,11 @@ class Portfolio < ApplicationRecord
 
   def prev
     @prev ||= user.portfolios.published.order(created_at: :desc).where("id < ?", id).first
+  end
+
+  private
+
+  def update_counter_cache
+    user.update_portfolios_count
   end
 end
