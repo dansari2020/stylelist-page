@@ -66,6 +66,8 @@
       if (w <= 767) {
         window.location = url
         return false;
+      } else {
+        $dispatch('img-modal')
       }
     }
   }
