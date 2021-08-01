@@ -1,5 +1,5 @@
 <% if field.attached? %>
-  <%= image_tag(field.variant(field.data, auto_orient: true, rotate: 0, resize: "80x80^", crop: "80x80+0+0"), class: "object-cover h-20 w-20 rounded-md") %>
+  <%= image_tag(field.url(field.data), class: "object-cover h-20 w-20 rounded-md") %>
 <% else %>
   <%= image_tag(field.default_url, class: "object-cover h-20 w-20 rounded-md") %>
 <% end %>
