@@ -75,7 +75,7 @@ class UserDashboard < Administrate::BaseDashboard
   # status
   SHOW_PAGE_ATTRIBUTES = %i[
     background
-    avatar
+    avatar_thumb
     email
     first_name
     last_name
@@ -109,7 +109,7 @@ class UserDashboard < Administrate::BaseDashboard
   # background_blob
   # pictures
   FORM_ATTRIBUTES = %i[
-    avatar
+    avatar_thumb
     background
     email
     first_name

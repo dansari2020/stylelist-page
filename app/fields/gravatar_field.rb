@@ -13,7 +13,7 @@ class GravatarField < Administrate::Field::Base
     Rails.application.routes.url_helpers.rails_representation_url(attachment.variant(options).processed, only_path: true)
   end
 
-  def rep_url(attachment, options)
+  def rep_url(attachment)
     Rails.application.routes.url_helpers.rails_representation_url(attachment, only_path: true)
   end
 
