@@ -18,11 +18,15 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::String,
     first_name: Field::String,
     last_name: Field::String,
-    full_name: Field::String,
+    full_name: Field::String.with_options(
+      searchable: false
+    ),
     username: Field::String,
     bio: Field::Text,
     role: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    job: Field::String,
+    job: Field::String.with_options(
+      searchable: false
+    ),
     # portfolios: Field::HasMany,
     # pictures: Field::HasMany,
     address: Field::HasOne.with_options(
@@ -30,7 +34,9 @@ class UserDashboard < Administrate::BaseDashboard
       searchable_fields: %w[street postal province country_code salon_name unit_suit city],
       include_blank: true
     ),
-    short_address: Field::String,
+    short_address: Field::String.with_options(
+      searchable: false
+    ),
     active: BooleanIconField,
     specialties: Field::HasMany,
     services: Field::HasMany,
