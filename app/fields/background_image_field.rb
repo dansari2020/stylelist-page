@@ -10,15 +10,21 @@ class BackgroundImageField < Administrate::Field::Base
   end
 
   def variant(attachment, options)
-    Rails.application.routes.url_helpers.rails_representation_url(attachment.variant(options).processed, only_path: true)
+    if attachment.attached?
+      Rails.application.routes.url_helpers.rails_representation_url(attachment.variant(options).processed, only_path: true)
+    end
   end
 
   def url(attachment)
-    Rails.application.routes.url_helpers.rails_blob_path(attachment, only_path: true)
+    if attachment.attached?
+      Rails.application.routes.url_helpers.rails_blob_path(attachment, only_path: true)
+    end
   end
 
   def blob_url(attachment)
-    Rails.application.routes.url_helpers.rails_blob_path(attachment, disposition: :attachment, only_path: true)
+    if attachment.attached?
+      Rails.application.routes.url_helpers.rails_blob_path(attachment, disposition: :attachment, only_path: true)
+    end
   end
 
   def can_add_attachment?
