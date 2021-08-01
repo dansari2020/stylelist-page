@@ -12,6 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     #   index_preview_size: [50, 50]
     # ),
     avatar: GravatarField,
+    avatar_thumb: GravatarField,
     background: BackgroundImageField,
     id: Field::Number,
     email: Field::String,
@@ -57,7 +58,7 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    avatar
+    avatar_thumb
     full_name
     job
     short_address

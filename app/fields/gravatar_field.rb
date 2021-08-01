@@ -10,21 +10,19 @@ class GravatarField < Administrate::Field::Base
   end
 
   def variant(attachment, options)
-    if attachment.attached?
-      Rails.application.routes.url_helpers.rails_representation_url(attachment.variant(options).processed, only_path: true)
-    end
+    Rails.application.routes.url_helpers.rails_representation_url(attachment.variant(options).processed, only_path: true)
+  end
+
+  def rep_url(attachment, options)
+    Rails.application.routes.url_helpers.rails_representation_url(attachment, only_path: true)
   end
 
   def url(attachment)
-    if attachment.attached?
-      Rails.application.routes.url_helpers.rails_blob_path(attachment, only_path: true)
-    end
+    Rails.application.routes.url_helpers.rails_blob_path(attachment, only_path: true)
   end
 
   def blob_url(attachment)
-    if attachment.attached?
-      Rails.application.routes.url_helpers.rails_blob_path(attachment, disposition: :attachment, only_path: true)
-    end
+    Rails.application.routes.url_helpers.rails_blob_path(attachment, disposition: :attachment, only_path: true)
   end
 
   def can_add_attachment?
@@ -32,7 +30,7 @@ class GravatarField < Administrate::Field::Base
   end
 
   def attached?
-    data.present? && (data.class.to_s.include?("ActiveStorage") && data.attached?)
+    data.is_a?(ActiveStorage::VariantWithRecord) || data.present? && (data.class.to_s.include?("ActiveStorage") && data.attached?)
   end
 
   def attachments
