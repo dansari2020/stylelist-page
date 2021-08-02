@@ -9,9 +9,60 @@ as defined by the routes in the `admin/` namespace
 
 <nav id="navigation" class="relative flex flex-col flex-wrap dark bg-gray-900 print:hidden border-r border-gray-300 p-6 flex-none w-64 md:z-30 md:h-screen md:shadow-xl animated faster md:slideOutLeft md:sticky md:top-0 min-h-screen h-full" role="navigation">
   <div class="flex flex-col">
-    <div class="flex items-center justify-center">
-      <%= image_tag "mini-logo.svg", alt: "StylistPage Logo", class: "h-8 w-auto" %>
+    <div class="flex items-center w-full p-4 pl-6 ng-tns-c51-1">
+      <div class="flex items-center justify-center">
+        <%= image_tag "mini-logo.svg", alt: "StylistPage Logo", class: "h-8" %>
+      </div>
+      <div class="flex items-center ml-auto" x-data="{ userMenuOpen : false }">
+        <div class="w-10 h-10 p-2" id="user">
+          <a class="cursor-pointer" @click="userMenuOpen = !userMenuOpen">
+            <div class="w-6 relative">
+              <div class="" style="color: rgb(148, 163, 184)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="absolute right-0 bottom-0 w-2 h-2 rounded-full mr-px mb-px bg-green-500"></span>
+            </div>
+          </a>
+          <div :hidden="!userMenuOpen" style="height: 369px;width: 200px;" class="z-20 relative">
+            <div style="box-shadow: 0 2px 4px -1px #0003, 0 4px 5px 0 #00000024, 0 1px 10px 0 #0000001f;" class="bg-white py-2 rounded-lg" id="mat-menu-panel-0">
+              <div class="flex flex-col">
+                <a class="flex flex-row px-4 h-12 items-center text-sm hover:bg-blue-50" style="color: #1e293b">
+                  <div class="w-6 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div><span>Profile</span>
+                  <div matripple="" class="mat-ripple mat-menu-ripple"></div>
+                </a>
+                <a class="flex flex-row px-4 h-12 items-center text-sm hover:bg-blue-50" style="color: #1e293b">
+                  <div class="w-6 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </div><span>Settings</span>
+                  <div matripple="" class="mat-ripple mat-menu-ripple"></div>
+                </a>
+                <!---->
+                <% if defined?(destroy_user_session_path) %>
+                  <%= link_to(destroy_user_session_path, method: :delete, class: "flex flex-row px-4 h-12 items-center text-sm hover:bg-blue-50 border-t", style: "border-color: #e2e8f0; color: #1e293b") do %>
+                  <div class="w-6 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                  </div><span>Sign out</span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
     <div class="flex flex-col items-center w-full p-4">
       <div class="relative w-24 h-24">
         <% if current_user.avatar.attached? %>
@@ -21,8 +72,12 @@ as defined by the routes in the `admin/` namespace
         <% end %>
       </div>
       <div class="flex flex-col items-center justify-center w-full mt-6">
-        <div class="w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center leading-normal font-medium text-white"><%= current_user.full_name %></div>
-        <div class="w-full mt-0.5 whitespace-nowrap overflow-ellipsis overflow-hidden text-center text-md leading-normal font-medium text-secondary" style="color: rgb(148, 163, 184)"><%= current_user.email %></div>
+        <div class="w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center leading-normal font-medium text-white">
+          <%= current_user.full_name %>
+        </div>
+        <div class="w-full mt-0.5 whitespace-nowrap overflow-ellipsis overflow-hidden text-center text-md leading-normal font-medium text-secondary" style="color: rgb(148, 163, 184)">
+          <%= current_user.email %>
+        </div>
       </div>
     </div>
     <div class="mt-8 space-x-4 space-y-2 flex flex-col">
@@ -31,10 +86,10 @@ as defined by the routes in the `admin/` namespace
       <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
         <% if valid_action?(:index, resource) && show_action?(:index, model_from_resource(resource)) %>
           <%= link_to(
-            resource_index_route(resource),
-            class: "p-2.5 flex flex-row text-gray-400 hover:text-white font-normal text-sm navigation__link--#{nav_link_state(resource)}"
-          ) do %>
-              <% case resource %>
+          resource_index_route(resource),
+          class: "p-2.5 flex flex-row text-gray-400 hover:text-white font-normal text-sm navigation__link--#{nav_link_state(resource)}"
+        ) do %>
+            <% case resource %>
               <% when "users" %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -47,12 +102,11 @@ as defined by the routes in the `admin/` namespace
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
-              <% end %>
+            <% end %>
             <span class="pl-2"><%= display_resource_name(resource) %></span>
           <% end %>
         <% end %>
       <% end %>
-      <%= link_to('Sign Out', destroy_user_session_path, method: :delete, class: "py-2.5 text-gray-400 hover:text-red-500 font-normal text-sm") if defined?(destroy_user_session_path) %>
     </div>
   </div>
 </nav>

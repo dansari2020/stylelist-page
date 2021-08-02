@@ -55,7 +55,8 @@ class UserDashboard < Administrate::BaseDashboard
     phone_method: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     pronoun: Field::String,
     client_incentives: Field::String,
-    condition_for_incenrive: Field::String
+    condition_for_incenrive: Field::String,
+    flags_count: Field::Number
   }.freeze
 
   # COLLECTION_ATTRIBUTES

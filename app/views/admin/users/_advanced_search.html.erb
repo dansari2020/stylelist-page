@@ -1,7 +1,7 @@
 <form class="flex-1 w-full space-y-4" role="search">
   
   <div class="flex space-x-4 flex-col md:flex-row">
-    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
+    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
           id="filter_status"
           name="filter[status]">
       <option value>Filter by status</option>
@@ -9,7 +9,7 @@
       <option value="deactivated:" <%= "selected" if params.dig(:filter, :status) == "deactivated:" %>>Deactivated</option>
     </select>
 
-    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
+    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
             id="filter_role"
             name="filter[role]">
       <option value>Filter by title</option>
@@ -17,20 +17,25 @@
       <option value="barber:" <%= "selected" if params.dig(:filter, :role) == "barber:" %>>Barber</option>
     </select>
 
-    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
+    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
             id="filter_has_posts"
             name="filter[has_posts]">
       <option value>Filter by post</option>
       <option value="no_posts:" <%= "selected" if params.dig(:filter, :has_posts) == "no_posts:" %>>No Posts</option>
       <option value="has_posts:" <%= "selected" if params.dig(:filter, :has_posts) == "has_posts:" %>>Has posts</option>
     </select>
+
+    <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+            id="order_flags">
+      <option value>Filter by flags</option>
+      <option value="<%= admin_users_path(user: { direction: "desc", order: "flags_count" }) %>" <%= "selected" if params.dig(:filter, :has_posts) == "no_posts:" %>>Highest flags</option>
+      <option value="<%= admin_users_path(user: { direction: "asc", order: "flags_count" }) %>" <%= "selected" if params.dig(:filter, :has_posts) == "no_posts:" %>>Lowest flags</option>
+    </select>
   </div>
   <div class="flex space-x-4 flex-col md:flex-row items-center">
     <input type="search" id="filter_search" name="filter[search]" placeholder="Filter by state/province, first name, last name, ..."
-            class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200"
+            class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200"
             value="<%= params[:filter][:search] if params.dig(:filter, :search).present? %>" />
-
-
 
     <%= link_to t("administrate.search.clear"), clear_search_params, class: "text-red-500 w-32 text-right" %>
   </div>

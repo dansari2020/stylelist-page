@@ -4,6 +4,7 @@ class Portfolio < ApplicationRecord
   enum hair_type: %i[straight wavy curly afro]
 
   belongs_to :user
+  has_many :flags, dependent: :destroy, counter_cache: true
   has_many :service_types, dependent: :destroy
   has_many_attached :pictures
   accepts_nested_attributes_for :service_types, allow_destroy: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_104037) do
+ActiveRecord::Schema.define(version: 2021_08_02_155115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,14 @@ ActiveRecord::Schema.define(version: 2021_07_31_104037) do
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
+  create_table "flags", force: :cascade do |t|
+    t.bigint "portfolio_id", null: false
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_flags_on_portfolio_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -113,6 +121,7 @@ ActiveRecord::Schema.define(version: 2021_07_31_104037) do
     t.integer "status", default: 0
     t.integer "hair_length"
     t.integer "hair_type"
+    t.integer "flags_count", default: 0, null: false
     t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
@@ -178,6 +187,7 @@ ActiveRecord::Schema.define(version: 2021_07_31_104037) do
     t.string "client_incentives"
     t.string "condition_for_incenrive"
     t.integer "portfolios_count", default: 0, null: false
+    t.integer "flags_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -187,6 +197,7 @@ ActiveRecord::Schema.define(version: 2021_07_31_104037) do
   add_foreign_key "addresses", "users"
   add_foreign_key "availabilities", "users"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "flags", "portfolios"
   add_foreign_key "languages_users", "languages"
   add_foreign_key "languages_users", "users"
   add_foreign_key "portfolios", "users"

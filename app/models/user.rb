@@ -32,12 +32,13 @@ class User < ApplicationRecord
   has_many :availabilities, dependent: :destroy
   has_many :social_media, dependent: :destroy
   has_many :portfolios, dependent: :destroy # , -> { where (status: :published) }
+  has_many :flags, through: :portfolios
   has_many :pictures, through: :portfolios
   accepts_nested_attributes_for :specialties, :address, :services,
     :availabilities, :social_media, allow_destroy: true
   has_and_belongs_to_many :languages, dependent: :destroy
 
-  before_save :destroy_prvious_data
+  # before_save :destroy_prvious_data
   after_update :send_confirmation_instructions, if: :should_send_confirmation
 
   delegate :full_address, :salon_name, :short_address, to: :address, allow_nil: true
@@ -144,6 +145,10 @@ class User < ApplicationRecord
     !deactivated?
   end
 
+  def update_flags_count
+    update(flags_count: flags.count)
+  end
+
   protected
 
   def timeout_in
@@ -154,8 +159,8 @@ class User < ApplicationRecord
     false
   end
 
-  def destroy_prvious_data
-    # Specialty.where(user_id: id).destroy_all if specialties.any? { |s| s.name_changed? }
-    Service.where(user_id: id).destroy_all if services.any? { |s| s.name_changed? }
-  end
+  # def destroy_prvious_data
+  # Specialty.where(user_id: id).destroy_all if specialties.any? { |s| s.name_changed? }
+  # Service.where(user_id: id).destroy_all if services.any? { |s| s.name_changed? }
+  # end
 end
