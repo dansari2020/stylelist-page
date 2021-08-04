@@ -51,7 +51,7 @@ module Admin
     #   end
     # end
     def scoped_resource
-      resource_class.with_attached_pictures.includes(:user, :service_types).published
+      resource_class.with_attached_pictures.includes(:user, :service_types).published.order(created_at: :desc)
     end
     # Override `resource_params` if you want to transform the submitted
     # data before it's persisted. For example, the following would turn all
