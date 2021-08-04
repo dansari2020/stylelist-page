@@ -1,0 +1,59 @@
+<%#
+# Index
+
+This view is the template for the index page.
+It is responsible for rendering the search bar, header and pagination.
+It renders the `_table` partial to display details about the resources.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Collection][1].
+  Contains helper methods to help display a table,
+  and knows which attributes should be displayed in the resource's table.
+- `resources`:
+  An instance of `ActiveRecord::Relation` containing the resources
+  that match the user's search criteria.
+  By default, these resources are passed to the table partial to be displayed.
+- `search_term`:
+  A string containing the term the user has searched for, if any.
+- `show_search_bar`:
+  A boolean that determines if the search bar should be shown.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Collection
+%>
+
+<% content_for(:title) do %>
+  <%= display_resource_name(page.resource_name) %>
+<% end %>
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-wrap items-center font-medium">
+        <div>
+          <!--<a class="whitespace-nowrap text-primary-500">User Interface</a>-->
+        </div>
+      </div>
+      <div class="mt-2">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"> <%= content_for(:title) %> </h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-auto p-6 sm:p-10" style="background-color: #F1F5F9">
+    <div class="mb-6 sm:mb-12">
+      <%= render("advanced_filter", resources: resources) %>
+    </div>
+    <div class="flex flex-wrap items-start w-full max-w-400 -m-4 grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <%= render(
+        "card",
+        collection_presenter: page,
+        collection_field_name: resource_name,
+        page: page,
+        resources: resources,
+        table_title: "page-title"
+      ) %>
+    </div>
+  <%= paginate resources, param_name: '_page' %>
+  </div>
+</div>

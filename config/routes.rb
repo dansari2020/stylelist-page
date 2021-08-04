@@ -50,4 +50,5 @@ Rails.application.routes.draw do
   get "auth/check-email", to: "auth#check_email", as: "check_email"
   get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
   get "/:username", to: "home#show"
+  post "/portfolio/:portfolio_id/flags" => "flags#create", :as => "portfolio_flags"
 end

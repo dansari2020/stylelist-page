@@ -37,6 +37,13 @@ as well as a link to its edit page.
 
   <div>
     <%= link_to(
+      "Visit page",
+      page.resource.url,
+      class: "border px-6 py-2 rounded-lg shadow-md",
+      target: "_blank"
+    ) %>
+
+    <%= link_to(
       t("administrate.actions.edit_resource", name: ''),
       [:edit, namespace, page.resource],
       class: "border px-6 py-2 rounded-lg shadow-md",

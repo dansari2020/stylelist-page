@@ -2,7 +2,29 @@ module Admin
   class PortfoliosController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
-    #
+
+    def index
+      # search_term = params[:search].to_s.strip
+      # resources = Administrate::Search.new(scoped_resource,
+      #                                      dashboard_class,
+      #                                      search_term).run
+      # resources = apply_collection_includes(resources)
+      # resources = order.apply(resources)
+      # resources = resources.page(params[:_page]).per(records_per_page)
+      # page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      # render locals: {
+      #   resources: resources,
+      #   search_term: search_term,
+      #   page: page,
+      #   show_search_bar: show_search_bar?,
+      # }
+      if params[:filter].present?
+        params[:search] = params[:filter].values.compact.uniq.join(" ")
+      end
+      super
+    end
+
     # def update
     #   super
     #   send_foo_updated_email(requested_resource)
@@ -28,7 +50,9 @@ module Admin
     #     resource_class.with_less_stuff
     #   end
     # end
-
+    def scoped_resource
+      resource_class.with_attached_pictures.includes(:user, :service_types).published
+    end
     # Override `resource_params` if you want to transform the submitted
     # data before it's persisted. For example, the following would turn all
     # empty values into nil values. It uses other APIs such as `resource_class`

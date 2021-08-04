@@ -1,0 +1,59 @@
+<style>
+  .btnFilter{
+    color: #1e293b; background-color: #fff;border-radius: 9999px;overflow: hidden;border: none!important;font-weight: 500;
+  }
+  .active{background-color: #e2e8f0}
+</style>
+<form class="flex-1 w-full space-y-4" role="search" x-ref="searchForm" x-data="{order: '<%= params.dig(:portfolio, :order) %>', direction: '<%= params.dig(:portfolio, :direction) %>'}">
+  <div class="flex flex-wrap -m-2">
+    <div class="flex flex-row space-x-4">
+      <div class="btnFilter <%= "active" unless params[:filter].present? %> m-2 w-44 text-center">
+        <%= link_to admin_portfolios_path, class: "" do %>
+          <span class="px-5 leading-10">
+            <span class="text-secondary text-sm font-normal">All</span>
+            <span class="ml-1.5 font-medium text-secondary">(<%= Portfolio.count %>)</span>
+          </span>
+        <% end %>
+      </div>
+      <select class="border-blueGray-300 px-3 py-2 text-sm placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200"
+        x-model="direction" x-on:change="if (direction){ order = 'flags_count' } else {order = ''; direction= '';}; setTimeout(function() {$refs.searchForm.submit()}, 100);">
+        <option value>Sort by flags</option>
+        <option value="desc" <%= "selected" if  params.dig(:portfolio, :direction) == "desc" && params.dig(:portfolio, :order) == "flags_count" %>>Highest flags</option>
+        <option value="asc" <%= "selected" if  params.dig(:portfolio, :direction) == "asc" && params.dig(:portfolio, :order) ==  "flags_count" %>>Lowest flags</option>
+      </select>
+      <input type="hidden" name="portfolio[order]" x-model="order" />
+      <input type="hidden" name="portfolio[direction]" x-model="direction" />
+    </div>
+    <div class="flex flex-wrap">
+      <div class="w-full">
+        <span class="px-5 leading-10 ml-1.5 font-medium">Hair Length:</span>
+      </div>
+      <% Portfolio.hair_lengths.keys.each do |key| %>
+      <div class="btnFilter m-2 <%= "active" if params.dig(:filter, :hair_length) == "#{key}:" %>">
+        <%= link_to admin_portfolios_path("filter[hair_length]": "#{key}:"), class: "" do %>
+          <span class="px-5 leading-10">
+            <span class="text-secondary text-sm font-normal"><%= key.humanize %></span>
+            <span class="ml-1.5 font-medium text-secondary">(<%= Portfolio.send(key).size %>)</span>
+          </span>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="flex flex-wrap">
+      <div class="w-full">
+        <span class="px-5 leading-10 ml-1.5 font-medium">Hair Type: </span>
+      </div>
+      <% Portfolio.hair_types.keys.each do |key| %>
+      <div class="btnFilter m-2 <%= "active" if params.dig(:filter, :hair_type) == "#{key}:" %>">
+        <%= link_to admin_portfolios_path("filter[hair_type]": "#{key}:"), class: "" do %>
+          <span class="px-5 leading-10">
+            <span class="text-secondary text-sm font-normal"><%= key.humanize %></span>
+            <span class="ml-1.5 font-medium text-secondary">(<%= Portfolio.send(key).size %>)</span>
+          </span>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</form>

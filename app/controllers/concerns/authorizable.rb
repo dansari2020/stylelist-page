@@ -2,12 +2,14 @@ module Authorizable
   extend ActiveSupport::Concern
 
   def after_login_path_for(resource)
-    if resource.pending?
-      after_register_path(:job)
-    elsif resource.deactivated?
-      reactivation_path
-    elsif resource.completed? && !resource.confirmed?
-      confirm_email_path
+    if !current_user.admin?
+      if resource.pending?
+        after_register_path(:job)
+      elsif resource.deactivated?
+        reactivation_path
+      elsif resource.completed? && !resource.confirmed?
+        confirm_email_path
+      end
     end
   end
 
@@ -23,10 +25,6 @@ module Authorizable
 
   def authenticate_duck
     return if current_user.nil?
-    if current_user.admin?
-      redirect_to admin_users_path
-      return
-    end
 
     after_login_path_for!(current_user)
   end

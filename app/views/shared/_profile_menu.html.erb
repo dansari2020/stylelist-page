@@ -24,7 +24,11 @@
       <% end %>
       <div class="pl-2">
         <h3 class="block py-2 text-sm text-gray-700"><%= user.full_name %></h3>
+        <% if user.admin? %>
+        <%= link_to "Admin Panel", admin_users_path, class: "text-xs text-gray-500" %>
+        <% else %>
         <%= link_to user.url, user.url, target: "_blank", class: "text-xs text-gray-500" %>
+        <% end %>
       </div>
     </div>
     <%= link_to('Sign Out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-center text-gray-700 hover:text-red-500 border-t" ) %>

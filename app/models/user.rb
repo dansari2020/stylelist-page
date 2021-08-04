@@ -57,7 +57,15 @@ class User < ApplicationRecord
   end
 
   def url
-    [ENV.fetch("WEBSITE_URL", "stylistpage.com/").strip, username.strip].compact.join
+    [ENV.fetch("WEBSITE_URL", default_url).strip, username.strip].compact.join
+  end
+
+  def default_url
+    if Rails.env.production?
+      "https://stylistpage.com/"
+    else
+      "http://localhost:3000/"
+    end
   end
 
   def profile_completed?

@@ -25,7 +25,7 @@ as defined by the routes in the `admin/` namespace
               <span class="absolute right-0 bottom-0 w-2 h-2 rounded-full mr-px mb-px bg-green-500"></span>
             </div>
           </a>
-          <div :hidden="!userMenuOpen" style="height: 369px;width: 200px;" class="z-20 relative">
+          <div :hidden="!userMenuOpen" @click.away="userMenuOpen = !userMenuOpen" style="height: 369px;width: 200px;" class="z-20 relative">
             <div style="box-shadow: 0 2px 4px -1px #0003, 0 4px 5px 0 #00000024, 0 1px 10px 0 #0000001f;" class="bg-white py-2 rounded-lg" id="mat-menu-panel-0">
               <div class="flex flex-col">
                 <a class="flex flex-row px-4 h-12 items-center text-sm hover:bg-blue-50" style="color: #1e293b">

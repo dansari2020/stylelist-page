@@ -15,7 +15,7 @@
         <% if user_signed_in? %>
           <div class="relative ml-3">
             <div class="flex flex-col space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-6 xl:space-x-8">
-              <%= render "shared/menu" %>
+              <%= render "shared/menu" unless current_user.admin? %>
               <%= render partial: "shared/profile_menu", locals: {user: current_user} %>
             </div>
           </div>
@@ -27,8 +27,10 @@
     </div>
   </nav>
 </header>
+<% unless current_user.admin? %>
 <div id="bottomMenu" x-data="{ bottomMenu : true }" class="md:hidden" x-show="bottomMenu">
   <div class="fixed bottom-0 z-10 flex flex-row justify-between w-full p-2 bg-white border-t">
     <%= render "shared/menu" %>
   </div>
 </div>
+<% end %>

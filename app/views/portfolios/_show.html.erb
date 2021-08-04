@@ -38,12 +38,16 @@
         </li>
         <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
           <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+          <% if portfolio.hair_length.present? %>
           <span class="px-3 py-1 text-sm border border-gray-200 rounded-full"><%= portfolio.hair_length&.humanize %></span>
+          <% end %>
         </li>
       </ul>
-      <div class="flex flex-col">
+      <div class="flex flex-col" id="flagContainer">
         <% if editable %>
           <%= link_to "Delete", portfolio_path(portfolio), method: :delete, remote: true, data: { "turbo-frame": "_top", confirm: "Are you sure?" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
+        <% else %>
+          <%= link_to "Flag Photo", portfolio_flags_path(portfolio, user_id: user_signed_in? && current_user.id), method: :post, remote: true, data: { "turbo-frame": "_top" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
         <% end %>
       </div>
     </div>
@@ -51,9 +55,9 @@
       <%= image_tag picture_url(portfolio.picture), class: "object-contain" %>
       <div class="absolute bottom-3 right-3">
         <%= render partial: "shared/share", locals: { classMenu: "bottom-12",
-        share_title: portfolio.user_first_name, 
-        share_link: portfolio.url, 
-        share_desc: portfolio.description, 
+        share_title: portfolio.user_first_name,
+        share_link: portfolio.url,
+        share_desc: portfolio.description,
         share_image: portfolio.pictures.attached? ? picture_url(portfolio.picture) : "" } %>
       </div>
     </div>

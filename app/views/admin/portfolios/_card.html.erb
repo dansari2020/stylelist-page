@@ -1,0 +1,42 @@
+<% resources.each do |resource| %>
+
+  <div class="flex flex-col max-w-80 w-full bg-white relative border overflow-hidden" style="border-radius: 1rem; --tw-shadow: 0 1px 3px 0 #0000001a,0 1px 2px 0 #0000000f;">
+    <%= image_tag resource.picture, class: "object-cover h-48" %>
+    <div class="mt-8 mx-8 mb-2">
+      <div class="h-28 overflow-hidden">
+        <div class="text-2xl font-semibold leading-tight">Hair Length: <%= resource.hair_length&.humanize %></div>
+        <div class="text-2xl font-semibold leading-tight">Hair Type: <%= resource.hair_type&.humanize %></div>
+        <div class="mt-4"><%= resource.description %></div>
+      </div>
+      <div class="mt-3 -mx-3 flex justify-between" >
+        <a href="<%= admin_portfolios_path(resource) -%>" class="px-3 hover:bg-purple-50 leading-10" style="padding: 0 20px!important;border-radius: 9999px!important;">
+          <span class="font-normal text-sm" style="color: #4f46e5"> Read More </span>
+        </a>
+        <div class="flex items-center space-x-2">
+          <%= link_to(portfolio_flags_path(resource, user_id: current_user.id), method: :post, remote: true, class: "action-edit flex space-x-2 items-center") do %>
+          <span id="flags_count_<%= resource.id %>"><%= resource.flags_count %></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+            </svg>
+          <% end %>
+
+          <% if valid_action?(:edit, collection_presenter.resource_name) && show_action?(:edit, resource) %>
+            <%= link_to([:edit, namespace, resource], class: "action-edit") do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            <% end %>
+          <% end %>
+
+          <% if valid_action?(:destroy, collection_presenter.resource_name) && show_action?(:destroy, resource) %>
+            <%= link_to([namespace, resource], class: "text-color-red", method: :delete, data: { confirm: t("administrate.actions.confirm") }) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
