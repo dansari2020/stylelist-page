@@ -26,6 +26,20 @@ as well as a link to its edit page.
   padding: 0;
   margin: 0;
 }
+.attribute-label {
+    color: #7b808c;
+    font-size: 0.8em;
+    font-weight: 400;
+    letter-spacing: 0.0357em;
+    position: relative;
+    text-transform: uppercase;
+    clear: left;
+    float: left;
+    margin-bottom: 1.5em;
+    margin-top: 0.25em;
+    text-align: right;
+    width: calc(20% - 1rem);
+}
 </style>
 <% end %>
 <% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>

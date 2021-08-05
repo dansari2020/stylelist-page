@@ -1,0 +1,10 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+<% if field.attached? %>
+  <%= image_tag(field.rep_url(field.data), class: "object-cover h-20 w-20 rounded-full") %>
+<% else %>
+  <%= image_tag(field.default_url, class: "object-cover h-20 w-20  rounded-full") %>
+<% end %>
+</div>

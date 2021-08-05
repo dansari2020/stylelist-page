@@ -2,5 +2,11 @@
   <%= f.label field.attribute %>
 </div>
 <div class="field-unit__field">
-  <%= f.text_field field.attribute %>
+  <div class="h-48">
+  <% if field.attached? %>
+    <%= image_tag field.data, class: "object-cover h-full w-full rounded-md" %>
+  <% else %>
+    <div class="object-cover h-full w-full rounded-md" style="background-color: #4F4F4E"></div>
+  <% end %>
+  </div>
 </div>

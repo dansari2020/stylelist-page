@@ -116,8 +116,8 @@ class UserDashboard < Administrate::BaseDashboard
   # background_blob
   # pictures
   FORM_ATTRIBUTES = %i[
-    avatar_thumb
     background
+    avatar_thumb
     email
     first_name
     last_name
