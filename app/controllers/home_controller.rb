@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_duck
   before_action :editable
   def index
-    redirect_to admin_users_path if current_user.admin?
+    redirect_to admin_users_path if current_user.present? && current_user.admin?
   end
 
   def show
