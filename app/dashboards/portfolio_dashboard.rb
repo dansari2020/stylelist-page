@@ -19,8 +19,8 @@ class PortfolioDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    hair_length: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    hair_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys })
+    hair_length: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.hair_length_list }),
+    hair_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.hair_type_list })
   }.freeze
 
   # COLLECTION_ATTRIBUTES

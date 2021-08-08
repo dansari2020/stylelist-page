@@ -7,7 +7,7 @@ class Users::AfterRegisterController < ApplicationController
   layout "register_steps"
 
   def show
-    if @user.profile_completed?
+    if @user.profile_activated?
       redirect_to(root_url)
     else
       render_wizard
@@ -17,7 +17,7 @@ class Users::AfterRegisterController < ApplicationController
   def update
     if step == :final
       @user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
-      @user.completed!
+      @user.activated!
       @user.save
       render turbo_stream: turbo_stream.replace("register_steps", partial: "shared/handle", locals: {user: current_user, editable: true})
       head :created, url: root_url

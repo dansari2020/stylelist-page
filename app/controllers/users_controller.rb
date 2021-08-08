@@ -28,8 +28,8 @@ class UsersController < ApplicationController
       if params["user"].has_key?("current_password") && !valid_password?
         flash[:error] = "Your current password is wrong"
         redirect_back
-      elsif params["user"].has_key?("status") && params["user"]["status"] == "completed"
-        current_user.completed!
+      elsif params["user"].has_key?("status") && params["user"]["status"] == "activated"
+        current_user.activated!
         redirect_back
       else
         respond_to do |format|

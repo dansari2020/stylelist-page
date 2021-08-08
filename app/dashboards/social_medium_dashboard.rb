@@ -13,7 +13,8 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # updated_at: Field::DateTime
   ATTRIBUTE_TYPES = {
     kind: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    url: Field::String
+    url: Field::String,
+    full_url: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,7 +26,7 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # id
   COLLECTION_ATTRIBUTES = %i[
     kind
-    url
+    full_url
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,7 +37,7 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
     kind
-    url
+    full_url
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -63,7 +64,7 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how social media are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(social_medium)
-  #   "SocialMedium ##{social_medium.id}"
-  # end
+  def display_resource(social_medium)
+    social_medium.full_url
+  end
 end

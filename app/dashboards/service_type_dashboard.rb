@@ -60,7 +60,7 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how service types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(service_type)
-  #   "ServiceType ##{service_type.id}"
-  # end
+  def display_resource(service_type)
+    service_type.name
+  end
 end

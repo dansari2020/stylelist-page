@@ -1,4 +1,4 @@
-<% if user_signed_in? && current_user.confirmed? && current_user.completed? %>
+<% if user_signed_in? && current_user.confirmed? && current_user.activated? %>
   <%= link_to root_url, class: "text-xs md:text-sm text-center text-gray-500 hover:text-blue-500 px-2 #{ "text-blue-500" if controller_name == "home"}" do %>
     <% if controller_name == "home" %>
       <%= image_tag "icons/portfolio-active.svg", class: "w-5 h-5 mx-auto" %>

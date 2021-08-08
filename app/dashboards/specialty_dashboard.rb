@@ -60,7 +60,7 @@ class SpecialtyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how specialties are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(specialty)
-  #   "Specialty ##{specialty.id}"
-  # end
+  def display_resource(specialty)
+    specialty.name
+  end
 end

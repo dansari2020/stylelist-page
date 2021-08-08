@@ -23,7 +23,7 @@ module Admin
     end
 
     def scoped_resource
-      resource_class.with_attached_avatar.includes(:address)
+      resource_class.with_attached_avatar.includes(:address).where(status: %w[activated deactivated])
     end
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.

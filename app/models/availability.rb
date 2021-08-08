@@ -11,4 +11,20 @@ class Availability < ApplicationRecord
       self.close_at = nil
     end
   end
+
+  def day_name
+    Date::DAYNAMES[day].capitalize
+  end
+
+  def info
+    "#{day_name} #{working_hours}"
+  end
+
+  def working_hours
+    if opened?
+      "#{open_at.strftime("%I:%M %p")} - #{close_at.strftime("%I:%M %p")}"
+    else
+      "Not Available"
+    end
+  end
 end

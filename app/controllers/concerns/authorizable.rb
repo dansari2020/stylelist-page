@@ -7,7 +7,7 @@ module Authorizable
         after_register_path(:job)
       elsif resource.deactivated?
         reactivation_path
-      elsif resource.completed? && !resource.confirmed?
+      elsif resource.activated? && !resource.confirmed?
         confirm_email_path
       end
     end

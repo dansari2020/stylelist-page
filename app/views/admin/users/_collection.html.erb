@@ -45,7 +45,8 @@ to display a collection of resources in an HTML table.
           <% end %>
         </th>
       <% end %>
-      <% [valid_action?(:edit, collection_presenter.resource_name),
+      <% [collection_presenter.resource_name == "user",
+          valid_action?(:edit, collection_presenter.resource_name),
           valid_action?(:destroy, collection_presenter.resource_name)].count(true).times do %>
         <th class="relative px-6 py-3" scope="col"></th>
       <% end %>
@@ -73,6 +74,7 @@ to display a collection of resources in an HTML table.
             <% end -%>
           </td>
         <% end %>
+        <% if resource.is_a?(User) %>
         <td>
           <%= link_to(
             "Visit page",
@@ -81,6 +83,7 @@ to display a collection of resources in an HTML table.
             target: "_blank"
           ) %>
         </td>
+        <% end %>
 
         <% if valid_action? :edit, collection_presenter.resource_name %>
           <td><%= link_to(

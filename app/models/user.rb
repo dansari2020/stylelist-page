@@ -7,7 +7,7 @@ class User < ApplicationRecord
   friendly_id :username
 
   enum role: %i[client hair_stylist barber admin]
-  enum status: %i[pending completed deactivated]
+  enum status: %i[pending activated deactivated disabled]
   enum phone_type: %i[mobile salon]
   enum phone_method: %i[text_or_calls text calls]
   enum deactivate_reason: {"Select a reason (optional)": 0,
@@ -68,8 +68,8 @@ class User < ApplicationRecord
     end
   end
 
-  def profile_completed?
-    username.present? && completed?
+  def profile_activated?
+    username.present? && activated?
   end
 
   ["bio", "username", "social_media", "education", "started_at", "specialties", "services",
@@ -81,6 +81,14 @@ class User < ApplicationRecord
 
   def has_promo?
     client_incentives.present? || condition_for_incenrive.present?
+  end
+
+  def self.role_list
+    roles.keys.map { |g| [g.humanize.gsub("stylist", "Stylist"), g] }
+  end
+
+  def self.status_list
+    [["Activate", "activated"], ["Deactivate", "deactivated"], ["Disable", "disabled"]]
   end
 
   def self.phone_type_list
@@ -141,7 +149,7 @@ class User < ApplicationRecord
   end
 
   def should_send_confirmation
-    !confirmed? && completed? && confirmation_token.nil?
+    !confirmed? && activated? && confirmation_token.nil?
   end
 
   def update_portfolios_count

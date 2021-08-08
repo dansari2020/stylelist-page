@@ -63,7 +63,7 @@ class LanguageDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how languages are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(language)
-  #   "Language ##{language.id}"
-  # end
+  def display_resource(language)
+    language.name
+  end
 end

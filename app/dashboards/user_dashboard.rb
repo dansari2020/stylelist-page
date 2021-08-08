@@ -23,7 +23,7 @@ class UserDashboard < Administrate::BaseDashboard
     ),
     username: Field::String,
     bio: Field::Text,
-    role: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    role: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.role_list }),
     job: Field::String.with_options(
       searchable: false
     ),
@@ -40,12 +40,12 @@ class UserDashboard < Administrate::BaseDashboard
     active: BooleanIconField,
     specialties: Field::HasMany,
     services: Field::HasMany,
-    availabilities: Field::HasMany,
+    availabilities: Field::HasMany.with_options(limit: 7, sort_by: :day),
     social_media: Field::HasMany,
     languages: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.status_list }),
     started_at: Field::Date,
     education: Field::String,
     phone: Field::String,
@@ -136,12 +136,12 @@ class UserDashboard < Administrate::BaseDashboard
     client_incentives
     condition_for_incenrive
     address
-    specialties
-    services
-    availabilities
-    social_media
-    languages
   ].freeze
+  # specialties
+  # services
+  # availabilities
+  # social_media
+  # languages
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
@@ -156,7 +156,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_FILTERS = {
     hair_stylist: ->(resources) { resources.where(role: :hair_stylist) },
     barber: ->(resources) { resources.where(role: :barber) },
-    active: ->(resources) { resources.where(status: [:pending, :completed]) },
+    active: ->(resources) { resources.where(status: [:pending, :activated]) },
     deactivated: ->(resources) { resources.where(status: :deactivated) },
     no_posts: ->(resources) { resources.where(portfolios_count: 0) },
     has_posts: ->(resources) { resources.where("portfolios_count > 0") }

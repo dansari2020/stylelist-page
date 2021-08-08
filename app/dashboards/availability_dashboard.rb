@@ -13,6 +13,8 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # updated_at: Field::DateTime,
   ATTRIBUTE_TYPES = {
     day: Field::Number,
+    day_name: Field::String,
+    working_hours: Field::String,
     open_at: Field::Time,
     opened: Field::Boolean,
     close_at: Field::Time
@@ -26,9 +28,8 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # user
   # id
   COLLECTION_ATTRIBUTES = %i[
-    day
-    open_at
-    close_at
+    day_name
+    working_hours
     opened
   ].freeze
 
@@ -39,7 +40,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # created_at
   # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
-    day
+    day_name
     open_at
     close_at
     opened
@@ -50,7 +51,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   # user
   FORM_ATTRIBUTES = %i[
-    day
+    day_name
     open_at
     close_at
     opened
@@ -71,7 +72,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how availabilities are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(availability)
-  #   "Availability ##{availability.id}"
-  # end
+  def display_resource(availability)
+    availability.info
+  end
 end

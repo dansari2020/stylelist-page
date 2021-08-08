@@ -40,15 +40,15 @@ class AddressDashboard < Administrate::BaseDashboard
   # id
   # created_at
   # updated_at
+  # street
+  # postal
+  # province
+  # country_code
+  # salon_name
+  # unit_suit
+  # city
+  # privacy
   SHOW_PAGE_ATTRIBUTES = %i[
-    street
-    postal
-    province
-    country_code
-    salon_name
-    unit_suit
-    city
-    privacy
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -81,7 +81,7 @@ class AddressDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how addresses are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(address)
-  #   "Address ##{address.id}"
-  # end
+  def display_resource(address)
+    address.full_address.join(", ")
+  end
 end
