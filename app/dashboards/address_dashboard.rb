@@ -82,6 +82,6 @@ class AddressDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(address)
-    address.full_address.join(", ")
+    Array.wrap(address.full_address).join(", ")
   end
 end
