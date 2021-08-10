@@ -1,18 +1,18 @@
 @import "../library/variables";
-fieldset {
+.admin fieldset {
   background-color: transparent;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-legend {
+.admin legend {
   font-weight: $bold-font-weight;
   margin: 0;
   padding: 0;
 }
 
-label {
+.admin label {
   display: block;
   font-weight: $bold-font-weight;
   margin: 0;
@@ -33,21 +33,21 @@ label {
 //   font-size: 16px;
 // }
 
-[type="color"],
-[type="date"],
-[type="datetime-local"],
-[type="email"],
-[type="month"],
-[type="number"],
-[type="password"],
-[type="search"],
-[type="tel"],
-[type="text"],
-[type="time"],
-[type="url"],
-[type="week"],
-input:not([type]),
-textarea {
+.admin [type="color"],
+.admin [type="date"],
+.admin [type="datetime-local"],
+.admin [type="email"],
+.admin [type="month"],
+.admin [type="number"],
+.admin [type="password"],
+.admin [type="search"],
+.admin [type="tel"],
+.admin [type="text"],
+.admin [type="time"],
+.admin [type="url"],
+.admin [type="week"],
+.admin input:not([type]),
+.admin textarea {
   appearance: none;
   background-color: $white;
   border: $base-border;
@@ -79,17 +79,17 @@ textarea {
   }
 }
 
-textarea {
+.admin textarea {
   resize: vertical;
 }
 
-[type="checkbox"],
-[type="radio"] {
+.admin [type="checkbox"],
+.admin [type="radio"] {
   display: inline;
   margin-right: $small-spacing / 2;
 }
 
-[type="file"] {
+.admin [type="file"] {
   width: 100%;
 }
 

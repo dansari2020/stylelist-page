@@ -1,13 +1,13 @@
 @import "../library/variables";
 $_navigation-link-padding: 0.6em;
 
-.navigation {
+.admin .navigation {
   flex: 1 0 10rem;
   padding: $base-spacing;
   padding-left: 0;
 }
 
-.navigation__link {
+.admin .navigation__link {
   background-color: transparent;
   color: $base-font-color;
   display: block;
@@ -28,6 +28,6 @@ $_navigation-link-padding: 0.6em;
   }
 }
 
-.navigation__link--active {
+.admin .navigation__link--active {
   font-weight: $bold-font-weight;
 }

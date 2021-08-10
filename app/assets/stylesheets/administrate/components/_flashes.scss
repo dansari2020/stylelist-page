@@ -1,6 +1,6 @@
 @import "../library/variables";
 @each $flash-type, $color in $flashes {
-  .flash-#{$flash-type} {
+  .admin .flash-#{$flash-type} {
     background-color: $color;
     color: mix($black, $color, 60%);
     display: block;

@@ -1,5 +1,5 @@
 @import "../library/variables";
-.cell-label {
+.admin .cell-label {
   padding-top: 0.15em;
 
   &:hover {
@@ -21,12 +21,12 @@
   }
 }
 
-.cell-label--asc,
-.cell-label--desc {
+.admin .cell-label--asc,
+.admin .cell-label--desc {
   font-weight: $bold-font-weight;
 }
 
-.cell-label__sort-indicator {
+.admin .cell-label__sort-indicator {
   float: right;
   margin-left: 5px;
 
@@ -38,11 +38,11 @@
   }
 }
 
-.cell-label__sort-indicator--desc {
+.admin .cell-label__sort-indicator--desc {
   transform: rotate(180deg);
 }
 
-.cell-data--number,
-.cell-label--number {
+.admin .cell-data--number,
+.admin .cell-label--number {
   text-align: right;
 }

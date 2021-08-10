@@ -1,5 +1,5 @@
 @import "../library/variables";
-.main-content {
+.admin .main-content {
   background-color: $white;
   border-radius: $base-border-radius;
   box-shadow: 0 0 6px 0 rgba($black, 0.12),
@@ -9,23 +9,23 @@
   min-width: 800px;
 }
 
-.main-content__header,
-.main-content__body {
+.admin .main-content__header,
+.admin .main-content__body {
   padding: 1rem 2rem;
 }
 
-.main-content__body--flush {
+.admin .main-content__body--flush {
   padding-left: 0;
   padding-right: 0;
 }
 
-.main-content__header {
+.admin .main-content__header {
   align-items: center;
   border-bottom: $base-border;
   display: flex;
 }
 
-.main-content__page-title {
+.admin .main-content__page-title {
   font-size: 1.6em;
   margin-right: auto;
 }

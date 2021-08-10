@@ -1,5 +1,5 @@
 @import "../library/variables";
-.field-unit {
+.admin .field-unit {
   align-items: center;
   display: flex;
   margin-bottom: $base-spacing;
@@ -7,14 +7,14 @@
   width: 100%;
 }
 
-.field-unit__label {
+.admin .field-unit__label {
   float: left;
   margin-left: 1rem;
   text-align: right;
   width: calc(15% - 1rem);
 }
 
-.field-unit__field {
+.admin .field-unit__field {
   float: left;
   margin-left: 2rem;
   max-width: 50rem;
@@ -25,23 +25,23 @@
   }
 }
 
-.field-unit--nested {
+.admin .field-unit--nested {
   border: $base-border;
   margin-left: 7.5%;
   max-width: 60rem;
   padding: $small-spacing;
   width: 100%;
 
-  .field-unit__field {
+  .admin .field-unit__field {
     width: 100%;
   }
 
-  .field-unit__label {
+  .admin .field-unit__label {
     width: 10rem;
   }
 }
 
-.field-unit--required {
+.admin .field-unit--required {
   label::after {
     color: $red;
     content: " *";
