@@ -1,0 +1,33 @@
+<% if field.resources.any? %>
+  <% order = field.order_from_params(params.fetch(field.name, {})) %>
+  <% page_number = params.fetch(field.name, {}).fetch(:page, nil) %>
+  <% collection_presenter = field.associated_collection(order) %>
+  <% field.resources(page_number, order).each do |resource| %>
+  <% collection_presenter.attributes_for(resource).each do |attribute| %>
+  <div class="inline-flex items-center m-1 text-sm bg-white border rounded-full">
+    <span class="max-w-xs ml-2 mr-1 leading-relaxed truncate" x-text="tag">
+      <%= render_field attribute %>
+    </span>
+
+    <% if valid_action? :destroy, collection_presenter.resource_name %>
+        <% if show_action? :destroy, resource %>
+          <%= link_to(
+          [namespace, resource],
+          class: "inline-block w-6 h-8 align-middle focus:outline-none flex items-center",
+          method: :delete,
+          alt: "Delete",
+          data: { confirm: t("administrate.actions.confirm") }
+        ) do %>
+          <svg class="w-6 h-6 mx-auto fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"></path></svg>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
+  <% if field.more_than_limit? %>
+    <%= paginate field.resources(page_number), param_name: "#{field.name}[page]" %>
+  <% end %>
+<% else %>
+  <%= t("administrate.fields.has_many.none", default: "–") %>
+<% end %>

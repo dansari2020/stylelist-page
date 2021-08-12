@@ -17,12 +17,13 @@ to display a collection of resources in an HTML table.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Collection
 %>
-
-<table class="min-w-full divide-y divide-gray-200" aria-labelledby="<%= table_title %>">
-  <thead class="bg-gray-50">
-    <tr>
+<div class="block w-full overflow-x-scroll">
+<table class="text-left w-full divide-y divide-gray-200 border-b border-gray-200" aria-labelledby="<%= table_title %>">
+  <thead class="bg-gray-50 text-white w-full">
+    <tr class="flex w-full px-4 md:px-8">
       <% collection_presenter.attribute_types.each do |attr_name, attr_type| %>
-        <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
+        <th class="text-center py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
+        <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>
         cell-label--<%= attr_type.html_class %>
         cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
         scope="col"
@@ -45,23 +46,27 @@ to display a collection of resources in an HTML table.
           <% end %>
         </th>
       <% end %>
+      <th class="relative px-6 py-3 <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>" scope="col">
       <% [collection_presenter.resource_name == "user",
           valid_action?(:edit, collection_presenter.resource_name),
           valid_action?(:destroy, collection_presenter.resource_name)].count(true).times do %>
-        <th class="relative px-6 py-3" scope="col"></th>
       <% end %>
+      </th>
     </tr>
   </thead>
-
-  <tbody class="bg-white divide-y divide-gray-200">
+  <tbody class="bg-white divide-y divide-gray-200 flex flex-col items-center justify-between overflow-y-scroll w-full"
+  <% if resources.model == "User" %>
+  style="height: 50vh;"
+  <% end %>
+  >
     <% resources.each do |resource| %>
-      <tr class="js-table-row hover:bg-gray-100"
+      <tr class="js-table-row hover:bg-gray-100 flex w-full items-center px-4 md:px-8"
           <% if show_action? :show, resource %>
             <%= %(tabindex=0 role=link data-url=#{polymorphic_path([namespace, resource])}) %>
           <% end %>
           >
         <% collection_presenter.attributes_for(resource).each do |attribute| %>
-          <td class="px-8 py-2 h-16 whitespace-nowrap cell-data--<%= attribute.html_class %>">
+          <td class="text-center py-2 min-h-16 whitespace-nowrap <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %> cell-data--<%= attribute.html_class %>">
             <% if show_action? :show, resource -%>
               <a href="<%= polymorphic_path([namespace, resource]) -%>"
                  tabindex="-1"
@@ -74,35 +79,54 @@ to display a collection of resources in an HTML table.
             <% end -%>
           </td>
         <% end %>
+        <td class="flex space-x-2 items-center justify-center <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>">
         <% if resource.is_a?(User) %>
-        <td>
           <%= link_to(
-            "Visit page",
             resource.url,
             class: "text-gray-500",
+            alt: "Visit page",
             target: "_blank"
-          ) %>
-        </td>
+          ) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          <% end %>
         <% end %>
 
         <% if valid_action? :edit, collection_presenter.resource_name %>
-          <td><%= link_to(
-            t("administrate.actions.edit"),
+          <% if show_action? :edit, resource%>
+            <%= link_to(
             [:edit, namespace, resource],
+            alt: "Edit",
             class: "text-indigo-600 hover:text-indigo-900 font-normal text-sm",
-          ) if show_action? :edit, resource%></td>
+          ) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            <% end %>
+          <% end %>
         <% end %>
 
         <% if valid_action? :destroy, collection_presenter.resource_name %>
-          <td><%= link_to(
-            t("administrate.actions.destroy"),
-            [namespace, resource],
-            class: "text-red-600 hover:text-red-900 font-normal text-sm",
-            method: :delete,
-            data: { confirm: t("administrate.actions.confirm") }
-          ) if show_action? :destroy, resource %></td>
+            <% if show_action? :destroy, resource %>
+              <%= link_to(
+              [namespace, resource],
+              class: "text-red-600 hover:text-red-900 font-normal text-sm",
+              method: :delete,
+              alt: "Delete",
+              data: { confirm: t("administrate.actions.confirm") }
+            ) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            <% end %>
+          <% end %>
         <% end %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>

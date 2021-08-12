@@ -3,8 +3,8 @@
 </div>
 <div class="field-unit__field">
 <% if field.attached? %>
-  <%= image_tag(field.rep_url(field.data), class: "object-cover h-20 w-20 rounded-full") %>
+  <%= image_tag(field.rep_url(field.data), class: "object-cover h-10 md:h-20 w-10 md:w-20 rounded-full mx-auto md:mx-1") %>
 <% else %>
-  <%= image_tag(field.default_url, class: "object-cover h-20 w-20  rounded-full") %>
+  <%= image_tag(field.default_url, class: "object-cover h-10 md:h-20 w-10 md:w-20 rounded-full mx-auto md:mx-1") %>
 <% end %>
 </div>

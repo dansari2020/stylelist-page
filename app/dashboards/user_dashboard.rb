@@ -38,11 +38,11 @@ class UserDashboard < Administrate::BaseDashboard
       searchable: false
     ),
     active: BooleanIconField,
-    specialties: Field::HasMany,
-    services: Field::HasMany,
+    specialties: TagsField,
+    services: TagsField,
     availabilities: Field::HasMany.with_options(limit: 7, sort_by: :day),
     social_media: Field::HasMany,
-    languages: Field::HasMany,
+    languages: TagsField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.status_list }),
@@ -102,9 +102,9 @@ class UserDashboard < Administrate::BaseDashboard
     address
     specialties
     services
+    languages
     availabilities
     social_media
-    languages
   ].freeze
 
   # FORM_ATTRIBUTES

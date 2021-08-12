@@ -1,5 +1,5 @@
 <form class="flex-1 w-full space-y-4" role="search" x-ref="searchForm" x-data="{order: '<%= params.dig(:user, :order) %>', direction: '<%= params.dig(:user, :direction) %>'}">
-  <div class="flex space-x-4 flex-col md:flex-row">
+  <div class="flex md:space-x-4 space-y-4 md:space-y-0 flex-col md:flex-row">
     <select class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200" onchange="this.form.submit()"
           id="filter_status"
           name="filter[status]">
@@ -38,6 +38,6 @@
             class="border-blueGray-300 px-3 py-2 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200"
             value="<%= params[:filter][:search] if params.dig(:filter, :search).present? %>" />
 
-    <%= link_to t("administrate.search.clear"), admin_users_path, class: "text-red-500 w-32 text-right" %>
+    <%= link_to t("administrate.search.clear"), admin_users_path, class: "text-red-500 w-32 md:text-right block py-2" %>
   </div>
 </form>

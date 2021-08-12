@@ -12,9 +12,14 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # created_at: Field::DateTime,
   # updated_at: Field::DateTime
   ATTRIBUTE_TYPES = {
-    kind: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    kind: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.kind_list }),
+    kind_text: Field::String.with_options(
+      searchable: false
+    ),
     url: Field::String,
-    full_url: Field::String
+    full_url: Field::String.with_options(
+      searchable: false
+    )
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,7 +30,6 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # user
   # id
   COLLECTION_ATTRIBUTES = %i[
-    kind
     full_url
   ].freeze
 
@@ -36,7 +40,6 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # created_at
   # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
-    kind
     full_url
   ].freeze
 
@@ -45,7 +48,7 @@ class SocialMediumDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   # user
   FORM_ATTRIBUTES = %i[
-    kind
+    kind_text
     url
   ].freeze
 
