@@ -8,8 +8,7 @@
     <%= render partial: "components/language/view", locals: {user: user, editable: editable} %>
   </li>
   <li class="p-2 border-0.5 border-gray-200 rounded-md md:py-4 md:border-l-0 md:border-r-0 md:border-t-0">
-    <%= turbo_stream_from "address" %>
-    <%= render partial: "components/address/view", locals: {user: user, editable: editable} %>
+    <%= render partial: "addresses/address", locals: { address: user.address || user.build_address, user: current_user } %>
   </li>
   <li class="p-2 border-0.5 border-gray-200 rounded-md md:pt-4 md:border-t-0 md:border-l-0 md:border-r-0">
     <%= turbo_stream_from "availability" %>

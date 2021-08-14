@@ -1,23 +1,21 @@
-<%= turbo_frame_tag "address" do %>
-  <div class="flex justify-center w-full">
-    <div id="view_address" class="flex justify-between w-full">
-      <div class="flex-1">
-        <h2 class="pb-4 leading-3 roboto-font font-medium text-xs">Address</h2>
-        <p class="leading-2 font-light text-sm">
-          <% if user.has_full_address? %>
-            <% Array.wrap(user.full_address).each do |p| %>
-              <%= p %><br/>
-            <% end %>
-          <% else %>
-            Where is your salon located?
+<% if user.has_full_address? %>
+  <%= render user.address %>
+<% else %>
+  <%= turbo_frame_tag "address" do %>
+    <div class="flex justify-center w-full">
+      <div id="view_address" class="flex justify-between w-full">
+        <div class="flex-1">
+          <h2 class="pb-4 leading-3 roboto-font font-medium text-xs">Address</h2>
+          <p class="leading-2 roboto-font font-light text-sm">
+              Where is your salon located?
+          </p>
+        </div>
+        <div class="flex items-start">
+          <% if user_signed_in? && current_user == user %>
+            <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
           <% end %>
-        </p>
-      </div>
-      <div class="flex items-start">
-        <% if editable %>
-          <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

@@ -1,0 +1,3 @@
+<%= turbo_stream.update [current_user, :address] do %>
+  <%= render "form", address: @address, user: current_user %>
+<% end %>

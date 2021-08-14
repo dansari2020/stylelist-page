@@ -51,4 +51,5 @@ Rails.application.routes.draw do
   get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
   get "/:username", to: "home#show"
   post "/portfolio/:portfolio_id/flags" => "flags#create", :as => "portfolio_flags"
+  resources :addresses
 end

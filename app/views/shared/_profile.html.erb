@@ -7,11 +7,14 @@
       <%= turbo_stream_from "avatar" %>
       <%= render partial: "components/avatar/view", locals: {user: user, editable: editable} %>
       <div class="justify-center p-2 md:mx-auto" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
-        <h2 class="leading-6 text-base md:text-left whitespace-nowrap roboto-font font-medium" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
+        <h2 class="leading-6 text-base md:text-left whitespace-nowrap roboto-font font-medium capitalize" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
           <%= user.full_name %><span class="pl-2 text-xs text-gray-500 md:text-sm"><%= "(#{user.pronoun})" if user.pronoun.present? %></h2>
         </h2>
         <p class="text-sm font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.job %></p>
-        <p class="text-sm font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.short_address %></p>
+        
+        <p class="text-sm font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
+          <%= render partial: "addresses/short_address", locals: { address: user.address || user.build_address, user: current_user } %>
+        </p>
         <div class="md:hidden" x-show="tab == 'profile'">
           <div class="flex justify-center w-full" x-data="{ edit : false }">
             <%= turbo_stream_from "bio" %>
