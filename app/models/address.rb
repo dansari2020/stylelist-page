@@ -29,12 +29,12 @@ class Address < ApplicationRecord
   end
 
   after_create_commit do
-    broadcast_replace_to [user, :short_address], target: "#{dom_id(user)}_short_address", partial: "addresses/short_address", locals: { address: self } 
-    broadcast_replace_to [user, :address], target: "#{dom_id(user)}_address", partial: "addresses/address", locals: { address: self } 
+    broadcast_replace_to [user, :short_address], target: "#{dom_id(user)}_short_address", partial: "addresses/short_address", locals: {address: self}
+    broadcast_replace_to [user, :address], target: "#{dom_id(user)}_address", partial: "addresses/address", locals: {address: self}
   end
 
   after_update_commit do
-    broadcast_replace_to [self, :short_address], partial: "addresses/short_address", locals: { address: self }, target: "#{dom_id(self)}_short_address"
+    broadcast_replace_to [self, :short_address], partial: "addresses/short_address", locals: {address: self}, target: "#{dom_id(self)}_short_address"
     broadcast_replace_to self
   end
 end

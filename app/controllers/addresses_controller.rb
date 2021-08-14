@@ -4,18 +4,19 @@ class AddressesController < ApplicationController
   before_action :set_address
 
   def new
-    render turbo_stream: turbo_stream.replace("#{dom_id(current_user)}_address", 
-      partial: "form", 
-      locals: { address: @address, user: current_user })
+    render turbo_stream: turbo_stream.replace("#{dom_id(current_user)}_address",
+      partial: "form",
+      locals: {address: @address, user: current_user})
   end
 
   def create
     respond_to do |format|
-      if @address = Address.create(address_params.merge(user_id: current_user.id))
+      @address = Address.create(address_params.merge(user_id: current_user.id))
+      if @address
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id(@address), 
-            partial: "addresses/address", 
-            locals: { user: current_user, address: @address })
+          render turbo_stream: turbo_stream.replace(dom_id(@address),
+            partial: "addresses/address",
+            locals: {user: current_user, address: @address})
         end
       end
     end
@@ -31,9 +32,9 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.update(address_params)
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id(@address), 
-            partial: "addresses/address", 
-            locals: { user: current_user, address: @address })
+          render turbo_stream: turbo_stream.replace(dom_id(@address),
+            partial: "addresses/address",
+            locals: {user: current_user, address: @address})
         end
       end
     end
@@ -42,7 +43,7 @@ class AddressesController < ApplicationController
   private
 
   def set_address
-    @address = if params[:id].blank? 
+    @address = if params[:id].blank?
       current_user.build_address
     else
       Address.find_by!(id: params[:id], user: current_user)
