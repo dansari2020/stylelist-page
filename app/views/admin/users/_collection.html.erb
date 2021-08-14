@@ -22,13 +22,8 @@ to display a collection of resources in an HTML table.
   <thead class="bg-gray-50 text-white w-full">
     <tr class="flex w-full px-4 md:px-8">
       <% collection_presenter.attribute_types.each do |attr_name, attr_type| %>
-        <th class="text-center py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
-        <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>
-        cell-label--<%= attr_type.html_class %>
-        cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
-        scope="col"
-        role="columnheader"
-        aria-sort="<%= sort_order(collection_presenter.ordered_html_class(attr_name)) %>">
+        <th class="text-center py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %> cell-label--<%= attr_type.html_class %> cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
+          scope="col" role="columnheader" aria-sort="<%= sort_order(collection_presenter.ordered_html_class(attr_name)) %>">
         <%= link_to(sanitized_order_params(page, collection_field_name).merge(
           collection_presenter.order_params_for(attr_name, key: collection_field_name)
         )) do %>
