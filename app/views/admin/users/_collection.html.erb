@@ -20,9 +20,9 @@ to display a collection of resources in an HTML table.
 <div class="block w-full overflow-x-scroll">
 <table class="text-left w-full divide-y divide-gray-200 border-b border-gray-200" aria-labelledby="<%= table_title %>">
   <thead class="bg-gray-50 text-white w-full">
-    <tr class="flex w-full px-4 md:px-8">
+    <tr class="grid gap-4 <%= "grid-cols-#{collection_presenter.attribute_types.size + 1}" %> w-full px-4 md:px-8">
       <% collection_presenter.attribute_types.each do |attr_name, attr_type| %>
-        <th class="text-center py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %> cell-label--<%= attr_type.html_class %> cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
+        <th class="text-center py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cell-label--<%= attr_type.html_class %> cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>"
           scope="col" role="columnheader" aria-sort="<%= sort_order(collection_presenter.ordered_html_class(attr_name)) %>">
         <%= link_to(sanitized_order_params(page, collection_field_name).merge(
           collection_presenter.order_params_for(attr_name, key: collection_field_name)
@@ -41,7 +41,7 @@ to display a collection of resources in an HTML table.
           <% end %>
         </th>
       <% end %>
-      <th class="relative px-6 py-3 <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>" scope="col">
+      <th class="relative px-6 py-3" scope="col">
       <% [collection_presenter.resource_name == "user",
           valid_action?(:edit, collection_presenter.resource_name),
           valid_action?(:destroy, collection_presenter.resource_name)].count(true).times do %>
@@ -55,13 +55,13 @@ to display a collection of resources in an HTML table.
   <% end %>
   >
     <% resources.each do |resource| %>
-      <tr class="js-table-row hover:bg-gray-100 flex w-full items-center px-4 md:px-8"
+      <tr class="js-table-row hover:bg-gray-100 grid gap-4 <%= "grid-cols-#{collection_presenter.attribute_types.size + 1}" %> w-full items-center px-4 md:px-8"
           <% if show_action? :show, resource %>
             <%= %(tabindex=0 role=link data-url=#{polymorphic_path([namespace, resource])}) %>
           <% end %>
           >
         <% collection_presenter.attributes_for(resource).each do |attribute| %>
-          <td class="text-center py-2 min-h-16 whitespace-nowrap <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %> cell-data--<%= attribute.html_class %>">
+          <td class="text-center py-2 min-h-16 whitespace-nowrap cell-data--<%= attribute.html_class %>">
             <% if show_action? :show, resource -%>
               <a href="<%= polymorphic_path([namespace, resource]) -%>"
                  tabindex="-1"
@@ -74,7 +74,7 @@ to display a collection of resources in an HTML table.
             <% end -%>
           </td>
         <% end %>
-        <td class="flex space-x-2 items-center justify-center <%= "w-1/#{collection_presenter.attribute_types.size + 1}" %>">
+        <td class="flex space-x-2 items-center justify-center">
         <% if resource.is_a?(User) %>
           <%= link_to(
             resource.url,
