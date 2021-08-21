@@ -6,7 +6,7 @@
     </div>
     <%= render "devise/shared/error_messages", resource: @user %>
     <div class="flex flex-row items-center w-full mb-4">
-      <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2", data: { "turbo-frame": "_top" } do %>
+      <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm", data: { "turbo-frame": "_top" } do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/speciality.svg", class: "h-5" %>
           <% if @user.has_specialties? %>
@@ -17,7 +17,7 @@
         </div>
         Your specialties
       <% end %>
-      <%= link_to wizard_path(:services), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2", data: { "turbo-frame": "_top" } do %>
+      <%= link_to wizard_path(:services), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm", data: { "turbo-frame": "_top"} do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/services.svg", class: "h-5" %>
           <% if @user.has_services? %>
@@ -30,7 +30,7 @@
       <% end %>
     </div>
     <div class="flex flex-row items-center w-full mb-4">
-      <%= link_to wizard_path(:bio), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
+      <%= link_to wizard_path(:bio), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/bio.svg", class: "h-5" %>
           <% if @user.has_bio? %>
@@ -41,7 +41,7 @@
         </div>
         Your biography
       <% end %>
-      <%= link_to wizard_path(:education), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2" do %>
+      <%= link_to wizard_path(:education), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/education.svg", class: "h-5" %>
           <% if @user.has_education? %>
@@ -54,7 +54,7 @@
       <% end %>
     </div>
     <div class="flex flex-row items-center w-full mb-4">
-      <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2" do %>
+      <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/calendar.svg", class: "h-5" %>
           <% if @user.has_started_at? %>
@@ -65,7 +65,7 @@
         </div>
         Years of Experience
       <% end %>
-      <%= link_to wizard_path(:social_media), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2" do %>
+      <%= link_to wizard_path(:social_media), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
           <%= image_tag "icons/social.svg", class: "h-5" %>
           <% if @user.has_social_media? %>

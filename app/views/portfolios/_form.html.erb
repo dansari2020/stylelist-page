@@ -102,20 +102,20 @@
 <div x-data="toggleBottomMenu()" x-init="init()"></div>
 <div x-data="{ imgModal : false }" @toggle-modal.window="imgModal = !imgModal">
 <%= form_for(portfolio, url: portfolio_path(portfolio), html: { method: :put }) do |f| %>
-  <div class="text-right actions px-4 pb-3 md:hidden">  
+  <div class="text-right actions px-4 pb-3 md:hidden pt-4 md:pt-">  
     <%= link_to "Cancel", root_url, class: "text-black text-white text-blue-500 px-4 py-2 rounded-md text-sm font-medium" %>
     <%= f.submit "Apply", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>
   <div class="flex flex-col md:space-x-4 md:flex-row-reverse">
-    <div class="md:flex pt-12 md:overflow-y-scroll md:w-2/3 lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
+    <div class="md:flex pt-4 md:pt-12 md:overflow-y-scroll md:w-2/3 lg:w-4/6" x-data="{portfolioOpt: '', serviceTypes: [], serviceIds: []}">
       <div class="md:w-1/2 px-4 md:px-8 flex flex-col w-full">
         <div class="w-full flex-1">
           <% Array.wrap(portfolio.pictures).each do |picture| %>
             <div class="">
-              <p class="py-2 pt-4 text-gray-600">
+              <p class="hidden md:flex py-2 pt-4 text-gray-600">
                 <%= picture.blob.filename %>
               </p>
-              <%= image_tag picture, class: "w-36 rounded-md"  %>
+              <%= image_tag picture, class: "w-25 md:w-36 rounded-md"  %>
             </div>
           <% end %>
           <div class="w-full mt-5">

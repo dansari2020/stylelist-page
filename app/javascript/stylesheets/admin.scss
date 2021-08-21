@@ -24,67 +24,6 @@ html {
 .h-15 {
   height: 3.75rem;
 }
-.h-screen-headless {
-  height: calc(100% - 60px);
-}
-.border-color-circle {
-  border-color: rgba(0, 0, 0, 0.6);
-}
-.color-circle {
-  color: rgba(0, 0, 0, 0.6);
-}
-@media (min-width: 768px) {
-  .h-screen-main {
-    height: calc(100vh - 80px);
-  }
-
-  .md-bg-gray-light {
-    background-color: #e5e5e5;
-  }
-  .h-screen-headless {
-    max-height: 667px;
-    overflow-y: auto;
-  }
-  .md-min-h-590 {
-    min-height: 590px;
-  }
-  .md-w-375 {
-    width: 375px;
-  }
-  .max-w-image-portfolio {
-    width: 33.333333%;
-  }
-  .popup .max-w-image-portfolio {
-    max-width: 499px;
-  }
-  .max-w-info-portfolio {
-    width: 66.666667%;
-  }
-  .popup .max-w-info-portfolio {
-    max-width: 375px;
-  }
-  .popup .portfolio-info {
-    max-width: 874px;
-    max-height: 499px;
-  }
-  .md-box-shadow-right {
-    box-shadow: 4px 0 4px -4px rgb(0 0 0 / 25%);
-  }
-}
-@media (max-width: 767px) {
-  .min-h-main {
-    height: calc(100% - 60px);
-  }
-  .h-screen-main {
-    height: 100%;
-  }
-  .max-w-image-portfolio {
-    width: 100%;
-  }
-  .max-w-info-portfolio {
-    width: 100%;
-  }
-}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

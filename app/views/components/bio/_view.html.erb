@@ -1,6 +1,6 @@
 <% frame = defined?(bio) ? bio : "bio" %>
 <%= turbo_frame_tag frame do %>
-  <div id="view_bio" class="flex justify-between w-full mt-5 md:mt-0">
+  <div id="view_bio" class="flex justify-between w-full mt-2 md:mt-0">
     <div class="flex-1">
       <h2 class="hidden pb-2 leading-3 md:b-4 md:block roboto-font font-medium text-xs">Bio</h2>
       <% if user.has_bio? %>

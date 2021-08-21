@@ -13,6 +13,7 @@ import "alpine-turbo-drive-adapter";
 import "alpinejs";
 
 // import tailwind into javascript
+import "stylesheets/tailwindcss/tailwind.scss"
 require("stylesheets/application.scss");
 
 Rails.start();
