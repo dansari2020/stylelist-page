@@ -140,9 +140,11 @@
                       </div>
                     </template>
                     <template x-for="(tag, index) in removeTags">
-                      <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                      <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                      <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                      <div :data-id="tag">
+                        <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                        <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                        <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                      </div>
                     </template>
                   </div>
                 </div>
@@ -176,9 +178,11 @@
                             </div>
                           </template>
                           <template x-for="(tag, index) in removeTags">
-                            <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
-                            <input type="hidden" name="portfolio[service_types_attributes][][name]" />
-                            <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                            <div :data-id="tag">
+                              <input type="hidden" name="portfolio[service_types_attributes][][id]" :value="tag" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][name]" />
+                              <input type="hidden" name="portfolio[service_types_attributes][][_destroy]" value="true" />
+                            </div>
                           </template>
                         </div>
                       </div>
