@@ -126,7 +126,8 @@
           </div>
           <div class="w-full my-4 text-right actions">
             <%= link_to "Cancel", "#", class: "text-black text-white text-gray-500 lg:px-4 py-2 text-sm font-medium mr-4", "@click.prevent": "toggleBottomMenu(); submenuSelected = false; submenu = ''" %>
-            <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+            <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium", "x-show": "submenu !== 'deactivate'" %>
+            <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium", "x-show": "submenu === 'deactivate'", data: { confirm: 'Are you sure you want to deativate your account?' }  %>
           </div>
         <% end %>
       </div>
