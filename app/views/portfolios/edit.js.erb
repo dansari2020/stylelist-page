@@ -1,1 +1,4 @@
-document.getElementById("portfolioInfoModal").innerHTML = "<%= j render "portfolios/form_modal", portfolio: @portfolio %>";
+var portfolioInfoModal = document.getElementById("portfolioInfoModal")
+if (portfolioInfoModal) {
+  portfolioInfoModal.innerHTML = "<%= j render "portfolios/form_modal", portfolio: @portfolio %>";
+}

@@ -71,6 +71,7 @@ class PortfoliosController < ApplicationController
       picture&.delete
       portfolio.destroy if portfolio.pictures.empty?
     end
+    flash[:destroy_pictures_msg] = "#{params[:pictures_ids].size} #{"Photo".pluralize(params[:pictures_ids].size)} Deleted"
     redirect_to root_url
   end
 

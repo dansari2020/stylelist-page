@@ -50,7 +50,7 @@
           <label for="<%= dom_id(portfolio.picture) %>" :class="{ 'ediable' : manage}">
             <span></span>
             <%= link_to portfolio_path(portfolio), remote: true, "@click": "dispatchFunction($dispatch, manage, '#{portfolio_path(portfolio)}')", class: "cursor-pointer popup-target w-full" do %>
-                <%= image_tag thumb_url(portfolio.picture), class: "md:rounded object-cover w-full border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-50 grayscale contrast-200' : manage }" %>
+                <%= image_tag thumb_url(portfolio.picture), class: "md:rounded object-cover w-full border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-60' : manage }" %>
             <% end %>
           </label>
       <% end %>

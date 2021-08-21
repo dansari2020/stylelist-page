@@ -1,6 +1,7 @@
 var  flags_count = document.getElementById('flags_count_<%= @flag.portfolio.id %>')
+var flag_container = document.getElementById('flagContainer');
 if (flags_count) {
   flags_count.innerHTML = "<%= @flag.portfolio.flags_count %>"
-} else {
-  document.getElementById('flagContainer').innerHTML = "<span class='text-green-500 text-center fomt-normal'>The picture has flaged</span>"
+} else if (flag_container) {
+  flag_container.innerHTML = "<span class='text-green-500 text-center fomt-normal'>The picture has flaged</span>"
 }
