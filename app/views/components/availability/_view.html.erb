@@ -16,7 +16,7 @@
         </div>
       </div>
       <% if has_availabilities %>
-        <ul class="w-full md:w-3/5">
+        <ul class="w-full" style="max-width: 330px">
           <% user.availabilities.each do |availability| %>
             <li class="flex justify-between w-full py-4 border-t">
               <span class="roboto-font font-light text-sm">
@@ -24,7 +24,7 @@
               </span>
               <span class="text-right roboto-font font-light text-sm">
                 <% if availability.opened? %>
-                  <%= "#{availability.open_at&.strftime("%I:%M %p")} - #{availability.close_at&.strftime("%I:%M %p")}" %>
+                  <%= "#{availability.open_at_in_text} - #{availability.close_at_in_text}" %>
                 <% else %>
                   Not Available
                 <% end %>

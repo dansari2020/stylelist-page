@@ -16,6 +16,10 @@
       input[type="checkbox"]:checked + label.availability span {
         background: url('<%= image_url("icons/selected-checkbox.svg") %>') center center no-repeat;
       }
+      input[type="time"]::-webkit-calendar-picker-indicator {
+          background: none;
+          display:none;
+      }
     </style>
     <div class="py-2">
       <h1 class="text-normal">Availability</h1>
@@ -27,6 +31,7 @@
         <% 0.upto(6) do |day_number| %>
           <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
         <% end %>
+        <div class="w-full" style="max-width: 330px">
         <%= f.fields_for :availabilities, availabilities do |av_form|%>
           <div class="w-full py-4 border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
             <div class="flex flex-row w-full">
@@ -51,14 +56,15 @@
             <div class="flex flex-1 flew-row " x-show="work">
               <div class="w-14">
               </div>
-                <%= av_form.time_field :open_at, ampm: true, class: "mx-2 p-2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5" %>
-                <% #= av_form.time_select :open_at, {ampm: true, default: av_form.object.open_at || Time.current.change(hour: 9, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
-              <span class="px-2 mx-auto leading-10">-</span>              
-                <%= av_form.time_field :close_at, ampm: true, class: "mx-2 p-2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5" %>
-                <% #= av_form.time_select :close_at, {ampm: true, default: av_form.object.close_at || Time.current.change(hour: 20, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
+                <%= av_form.time_field :open_at, class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                <%= av_form.select :open_at_ampm, options_for_select(Availability.open_at_ampms.keys, av_form.object.open_at_ampm), {}, class: "px-4 appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+              <span class="px-2 mx-auto h-16 inline-flex items-center">-</span>              
+                <%= av_form.time_field :close_at, class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                <%= av_form.select :close_at_ampm, options_for_select(Availability.close_at_ampms.keys, av_form.object.close_at_ampm), {}, class: "px-4 appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
             </div>
           </div>
         <% end %>
+        </div>
       </div>
       <input type="hidden" name="from_url" value="<%= from_url %>">
       <input type="hidden" name="frame" value="availability_form">
