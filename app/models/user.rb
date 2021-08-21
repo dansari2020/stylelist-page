@@ -112,7 +112,8 @@ class User < ApplicationRecord
   def backgroun_medium
     return unless background.attached?
 
-    background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
+    # if background.variable?
+    background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0") 
   end
 
   def distance_of_time_at_now
