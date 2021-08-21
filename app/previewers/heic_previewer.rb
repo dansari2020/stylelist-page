@@ -25,7 +25,7 @@
 # end
 
 class HEICPreviewer < ActiveStorage::Previewer
-  CONTENT_TYPE = 'image/heic'.freeze
+  CONTENT_TYPE = "image/heic".freeze
 
   class << self
     def accept?(blob)
@@ -37,15 +37,15 @@ class HEICPreviewer < ActiveStorage::Previewer
 
       require "image_processing/vips"
       @vips_exists = Vips.at_least_libvips?(0, 0)
-    rescue StandardError
+    rescue
       @vips_exists = false
     end
   end
 
   def preview
     download_blob_to_tempfile do |input|
-      io = ImageProcessing::Vips.source(input).convert('png').call
-      yield io: io, filename: "#{blob.filename.base}.png", content_type: 'image/png'
+      io = ImageProcessing::Vips.source(input).convert("png").call
+      yield io: io, filename: "#{blob.filename.base}.png", content_type: "image/png"
     end
   end
 end

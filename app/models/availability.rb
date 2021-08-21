@@ -24,11 +24,11 @@ class Availability < ApplicationRecord
   end
 
   def open_at
-    in_12_hours(read_attribute(:open_at)) if read_attribute(:open_at).present? 
+    in_12_hours(read_attribute(:open_at)) if read_attribute(:open_at).present?
   end
-  
+
   def close_at
-    in_12_hours(read_attribute(:close_at)) if read_attribute(:close_at).present? 
+    in_12_hours(read_attribute(:close_at)) if read_attribute(:close_at).present?
   end
 
   def in_12_hours(time)
@@ -41,23 +41,23 @@ class Availability < ApplicationRecord
 
   def open_at=(new_open_at)
     if new_open_at.present?
-      res = DateTime.strptime(new_open_at, "%H:%M") 
+      res = DateTime.strptime(new_open_at, "%H:%M")
       if res.strftime("%P") == "am" && open_at_ampm_pm?
-        res = res + 12.hours
+        res += 12.hours
       elsif res.strftime("%P") == "pm" && open_at_ampm_am?
-        res = res - 12.hours
+        res -= 12.hours
       end
       self[:open_at] = res
     end
   end
-  
+
   def close_at=(new_close_at)
     if new_close_at.present?
-      res = DateTime.strptime(new_close_at, "%H:%M") 
+      res = DateTime.strptime(new_close_at, "%H:%M")
       if res.strftime("%P") == "am" && close_at_ampm_pm?
-        res = res + 12.hours
+        res += 12.hours
       elsif res.strftime("%P") == "pm" && close_at_ampm_am?
-        res = res - 12.hours
+        res -= 12.hours
       end
       self[:close_at] = res
     end
