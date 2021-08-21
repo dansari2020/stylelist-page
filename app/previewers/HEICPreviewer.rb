@@ -24,7 +24,7 @@
 #   end
 # end
 
-class HEICPreviewer < ActiveStorage::Previewer
+class HeicPreviewer < ActiveStorage::Previewer
   CONTENT_TYPE = "image/heic".freeze
 
   class << self
