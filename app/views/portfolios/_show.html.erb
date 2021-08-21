@@ -8,7 +8,7 @@
     <% end %>
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
   </div>
-  <div class="flex flex-1 flex-row overflow-hidden bg-white rounded-2xl" style="max-width: 874px;">
+  <div class="flex flex-1 flex-row overflow-hidden bg-white rounded-xl" style="max-width: 874px;">
     <div id="portfolioInfoModal" class="px-3 py-5 overflow-y-scroll" style="width:375px;max-height: 499px">
       <div class="flex">
         <% if editable %>
@@ -17,29 +17,29 @@
       </div>
       <ul class="my-3 space-y-3 list-none">
         <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Description</h2>
-            <p class="text-xs font-medium text-center text-gray-500 md:text-left md:text-sm leading-2"><%= portfolio.description&.html_safe %></p>
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-xs font-medium roboto-font md:block">Description</h2>
+            <p class="text-xs text-center roboto-font font-light md:text-left md:text-sm leading-2"><%= portfolio.description&.html_safe %></p>
         </li>
         <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Services Provided</h2>
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-xs font-medium roboto-font md:block">Services Provided</h2>
           <ul class="flex flex-wrap">
             <% portfolio.service_types.each do |service_type| %>
-              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full"><%= service_type.name %></span></li>
+              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm roboto-font font-light border border-gray-200 rounded-full"><%= service_type.name %></span></li>
             <% end %>
           </ul>
         </li>
         <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair Type</h2>
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-xs font-medium roboto-font md:block">Hair Type</h2>
           <ul class="flex flex-wrap">
             <% Array.wrap(portfolio.hair_type).each do |hair_type| %>
-              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border border-gray-200 rounded-full"><%= hair_type&.humanize %></span></li>
+              <li class="mt-2 mr-2"><span class="block px-3 py-1 text-sm border roboto-font font-light border-gray-200 rounded-full"><%= hair_type&.humanize %></span></li>
             <% end %>
           </ul>
         </li>
         <li class="p-2 border border-gray-200 md:py-4 md:mt-3">
-          <h2 class="hidden pb-2 leading-3 md:b-4 text-normal md:block">Hair length</h2>
+          <h2 class="hidden pb-2 leading-3 md:b-4 text-xs font-medium roboto-font md:block">Hair length</h2>
           <% if portfolio.hair_length.present? %>
-          <span class="px-3 py-1 text-sm border border-gray-200 rounded-full"><%= portfolio.hair_length&.humanize %></span>
+          <span class="px-3 py-1 text-sm border  border-gray-200 roboto-font font-light rounded-full"><%= portfolio.hair_length&.humanize %></span>
           <% end %>
         </li>
       </ul>

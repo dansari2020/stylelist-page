@@ -133,7 +133,7 @@ class User < ApplicationRecord
       end
     end
 
-    components.join(", ")
+    components.empty? ? "Less than one month" : components.join(", ")
   end
 
   # def active_for_authentication?
