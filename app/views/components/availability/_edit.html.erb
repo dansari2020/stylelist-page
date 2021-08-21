@@ -44,20 +44,18 @@
                       <%= av_form.text_field :day, class: "hidden" %>
                     <% end %>
                   </p>
-                  <p class="flex-1 text-center" x-show="!work">Not Available</p>
+                  <p class="flex-1 text-right pr-4" x-show="!work">Not Available</p>
                 </div>
               </div>
             </div>
             <div class="flex flex-1 flew-row " x-show="work">
               <div class="w-14">
               </div>
-              <div class="flex flex-1 leading-10">
-                <%= av_form.time_select :open_at, {ampm: true, default: av_form.object.open_at || Time.current.change(hour: 9, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
-              </div>
-              <span class="px-2 mx-auto leading-10">-</span>
-              <div class="flex flex-1 leading-10">
-                <%= av_form.time_select :close_at, {ampm: true, default: av_form.object.close_at || Time.current.change(hour: 20, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
-              </div>
+                <%= av_form.time_field :open_at, ampm: true, class: "mx-2 p-2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5" %>
+                <% #= av_form.time_select :open_at, {ampm: true, default: av_form.object.open_at || Time.current.change(hour: 9, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
+              <span class="px-2 mx-auto leading-10">-</span>              
+                <%= av_form.time_field :close_at, ampm: true, class: "mx-2 p-2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5" %>
+                <% #= av_form.time_select :close_at, {ampm: true, default: av_form.object.close_at || Time.current.change(hour: 20, min: 0), ":disabled": "!work"}, class: "mx-2 p-2 w-1/2 rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white space-x-4 space-x-reverse" %>
             </div>
           </div>
         <% end %>
