@@ -24,7 +24,7 @@
               </span>
               <span class="text-right roboto-font font-light text-sm">
                 <% if availability.opened? %>
-                  <%= "#{availability.open_at.strftime("%I:%M %p")} - #{availability.close_at.strftime("%I:%M %p")}" %>
+                  <%= "#{availability.open_at&.strftime("%I:%M %p")} - #{availability.close_at&.strftime("%I:%M %p")}" %>
                 <% else %>
                   Not Available
                 <% end %>

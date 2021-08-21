@@ -12,7 +12,7 @@ class Address < ApplicationRecord
     elsif privacy?
       ["Your address has been hidden"]
     else
-      [salon_name, street_number, city_address, country.name].reject { |e| e.blank? }.compact
+      [salon_name, street_number, city_address, country&.name].reject { |e| e.blank? }.compact
     end
   end
 

@@ -9,6 +9,7 @@ class Availability < ApplicationRecord
     if !opened?
       self.open_at = nil
       self.close_at = nil
+      self.opened = false
     end
   end
 
@@ -22,7 +23,7 @@ class Availability < ApplicationRecord
 
   def working_hours
     if opened?
-      "#{open_at.strftime("%I:%M %p")} - #{close_at.strftime("%I:%M %p")}"
+      "#{open_at&.strftime("%I:%M %p")} - #{close_at&.strftime("%I:%M %p")}"
     else
       "Not Available"
     end
