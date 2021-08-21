@@ -93,10 +93,11 @@ class UsersController < ApplicationController
       specialties_attributes: [:id, :name, :_destroy],
       services_attributes: [:id, :name, :_destroy],
       social_media_attributes: [:id, :kind, :url, :_destroy],
-      availabilities_attributes: [:id, :day, "open_at(1i)", "open_at(2i)", "open_at(3i)", "open_at(4i)", "open_at(5i)",
-        "close_at(1i)", "close_at(2i)", "close_at(3i)", "close_at(4i)", "close_at(5i)", :opened],
+      availabilities_attributes: [:id, :day, :open_at, :close_at, :opened],
       address_attributes: [:id, :country_code, :salon_name, :street, :unit_suit, :city, :province,
         :postal, :privacy])
+    # "open_at(1i)", "open_at(2i)", "open_at(3i)", "open_at(4i)", "open_at(5i)",
+    # "close_at(1i)", "close_at(2i)", "close_at(3i)", "close_at(4i)", "close_at(5i)",
   end
 
   def user
