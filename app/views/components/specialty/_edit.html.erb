@@ -7,8 +7,9 @@
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
         <div class="relative block w-full">
-          <div x-data data-limit="3" data-tags='[<%= user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
-        data-tagIds='[<%= user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
+          <div x-data data-limit="3" 
+            data-tags='[<%= user.specialties.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
+            data-tagIds='[<%= user.specialties.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
             <div x-data="tagSelect()" x-init="init('parentEl')" @click.away="clearSearch()" @keydown.escape="clearSearch()">
               <div class="relative inline-block w-full overflow-y-scroll" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                 <div :class="[open ? 'block' : 'hidden']">
@@ -42,6 +43,12 @@
                   </div>
                 </template>
               </div>
+              <div class="pt-4 pb-2 text-right actions">
+                <%= link_to "Cancel", profile_view_path("specialty_form", "specialty"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-2" %>
+                <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium", 
+                  ":class": "{'opacity-50': tags.length === 0 && removeTags.length === 0}", 
+                  ":disabled": "tags.length === 0 && removeTags.length === 0" %>
+              </div>
             </div>
           </div>
         </div>
@@ -49,10 +56,7 @@
       <input type="hidden" name="from_url" value="<%= from_url %>">
       <input type="hidden" name="frame" value="specialty_form">
       <input type="hidden" name="component" value="specialty">
-      <div class="pt-4 pb-2 text-right actions">
-        <%= link_to "Cancel", profile_view_path("specialty_form", "specialty"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium" %>
-        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-      </div>
+      
     <% end %>
   </div>
 <% end %>

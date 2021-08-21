@@ -43,6 +43,12 @@
                   </div>
                 </template>
               </div>
+              <div class="pt-4 pb-2 text-right actions">
+                <%= link_to "Cancel", profile_view_path("service_form", "service"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-2" %>
+                <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium",
+                  ":class": "{'opacity-50': tags.length === 0 && removeTags.length === 0}", 
+                  ":disabled": "tags.length === 0 && removeTags.length === 0" %>
+              </div>
             </div>
           </div>
         </div>
@@ -50,10 +56,7 @@
       <input type="hidden" name="from_url" value="<%= from_url %>">
       <input type="hidden" name="frame" value="service_form">
       <input type="hidden" name="component" value="service">
-      <div class="pt-4 pb-2 text-right actions">
-        <%= link_to "Cancel", profile_view_path("service_form", "service"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium" %>
-        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-      </div>
+      
     <% end %>
   </div>
 <% end %>
