@@ -121,11 +121,11 @@ class User < ApplicationRecord
 
     if background.attachment.blob.variable?
       background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
-    else
-      HeicPreviewer.new(background.attachment.blob).preview do |attachable|
-        background.attach(attachable)
-        background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
-      end
+    # else
+    #   HeicPreviewer.new(background.attachment.blob).preview do |attachable|
+    #     background.attach(attachable)
+    #     background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
+    #   end
     end
   end
 
