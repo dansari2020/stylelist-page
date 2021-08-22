@@ -106,7 +106,14 @@ class User < ApplicationRecord
   def avatar_thumb
     return unless avatar.attached?
 
-    avatar.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "112x112^", crop: "112x112+0+0")
+    if avatar.attachment.blob.variable?
+      avatar.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "112x112^", crop: "112x112+0+0")
+    else
+      HeicPreviewer.new(avatar.attachment.blob).preview do |attachable|
+        avatar.attach(attachable)
+        avatar.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "112x112^", crop: "112x112+0+0")
+      end
+    end
   end
 
   def backgroun_medium
