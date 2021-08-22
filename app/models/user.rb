@@ -112,8 +112,11 @@ class User < ApplicationRecord
   def backgroun_medium
     return unless background.attached?
 
-    # if background.variable?
-    background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
+    if background.attachment.blob.variable?
+      background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
+    else
+      HeicPreviewer.new(background.attachment.blob).preview
+    end
   end
 
   def distance_of_time_at_now
