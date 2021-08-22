@@ -51,7 +51,7 @@
           <div class="flex py-2 flex-row">
             <% User.phone_method_list.each do |text, key| %>
               <%= f.radio_button :phone_method, key, class: "hidden", id: "user_phone_method_#{key}" %>
-              <%= f.label "phone_method_#{key}", class: "py-2 pl-12 mr-2 border border-gray-200 rounded-full md:w-1/2 focus:border-blue-200 bg-white" do %>
+              <%= f.label "phone_method_#{key}", class: "py-2 pl-12 mr-2 border border-gray-200 rounded-full w-1/2 focus:border-blue-200 bg-white" do %>
                 <span class="radiobtn"></span>
                 <%= text %>
               <% end %>
