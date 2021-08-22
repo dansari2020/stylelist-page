@@ -38,7 +38,7 @@ class User < ApplicationRecord
     :availabilities, :social_media, allow_destroy: true
   has_and_belongs_to_many :languages, dependent: :destroy
 
-  # before_save :destroy_prvious_data
+  after_update :rename_upload_filename
   after_update :send_confirmation_instructions, if: :should_send_confirmation
 
   delegate :full_address, :salon_name, :short_address, to: :address, allow_nil: true
@@ -193,4 +193,11 @@ class User < ApplicationRecord
   # Specialty.where(user_id: id).destroy_all if specialties.any? { |s| s.name_changed? }
   # Service.where(user_id: id).destroy_all if services.any? { |s| s.name_changed? }
   # end
+
+  def rename_upload_filename
+    if background.attached?
+      blob = background.attachment.blob
+      blob.update(filename: "user-background-#{id}.#{blob.filename.extension}")
+    end
+  end
 end
