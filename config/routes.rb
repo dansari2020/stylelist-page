@@ -49,7 +49,12 @@ Rails.application.routes.draw do
   get "portfolios" => redirect("/portfolios/new")
   get "auth/check-email", to: "auth#check_email", as: "check_email"
   get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
-  get "/:username", to: "home#show"
+  get "/:username", to: "home#show",
+  constraints: ->(request) {
+    User.where("username ilike ?", request.path_parameters[:username]).exists?
+  }
   post "/portfolio/:portfolio_id/flags" => "flags#create", :as => "portfolio_flags"
   resources :addresses
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 end

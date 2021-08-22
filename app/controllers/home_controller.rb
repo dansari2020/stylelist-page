@@ -11,12 +11,15 @@ class HomeController < ApplicationController
   private
 
   def editable
-    @editable = current_user.present? && (params[:username].nil? || current_user.username == params[:username])
-    @user = if @editable
-      current_user
-    elsif params[:username].present?
-      User.includes(:address, :specialties, :services, :availabilities, :social_media, :portfolios)
-        .find_by!(username: params[:username])
+    if ["404", "400", "401", "500"].exclude? params[:username] 
+      @editable = current_user.present? && (params[:username].nil? || 
+        current_user.username.downcase == params[:username].downcase)
+      @user = if @editable
+        current_user
+      elsif params[:username].present?
+        User.includes(:address, :specialties, :services, :availabilities, :social_media, :portfolios)
+          .find_by!("username ilike ?", params[:username])
+      end
     end
   end
 end

@@ -28,7 +28,7 @@ FriendlyId.defaults do |config|
     stylistsearch stylistfeed stylistdiscovery stylistfilter login closeaccount
     support ourmission mission subscribe brandassets academy news news&events events
     findastylist findasalon mobile ios android app salongrow security roadmap
-    featurereqeusts ads learnmore]
+    featurereqeusts ads learnmore 404 500 401 not_found internal_server_error bad_request]
 
   # This adds an option to treat reserved words as conflicts rather than exceptions.
   # When there is no good candidate, a UUID will be appended, matching the existing
