@@ -10,7 +10,7 @@
         <h2 class="leading-6 text-base md:text-left whitespace-nowrap roboto-font font-medium capitalize" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
           <%= user.full_name %>
           <% if user.pronoun.present? %>
-          <span class="pl-2 text-xs text-gray-500 md:text-sm"><%= "(#{user.pronoun})" %></span>
+          <span style="font-size: 13px" class="font-light roboto-font"><%= "(#{user.pronoun})" %></span>
           <% end %>
         </h2>
         </h2>

@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "education" do %>
   <div id="view_education" class="flex justify-between w-full">
     <div class="flex-1">
-      <h2 class="pb-2 leading-3 md:pb-4 roboto-font font-medium text-xs">Education</h2>
+      <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Education</h2>
       <p class="leading-2 roboto-font font-light text-sm">
         <% if user.has_education? %>
           <%= user.education %>

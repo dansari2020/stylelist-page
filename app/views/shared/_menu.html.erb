@@ -1,25 +1,33 @@
+<style>
+.menu-item {
+  color: #4F4F4E
+}
+.menu-item:hover,.menu-item.active {
+  color: #3374DE
+}
+</style>
 <% if user_signed_in? && current_user.confirmed? && current_user.activated? %>
-  <%= link_to root_url, class: "text-xs md:text-sm text-center text-gray-500 hover:text-blue-500 px-2 #{ "text-blue-500" if controller_name == "home"}" do %>
+  <%= link_to root_url, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "home"}" do %>
     <% if controller_name == "home" %>
-      <%= image_tag "icons/portfolio-active.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/portfolio-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% else %>
-      <%= image_tag "icons/portfolio.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/portfolio.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% end %>
     Portfolio
   <% end %>
-  <%= link_to new_portfolio_path, class: "text-xs md:text-sm text-center text-gray-500 hover:text-blue-500 px-2 #{ "text-blue-500" if controller_name == "portfolios"}" do %>
+  <%= link_to new_portfolio_path, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "portfolios"}" do %>
     <% if controller_name == "portfolios" %>
-      <%= image_tag "icons/plus-active.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/plus-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% else %>
-      <%= image_tag "icons/plus.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/plus.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% end %>
     Upload
   <% end %>
-  <%= link_to settings_path, class: "text-xs md:text-sm text-center text-gray-500 hover:text-blue-500 px-2 #{ "text-blue-500" if controller_name == "users"}" do %>
+  <%= link_to settings_path, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "users"}" do %>
     <% if controller_name == "users" %>
-      <%= image_tag "icons/setting-active.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/setting-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% else %>
-      <%= image_tag "icons/setting.svg", class: "w-5 h-5 mx-auto" %>
+      <%= image_tag "icons/setting.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
     <% end %>
     Settings
   <% end %>
