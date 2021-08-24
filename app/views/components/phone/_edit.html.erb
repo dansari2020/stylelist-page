@@ -37,6 +37,16 @@
       input[type="radio"]:checked + label span.radiobtn:after {
         display: block;
       }
+      @media (max-width: 767px) {
+        input[type="radio"] + label span.radiobtn {
+        top: 7px;
+        height: 22px;
+        width: 22px;
+      }
+      input[type="radio"] + label span.radiobtn:after {
+        width: 12px;
+        height: 12px;
+      }
     </style>
     <div class="py-2">
       <h1 class="text-normal">Phone</h1>
@@ -45,13 +55,13 @@
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="w-full" x-data="{phoneType: '<%= user.phone_type || "mobile" %>'}">
         <%= f.text_field :phone, autofocus: true, placeholder: "(555) 555-5555", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <%= f.select :phone_type, options_for_select(User.phone_type_list, user.phone_type), {}, "x-model": "phoneType", class: "px-4 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white md:w-28 w-full" %>
+        <%= f.select :phone_type, options_for_select(User.phone_type_list, user.phone_type), {}, "x-model": "phoneType", class: "px-4 py-2 rounded-lg mt-2 border focus:border-gray-500 focus:outline-none autofill:bg-white w-28" %>
         <div class="w-full" x-show="phoneType === 'mobile'">
           <%= f.label :phone_method, "Preferred method of contact", class: "block py-2 mt-8" %>
-          <div class="flex py-2 flex-row">
+          <div class="flex py-2 md:flex-row flex-col">
             <% User.phone_method_list.each do |text, key| %>
               <%= f.radio_button :phone_method, key, class: "hidden", id: "user_phone_method_#{key}" %>
-              <%= f.label "phone_method_#{key}", class: "py-2 pl-12 mr-2 border border-gray-200 rounded-full w-1/2 focus:border-blue-200 bg-white" do %>
+              <%= f.label "phone_method_#{key}", class: "py-2 pr-3 md:pr-0 mb-2 md:mb-0 pl-12 text-sm mr-2 border border-gray-200 rounded-full md:w-1/2 focus:border-blue-200 bg-white" do %>
                 <span class="radiobtn"></span>
                 <%= text %>
               <% end %>
