@@ -1,3 +1,4 @@
+<div x-data="toggleBottomMenu()" x-init="init()"></div>
 <div class="w-full min-h-screen flex flex-wrap flex-col px-4 justify-center items-center content-center">
   <div class="px-4">
     <%= image_tag "only-logo.svg", class: "w-full mx-auto", style: "max-width: 221px" %>
@@ -7,3 +8,14 @@
     </p>
   </div>
 </div>
+<script>
+  function toggleBottomMenu(){
+    return {
+      init () {
+        const bottomMenu = document.getElementById('bottomMenu');
+        const currentValue = bottomMenu.__x.$data.bottomMenu;
+        bottomMenu.__x.$data.bottomMenu = !currentValue;
+      }
+    }
+  }
+</script>

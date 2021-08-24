@@ -1,16 +1,32 @@
-<div class="flex flex-wrap md:flex-row flex-col-reverse px-4 h-screen-main content-center">
+<div x-data="toggleBottomMenu()" x-init="init()"></div>
+<div class="flex md:flex-wrap md:flex-row flex-col px-4 h-screen-main content-center">
   <div class="px-4 flex-1 flex flex-col justify-center items-center">
-    <h1 class="roboto-font font-bold mt-12 md:text-9xl text-6xl" style="color: #666666">Oops!</h1>
+    <h1 class="roboto-font font-bold md:mt-12 md:text-9xl text-6xl" style="color: #666666">Oops!</h1>
     <p class="md:text-5xl text-2xl roboto-font font-medium mt-8 text-center">
       We can’t seem to find the page
       you’re looking for.
     </p>
-    <p class="md:text-4xl text-xl roboto-font font-bold mt-16">
+    <p class="md:text-4xl text-xl roboto-font font-bold mt-16 hidden md:flex">
       Error code: 404
     </p>
-      <%= link_to "Back", root_url, class: "px-3 py-2 border border-blue-500 text-blue-500 mt-14" %>
+      <%= link_to "Back", root_url, class: "px-3 py-2 border border-blue-500 text-blue-500 mt-14 hidden md:block" %>
   </div>
-  <div class="px-4 flex-1 flex justify-center items-center">
+  <div class="px-4 flex-1 flex flex-col justify-center items-center">
     <%= image_tag "404.svg", class: "w-full mx-auto", style: "max-width: 385px" %>
+    <p class="md:text-4xl text-xl roboto-font font-bold mt-8 md:hidden">
+      Error code: 404
+    </p>
+    <%= link_to "Back", root_url, class: "px-3 py-2 border border-blue-500 text-blue-500 my-8 block w-full text-center rounded-full md:hidden" %>
   </div>
 </div>
+<script>
+  function toggleBottomMenu(){
+    return {
+      init () {
+        const bottomMenu = document.getElementById('bottomMenu');
+        const currentValue = bottomMenu.__x.$data.bottomMenu;
+        bottomMenu.__x.$data.bottomMenu = !currentValue;
+      }
+    }
+  }
+</script>
