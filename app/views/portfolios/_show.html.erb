@@ -45,7 +45,7 @@
       </ul>
       <div class="flex flex-col" id="flagContainer">
         <% if editable %>
-          <%= link_to "Delete", portfolio_path(portfolio), method: :delete, remote: true, data: { "turbo-frame": "_top", confirm: "Are you sure?" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
+          <%= link_to "Delete", portfolio_path(portfolio), method: :delete, data: { "turbo-frame": "_top", confirm: "Are you sure?" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
         <% else %>
           <%= link_to "Flag Photo", portfolio_flags_path(portfolio, user_id: user_signed_in? && current_user.id), method: :post, remote: true, data: { "turbo-frame": "_top" }, class: "block px-3 py-2 text-sm text-center text-red-500" %>
         <% end %>

@@ -61,7 +61,10 @@ class PortfoliosController < ApplicationController
 
   def destroy
     @portfolio.destroy
-    redirect_to root_url
+    flash[:destroy_pictures_msg] = "1 Photo Deleted"
+    respond_to do |format|
+      format.html { redirect_to root_url }
+    end
   end
 
   def destroy_pictures
