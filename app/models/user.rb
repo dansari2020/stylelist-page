@@ -63,6 +63,10 @@ class User < ApplicationRecord
     [ENV.fetch("WEBSITE_URL", default_url).strip, username.strip].compact.join
   end
 
+  def short_url
+    "/#{username.strip}"
+  end
+
   def default_url
     if Rails.env.production?
       "https://stylistpage.com/"
