@@ -19,10 +19,11 @@ class User < ApplicationRecord
                            "I don't do hair anymore": 6}
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false},
     length: {minimum: 5},
-    format: {with: /\A[a-zA-Z]+\z/, message: "only allows letters"}
+    format: {with: /\A[a-zA-Z]+\z/, message: "only allows letters"}, if: :username_changed?
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, presence: true, confirmation: true,
-  format: {with: /\A(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,}\z/, message: "must be mix of letters & numbers."}
+    format: {with: /\A(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,}\z/, message: "must be mix of letters & numbers."}, 
+    if: lambda { |user| user.encrypted_password_changed? }
   validates :first_name, presence: true
   validates :last_name, presence: true
 

@@ -56,10 +56,10 @@
             <div class="flex flex-1 flew-row " x-show="work">
               <div class="w-14">
               </div>
-                <%= av_form.time_field :open_at, "min": "01:00", "max": "12:00", "required": true, class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                <%= av_form.time_field :open_at, "min": "01:00", "max": "12:00", class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
                 <%= av_form.select :open_at_ampm, options_for_select(Availability.open_at_ampms.keys, av_form.object.open_at_ampm), {}, class: "px-4 appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
               <span class="px-2 mx-auto h-16 inline-flex items-center">-</span>              
-                <%= av_form.time_field :close_at, "min": "01:00", "max": "12:00", "required": true, class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                <%= av_form.time_field :close_at, "min": "01:00", "max": "12:00", class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
                 <%= av_form.select :close_at_ampm, options_for_select(Availability.close_at_ampms.keys, av_form.object.close_at_ampm), {}, class: "px-4 appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
             </div>
           </div>

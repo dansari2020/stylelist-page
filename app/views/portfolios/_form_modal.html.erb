@@ -168,10 +168,10 @@
         <div class="w-full py-4 border-t flex flex-col" x-data="{ tab : 'profile' }">
           <label for="" class="font-bold text-md mb-2.5">Length of Hair</label>
           <div class="relative mt-2">
-            <%= image_tag "girl.png", style: "width: 353px;height: 524px" %>
+            <%= image_tag "girl.svg", class: "my-8", style: "width: 353px;height: 524px" %>
             <div class="flex flex-col flex-wrap length-of-hair-wrapper">
               <input type="hidden" name="portfolio[hair_length]" value="">
-              <% styles = ["top: -2px", "top: 105px", "top: 194px", "top: 254px", "top: 318px", "top: 386px", "bottom: -10px"] %>
+              <% styles = ["top: -15px", "top: 100px", "top: 194px", "top: 254px", "top: 318px", "top: 395px", "top: 503px"] %>
               <% Portfolio.hair_length_list.each_with_index do |(text, value), index|%>
                 <input class="hidden" type="radio" value="<%= value %>" <%= "checked" if value == portfolio.hair_length %> name="portfolio[hair_length]" id="porfolio_hair_length_<%= value %>">
                 <label data-value="<%= value %>" class="absolute py-2 mb-2 mr-2 cursor-pointer" style="<%= styles[index] %>" for="porfolio_hair_length_<%= value %>">
