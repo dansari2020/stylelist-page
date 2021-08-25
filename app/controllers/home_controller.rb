@@ -11,8 +11,8 @@ class HomeController < ApplicationController
   private
 
   def editable
-    if ["404", "400", "401", "500"].exclude? params[:username] 
-      @editable = current_user.present? && (params[:username].nil? || 
+    if ["404", "400", "401", "500"].exclude? params[:username]
+      @editable = current_user.present? && (params[:username].nil? ||
         current_user.username.downcase == params[:username].downcase)
       @user = if @editable
         current_user

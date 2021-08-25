@@ -19,7 +19,8 @@ class User < ApplicationRecord
                            "I don't do hair anymore": 6}
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
-  validates :password, presence: true, confirmation: true, length: {minimum: 8}, on: :create
+  validates :password, presence: true, confirmation: true, length: {minimum: 8},
+    format: {with: /^(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,}$/}
   validates :first_name, presence: true
   validates :last_name, presence: true
 
@@ -121,11 +122,11 @@ class User < ApplicationRecord
 
     if background.attachment.blob.variable?
       background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
-    # else
-    #   HeicPreviewer.new(background.attachment.blob).preview do |attachable|
-    #     background.attach(attachable)
-    #     background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
-    #   end
+      # else
+      #   HeicPreviewer.new(background.attachment.blob).preview do |attachable|
+      #     background.attach(attachable)
+      #     background.variant(gravity: "center", auto_orient: true, rotate: 0, resize: "530x200^", crop: "530x200+0+0")
+      #   end
     end
   end
 

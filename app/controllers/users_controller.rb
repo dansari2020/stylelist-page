@@ -34,6 +34,8 @@ class UsersController < ApplicationController
       else
         respond_to do |format|
           if @user.update(user_params)
+            bypass_sign_in current_user if update_with_password?
+
             if params[:component].present? && params[:frame].present?
               format.turbo_stream do
                 return render turbo_stream: turbo_stream.replace(params[:frame], partial: "components/#{params[:component]}/view", locals: {user: current_user, editable: true})
@@ -44,8 +46,6 @@ class UsersController < ApplicationController
                 return redirect_to confirm_email_path
               elsif params["user"]["deactivate_reason"].present?
                 return destroy
-              elsif params["user"]["background"].present? || params["user"]["avatar"].present?
-                return redirect_back
               else
                 return redirect_back
               end
@@ -113,6 +113,10 @@ class UsersController < ApplicationController
 
   def redirect_back
     redirect_to(params[:from_url] || root_url)
+  end
+
+  def update_with_password?
+    user_params[:password].present? && user_params[:password_confirmation].present?
   end
 
   private
