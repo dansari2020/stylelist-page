@@ -1,72 +1,74 @@
-<% address ||= Address.new %>
-<% form_id = address.new_record? ? "#{dom_id(local_assigns[:user])}_address" : address %>
-<%= form_with model: address,
-  id: form_id,
-  data: local_assigns[:data],
-  class: Array.wrap(local_assigns[:class]) do |form| %>
-  <div id="edit_address" class="w-full p-2 bg-gray-100">
-    <style>
-      input:checked ~ .dot {
-        transform: translateX(100%);
-      }
-      input ~ .bgdot {
-        background-color: #999998;
-        background-image: url('<%= image_url("icons/switch_off.png") %>');
-        background-position-y: center;
-        background-position-x: 80%;
-        background-repeat: no-repeat;
-      }
-      input:checked ~ .bgdot {
-        background-color: #3374DE;
-        background-image: url('<%= image_url("icons/switch_on.png") %>');
-        background-position-x: 20%;
-      }
-    </style>
-    <div class="py-2">
-      <h1 class="text-normal">Address</h1>
-    </div>
-    <%= render "devise/shared/error_messages", resource: form.object %>
-    <div class="w-full">
-      <div class="w-full space-y-4">
-        <%= form.country_select :country_code, {priority_countries: ["US", "CA"], priority_countries_divider: "~~~~~~"}, include_blank: "Country", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <%= form.text_field :salon_name, placeholder: "Salon Name (Optional)", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <%= form.text_field :street, placeholder: "Street Address", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <%= form.text_field :unit_suit, placeholder: "Unit/Suite", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <%= form.text_field :city, placeholder: "City", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-        <div class="space-x-4 flex">
-          <div class="w-1/2">
-            <%= form.text_field :province, placeholder: "Province/State", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+<%= turbo_frame_tag "address_form" do %>
+  <% address ||= Address.new %>
+  <% form_id = address.new_record? ? "#{dom_id(local_assigns[:user])}_address" : address %>
+  <%= form_with model: address,
+    id: form_id,
+    data: local_assigns[:data],
+    class: Array.wrap(local_assigns[:class]) do |form| %>
+    <div id="edit_address" class="w-full p-2 bg-gray-100">
+      <style>
+        input:checked ~ .dot {
+          transform: translateX(100%);
+        }
+        input ~ .bgdot {
+          background-color: #999998;
+          background-image: url('<%= image_url("icons/switch_off.png") %>');
+          background-position-y: center;
+          background-position-x: 80%;
+          background-repeat: no-repeat;
+        }
+        input:checked ~ .bgdot {
+          background-color: #3374DE;
+          background-image: url('<%= image_url("icons/switch_on.png") %>');
+          background-position-x: 20%;
+        }
+      </style>
+      <div class="py-2">
+        <h1 class="text-normal">Address</h1>
+      </div>
+      <%= render "devise/shared/error_messages", resource: form.object %>
+      <div class="w-full">
+        <div class="w-full space-y-4">
+          <%= form.country_select :country_code, {priority_countries: ["US", "CA"], priority_countries_divider: "~~~~~~"}, include_blank: "Country", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          <%= form.text_field :salon_name, placeholder: "Salon Name (Optional)", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          <%= form.text_field :street, placeholder: "Street Address", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          <%= form.text_field :unit_suit, placeholder: "Unit/Suite", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          <%= form.text_field :city, placeholder: "City", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+          <div class="space-x-4 flex">
+            <div class="w-1/2">
+              <%= form.text_field :province, placeholder: "Province/State", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+            </div>
+            <div class="w-1/2">
+              <%= form.text_field :postal, placeholder: "Postal Code", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
+            </div>
           </div>
-          <div class="w-1/2">
-            <%= form.text_field :postal, placeholder: "Postal Code", class: "px-4 py-2 w-full rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white" %>
-          </div>
-        </div>
-        <div class="flex justify-between pt-20">
-          <div class="w-full">
-            <h4 class="font-bold">Privacy</h4>
-            <p class="text-sm text-gray-500">Hide your address on profile</p>
-          </div>
-          <div>
-            <div class="flex items-center justify-center w-full mb-12">
-              <label for="toggleB" class="flex items-center cursor-pointer">
-                <!-- toggle -->
-                <div class="relative">
-                  <!-- input -->
-                  <%= form.check_box :privacy, id: "toggleB", class: "sr-only" %>
-                  <!-- line -->
-                  <div class="block h-8 rounded-full w-14 bgdot"></div>
-                  <!-- dot -->
-                  <div class="absolute w-6 h-6 transition bg-white rounded-full top-1 left-1 dot"></div>
-                </div>
-              </label>
+          <div class="flex justify-between pt-20">
+            <div class="w-full">
+              <h4 class="font-bold">Privacy</h4>
+              <p class="text-sm text-gray-500">Hide your address on profile</p>
+            </div>
+            <div>
+              <div class="flex items-center justify-center w-full mb-12">
+                <label for="toggleB" class="flex items-center cursor-pointer">
+                  <!-- toggle -->
+                  <div class="relative">
+                    <!-- input -->
+                    <%= form.check_box :privacy, id: "toggleB", class: "sr-only" %>
+                    <!-- line -->
+                    <div class="block h-8 rounded-full w-14 bgdot"></div>
+                    <!-- dot -->
+                    <div class="absolute w-6 h-6 transition bg-white rounded-full top-1 left-1 dot"></div>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
         </div>
+        <div class="pt-4 pb-2 text-right actions">
+          <%= link_to "Cancel", profile_view_path("address_form", "address"), class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-2" %>
+          <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
+        </div>
       </div>
-      <div class="pt-4 pb-2 text-right actions">
-        <%= link_to "Cancel", address, class: "text-gray-500 lg:px-4 py-2 rounded-md text-sm font-medium mr-2" if form.object.persisted? %>
-        <%= submit_tag "Save", class: "bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

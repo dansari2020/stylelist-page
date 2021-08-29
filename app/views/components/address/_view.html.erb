@@ -1,4 +1,4 @@
-<% if user.has_full_address? && Array.wrap(address.full_address).join.strip != "" %>
+<% if user.has_full_address? && Array.wrap(user.address.full_address).join.strip != "" %>
   <%= render user.address %>
 <% else %>
   <%= turbo_frame_tag "address" do %>
