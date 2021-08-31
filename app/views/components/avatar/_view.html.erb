@@ -7,9 +7,9 @@
             <%= f.label :avatar, class: "cursor-pointer" do %>
               <div class="relative">
                 <% if user.avatar.attached? %>
-                  <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+                  <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
                 <% else %>
-                  <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
+                  <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-27 md:w-27 relative" %>
                 <% end %>
                 <div class="absolute w-6 h-6 right-1 inset-y-3/4 md:block" :class="{'hidden': tab == 'profile' || tab == 'contact'}">
                   <%= image_tag "icons/attached_background.png", class: "w-6 h-6 mx-auto" %>
@@ -25,9 +25,9 @@
         <% else %>
           <div class="relative">
             <% if user.avatar.attached? %>
-              <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-28 md:w-28 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+              <%= image_tag user.avatar_thumb || default_avatar, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
             <% else %>
-              <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-28 md:w-28 relative" %>
+              <%= image_tag "icons/avatar.svg", class: "md rounded-full h-17 w-17 md:h-27 md:w-27 relative" %>
             <% end %>
           </div>
         <% end %>
