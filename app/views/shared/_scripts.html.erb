@@ -1,0 +1,34 @@
+<script type="application/javascript">
+  window.timeHandle = function () {
+    return {
+      formData: {
+        startTime: '',
+        endTime: ''
+      },
+      message: '',
+      errStartTime: false,
+      errEndTime: false,
+      init(startTime, endTime) {
+        this.formData.startTime = startTime
+        this.formData.endTime = endTime
+      },
+      submitData() {
+        console.log("formData.startTime", this.formData.startTime)
+        console.log("formData.endTime", this.formData.endTime)
+        var arrStart = this.formData.startTime.split(',');
+        var arrEnd = this.formData.endTime.split(',');
+        if (parseInt(arrStart[0]) > 12 || parseInt(arrStart[0]) < 1) {
+          this.errStartTime = true
+        } else {
+          this.errStartTime = false
+        }
+        if (parseInt(arrEnd[0]) > 12 || parseInt(arrEnd[0]) < 1) {
+          alert('End time should be in 12 hour time')
+          this.errEndTime = true
+        } else {
+          this.errEndTime = false
+        }
+      }
+    }
+  }
+</script>
