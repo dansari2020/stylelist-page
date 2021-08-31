@@ -17,7 +17,7 @@
       </div>
       <% if has_availabilities %>
         <ul class="w-full" style="max-width: 330px">
-          <% user.availabilities.each do |availability| %>
+          <% user.availabilities.order(day: :asc).each do |availability| %>
             <li class="flex justify-between w-full py-4 border-t">
               <span class="roboto-font font-light text-sm">
                 <%= availability.day_name %>
