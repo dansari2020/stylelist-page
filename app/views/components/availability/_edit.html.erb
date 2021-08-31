@@ -55,18 +55,30 @@
             </div>
             <div class="flex-1">
               <template x-if="work">
-                <div class="flex flew-row" x-data="timeHandle()" x-init="init('<%= av_form.object.open_at&.strftime("%I:%M") %>','<%= av_form.object.close_at&.strftime("%I:%M") %>')">
-                  <div class="w-14">
+                <div x-data="timeHandle()" x-init="init('<%= av_form.object.open_at&.strftime("%I:%M") %>','<%= av_form.object.close_at&.strftime("%I:%M") %>')">
+                  <div class="flex flew-row">
+                    <div class="w-14">
+                    </div>
+                    <%= av_form.time_field :open_at, "min": "01:00", "max": "12:59", "x-model": "formData.startTime", "x-on:change": "submitData", 
+                      ":class": "{ 'border-red-500 focus:border-red-500' : errStartTime }",
+                      class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                    <div class="px-4 bg-white inline-flex items-center appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16">am</div>
+                    <div class="px-2 mx-auto h-16 inline-flex items-center">-</div>              
+                    <%= av_form.time_field :close_at, "min": "01:00", "max": "12:59", "x-model": "formData.endTime", "x-on:change": "submitData", 
+                      ":class": "{ 'border-red-500 focus:border-red-500' : errEndTime }",
+                      class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
+                    <div class="px-4 bg-white inline-flex items-center appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16">pm</div>
                   </div>
-                  <%= av_form.time_field :open_at, "min": "01:00", "max": "12:59", "x-model": "formData.startTime", "x-on:change": "submitData", 
-                    ":class": "{ 'border-red-500 focus:border-red-500' : errStartTime }",
-                    class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
-                  <div class="px-4 bg-white inline-flex items-center appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16">am</div>
-                  <div class="px-2 mx-auto h-16 inline-flex items-center">-</div>              
-                  <%= av_form.time_field :close_at, "min": "01:00", "max": "12:59", "x-model": "formData.endTime", "x-on:change": "submitData", 
-                    ":class": "{ 'border-red-500 focus:border-red-500' : errEndTime }",
-                    class: "px-4 roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
-                  <div class="px-4 bg-white inline-flex items-center appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16">pm</div>
+                  <template x-if="errStartTime || errEndTime">
+                  <ul class="flex flex-col space-y-2 px-3">
+                  <template x-if="errStartTime">
+                    <li class="text-red-400">Start Time should be in 12 hour time</li>
+                  </template>
+                  <template x-if="errEndTime">
+                    <li class="text-red-400">End Time should be in 12 hour time</li>
+                  </template>
+                  </ul>
+                  </template>
                 </div>
               </template>
             </div>
