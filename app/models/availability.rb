@@ -41,14 +41,14 @@ class Availability < ApplicationRecord
 
   def open_at=(new_open_at)
     if new_open_at.present?
-      res = DateTime.strptime(new_open_at, "%H:%M")
+      res = DateTime.strptime(new_open_at, "%H:%M %p")
       self[:open_at] = res
     end
   end
 
   def close_at=(new_close_at)
     if new_close_at.present?
-      res = DateTime.strptime(new_close_at, "%H:%M")
+      res = DateTime.strptime(new_close_at, "%H:%M %p")
       self[:close_at] = res
     end
   end
