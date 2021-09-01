@@ -1,5 +1,5 @@
 <% if user.has_full_address? && Array.wrap(user.address.full_address).join.strip != "" %>
-  <%= render user.address %>
+  <%= render user.address, user: (defined?(:editable) && editable) ? user : nil %>
 <% else %>
   <%= turbo_frame_tag "address" do %>
     <div class="flex justify-center w-full">
@@ -11,7 +11,7 @@
           </p>
         </div>
         <div class="flex items-start">
-          <% if user_signed_in? && current_user == user %>
+          <% if (user_signed_in? && current_user == user) || (defined?(:editable) && editable) %>
             <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
           <% end %>
         </div>
