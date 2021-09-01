@@ -80,8 +80,8 @@ class User < ApplicationRecord
     username.present? && activated?
   end
 
-  ["bio", "username", "social_media", "education", "started_at", "specialties", "services",
-    "social_media", "phone", "languages", "full_address"].each do |info|
+  ["bio", "username", "education", "started_at", "specialties", "services",
+    "phone", "languages", "full_address"].each do |info|
     define_method("has_#{info}?") do
       send(info).present?
     end
@@ -89,6 +89,10 @@ class User < ApplicationRecord
 
   def has_promo?
     client_incentives.present? || condition_for_incenrive.present?
+  end
+
+  def has_social_media?
+    social_media.present? && social_media.map{|s| s.url.present?}.all?
   end
 
   def self.role_list

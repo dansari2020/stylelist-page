@@ -141,7 +141,7 @@
                 data-tags='[<%= prefer_service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
                 data-tagIds='[<%= prefer_service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
                 <div x-data="tagSelect()" x-init="init('parentEl')">
-                  <label for="" class="font-bold text-md block mb-2.5">Services Provided</label>
+                  <label for="" class="roboto-font text-xs font-medium block mb-2.5">Services Provided</label>
                   <div class="flex flex-wrap service-wrapper">
                     <%= collection_check_boxes(:portfolio, :service_type_ids, Portfolio.prefer_service_types.map{|ps| [ps]}, :first, :first) do |b| %>
                       <%= b.check_box(class: "hidden", checked: prefer_service_types.exists?(name: b.value)) + b.label(:"data-value" => b.value, class: "py-2 mr-2 mb-2 cursor-pointer", "@click": "toggleTag('#{b.value}')") { "<span class='py-2 px-3.7 text-sm bg-white border rounded-full border-color-circle color-circle'>#{b.value}</span>".html_safe } %>
@@ -165,13 +165,13 @@
               </div>
             </div>
             <div class="flex items-start">
-              <%= link_to "Add More", "#", class: "text-blue-500 text-sm font-sm", "@click.prevent": "portfolioOpt='serviceType'; addMoreFunc($dispatch)", ":class": "{ 'md:hidden' : portfolioOpt === 'serviceType' }" %>
+              <%= link_to "Add More", "#", class: "text-blue-500 roboto-font text-xs font-medium", "@click.prevent": "portfolioOpt='serviceType'; addMoreFunc($dispatch)", ":class": "{ 'md:hidden' : portfolioOpt === 'serviceType' }" %>
             </div>
           </div>
           <div class="w-full pb-4 flex justify-between">
             <div class="flex flex-col">
               <% if service_types.present? %>
-                <label for="" class="font-bold text-md mb-2.5">Additional Services</label>
+                <label for="" class="roboto-font text-xs font-medium mb-2.5">Additional Services</label>
                 <div class="flex flex-col w-full md:inline-flex md:flex-row md:items-center">
                   <div class="relative block w-full">
                     <div x-data 
@@ -209,7 +209,7 @@
           <div class="py-4 border-t flex justify-between">
             <div class="flex flex-col flex-wrap length-of-hair-wrapper">
               <input type="hidden" name="portfolio[hair_type]" value="">
-              <label for="" class="font-bold text-md mb-2.5">Hair Type</label>
+              <label for="" class="roboto-font text-xs font-medium mb-2.5">Hair Type</label>
               <ul class="flex flex-wrap">
               <% Portfolio.hair_types.each_with_index do |(text, value), index|%>
                 <li class="mt-2 mr-2">
@@ -224,7 +224,7 @@
           </div>
         </div>
         <div class="flex justify-between w-full pb-4 md:py-4 border-t">
-          <%= f.submit "Save and add another photo", class: "bg-white text-blue-500 cursor-pointer hidden md:block" %>
+          <%= f.submit "Save and add another photo", class: "roboto-font text-sm font-semibold bg-white cursor-pointer hidden md:block", style: "color: #3374DE" %>
         </div>
       </div>
       <div class="md:w-1/2 md:px-8 md:pt-4 flex flex-col w-full">
@@ -232,7 +232,7 @@
           <div class="w-full flex-1 md:pb-4">
             <template x-if="portfolioOpt === 'serviceType'">
               <div class="w-full hidden md:flex md:flex-col">
-                <label for="" class="font-bold text-md mb-3">Additional services provided</label>
+                <label for="" class="roboto-font text-xs font-medium mb-3">Additional services provided</label>
                 <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
                   <div class="relative block w-full">
                     <div x-data 
@@ -287,10 +287,10 @@
     </div>
     <div class="relative block px-4 md:pt-8 border-r md:w-1/3 lg:w-2/6" x-data="{ tab : 'profile' }">
       <div class="md:p-8 mb-2 md:border-b">
-        <label for="" class="font-bold text-md mb-2.5 block pb-2">Length of Hair</label>
+        <label for="" class="roboto-font text-xs font-medium mb-2.5 block pb-2">Length of Hair</label>
         <div class="relative mt-2" x-data="LengthOfHair()" x-init="init('<%= portfolio.hair_length %>')">
           <% #= image_tag "girl.svg", class: "my-8", style: "width: 353px;height: 524px" %>
-          <svg class="my-2 " width="353" height="524" viewBox="0 0 353 524" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="my-2" viewBox="0 0 353 524" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line x1="227" y1="508.5" x2="72" y2="508.5" stroke="black"/>
             <line x1="246" y1="16.5" x2="72" y2="16.5" stroke="black"/>
             <line x1="246" y1="123.5" x2="47" y2="123.5" stroke="black"/>
@@ -339,7 +339,7 @@
       <div class="max-h-full overflow-auto modal">
         <div class="flex-1 py-4 px-3 modal-content flex flex-col h-5/6" @click.away="imgModal = ''; portfolioOpt = '';">
           <div class="w-full flex flex-col flex-1">
-            <label for="" class="font-bold text-md mb-3">Additional services provided</label>
+            <label for="" class="roboto-font text-xs font-medium mb-3">Additional services provided</label>
             <div class="flex flex-col md:inline-flex md:flex-row md:items-center">
               <div class="relative block w-full">
                 <div x-data 
