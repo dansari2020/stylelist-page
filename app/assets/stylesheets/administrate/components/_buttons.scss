@@ -1,8 +1,8 @@
-@import "../library/variables";
+@import '../library/variables';
 .admin button,
-.admin input[type="button"],
-.admin input[type="reset"],
-.admin input[type="submit"],
+.admin input[type='button'],
+.admin input[type='reset'],
+.admin input[type='submit'],
 .admin .button {
   appearance: none;
   background-color: $action-color;
