@@ -431,8 +431,10 @@
     return {
       init () {
         const bottomMenu = document.getElementById('bottomMenu');
-        const currentValue = bottomMenu.__x.$data.bottomMenu;
-        bottomMenu.__x.$data.bottomMenu = !currentValue;
+        if (bottomMenu) {
+          const currentValue = bottomMenu.__x.$data.bottomMenu;
+          bottomMenu.__x.$data.bottomMenu = !currentValue;
+        }
       }
     }
   }
