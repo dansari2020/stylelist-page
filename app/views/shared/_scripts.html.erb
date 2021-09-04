@@ -32,11 +32,9 @@
     return {
       lengthofHair: '',
       init(val) {
-        console.log('init length of hair: ', val)
         this.lengthofHair = val
       },
       choose(val) {
-        console.log('length of hair: ', val)
         this.lengthofHair = val
       }
     }
@@ -45,7 +43,6 @@
     return {
       init(timepicker) {
         // const timepicker = document.querySelector(".timepicker-ui");
-        console.log('timepicker', timepicker);
         const options = {mobile: true};
         const newTimepicker = new TimepickerUI(timepicker, options);
         newTimepicker.create()
