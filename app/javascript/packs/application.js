@@ -19,14 +19,6 @@ require("stylesheets/application.scss");
 import { TimepickerUI } from "timepicker-ui";
 window.TimepickerUI = TimepickerUI
 
-            
-// import TimepickerUI from "timepicker-ui";
-              
-// const basicPicker = new TimepickerUI(basic);
-// basicPicker.create();
-
-
-
 Rails.start();
 ActiveStorage.start();
 
