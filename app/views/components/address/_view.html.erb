@@ -12,7 +12,7 @@
         </div>
         <div class="flex items-start">
           <% if (user_signed_in? && current_user == user) || (defined?(:editable) && editable) %>
-            <%= link_to "Edit", profile_edit_path("address"), class: "text-blue-500 text-sm" %>
+            <%= link_to "Edit", profile_edit_path("address"), class: "roboto-font text-blue-500 text-2xs font-normal" %>
           <% end %>
         </div>
       </div>

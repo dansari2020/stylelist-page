@@ -13,7 +13,7 @@
       </div>
       <div class="flex items-start">
         <% if local_assigns[:user] == address.user %>
-          <%= link_to "Edit", address.new_record? ? new_address_path : edit_address_path(address), class: "text-blue-500 text-sm" %>
+          <%= link_to "Edit", address.new_record? ? new_address_path : edit_address_path(address), class: "roboto-font text-blue-500 text-2xs font-normal" %>
         <% end %>
       </div>
     </div>
