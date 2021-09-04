@@ -6,6 +6,9 @@ body {
   min-height: -webkit-fill-available;
   font-family: 'Raleway', sans-serif;
 }
+turbo-frame {
+  width: 100%;
+}
 .roboto-font {
   font-family: 'Roboto', sans-serif;
 }
@@ -13,7 +16,7 @@ body {
   border-width: 0.5px;
 }
 .wrapper {
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 }
 html {
@@ -48,9 +51,6 @@ select:-webkit-autofill:focus {
 }
 .bg-yellow-light {
   background-color: #ffde03;
-}
-turbo-frame {
-  width: 100%;
 }
 .dz-preview {
   @apply flex flex-col items-center justify-center w-full h-full;
