@@ -7,7 +7,7 @@
       <%= turbo_stream_from "avatar" %>
       <%= render partial: "components/avatar/view", locals: {user: user, editable: editable} %>
       <div class="justify-center p-2 pt-5 md:mx-auto" :class="{'mx-auto': tab == 'profile' || tab == 'contact'}">
-        <h2 class="leading-6 text-base md:text-left whitespace-nowrap roboto-font font-medium capitalize" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
+        <h2 class="leading-6 text-sm md:text-base md:text-left whitespace-nowrap roboto-font font-medium capitalize" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
           <%= user.full_name %>
           <% if user.pronoun.present? %>
           <span style="font-size: 13px" class="font-light roboto-font"><%= "(#{user.pronoun})" %></span>
