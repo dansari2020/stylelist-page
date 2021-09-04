@@ -14,9 +14,9 @@
           <% end %>
         </h2>
         </h2>
-        <p class="text-sm font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.job %></p>
+        <p class="text-xs font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}"><%= user.job %></p>
         
-        <p class="text-sm font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
+        <p class="text-xs font-medium leading-5 text-gray-500 md:text-left roboto-font" :class="{'text-center': tab == 'profile' || tab == 'contact'}">
           <%= render partial: "addresses/short_address", locals: { address: user.address || user.build_address, user: current_user } %>
         </p>
         <div class="md:hidden" x-show="tab == 'profile'">
