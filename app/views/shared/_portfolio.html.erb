@@ -21,8 +21,13 @@
   <div class="flex items-center flex-1">
     <div class="py-12 mx-auto mb-14 md:mb-0">
       <p class="mb-4 text-sm text-center text-gray-500">
+      <% if user == current_user %>
         Your portfolio is empty
+      <% else %>
+        The portfolio is empty
+      <% end %>
       </p>
+      <% if user == current_user %>
       <% portfolio = user.portfolios.new %>
       <% form_id = dom_id(portfolio, "pictures") %>
       <%= form_for(portfolio, url: portfolios_path, html: { method: :post, id: form_id }) do |f| %>
@@ -31,6 +36,7 @@
           <%= f.file_field :pictures, accept: "image/*", class: "hidden", onchange: "document.getElementById('#{form_id}').submit()" %>
           <%= f.submit "Submit", class: "hidden" %>
         <% end %>
+      <% end %>
       <% end %>
     </div>
   </div>

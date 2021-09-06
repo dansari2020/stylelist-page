@@ -26,6 +26,7 @@ class User < ApplicationRecord
     if: lambda { |user| user.encrypted_password_changed? }
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validate :check_started_at
 
   has_one_attached :avatar
   has_one_attached :background
@@ -92,7 +93,7 @@ class User < ApplicationRecord
   end
 
   def has_social_media?
-    social_media.present? && social_media.map{|s| s.url.present?}.all?
+    social_media.present? && social_media.map{|s| s.url.present?}.any?
   end
 
   def self.role_list
@@ -210,6 +211,13 @@ class User < ApplicationRecord
     if background.attached?
       blob = background.attachment.blob
       blob.update(filename: "user-background-#{id}.#{blob.filename.extension}")
+    end
+  end
+
+  def check_started_at
+    if started_at.present? && (started_at.year > Time.now.year || 
+      (started_at.year == Time.now.year && started_at.month > Time.now.month))
+      errors.add(:years_of_experience, " can't be in a future date")
     end
   end
 end

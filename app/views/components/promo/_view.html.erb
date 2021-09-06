@@ -6,8 +6,8 @@
       <%= link_to "Edit", profile_edit_path("promo"), class: "roboto-font text-blue-500 pb-2 text-2xs font-normal w-full text-right md:text-center absolute top-0 right-0 md:relative md:top-auto md:right:auto mt-2 mr-3 md:block md:items-start md:mr-0 md:mt-0 roboto-font font-light text-sm #{" hidden" if !user.has_promo? }" %>
     <% end %>
   <% else %>
-    <p class="text-sm text-gray-500 roboto-font font-light">Client Promo</p>
     <% if editable %>
+      <p class="text-sm text-gray-500 roboto-font font-light">Client Promo</p>
       <%= link_to "Add Promo", profile_edit_path("promo"), class: "text-blue-500 text-sm md:text-sm" %>
     <% end %>
   <% end %>
