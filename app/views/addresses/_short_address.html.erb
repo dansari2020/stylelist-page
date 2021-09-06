@@ -1,6 +1,6 @@
 <% address ||= Address.new %>
 <% model = address.new_record? ? [local_assigns[:user], :short_address].compact : [address, :short_address] %>
-<% frame = address.new_record? ? "#{dom_id(local_assigns[:user])}_short_address" : "#{dom_id(address)}_short_address" %>
+<% frame = address.new_record? ? "#{dom_id(local_assigns[:user] || "user")}_short_address" : "#{dom_id(address)}_short_address" %>
 
 <%= turbo_stream_from model %>
 <%= turbo_frame_tag frame do %>
