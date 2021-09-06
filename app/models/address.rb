@@ -8,13 +8,13 @@ class Address < ApplicationRecord
 
   def full_address
     if new_record?
-      ["Where is your salon located?"]
+      []
     elsif privacy?
       ["Your address has been hidden"]
     else
       ad = [salon_name, street_number, city_address, country&.name].reject { |e| e.blank? }.compact
       if ad.empty?
-        ["Where is your salon located?"]
+        []
       else
         ad
       end

@@ -8,7 +8,11 @@
       <div class="flex-1">
         <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Address</h2>
         <p class="leading-2 roboto-font font-light text-sm">
+          <% if Array.wrap(address.full_address).empty? %>
+          <span class="sub-title-color">Where is your salon located?</span>
+          <% else %>
           <%= Array.wrap(address.full_address).join("<br/>").html_safe %>
+          <% end %>
         </p>
       </div>
       <div class="flex items-start">
