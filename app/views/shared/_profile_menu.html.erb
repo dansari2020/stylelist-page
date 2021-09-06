@@ -27,7 +27,7 @@
         <% if user.admin? %>
         <%= link_to "Admin Panel", admin_users_path, class: "text-xs text-gray-500" %>
         <% else %>
-        <%= link_to user.url, user.url, target: "_blank", class: "text-xs text-gray-500" %>
+        <%= link_to user.url_without_http, user.url, target: "_blank", class: "text-xs text-gray-500" %>
         <% end %>
       </div>
     </div>

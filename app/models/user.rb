@@ -65,6 +65,10 @@ class User < ApplicationRecord
     [ENV.fetch("WEBSITE_URL", default_url).strip, username.strip].compact.join
   end
 
+  def url_without_http
+    url.gsub(/http:\/\/|https:\/\/|www./,"")
+  end
+
   def short_url
     "/#{username.strip}"
   end
