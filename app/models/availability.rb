@@ -72,9 +72,9 @@ class Availability < ApplicationRecord
   def check_working_hours
     if opened?
       if open_at.nil? || close_at.nil?
-        errors.add(:open_time, " or closing time can't be blank")
+        errors.add(:opening_time, " or closing time can't be blank")
       elsif read_attribute(:close_at) < read_attribute(:open_at)
-        errors.add :closing_time, "must be after open time"
+        errors.add :closing_time, "must be after opening time"
       end
     end
   end
