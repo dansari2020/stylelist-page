@@ -29,7 +29,7 @@ class UserDashboard < Administrate::BaseDashboard
     ),
     # portfolios: Field::HasMany,
     # pictures: Field::HasMany,
-    address: Field::HasOne.with_options(
+    address: HasOne.with_options(
       searchable: true,
       searchable_fields: %w[street postal province country_code salon_name unit_suit city],
       include_blank: true
@@ -42,7 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
     services: TagsField,
     availabilities: Field::HasMany.with_options(limit: 7, sort_by: :day),
     social_media: Field::HasMany,
-    languages: TagsField,
+    languages: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.status_list }),

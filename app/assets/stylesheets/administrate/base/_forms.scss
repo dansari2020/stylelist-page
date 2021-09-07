@@ -1,4 +1,4 @@
-@import "../library/variables";
+@import '../library/variables';
 .admin fieldset {
   background-color: transparent;
   border: 0;
@@ -7,7 +7,7 @@
 }
 
 .admin legend {
-  font-weight: $bold-font-weight;
+  // font-weight: $bold-font-weight;
   margin: 0;
   padding: 0;
 }
@@ -33,19 +33,19 @@
 //   font-size: 16px;
 // }
 
-.admin [type="color"],
-.admin [type="date"],
-.admin [type="datetime-local"],
-.admin [type="email"],
-.admin [type="month"],
-.admin [type="number"],
-.admin [type="password"],
-.admin [type="search"],
-.admin [type="tel"],
-.admin [type="text"],
-.admin [type="time"],
-.admin [type="url"],
-.admin [type="week"],
+.admin [type='color'],
+.admin [type='date'],
+.admin [type='datetime-local'],
+.admin [type='email'],
+.admin [type='month'],
+.admin [type='number'],
+.admin [type='password'],
+.admin [type='search'],
+.admin [type='tel'],
+.admin [type='text'],
+.admin [type='time'],
+.admin [type='url'],
+.admin [type='week'],
 .admin input:not([type]),
 .admin textarea {
   appearance: none;
@@ -83,13 +83,13 @@
   resize: vertical;
 }
 
-.admin [type="checkbox"],
-.admin [type="radio"] {
+.admin [type='checkbox'],
+.admin [type='radio'] {
   display: inline;
   margin-right: $small-spacing / 2;
 }
 
-.admin [type="file"] {
+.admin [type='file'] {
   width: 100%;
 }
 
