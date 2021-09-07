@@ -42,7 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
     services: TagsField,
     availabilities: Field::HasMany.with_options(limit: 7, sort_by: :day),
     social_media: Field::HasMany,
-    languages: Field::HasMany,
+    # languages: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.status_list }),
@@ -102,10 +102,10 @@ class UserDashboard < Administrate::BaseDashboard
     address
     specialties
     services
-    languages
     availabilities
     social_media
   ].freeze
+  # languages
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
