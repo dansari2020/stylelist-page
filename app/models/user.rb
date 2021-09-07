@@ -22,7 +22,7 @@ class User < ApplicationRecord
     format: {with: /\A[a-zA-Z0-9_]+\z/, message: "only allows letters and numbers"}, if: :username_changed?
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, presence: true, confirmation: true,
-    format: {with: /\A(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,}\z/, message: "must be mix of letters & numbers."}, 
+    format: {with: /\A(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,}\z/, message: "must be mix of letters & numbers."},
     if: lambda { |user| user.encrypted_password_changed? }
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -66,7 +66,7 @@ class User < ApplicationRecord
   end
 
   def url_without_http
-    url.gsub(/http:\/\/|https:\/\/|www./,"")
+    url.gsub(/http:\/\/|https:\/\/|www./, "")
   end
 
   def short_url
@@ -97,7 +97,7 @@ class User < ApplicationRecord
   end
 
   def has_social_media?
-    social_media.present? && social_media.map{|s| s.url.present?}.any?
+    social_media.present? && social_media.map { |s| s.url.present? }.any?
   end
 
   def self.role_list
@@ -219,7 +219,7 @@ class User < ApplicationRecord
   end
 
   def check_started_at
-    if started_at.present? && (started_at.year > Time.now.year || 
+    if started_at.present? && (started_at.year > Time.now.year ||
       (started_at.year == Time.now.year && started_at.month > Time.now.month))
       errors.add(:years_of_experience, " can't be in a future date")
     end

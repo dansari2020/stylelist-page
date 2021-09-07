@@ -42,5 +42,28 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    # def after_resource_destroyed_path(requested_resource)
+    #   # { action: :index }
+    #   request.referer
+    # end
+    def destroy
+      if requested_resource.destroy
+        flash[:notice] = translate_with_resource("destroy.success")
+      else
+        flash[:error] = requested_resource.errors.full_messages.join("<br/>")
+      end
+      redirect_to after_resource_destroyed_path(requested_resource)
+    end
+
+    private
+
+    def valid_action?(name, resource = resource_class)
+      %w[edit destroy].exclude?(name.to_s) && super
+    end
+
+    def after_resource_destroyed_path(requested_resource)
+      {action: "show", controller: "admin/users", id: requested_resource.user.username}
+    end
   end
 end
