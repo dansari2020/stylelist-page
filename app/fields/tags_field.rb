@@ -67,7 +67,7 @@ class TagsField < Administrate::Field::Base
   private
 
   def includes
-    associated_dashboard.collection_includes
+    associated_dashboard&.collection_includes
   end
 
   def candidate_resources
@@ -80,10 +80,12 @@ class TagsField < Administrate::Field::Base
   end
 
   def display_candidate_resource(resource)
-    associated_dashboard.display_resource(resource)
+    associated_dashboard&.display_resource(resource)
   end
 
   def associated_dashboard
+    return if data.nil?
+
     "#{data.model}Dashboard".constantize.new
   end
 

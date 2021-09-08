@@ -47,6 +47,8 @@ class HasOne < Administrate::Field::Base
   end
 
   def display_associated_resource
+    return if data.nil?
+    
     "#{data.class}Dashboard".safe_constantize.new.display_resource(data)
   end
 
