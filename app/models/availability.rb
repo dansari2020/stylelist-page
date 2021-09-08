@@ -1,6 +1,7 @@
 class Availability < ApplicationRecord
   belongs_to :user
 
+  enum day: %i[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
   enum open_at_ampm: %i[am pm], _prefix: true
   enum close_at_ampm: %i[am pm], _prefix: true
   validates :day, presence: true
@@ -54,7 +55,8 @@ class Availability < ApplicationRecord
   end
 
   def day_name
-    Date::DAYNAMES[day].capitalize
+    day
+    # Date::DAYNAMES[day].capitalize
   end
 
   def info

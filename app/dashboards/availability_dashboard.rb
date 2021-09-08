@@ -12,7 +12,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # created_at: Field::DateTime,
   # updated_at: Field::DateTime,
   ATTRIBUTE_TYPES = {
-    day: Field::Number,
+    day: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     day_name: Field::String,
     working_hours: Field::String,
     open_at: Field::Time,
@@ -51,7 +51,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   # user
   FORM_ATTRIBUTES = %i[
-    day_name
+    day
     open_at
     close_at
     opened
