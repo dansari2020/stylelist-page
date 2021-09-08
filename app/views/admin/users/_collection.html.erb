@@ -104,7 +104,7 @@ to display a collection of resources in an HTML table.
         <% end %>
 
         <% if valid_action? :destroy, collection_presenter.resource_name %>
-            <% if show_action? :destroy, resource %>
+            <% if !resource.is_a?(SocialMedium) && !resource.is_a?(Availability) && show_action?(:destroy, resource) %>
               <%= link_to(
               [namespace, resource],
               class: "text-red-600 hover:text-red-900 font-normal text-sm",
