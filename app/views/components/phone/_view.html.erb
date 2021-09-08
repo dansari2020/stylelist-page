@@ -3,11 +3,11 @@
     <div id="view_phone" class="flex justify-between w-full">
       <div class="flex-1">
         <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Phone</h2>
-        <p class="leading-2 roboto-font font-light text-sm">
+        <p class="leading-2 roboto-font font-light text-sm sub-title-color">
           <% if user.has_phone? %>
             <%= user.phone %>
           <% else %>
-            <span class="sub-title-color">What number can clients contact you at?</span>
+            What number can clients contact you at?
           <% end %>
         </p>
       </div>

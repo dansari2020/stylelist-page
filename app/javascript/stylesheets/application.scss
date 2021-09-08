@@ -38,9 +38,6 @@ html {
   color: rgba(0, 0, 0, 0.6);
 }
 @media (min-width: 768px) {
-  .fullname_css {
-    margin-left: calc((100% - 122px) / 2);
-  }
   .h-screen-main {
     height: calc(100vh - 80px);
   }
