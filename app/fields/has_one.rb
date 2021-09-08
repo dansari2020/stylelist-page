@@ -9,7 +9,6 @@ class HasOne < Administrate::Field::Base
     #     Administrate.warn_of_deprecated_option(:class_name)
     #     options.fetch(:class_name)
     #   elsif resource_class
-    #     byebug
     #     associated_class_name(resource_class, attr)
     #   else
     #     Administrate.warn_of_missing_resource_class
@@ -46,14 +45,12 @@ class HasOne < Administrate::Field::Base
     data.try(:persisted?)
   end
 
-  def display_associated_resource
-    return if data.nil?
-    
-    "#{data.class}Dashboard".safe_constantize.new.display_resource(data)
+  def display_associated_resource    
+    "#{attribute.to_s.classify}Dashboard".safe_constantize.new.display_resource(data)
   end
 
   def associated_class_name
-    data.class.to_s.pluralize.downcase
+    attribute.to_s.pluralize.downcase
   end
 
   private

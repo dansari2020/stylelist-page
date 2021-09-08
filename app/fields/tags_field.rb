@@ -84,9 +84,7 @@ class TagsField < Administrate::Field::Base
   end
 
   def associated_dashboard
-    return if data.nil?
-
-    "#{data.model}Dashboard".constantize.new
+    "#{attribute.to_s.classify}Dashboard".constantize.new
   end
 
   def sort_by
