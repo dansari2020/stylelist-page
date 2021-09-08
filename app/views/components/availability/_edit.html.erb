@@ -32,7 +32,7 @@
           <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
         <% end %>
         <div class="w-full" style="max-width: 330px">
-        <%= f.fields_for :availabilities, availabilities.sort_by {|obj| obj.day} do |av_form|%>
+        <%= f.fields_for :availabilities, availabilities do |av_form|%>
           <div class="w-full py-4 border-b" x-data="{ work : <%= av_form.object.opened.to_s %> }">
             <div class="flex flex-row w-full">
               <div class="w-16 h-12">
