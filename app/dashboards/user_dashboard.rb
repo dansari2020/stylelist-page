@@ -29,7 +29,7 @@ class UserDashboard < Administrate::BaseDashboard
     ),
     # portfolios: Field::HasMany,
     # pictures: Field::HasMany,
-    address: HasOne.with_options(
+    address: Field::HasOne.with_options(
       searchable: true,
       searchable_fields: %w[street postal province country_code salon_name unit_suit city],
       include_blank: true
