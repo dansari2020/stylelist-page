@@ -1,7 +1,7 @@
 <% address ||= Address.new %>
 <% model = address.new_record? ? [local_assigns[:user], :address].compact : address %>
 <% user = local_assigns[:user].present? ? dom_id(local_assigns[:user]) : "user" %>
-<% frame = address.new_record? ? "#{user}_address" : "#{dom_id(address)}_address" %>
+<% frame = address.new_record? ? "#{user}_address" : dom_id(address) %>
 <%= turbo_stream_from model %>
 <%= turbo_frame_tag frame do %>
   <div class="flex justify-center w-full">

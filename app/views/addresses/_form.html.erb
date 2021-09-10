@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "address_form" do %>
   <% address ||= Address.new %>
   <% user = local_assigns[:user].present? ? dom_id(local_assigns[:user]) : "user" %>
-  <% frame = address.new_record? ? "#{user}_address" : "#{dom_id(address)}_address" %>
+  <% form_id = address.new_record? ? "#{user}_address" : dom_id(address) %>
   <%= form_with model: address,
     id: form_id,
     data: local_assigns[:data],
