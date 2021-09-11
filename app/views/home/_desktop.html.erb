@@ -1,11 +1,11 @@
 <div class="text-center flex flex-col relative">
   <%= image_tag "bg/mobile-01.jpg", class: "md:hidden w-full" %>
-  <div class="absolute inset-0">
+  <div class="absolute inset-0 md:relative">
     <div class="py-11 z-20">
       <h1 class="robot-font font-bold md:font-normal text-3xl md:text-5xl md:text-black text-white px-4">Create a free<br/>
       portfolio with StylistPage</h1>
     </div>
-    <div class="z-20 absolute md:relative bottom-10 md:bottom-auto inset-x-0">
+    <div class="z-20 absolute md:relative bottom-10 md:bottom-auto inset-x-0 md:pb-10">
       <%= link_to "Create Account", new_user_registration_path, class: "rounded-3xl max-w-xs py-3 block mx-auto", style: "background: #FFDE03;" %>
     </div>
     <p class="roboto-font text-base z-20 hidden md:block" style="color: #3374DE;">Yup, it’s free!</p>
