@@ -1,35 +1,69 @@
-<div class="text-center flex flex-col">
-  <div class="py-11">
-    <h1 class="robot-font font-normal text-5xl" style="line-height: 61px;">Create a free<br/>
-    portfolio with StylistPage</h1>
+<div class="text-center flex flex-col relative">
+  <%= image_tag "bg/mobile-01.jpg", class: "md:hidden w-full" %>
+  <div class="absolute inset-0">
+    <div class="py-11 z-20">
+      <h1 class="robot-font font-bold md:font-normal text-3xl md:text-5xl md:text-black text-white px-4">Create a free<br/>
+      portfolio with StylistPage</h1>
+    </div>
+    <div class="z-20 absolute md:relative bottom-10 md:bottom-auto inset-x-0">
+      <%= link_to "Create Account", new_user_registration_path, class: "rounded-3xl max-w-xs py-3 block mx-auto", style: "background: #FFDE03;" %>
+    </div>
+    <p class="roboto-font text-base z-20 hidden md:block" style="color: #3374DE;">Yup, it’s free!</p>
+    <p class="roboto-font font-bold md:font-normal text-base z-20 text-white md:hidden absolute md:relative bottom-24 md:bottom-auto inset-x-0" >Yup, it’s free!</p>
   </div>
-  <div class="pb-14">
-    <%= link_to "Create Account", new_user_registration_path, class: "rounded-3xl max-w-xs py-3 block mx-auto", style: "background: #FFDE03;" %>
-  </div>
-  <p class="roboto-font text-base" style="color: #3374DE;">Yup, it’s free!</p>
-  <div class="flex flex-row items-end space-x-3 -mt-10 pb-8">
-    <%= image_tag "homepage/01.jpg", class: "flex-1" %>
-    <%= image_tag "homepage/02.jpg", class: "flex-1" %>
-    <%= image_tag "homepage/03.jpg", class: "flex-1" %>
-    <%= image_tag "homepage/04.jpg", class: "flex-1" %>
-    <%= image_tag "homepage/05.jpg", class: "flex-1" %>
+  <div class="hidden md:flex md:flex-row md:items-end md:space-x-3 md:-mt-10 pb-8 md:px-4">
+    <div class="md:w-1/5">
+      <%= image_tag "homepage/01.jpg" %>
+    </div>
+    <div class="md:w-1/5">
+      <%= image_tag "homepage/02.jpg" %>
+    </div>
+    <div class="md:w-1/5">
+      <%= image_tag "homepage/03m.jpg" %>
+    </div>
+    <div class="md:w-1/5">
+      <%= image_tag "homepage/04.jpg" %>
+    </div>
+    <div class="md:w-1/5">
+      <%= image_tag "homepage/05.jpg" %>
+    </div>
   </div>
 </div>
 
-<div style="background: #FAFAFA;" class="pt-24 pb-20">
+<div style="background: #FAFAFA;" class="py-10 md:pt-24 md:pb-20 px-4">
   <div class="text-center pb-11">
-    <h1 class="roboto-font text-5xl font-medium" style="line-height: 61px;">Showcase your<br/>haircuts, colors & Styles</h1>
+    <h1 class="roboto-font text-3xl md:text-5xl font-bold md:font-medium">Showcase your<br/>haircuts, colors & Styles</h1>
   </div>
   <div class="mx-auto" style="max-width: 840px">
-    <div class="flex flex-wrap">
-      <%= image_tag "homepage/stylists/01.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/02.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/03.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/04.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/05.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/06.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/07.jpg", class: "flex-1" %>
-      <%= image_tag "homepage/stylists/08.jpg", class: "flex-1" %>
+    <div class="flex flex-col">
+      <div class="flex flex-row space-x-2 md:space-x-0">
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/01.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/02.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/03.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/04.jpg" %>
+        </div>
+      </div>
+      <div class="flex flex-row pt-1 md:pt-0 space-x-2 md:space-x-0">
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/05.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/06.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/07.jpg" %>
+        </div>
+        <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
+        <%= image_tag "homepage/stylists/08.jpg" %>
+        </div>
+      </div>
     </div>
     <p class="roboto-font text-base font-medium pt-6 text-left" style="color: #4F4F4E;">Create Tags</p>
     <ul class="flex flex-wrap space-x-2 space-y-2">
@@ -44,18 +78,20 @@
   </div>
 </div>
 
-<div class="flex pb-4">
-  <div class="md:w-1/2">
-    <%= image_tag "homepage/client01.jpg" %>
+<div class="flex flex-col md:flex-row pb-4">
+  <div class="md:w-1/2 relative">
+    <%= image_tag "homepage/client01.jpg", class: "hidden md:block" %>
+    <%= image_tag "homepage/client01-mobile.jpg", class: "md:hidden w-full" %>
+    <h3 class="md:hidden absolute inset-0 font-medium roboto-font pb-7 md:text-black text-white text-center pt-5 md:pt-0 text-size-make-it-easy">Make it easy for clients<br/>to brag about your work</h3>
   </div>
-  <div class="md:w-1/2 flex items-center justify-center" style="background: #FAFAFA;">
+  <div class="md:w-1/2 flex items-center justify-center px-4 py-10 md:py-0" style="background: #FAFAFA;">
     <div>
-      <h3 class="font-medium roboto-font pb-7" style="font-size: 42px;line-height: 61px;">Make it easy for clients<br/>to brag about your work</h3>
-      <p class="block pb-6">
+      <h3 class="hidden md:block font-medium roboto-font pb-7 md:text-black text-white text-center pt-5 md:pt-0 text-size-make-it-easy">Make it easy for clients<br/>to brag about your work</h3>
+      <p class="block pb-6 text-center">
         <span class="border px-2 py-1 font-medium roboto-font rounded-full bg-white" style="color: #4F4F4E;">StylistPage.com/yourname</span>
       </p>
-      <p class="font-medium roboto-font text-base pb-6" style="color: #4F4F4E;">Seamless Sharing</p>
-      <ul class="flex space-x-2 mx-auto">
+      <p class="font-medium roboto-font text-base pb-6 text-center" style="color: #4F4F4E;">Seamless Sharing</p>
+      <ul class="flex space-x-2 mx-auto" style="max-width: 132px">
         <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/twitter.svg" %></li>
         <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/facebook.svg" %></li>
         <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/copy.svg" %></li>
@@ -64,8 +100,8 @@
   </div>
 </div>
 
-<div style="background: #FAFAFA;" class="text-center py-20">
-  <h2 class="roboto-font font-medium text-5xl" style="line-height: 61px;">Designed for hairstylists<br/>by hairstylists</h2>
+<div class="bg-md-gray-home text-center py-20 px-4">
+  <h2 class="roboto-font font-bold md:font-medium text-size-make-it-easy px-4">Designed for hairstylists<br/>by hairstylists</h2>
   <div class="pt-16">
     <%= link_to "Create Account", new_user_registration_path, class: "rounded-3xl max-w-xs py-3 block mx-auto", style: "background: #FFDE03;" %>
   </div>

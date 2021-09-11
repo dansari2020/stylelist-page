@@ -27,7 +27,7 @@
     </div>
   </nav>
 </header>
-<% unless current_user.present? && current_user.admin? %>
+<% unless current_user.present? && current_user.admin? || (current_user.nil? && action_name == "index" && controller_name == "home") %>
 <div id="bottomMenu" x-data="{ bottomMenu : true }" class="md:hidden" x-show="bottomMenu">
   <div class="fixed bottom-0 z-10 flex flex-row justify-between w-full p-2 bg-white border-t z-20">
     <%= render "shared/menu" %>

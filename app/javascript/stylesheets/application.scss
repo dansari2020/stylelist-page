@@ -74,6 +74,13 @@ html {
   .md-box-shadow-right {
     box-shadow: 4px 0 4px -4px rgb(0 0 0 / 25%);
   }
+
+  .bg-md-gray-home {
+    background: #fafafa;
+  }
+  .text-size-make-it-easy {
+    font-size: 47px;
+  }
 }
 @media (max-width: 767px) {
   .min-h-main {
@@ -87,6 +94,9 @@ html {
   }
   .max-w-info-portfolio {
     width: 100%;
+  }
+  .text-size-make-it-easy {
+    font-size: 31px;
   }
 }
 .alert-danger,
