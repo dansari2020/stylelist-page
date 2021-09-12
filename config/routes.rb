@@ -24,8 +24,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get "mobile", to: "mobile#index"
+  # get "mobile", to: "mobile#index"
   root "home#index"
+  get "/feedback", to: "home#feedback", as: "feedback"
+  get "/contact", to: "home#contact", as: "contact"
+  get "/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
+  get "/terms_of_service", to: "home#terms_of_service", as: "terms_of_service"
+
   devise_for :users, path: "auth",
   controllers: {
     registrations: "users/registrations",

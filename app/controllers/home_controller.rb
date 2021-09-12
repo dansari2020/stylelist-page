@@ -8,6 +8,18 @@ class HomeController < ApplicationController
   def show
   end
 
+  def feedback
+  end
+  
+  def contact
+  end
+
+  def privacy_policy
+  end
+  
+  def terms_of_service
+  end
+
   private
 
   def editable

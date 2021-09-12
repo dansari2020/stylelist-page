@@ -19,16 +19,17 @@ FriendlyId.defaults do |config|
   config.reserved_words = %w[new edit index session login logout users admin
     stylesheets assets javascripts images api contactus contact helpcenter help
     knowledgebase career careers careerpage blog pricingplan settings setting about
-    hompage home homepage marketing culturevalues values policies standards
-    policiesandstandards privacypolicy privacy faqs faq advertising help
+    hompage home homepage marketing culturevalues values policies standards email
+    policiesandstandards privacypolicy privacy faqs faq advertising help password
     customerstories api stylistpage client stylists stylist salons salon barber
     barbers hair influencers hairinfluencers pricing pricingplan partnerships blog
     blogs socialmedia mediakit media mediainquiries overview resources usecase
     industryresearch webinars training search searchfeed feed discovery filter
-    stylistsearch stylistfeed stylistdiscovery stylistfilter login closeaccount
-    support ourmission mission subscribe brandassets academy news news&events events
-    findastylist findasalon mobile ios android app salongrow security roadmap
-    featurereqeusts ads learnmore 404 500 401 not_found internal_server_error bad_request]
+    stylistsearch stylistfeed stylistdiscovery stylistfilter closeaccount register
+    support ourmission mission subscribe brandassets academy news news_events events
+    findastylist findasalon mobile ios android app salongrow security roadmap forgot_password
+    featurereqeusts ads learnmore 404 500 401 not_found internal_server_error bad_request
+    feedback privacy_policy terms_of_service terms privacy signin signup forget forgot]
 
   # This adds an option to treat reserved words as conflicts rather than exceptions.
   # When there is no good candidate, a UUID will be appended, matching the existing

@@ -8,7 +8,9 @@
       <%= render "shared/header" %>
       <div id="main" class="w-full mx-auto min-h-main max-w-screen-2xl">
         <%= yield %>
+        <% unless user_signed_in? %>
         <%= render "shared/footer" %>
+        <% end %>
       </div>
     </div>
     <%= render "shared/scripts" %>
