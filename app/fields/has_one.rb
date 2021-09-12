@@ -45,7 +45,7 @@ class HasOne < Administrate::Field::Base
     data.try(:persisted?)
   end
 
-  def display_associated_resource    
+  def display_associated_resource
     "#{attribute.to_s.classify}Dashboard".safe_constantize.new.display_resource(data)
   end
 
