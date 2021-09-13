@@ -48,9 +48,11 @@
       </li>
       <li class="p-2 border border-gray-200 rounded-md md:py-4 md:mt-3">
         <h2 class="pb-2 leading-3 md:b-4 text-normal">Hair length</h2>
+        <% if portfolio.hair_length.present? %>
         <p class="mt-2 mr-2">
           <span class="px-3 py-1 text-sm border border-gray-200 rounded-full"><%= portfolio.hair_length&.humanize %></span>
         </p>
+        <% end %>
       </li>
     </ul>
     <div class="flex flex-col">
