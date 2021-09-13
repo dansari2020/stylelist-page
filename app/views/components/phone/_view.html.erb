@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class="flex flex-col items-start">
-        <% if editable %>
+        <% if local_assigns[:editable].present? %>
           <%= link_to "Edit", profile_edit_path("phone"), class: "roboto-font text-blue-500 pb-2 text-2xs font-normal w-full text-right" %>
         <% end %>
         <% if user.has_phone? && user.mobile?  %>

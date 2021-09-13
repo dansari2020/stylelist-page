@@ -2,7 +2,7 @@
   <div class="flex flex-wrap content-center w-full bg-center bg-no-repeat bg-cover md:rounded-lg relative" 
     style="height: 200px; background-color: #4F4F4E; <%= "background-image: url(#{url_for(user.backgroun_medium)})" if user.background.attached? %>">
     <div class="flex flex-col w-full">
-    <% if editable %>
+    <% if local_assigns[:editable].present? %>
       <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "background")  }, remote: true, authenticity_token: true) do |f| %>
         <%= f.label :background, class: "cursor-pointer absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center flex-col justify-center" do %>
           <% if user.background.attached? %>

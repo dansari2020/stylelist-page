@@ -20,7 +20,7 @@
         </p>
       </div>
       <div class="flex items-start">
-      <% if editable %>
+      <% if local_assigns[:editable].present? %>
         <%= link_to "Edit", profile_edit_path("language"), class: "roboto-font text-blue-500 text-2xs font-normal" %>
       <% end %>
       </div>
