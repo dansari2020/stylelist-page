@@ -1,2 +1,8 @@
+<%= content_for(:head) do %>
+<meta property="og:url"                content="<%= @user.url %>" />
+<meta property="og:type"               content="website" />
+<meta property="og:title"              content="<%= @user.full_name %>" />
+<meta property="og:description"        content="<%= @user.bio %>" />
+<meta property="og:image"              content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>" />
+<% end %>
 <%= render partial: "shared/handle", locals: {user: @user, editable: @editable} %>
-
