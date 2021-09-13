@@ -4,5 +4,10 @@
 <meta property="og:title"              content="<%= @user.full_name %>" />
 <meta property="og:description"        content="<%= @user.bio %>" />
 <meta property="og:image"              content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>" />
+
+<meta name="twitter:title" content="<%= @user.full_name %>">
+<meta name="twitter:description" content="<%= @user.bio %>">
+<meta name="twitter:image" content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>">
+<meta name="twitter:card" content="summary_large_image">
 <% end %>
 <%= render partial: "shared/handle", locals: {user: @user, editable: @editable} %>
