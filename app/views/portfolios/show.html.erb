@@ -1,5 +1,5 @@
 <%= content_for(:head) do %>
-<% @picture = Rails.application.routes.url_helpers.rails_blob_url(@portfolio.picture) if @portfolio.picture.attached? %>
+<% @picture = Rails.application.routes.url_helpers.rails_blob_url(@portfolio.picture) if @portfolio.pictures.attached? %>
 <meta property="og:url"                content="<%= @portfolio.url %>" />
 <meta property="og:type"               content="website" />
 <meta property="og:title"              content="StylistPage - <%= @portfolio.user_first_name %>" />
