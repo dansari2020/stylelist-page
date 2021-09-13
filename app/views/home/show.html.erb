@@ -1,13 +1,14 @@
 <%= content_for(:head) do %>
+<% @avatar = Rails.application.routes.url_helpers.rails_blob_url(@user.avatar) if @user.avatar.attached? %>
 <meta property="og:url"                content="<%= @user.url %>" />
 <meta property="og:type"               content="website" />
 <meta property="og:title"              content="StylistPage - <%= @user.full_name %>" />
 <meta property="og:description"        content="<%= @user.bio %>" />
-<meta property="og:image"              content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>" />
+<meta property="og:image"              content="<%= @avatar %>" />
 
 <meta name="twitter:title" content="StylistPage - <%= @user.full_name %>">
 <meta name="twitter:description" content="<%= @user.bio %>">
-<meta name="twitter:image" content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>">
+<meta name="twitter:image" content="<%= @avatar %>">
 <meta name="twitter:card" content="summary_large_image">
 
 <meta property="og:site_name" content="StylistPage">
