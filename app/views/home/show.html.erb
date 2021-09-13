@@ -1,13 +1,19 @@
 <%= content_for(:head) do %>
 <meta property="og:url"                content="<%= @user.url %>" />
 <meta property="og:type"               content="website" />
-<meta property="og:title"              content="<%= @user.full_name %>" />
+<meta property="og:title"              content="StylistPage - <%= @user.full_name %>" />
 <meta property="og:description"        content="<%= @user.bio %>" />
 <meta property="og:image"              content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>" />
 
-<meta name="twitter:title" content="<%= @user.full_name %>">
+<meta name="twitter:title" content="StylistPage - <%= @user.full_name %>">
 <meta name="twitter:description" content="<%= @user.bio %>">
 <meta name="twitter:image" content="<%= url_for(@user.avatar_thumb) if @user.avatar.attached? %>">
 <meta name="twitter:card" content="summary_large_image">
+
+<meta property="og:site_name" content="StylistPage">
+<meta name="twitter:image:alt" content="StylistPage">
+
+<meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
+<meta name="twitter:site" content="<%= ENV["TWITTER_SITE_NAME"] %>">
 <% end %>
 <%= render partial: "shared/handle", locals: {user: @user, editable: @editable} %>
