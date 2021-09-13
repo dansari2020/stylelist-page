@@ -190,6 +190,8 @@ GEM
     mailgun-ruby (1.2.5)
       rest-client (>= 2.0.2)
     marcel (1.0.1)
+    meta-tags (2.15.0)
+      actionpack (>= 3.2.0, < 6.2)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -387,6 +389,7 @@ DEPENDENCIES
   language_list
   listen (~> 3.3)
   mailgun-ruby
+  meta-tags
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
@@ -408,4 +411,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.19
+   2.2.25

@@ -73,13 +73,14 @@
     });
   }
   function fbshareCurrentPage(url, title = '', summary = '', image = '') {
-    params = '?s=100'+
-      '&p[title]=' + title +
-      '&p[summary]=' + summary +
-      '&p[url]=' + encodeURIComponent(url) +
-      '&p[images][0]=' + encodeURIComponent(image)
-      window.open("https://www.facebook.com/sharer/sharer.php"+params, '', 
-        'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+    FB.ui({method: 'send', link: url});
+    // params = '?s=100'+
+    //   '&p[title]=' + title +
+    //   '&p[summary]=' + summary +
+    //   '&p[url]=' + encodeURIComponent(url) +
+    //   '&p[images][0]=' + encodeURIComponent(image)
+    //   window.open("https://www.facebook.com/sharer/sharer.php"+params, '', 
+    //     'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
     return false; 
   }
 

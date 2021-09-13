@@ -11,6 +11,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+<%= display_meta_tags site: "StylistPage" %>
+<% set_meta_tags title: "StylistPage",
+                 description: "",
+                 keywords: "Hairstyle, barbershop" %>
 <%= yield :head %>
 <%= turbo_include_tags %>
 <% #= stimulus_include_tags %>
