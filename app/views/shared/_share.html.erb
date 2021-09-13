@@ -73,7 +73,7 @@
     });
   }
   function fbshareCurrentPage(url, title = '', summary = '', image = '') {
-    FB.ui({method: 'send', link: url});
+    FB.ui({method: 'share', link: url});
     // params = '?s=100'+
     //   '&p[title]=' + title +
     //   '&p[summary]=' + summary +
