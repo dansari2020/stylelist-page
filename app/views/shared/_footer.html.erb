@@ -3,10 +3,7 @@
     <div>© 2021 StylistPage, Inc</div>
     <ul class="flex space-x-3">
       <li>
-        <%= link_to "Feedback", feedback_path, class: "" %>
-      </li>
-      <li>
-        <%= link_to "Contact", contact_path, class: "" %>
+        <%= link_to "Contact", "mailto:#{ENV.fetch("CONTACT_EMAIL", "hello@stylistpage.com")}", class: "" %>
       </li>
       <li>
         <%= link_to "Privacy Policy", privacy_policy_path, class: "" %>
