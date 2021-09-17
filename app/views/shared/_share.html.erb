@@ -10,10 +10,7 @@
         <% %w[copy_link facebook twitter].each do |social| %>
           <li class="mt-2">
             <%= link_to "#", class: "flex flex-row items-center roboto-font", data: { link: defined?(resource) && resource }, 
-            "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_title) && share_title}\", 
-            \"#{defined?(share_link) && share_link&.html_safe}\",
-            \"#{defined?(share_desc) && share_desc&.html_safe}\",
-            \"#{defined?(share_image) && share_image}\")" do %>
+            "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_link) && share_link&.html_safe}\")" do %>
               <div class="w-1/4">
                 <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3" %>
               </div>
@@ -26,25 +23,16 @@
   </div>
 </div>
 <script language="javascript">
-  function shareBtn(shareType, title = '', url = '', summary = '', image = '') {
-    if (title === '' || !title) {
-      title = window.shareTitle
-    }
+  function shareBtn(shareType, url = '') {
     if (url === '' || !url) {
       url = window.shareLink
     }
-    if (summary === '' || !summary) {
-      summary = window.shareDesc
-    }
-    if (image === '' || !image) {
-      image = window.shareImage
-    }
     switch (shareType) {
       case "facebook":
-        fbshareCurrentPage(url, title, summary, image)
+        fbshareCurrentPage(url)
         break;
       case "twitter":
-        tweetCurrentPage(url, title, image)
+        tweetCurrentPage(url)
         break;
   
       default:
@@ -62,30 +50,18 @@
     document.body.removeChild(dummy);
   }
   
-  function shareFacebook(title, url, summary, image) {
-    var title = encodeURI(title);
+  function fbshareCurrentPage(url) {
     var url = encodeURI(url);
-    var summary = encodeURI(summary);
-    var image = encodeURI(image);
     FB.ui({
       method: 'share',
       href: url
     });
-  }
-  function fbshareCurrentPage(url, title = '', summary = '', image = '') {
-    FB.ui({method: 'share', href: url});
-    // params = '?s=100'+
-    //   '&p[title]=' + title +
-    //   '&p[summary]=' + summary +
-    //   '&p[url]=' + encodeURIComponent(url) +
-    //   '&p[images][0]=' + encodeURIComponent(image)
-    //   window.open("https://www.facebook.com/sharer/sharer.php"+params, '', 
-    //     'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
     return false; 
   }
 
-  function tweetCurrentPage(url, title, image){ 
-    window.open("https://twitter.com/share?card=photo&image="+ encodeURIComponent(image)+"&url="+ encodeURIComponent(url)+"&text="+ title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+  function tweetCurrentPage(url){ 
+    // window.open("https://twitter.com/share?card=photo&image="+ encodeURIComponent(image)+"&url="+ encodeURIComponent(url)+"&text="+ title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+    window.open("https://twitter.com/share?url="+ encodeURIComponent(url), 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
     return false;
   }
 </script>
