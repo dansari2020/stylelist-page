@@ -221,7 +221,7 @@ class User < ApplicationRecord
   def check_started_at
     if started_at.present? && (started_at.year > Time.now.year ||
       (started_at.year == Time.now.year && started_at.month > Time.now.month))
-      errors.add(:years_of_experience, " can't be in a future date")
+      errors.add(:_, "Can't be in a future date")
     end
   end
 end

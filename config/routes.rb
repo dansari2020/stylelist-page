@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options :host => ENV.fetch("DEFAULT_URL") { "stylistpage.com" }
+  default_url_options host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }
   namespace :admin do
     resources :users
     resources :portfolios
@@ -54,12 +54,12 @@ Rails.application.routes.draw do
   get "portfolios" => redirect("/portfolios/new")
   get "auth/check-email", to: "auth#check_email", as: "check_email"
   get "auth/reset-password", to: "auth#reset_password", as: "reset_password"
-  
+
   get "/:username/porfolios/:id", to: "portfolios#show",
   constraints: ->(request) {
     User.where("username ilike ?", request.path_parameters[:username]).exists?
   }
-  
+
   get "/:username", to: "home#show",
   constraints: ->(request) {
     User.where("username ilike ?", request.path_parameters[:username]).exists?

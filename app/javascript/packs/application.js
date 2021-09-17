@@ -7,6 +7,7 @@ import Rails from "@rails/ujs";
 import "@hotwired/turbo-rails";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
+require("jquery")
 
 // import alpinejs and its necessary rails adaptation
 import "alpine-turbo-drive-adapter";

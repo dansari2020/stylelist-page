@@ -9,7 +9,7 @@
       <ul class="flex flex-wrap flex-col">
         <% %w[copy_link facebook twitter].each do |social| %>
           <li class="mt-2">
-            <%= link_to "#", class: "flex flex-row items-center", data: { link: defined?(resource) && resource }, 
+            <%= link_to "#", class: "flex flex-row items-center roboto-font", data: { link: defined?(resource) && resource }, 
             "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_title) && share_title}\", 
             \"#{defined?(share_link) && share_link&.html_safe}\",
             \"#{defined?(share_desc) && share_desc&.html_safe}\",

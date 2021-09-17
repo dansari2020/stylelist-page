@@ -42,6 +42,7 @@ class UsersController < ApplicationController
               end
             end
             format.html do
+              flash[:success] = "Your profile was updated successfully!"
               if params["user"]["email"].present?
                 return redirect_to confirm_email_path
               elsif params["user"]["deactivate_reason"].present?
