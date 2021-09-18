@@ -1,6 +1,7 @@
 class Address < ApplicationRecord
   include ActionView::RecordIdentifier
   belongs_to :user
+  validates :user, presence: true
 
   def country
     @country ||= ISO3166::Country[country_code]

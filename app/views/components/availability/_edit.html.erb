@@ -61,7 +61,6 @@
                   <div x-data="time()" x-init="init($el)">
                     <%= av_form.text_field :open_at, value: av_form.object.open_at_in_text&.upcase || "01:00 AM", class: "w-28 timepicker-ui-input px-4 text-center roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
                   </div>
-                  <% #= av_form.select :open_at_ampm, options_for_select(Availability.open_at_ampms.keys, av_form.object.open_at_ampm), {}, class: "px-4 appearance-none roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>
                   <div class="px-2 mx-auto h-16 inline-flex items-center">-</div>              
                   <div x-data="time()" x-init="init($el)">
                     <%= av_form.text_field :close_at, value: av_form.object.close_at_in_text&.upcase || "01:00 AM", class: "w-28 timepicker-ui-input px-4 text-center roboto-font font-light text-sm rounded-lg border focus:border-gray-500 focus:outline-none autofill:bg-white leading-5 h-16" %>  

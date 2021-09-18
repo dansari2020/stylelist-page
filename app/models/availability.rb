@@ -2,11 +2,12 @@ class Availability < ApplicationRecord
   belongs_to :user
 
   enum day: %i[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
-  enum open_at_ampm: %i[am pm], _prefix: true
-  enum close_at_ampm: %i[am pm], _prefix: true
+
   validates :day, presence: true
+  validates :user, presence: true
 
   validate :check_working_hours
+
   before_validation :reset_time
 
   def reset_time

@@ -9,6 +9,8 @@ class Portfolio < ApplicationRecord
   has_many_attached :pictures
   accepts_nested_attributes_for :service_types, allow_destroy: true
 
+  validates :user, presence: true
+
   delegate :first_name, to: :user, prefix: true
 
   after_save :update_counter_cache

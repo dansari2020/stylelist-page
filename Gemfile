@@ -30,6 +30,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "standard"
+  gem "rspec-rails"
+  gem "shoulda-matchers", "~> 5.0"
 end
 
 group :development do
@@ -50,6 +52,7 @@ group :test do
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
+  gem "simplecov", require: false
 end
 
 group :production do
@@ -71,3 +74,4 @@ gem "friendly_id", "~> 5.4.0"
 gem "administrate"
 gem "administrate-field-active_storage"
 gem "meta-tags"
+gem "regressor", "~> 0.6.2"

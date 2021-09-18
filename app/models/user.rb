@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_many :social_media, dependent: :destroy
   has_many :portfolios, dependent: :destroy # , -> { where (status: :published) }
   has_many :flags, through: :portfolios
-  has_many :pictures, through: :portfolios
+  has_many :pictures, through: :portfolios, source: :pictures_attachments
   accepts_nested_attributes_for :specialties, :address, :services,
     :availabilities, :social_media, allow_destroy: true
   has_and_belongs_to_many :languages, dependent: :destroy

@@ -1,6 +1,8 @@
 class Flag < ApplicationRecord
   belongs_to :portfolio, counter_cache: true
 
+  validates :portfolio, presence: true
+
   after_create :update_flags_count
   after_destroy :update_flags_count
 

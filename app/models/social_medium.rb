@@ -1,10 +1,10 @@
 class SocialMedium < ApplicationRecord
+  belongs_to :user
+
   enum kind: %i[twitter facebook instagram youtube]
 
   validates :kind, presence: true
-  # validates :url, presence: true
-
-  belongs_to :user
+  validates :user, presence: true
 
   def full_url
     "https://#{kind}.com/#{url}"
