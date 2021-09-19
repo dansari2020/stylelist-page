@@ -81,6 +81,10 @@ html {
   .text-size-make-it-easy {
     font-size: 47px;
   }
+  .space-showcase > :not([hidden]) ~ :not([hidden]) {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
 }
 @media (max-width: 767px) {
   .min-h-main {
@@ -97,6 +101,10 @@ html {
   }
   .text-size-make-it-easy {
     font-size: 31px;
+  }
+  .space-showcase > :not([hidden]) ~ :not([hidden]) {
+    margin-left: 7px;
+    margin-bottom: 7px;
   }
 }
 .alert-danger,
