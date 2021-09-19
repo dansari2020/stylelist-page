@@ -36,11 +36,11 @@ RSpec.describe Address, regressor: true do
   subject {
     described_class.new(country_code: "US")
   }
-  
+
   let(:address) do
     FactoryBot.create(:address)
   end
-  
+
   let(:privacy_address) do
     FactoryBot.create(:address, privacy: true)
   end
@@ -50,7 +50,7 @@ RSpec.describe Address, regressor: true do
       expect(subject.country.name).to eq("United States of America")
     end
   end
-  
+
   describe ".full_address" do
     it "get empty array of new address" do
       expect(subject.full_address).to be_empty

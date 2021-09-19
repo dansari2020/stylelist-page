@@ -49,7 +49,7 @@ class Availability < ApplicationRecord
       self[:open_at] = nil
     end
   end
-  
+
   def close_at=(new_close_at)
     if new_close_at.present?
       res = DateTime.strptime(new_close_at, "%H:%M %p")

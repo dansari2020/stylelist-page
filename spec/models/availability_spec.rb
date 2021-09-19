@@ -4,11 +4,19 @@ RSpec.describe Availability, regressor: true do
   let(:open) { Time.now.change(hour: 8) }
   let(:close) { Time.now.change(hour: 18) }
   let(:day) { Availability.days.keys.sample }
+  let(:user) { FactoryBot.create(:user) }
+  let(:invalid_case_1) { Availability.new(user: user, opened: true, day: day) }
+  let(:invalid_case_2) {
+    Availability.new(user: user, opened: true, day: day,
+      open_at: close.strftime("%I:%M %P"), close_at: open.strftime("%I:%M %P"))
+  }
 
   subject {
-    described_class.new(day: day, opened: true, open_at: open.strftime("%I:%M %P"), close_at: close.strftime("%I:%M %P"))
+    described_class.new(day: day, opened: true,
+      open_at: open.strftime("%I:%M %P"),
+      close_at: close.strftime("%I:%M %P"))
   }
-  
+
   # === Relations ===
   it { is_expected.to belong_to :user }
 
@@ -32,20 +40,27 @@ RSpec.describe Availability, regressor: true do
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :user }
   it { is_expected.to validate_presence_of :day }
-  
+
   it "is not valid without a open_at" do
-    expect(Availability.new(opened: true)).to_not be_valid
+    expect(invalid_case_1).to_not be_valid
+    invalid_case_1.validate
+    expect(invalid_case_1.errors.full_messages).to eq(["Opening time  or closing time can't be blank"])
   end
 
   it "is not valid open_at after the close_at" do
-    expect(Availability.new(opened: true, open_at: close.strftime("%I:%M %P"), close_at: open.strftime("%I:%M %P") )).to_not be_valid
+    expect(invalid_case_2).to_not be_valid
+    invalid_case_2.validate
+    expect(invalid_case_2.errors.full_messages).to eq(["Closing time must be after opening time"])
   end
 
   # === Validations (Numericality) ===
 
   # === Enums ===
-  it { is_expected.to define_enum_for(:day).with_values(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) }
-  
+  it {
+    is_expected.to define_enum_for(:day).with_values(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+      "Friday", "Saturday"])
+  }
+
   # === public methods ===
   describe ".open_at_in_text" do
     it "get open at in text" do

@@ -33,13 +33,13 @@ RSpec.describe SocialMedium, regressor: true do
 
   # === public methods ===
   subject {
-    described_class.new(kind: kind, url: url )
+    described_class.new(kind: kind, url: url)
   }
-  
+
   let(:address) do
     FactoryBot.create(:address)
   end
-  
+
   let(:privacy_address) do
     FactoryBot.create(:address, privacy: true)
   end
