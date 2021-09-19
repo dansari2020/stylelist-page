@@ -4,7 +4,7 @@ class SocialMedium < ApplicationRecord
   enum kind: %i[twitter facebook instagram youtube]
 
   validates :kind, presence: true
-  validates :user, presence: true
+validates :user, presence: true
 
   def full_url
     "https://#{kind}.com/#{url}"

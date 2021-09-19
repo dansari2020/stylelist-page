@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe SocialMedium, regressor: true do
+  let(:kind) { SocialMedium.kinds.keys.sample }
+  let(:url) { Faker::Name.first_name.downcase }
+
   # === Relations ===
   it { is_expected.to belong_to :user }
 
@@ -27,4 +30,35 @@ RSpec.describe SocialMedium, regressor: true do
 
   # === Enums ===
   it { is_expected.to define_enum_for(:kind).with_values(["twitter", "facebook", "instagram", "youtube"]) }
+
+  # === public methods ===
+  subject {
+    described_class.new(kind: kind, url: url )
+  }
+  
+  let(:address) do
+    FactoryBot.create(:address)
+  end
+  
+  let(:privacy_address) do
+    FactoryBot.create(:address, privacy: true)
+  end
+
+  describe ".full_url" do
+    it "get a full url" do
+      expect(subject.full_url).to eq("https://#{kind}.com/#{url}")
+    end
+  end
+
+  describe ".kind_text" do
+    it "get social medium name in text" do
+      expect(subject.kind_text).to eq(subject.kind.humanize)
+    end
+  end
+
+  describe "#kind_list" do
+    it "get list of social media" do
+      expect(SocialMedium.kind_list).to eq([["Twitter", "twitter"], ["Facebook", "facebook"], ["Instagram", "instagram"], ["Youtube", "youtube"]])
+    end
+  end
 end
