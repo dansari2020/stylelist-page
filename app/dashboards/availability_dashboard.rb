@@ -13,7 +13,6 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # updated_at: Field::DateTime,
   ATTRIBUTE_TYPES = {
     day: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    day_name: Field::String,
     working_hours: Field::String,
     open_at: Field::Time,
     opened: Field::Boolean,
@@ -28,7 +27,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # user
   # id
   COLLECTION_ATTRIBUTES = %i[
-    day_name
+    day
     working_hours
     opened
   ].freeze
@@ -40,7 +39,7 @@ class AvailabilityDashboard < Administrate::BaseDashboard
   # created_at
   # updated_at
   SHOW_PAGE_ATTRIBUTES = %i[
-    day_name
+    day
     open_at
     close_at
     opened

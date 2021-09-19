@@ -45,28 +45,27 @@ class Availability < ApplicationRecord
     if new_open_at.present?
       res = DateTime.strptime(new_open_at, "%H:%M %p")
       self[:open_at] = res
+    else
+      self[:open_at] = nil
     end
   end
-
+  
   def close_at=(new_close_at)
     if new_close_at.present?
       res = DateTime.strptime(new_close_at, "%H:%M %p")
       self[:close_at] = res
+    else
+      self[:close_at] = nil
     end
   end
 
-  def day_name
-    day
-    # Date::DAYNAMES[day].capitalize
-  end
-
   def info
-    "#{day_name} #{working_hours}"
+    "#{day} #{working_hours}"
   end
 
   def working_hours
     if opened?
-      "#{open_at&.strftime("%I:%M %p")} - #{close_at&.strftime("%I:%M %p")}"
+      "#{self[:open_at]&.strftime("%I:%M %p")} - #{self[:close_at]&.strftime("%I:%M %p")}"
     else
       "Not Available"
     end
