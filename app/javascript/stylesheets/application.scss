@@ -83,6 +83,8 @@ html {
   }
   .space-showcase > :not([hidden]) ~ :not([hidden]) {
     margin-left: 5px;
+  }
+  .space-showcase > :not([hidden]) {
     margin-bottom: 5px;
   }
 }
@@ -104,6 +106,8 @@ html {
   }
   .space-showcase > :not([hidden]) ~ :not([hidden]) {
     margin-left: 7px;
+  }
+  .space-showcase > :not([hidden]) {
     margin-bottom: 7px;
   }
 }
