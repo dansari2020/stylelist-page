@@ -345,7 +345,7 @@
                 <div x-data 
                   data-tags='[<%= service_types.pluck(:name).map{|name| "\"#{name}\""}.join(',') %>]'
                   data-tagIds='[<%= service_types.pluck(:id).map{|id| "\"#{id}\""}.join(',') %>]'>
-                  <div x-data="tagSelect()" x-init="init('parentEl');hideBottomMenu()" @click.away="clearSearch()" @keydown.escape="clearSearch()">
+                  <div x-data="tagSelect()" x-init="init('parentEl');" @click.away="clearSearch()" @keydown.escape="clearSearch()">
                     <div class="relative w-full overflow-y-scroll rounded" @keydown.enter.prevent="addTag(textInput)" @click.prevent="focusTag()">
                       <div class="w-full">
                         <div :class="[open ? 'block' : 'hidden']">
