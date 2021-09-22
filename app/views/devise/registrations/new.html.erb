@@ -37,7 +37,7 @@
       </div>
       <div class="flex justify-between w-full actions">
         <div class="w-1/2">
-          <p class="text-xs text-justify text-gray-500">By clicking Sign Up you agree to our <%= link_to "Terms", "#", class: "text-blue-500" %> and <%= link_to "Services", "#",class: "text-blue-500" %></p>
+          <p class="text-xs text-justify text-gray-500">By clicking Sign Up you agree to our <%= link_to "Terms", terms_of_service_path, class: "text-blue-500", target: "_blank" %> and <%= link_to "Services", privacy_policy_path, class: "text-blue-500", target: "_blank" %></p>
         </div>
         <div class="w-1/2 text-right">
           <%= f.submit "Sign up", class: "text-black bg-yellow-light hover:bg-yellow-500 px-4 py-2 rounded-md md:text-sm text-xs font-medium" %>
