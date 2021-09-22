@@ -66,9 +66,9 @@ as defined by the routes in the `admin/` namespace
     <div class="flex flex-col items-center w-full p-4">
       <div class="relative w-24 h-24">
         <% if current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar_thumb, class: "w-full h-full rounded-full" %>
+          <%= image_tag current_user.avatar_thumb, alt: current_user.full_name, class: "w-full h-full rounded-full" %>
         <% else %>
-          <%= image_tag "icons/avatar.svg", class: "w-full h-full rounded-full" %>
+          <%= image_tag "icons/avatar.svg", alt: "Avatar", class: "w-full h-full rounded-full" %>
         <% end %>
       </div>
       <div class="flex flex-col items-center justify-center w-full mt-6">

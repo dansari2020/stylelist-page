@@ -8,7 +8,7 @@
     <div class="flex-1 w-full pt-2">
       <%= f.fields_for :social_media, @social_media  do |social_form| %>
         <div class="flex flex-row items-center w-full px-4 mb-3 border rounded-lg focus:border-gray-500 focus:outline-none">
-          <%= image_tag "icons/#{social_form.object.kind}.svg", class: "w-5" %>
+          <%= image_tag "icons/#{social_form.object.kind}.svg", class: "w-5", alt: social_form.object.kind %>
           <span class="ml-4 text-gray-500"><%= "https://#{social_form.object.kind}.com/" %></span>
           <%= social_form.text_field :url, placeholder: "username", class: "w-full py-3 focus:border-none outline-none autofill:bg-white" %>
           <%= social_form.text_field :kind, class: "hidden" %>

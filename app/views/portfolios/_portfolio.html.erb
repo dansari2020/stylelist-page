@@ -1,6 +1,6 @@
 <div class="flex flex-col mx-auto overflow-hidden bg-white md:flex-row-reverse portfolio-info" x-data="toggleBottomMenu()" x-init="init()">
   <div class="relative flex items-center max-w-image-portfolio">
-    <%= image_tag picture_url(portfolio.picture), class: "object-contain w-full" %>
+    <%= image_tag picture_url(portfolio.picture), class: "object-contain w-full", alt: "#{portfolio.user_first_name} Portfolio" %>
     <div class="absolute bottom-3 right-3">
       <%= render partial: "shared/share", locals: { 
         share_title: portfolio.user_first_name, 

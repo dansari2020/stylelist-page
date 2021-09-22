@@ -1,7 +1,7 @@
 <div x-data="{ socialMenu : false }">
   <button  @click="socialMenu = true" @click.away="socialMenu = false" 
     class="-mt-8 md:mt-0 flex items-center justify-center px-2 py-2 ml-auto text-sm text-right text-black bg-transparent rounded-md md:px-4 md:font-bold md:text-md max-w-max whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light max-h-max">
-    <%= image_tag "icons/share.svg", class: "w-4 mr-2" %>
+    <%= image_tag "icons/share.svg", class: "w-4 mr-2", alt: "" %>
     Share
   </button>
   <div x-show="socialMenu" class="w-44 p-4 absolute right-0 z-20 py-1 mt-2 origin-top-right bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 group-hover:block focus:outline-none <%= defined?(classMenu) && classMenu %>" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -12,7 +12,7 @@
             <%= link_to "#", class: "flex flex-row items-center roboto-font", data: { link: defined?(resource) && resource }, 
             "@click.prevent": "shareBtn(\"#{social}\",\"#{defined?(share_link) && share_link&.html_safe}\")" do %>
               <div class="w-1/4">
-                <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3" %>
+                <%= image_tag "icons/#{social}.svg", class: "h-5 pr-3", alt: social %>
               </div>
               <span class="font-light text-base w-3/4 text-left"><%= social.humanize %></span>
             <% end %>

@@ -2,7 +2,7 @@
   <button type="button" @click="profileMenu = true" @click.away="profileMenu = false"  class="flex text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
     <span class="sr-only">Open user menu</span>
     <% if user.avatar.attached? %>
-      <%= image_tag user.avatar_thumb || default_avatar, class: "h-8 w-8 rounded-full", alt: "avatar" %>
+      <%= image_tag user.avatar_thumb || default_avatar, class: "h-8 w-8 rounded-full", alt: user.full_name %>
     <% else %>
       <span class="inline-block w-8 h-8 overflow-hidden bg-gray-100 rounded-full">
         <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
@@ -14,7 +14,7 @@
   <div x-show="profileMenu" class="absolute right-0 z-20 py-1 mt-2 origin-top-right bg-white rounded-lg shadow-lg w-72 ring-1 ring-black ring-opacity-5 group-hover:block focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
     <div class="flex items-center w-full px-4 pb-2">
       <% if user.avatar.attached? %>
-        <%= image_tag user.avatar_thumb || default_avatar, class: "h-12 w-12 rounded-full", alt: "avatar" %>
+        <%= image_tag user.avatar_thumb || default_avatar, class: "h-12 w-12 rounded-full", alt: user.full_name %>
       <% else %>
         <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
           <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">

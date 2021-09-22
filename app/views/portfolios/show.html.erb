@@ -20,7 +20,7 @@
 <div class="flex flex-row py-5 px-3">
   <% url = current_user.present? && @portfolio.user == current_user ? root_url : @portfolio.user.url %>
   <%= link_to url, class: "text-md font-medium flex-1 flex flex-row items-center" do %>
-    <%= image_tag "icons/flash-l.svg", class: "mr-3 w-4 h-4" %>
+    <%= image_tag "icons/flash-l.svg", class: "mr-3 w-4 h-4", alt: "" %>
     <span class="text-md font-medium flex-1">Styled by <%= @portfolio.user_first_name %></span>
   <% end %>
   <div class="flex">

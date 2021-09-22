@@ -7,25 +7,25 @@
         <li class="flex items-center rounded-xl md:px-4 h-14" :class="{'md:bg-gray-200' : tab === 'profile'}">
           <a href="#" class="w-full flex content-center justify-between" @click.prevent="tab = 'profile'; tabSelected = !tabSelected; submenu = ''">
             <div class="flex space-x-2">
-              <%= image_tag "icons/profile.svg", class: "w-6" %>
+              <%= image_tag "icons/profile.svg", class: "w-6", alt: "" %>
               <div class="flex-1 pl-7 md:pl-0">
                 <p class="font-semibold text-sm">Edit Profile</p>
                 <p class="text-xs font-normal text-gray-400 md:hidden">Name, Title</p>
               </div>
             </div>
-            <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'profile'" %>
+            <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'profile'", alt: "" %>
           </a>
         </li>
         <li class="flex items-center rounded-xl md:px-4 h-14" :class="{'md:bg-gray-200' : tab === 'manage_account'}">
           <a href="#" class="w-full flex content-center justify-between" @click.prevent="tab = 'manage_account'; tabSelected = !tabSelected; submenu = ''">
             <div class="flex space-x-2">
-              <%= image_tag "icons/manage_account.svg", class: "w-6" %>
+              <%= image_tag "icons/manage_account.svg", class: "w-6", alt: "" %>
               <div class="flex-1 pl-7 md:pl-0">
                 <p class="font-semibold font-normal text-sm">Manage Account</p>
                 <p class="text-xs font-normal text-gray-400 md:hidden">Update Email, Change Password, Deactivate Account</p>
               </div>
             </div>
-            <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'manage_account'" %>
+            <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'manage_account'", alt: "" %>
           </a>
         </li>
       </ul>
@@ -42,59 +42,59 @@
           <p class="font-semibold text-sm text-black">Edit Profile</p>
         </div>
       </div>
-      <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'profile'" %>
+      <%= image_tag "icons/arrow-right.svg", class: "w-4 hidden md:block", "x-show": "tab === 'profile'", alt: "" %>
     </a>
     <ul class="mt-10 w-full" id="profil_submenu" x-show="tab === 'profile'">
       <li class="flex items-center rounded-xl md:px-3 lg:px-4 h-14" :class="{'bg-blue-100' : submenu === 'name'}">
         <a href="#" class="w-full flex items-center justify-between" @click.prevent="toggleBottomMenu(); submenu = 'name'; submenuSelected = !submenuSelected">
-          <%= image_tag "icons/update_name.svg", class: "h-6 md:hidden" %>
+          <%= image_tag "icons/update_name.svg", class: "h-6 md:hidden", alt: "" %>
           <div class="flex-1 pl-7 md:pl-0">
             <p class="font-semibold text-sm">Name</p>
             <p class="text-xs roboto-font font-normal text-gray-500"><%= @user.full_name %></p>
           </div>
-          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'name'" %>
+          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'name'", alt: "" %>
         </a>
       </li>
       <li class="flex items-center rounded-xl md:px-3 lg:px-4 h-14" :class="{'bg-blue-100' : submenu === 'job'}">
         <a href="#" class="w-full flex items-center justify-between" @click.prevent="toggleBottomMenu(); submenu = 'job'; submenuSelected = !submenuSelected">
-          <%= image_tag "icons/update_job.svg", class: "h-6 md:hidden" %>
+          <%= image_tag "icons/update_job.svg", class: "h-6 md:hidden", alt: "" %>
           <div class="flex-1 pl-7 md:pl-0">
             <p class="font-semibold text-sm">Job Title</p>
             <p class="text-xs roboto-font font-normal text-gray-500"><%= @user.job %></p>
           </div>
-          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'job'" %>
+          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'job'", alt: "" %>
         </a>
       </li>
     </ul>
     <ul class="mt-10 w-full" id="manage_account_submenu" x-show="tab === 'manage_account'">
       <li class="flex items-center rounded-xl md:px-3 lg:px-4 h-14" :class="{'bg-blue-100' : submenu === 'update_email'}">
         <a href="#" class="w-full flex items-center justify-between" @click.prevent="toggleBottomMenu(); submenu = 'update_email';submenuSelected = !submenuSelected">
-          <%= image_tag "icons/email-setting.svg", class: "h-6 md:hidden" %>
+          <%= image_tag "icons/email-setting.svg", class: "h-6 md:hidden", alt: "" %>
           <div class="flex-1 pl-7 md:pl-0">
             <p class="font-semibold text-sm">Update Email</p>
             <p class="text-xs roboto-font font-normal text-gray-500"><%= @user.email %></p>
           </div>
-          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'update_email'" %>
+          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'update_email'", alt: "" %>
         </a>
       </li>
       <li class="flex items-center rounded-xl md:px-3 lg:px-4 h-14" :class="{'bg-blue-100' : submenu === 'change_password'}">
         <a href="#" class="w-full flex items-center justify-between" @click.prevent="toggleBottomMenu(); submenu = 'change_password'; submenuSelected = !submenuSelected">
-          <%= image_tag "icons/password-lock.svg", class: "h-6 md:hidden" %>
+          <%= image_tag "icons/password-lock.svg", class: "h-6 md:hidden", alt: "" %>
           <div class="flex-1 pl-7 md:pl-0">
             <p class="font-semibold text-sm">Change Password</p>
             <p class="text-xs roboto-font font-normal text-gray-500">Create a new password</p>
           </div>
-          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'change_password'" %>
+          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'change_password'", alt: "" %>
         </a>
       </li>
       <li class="flex items-center rounded-xl md:px-3 lg:px-4 h-14" :class="{'bg-blue-100' : submenu === 'deactivate'}">
         <a href="#" class="w-full flex items-center justify-between" @click.prevent="toggleBottomMenu(); submenu = 'deactivate'; submenuSelected = !submenuSelected">
-          <%= image_tag "icons/deactivate-account.svg", class: "h-6 md:hidden" %>
+          <%= image_tag "icons/deactivate-account.svg", class: "h-6 md:hidden", alt: "" %>
           <div class="flex-1 pl-7 md:pl-0">
             <p class="font-semibold text-sm">Deactivate Account</p>
             <p class="text-xs roboto-font font-normal text-gray-500">Hide your portfolio from the web</p>
           </div>
-          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'deactivate'" %>
+          <%= image_tag "icons/arrow-right.svg", class: "h-6", "x-show": "submenu === 'deactivate'", alt: "" %>
         </a>
       </li>
     </ul>

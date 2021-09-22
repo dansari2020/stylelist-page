@@ -9,25 +9,25 @@
 <% if user_signed_in? && current_user.confirmed? && current_user.activated? %>
   <%= link_to root_url, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "home"}" do %>
     <% if controller_name == "home" %>
-      <%= image_tag "icons/portfolio-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/portfolio-active.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% else %>
-      <%= image_tag "icons/portfolio.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/portfolio.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% end %>
     Portfolio
   <% end %>
   <%= link_to new_portfolio_path, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "portfolios"}" do %>
     <% if controller_name == "portfolios" %>
-      <%= image_tag "icons/plus-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/plus-active.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% else %>
-      <%= image_tag "icons/plus.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/plus.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% end %>
     Upload
   <% end %>
   <%= link_to settings_path, style: "font-size: 10px", class: "menu-item roboto-font font-normal text-center px-2 #{ "active" if controller_name == "users"}" do %>
     <% if controller_name == "users" %>
-      <%= image_tag "icons/setting-active.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/setting-active.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% else %>
-      <%= image_tag "icons/setting.svg", class: "w-5 h-5 mx-auto mb-1.5" %>
+      <%= image_tag "icons/setting.svg", class: "w-5 h-5 mx-auto mb-1.5", alt: "" %>
     <% end %>
     Settings
   <% end %>

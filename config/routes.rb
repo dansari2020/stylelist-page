@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get "/contact", to: "home#contact", as: "contact"
   get "/privacy_policy", to: "home#privacy_policy", as: "privacy_policy"
   get "/terms_of_service", to: "home#terms_of_service", as: "terms_of_service"
+  get "/robots.txt" => "robots_txts#show"
 
   devise_for :users, path: "auth",
   controllers: {

@@ -1,5 +1,5 @@
 <div class="text-center flex flex-col relative">
-  <%= image_tag "bg/mobile-01.jpg", class: "md:hidden w-full" %>
+  <%= image_tag "bg/mobile-01.jpg", class: "md:hidden w-full", alt: "" %>
   <div class="absolute inset-0 md:relative">
     <div class="py-11 z-20">
       <h1 class="robot-font font-bold md:font-normal text-3xl md:text-5xl md:text-black text-white px-4">Create a free<br/>
@@ -13,19 +13,19 @@
   </div>
   <div class="hidden md:flex md:flex-row md:items-end md:space-x-3 md:-mt-10 pb-8 md:px-4">
     <div class="md:w-1/5">
-      <%= image_tag "homepage/01.jpg" %>
+      <%= image_tag "homepage/01.jpg", alt: "" %>
     </div>
     <div class="md:w-1/5">
-      <%= image_tag "homepage/02.jpg" %>
+      <%= image_tag "homepage/02.jpg", alt: "" %>
     </div>
     <div class="md:w-1/5">
-      <%= image_tag "homepage/03m.jpg" %>
+      <%= image_tag "homepage/03m.jpg", alt: "" %>
     </div>
     <div class="md:w-1/5">
-      <%= image_tag "homepage/04.jpg" %>
+      <%= image_tag "homepage/04.jpg", alt: "" %>
     </div>
     <div class="md:w-1/5">
-      <%= image_tag "homepage/05.jpg" %>
+      <%= image_tag "homepage/05.jpg", alt: "" %>
     </div>
   </div>
 </div>
@@ -38,30 +38,30 @@
     <div class="flex flex-col">
       <div class="flex flex-row space-showcase">
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/01.jpg" %>
+        <%= image_tag "homepage/stylists/01.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/02.jpg" %>
+        <%= image_tag "homepage/stylists/02.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/03.jpg" %>
+        <%= image_tag "homepage/stylists/03.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/04.jpg" %>
+        <%= image_tag "homepage/stylists/04.jpg", alt: "" %>
         </div>
       </div>
       <div class="flex flex-row pt-1 md:pt-0 space-showcase">
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/05.jpg" %>
+        <%= image_tag "homepage/stylists/05.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/06.jpg" %>
+        <%= image_tag "homepage/stylists/06.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/07.jpg" %>
+        <%= image_tag "homepage/stylists/07.jpg", alt: "" %>
         </div>
         <div class="w-1/4 rounded-xl overflow-hidden md:rounded-md border md:border-none" style="border-color: rgba(0, 0, 0, 0.12)">
-        <%= image_tag "homepage/stylists/08.jpg" %>
+        <%= image_tag "homepage/stylists/08.jpg", alt: "" %>
         </div>
       </div>
     </div>
@@ -80,8 +80,8 @@
 
 <div class="flex flex-col md:flex-row pb-4">
   <div class="md:w-1/2 relative">
-    <%= image_tag "homepage/client01.jpg", class: "hidden md:block" %>
-    <%= image_tag "homepage/client01-mobile.jpg", class: "md:hidden w-full" %>
+    <%= image_tag "homepage/client01.jpg", class: "hidden md:block", alt: "" %>
+    <%= image_tag "homepage/client01-mobile.jpg", class: "md:hidden w-full", alt: "" %>
     <h3 class="md:hidden absolute inset-0 font-medium roboto-font pb-7 md:text-black text-white text-center pt-5 md:pt-0 text-size-make-it-easy">Make it easy for clients<br/>to brag about your work</h3>
   </div>
   <div class="md:w-1/2 flex items-center justify-center px-4 py-10 md:py-0" style="background: #FAFAFA;">
@@ -92,9 +92,15 @@
       </p>
       <p class="font-medium roboto-font text-base pb-6 text-center" style="color: #4F4F4E;">Seamless Sharing</p>
       <ul class="flex space-x-2 mx-auto" style="max-width: 148px">
-        <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/twitter.svg" %></li>
-        <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/facebook.svg" %></li>
-        <li class="rounded-full border w-11 h-11 flex items-center justify-center"><%= image_tag "homepage/copy.svg" %></li>
+        <li class="rounded-full border w-11 h-11 flex items-center justify-center">
+          <%= image_tag "homepage/twitter.svg", alt: "" %>
+        </li>
+        <li class="rounded-full border w-11 h-11 flex items-center justify-center">
+          <%= image_tag "homepage/facebook.svg", alt: "" %>
+        </li>
+        <li class="rounded-full border w-11 h-11 flex items-center justify-center">
+          <%= image_tag "homepage/copy.svg", alt: "" %>
+        </li>
       </ul>
     </div>
   </div>

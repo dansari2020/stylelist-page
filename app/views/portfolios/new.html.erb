@@ -5,7 +5,7 @@
         <% @token = form_authenticity_token %>
         <%= hidden_field_tag :authenticity_token, @token %>
         <%= f.label :pictures, class: "cursor-pointer" do %>
-          <%= image_tag "icons/upload_portfolio.png", class: "w-36 mx-auto mb-8 md:block hidden" %>
+          <%= image_tag "icons/upload_portfolio.png", class: "w-36 mx-auto mb-8 md:block hidden", alt: "" %>
           <h1 class="mb-8 text-2xl hidden md:block">
             <span class="text-blue-500">Chose a file</span> or drag it here
           </h1>

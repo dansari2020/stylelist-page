@@ -1,5 +1,6 @@
 <title><%= yield(:page_title) %> StylistPage</title>
 <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
@@ -14,11 +15,14 @@
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 <%= display_meta_tags site: "StylistPage" %>
+<%= canonical_tag -%>
 <% set_meta_tags title: "StylistPage",
                  description: "",
                  keywords: "Hairstyle, barbershop" %>
 <%= yield :head %>
 <%= turbo_include_tags %>
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="noindex,nofollow">
 <% #= stimulus_include_tags %>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

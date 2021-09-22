@@ -6,7 +6,7 @@
       <%= form_for(user, url: profile_users_path, html: { method: :put, id: dom_id(user, "background")  }, remote: true, authenticity_token: true) do |f| %>
         <%= f.label :background, class: "cursor-pointer absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center flex-col justify-center" do %>
           <% if user.background.attached? %>
-            <%= image_tag "icons/camera.svg", class: "w-10 h-10 mx-auto md:block", ":class": "{'hidden': tab == 'profile' || tab == 'contact'}" %>
+            <%= image_tag "icons/camera.svg", alt: "Camera", class: "w-10 h-10 mx-auto md:block", ":class": "{'hidden': tab == 'profile' || tab == 'contact'}" %>
           <% else %>
             <svg width="38" height="30" viewBox="0 0 38 30" class="mx-auto md:block" fill="none" xmlns="http://www.w3.org/2000/svg" :class="{'hidden': tab == 'profile' || tab == 'contact'}">
               <path d="M36.1111 25.8889C36.1111 26.714 35.7834 27.5053 35.1999 28.0888C34.6165 28.6722 33.8251 29 33 29H5.00003C4.17491 29 3.38359 28.6722 2.80014 28.0888C2.21669 27.5053 1.88892 26.714 1.88892 25.8889V8.77778C1.88892 7.95266 2.21669 7.16134 2.80014 6.57789C3.38359 5.99444 4.17491 5.66667 5.00003 5.66667H11.2222L14.3334 1H23.6667L26.7778 5.66667H33C33.8251 5.66667 34.6165 5.99444 35.1999 6.57789C35.7834 7.16134 36.1111 7.95266 36.1111 8.77778V25.8889Z" stroke="white" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

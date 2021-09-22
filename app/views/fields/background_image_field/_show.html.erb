@@ -1,17 +1,6 @@
-<!--
-<div class="flex flex-wrap content-center w-full bg-center bg-no-repeat bg-cover md:rounded-lg relative" 
-<% if field.attached? %>
-  style="height: 200px; background-color: #4F4F4E; background-image: url(<%= url_for(field.data) %>)"
-<% else %>
-  style="height: 200px; background-color: #4F4F4E; background-image: url(<%= field.default_url %>)"
-<% end %>
->
-</div>
--->
-
 <div class="h-48">
 <% if field.attached? %>
-  <%= image_tag field.data, class: "object-cover h-full w-full rounded-md" %>
+  <%= image_tag field.data, class: "object-cover h-full w-full rounded-md", alt: "" %>
 <% else %>
   <div class="object-cover h-full w-full rounded-md" style="background-color: #4F4F4E"></div>
 <% end %>

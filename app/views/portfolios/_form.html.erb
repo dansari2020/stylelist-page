@@ -129,7 +129,7 @@
               <p class="hidden md:flex py-2 pt-4 text-gray-600">
                 <%= picture.blob.filename %>
               </p>
-              <%= image_tag picture, class: "w-25 md:w-36 rounded-md"  %>
+              <%= image_tag picture, class: "w-25 md:w-36 rounded-md", alt: ""  %>
             </div>
           <% end %>
           <div class="w-full mt-5">
@@ -289,7 +289,6 @@
       <div class="md:p-8 mb-2 md:border-b">
         <label for="" class="roboto-font text-xs font-medium mb-2.5 block pb-2">Length of Hair</label>
         <div class="relative mt-2" x-data="LengthOfHair()" x-init="init('<%= portfolio.hair_length %>')">
-          <% #= image_tag "girl.svg", class: "my-8", style: "width: 353px;height: 524px" %>
           <svg class="my-2" viewBox="0 0 353 524" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line x1="227" y1="508.5" x2="72" y2="508.5" stroke="black"/>
             <line x1="246" y1="16.5" x2="72" y2="16.5" stroke="black"/>

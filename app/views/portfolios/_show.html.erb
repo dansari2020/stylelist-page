@@ -3,7 +3,7 @@
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
     <% if portfolio.next.present? %>
       <%= link_to portfolio_path(portfolio.next), remote: true do %>
-        <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer" %>
+        <%= image_tag "icons/popup-l.svg", class: "mr-5 cursor-pointer", alt: "" %>
       <% end %>
     <% end %>
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="relative flex items-center" style="max-width:499px">
-      <%= image_tag picture_url(portfolio.picture), class: "object-contain" %>
+      <%= image_tag picture_url(portfolio.picture), class: "object-contain", alt: "#{portfolio.user_first_name} Portfolio" %>
       <div class="absolute bottom-3 right-3">
         <%= render partial: "shared/share", locals: { classMenu: "bottom-12",
         share_title: portfolio.user_first_name,
@@ -66,7 +66,7 @@
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>
     <% if portfolio.prev.present? %>
       <%= link_to portfolio_path(portfolio.prev), remote: true do %>
-        <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer" %>
+        <%= image_tag "icons/popup-r.svg", class: "ml-5 cursor-pointer", alt: "" %>
       <% end %>
     <% end %>
     <div class="flex-1 w-full" @click="imgModal = ''; linkable = '';">&nbsp;</div>

@@ -9,7 +9,7 @@
               <% next if social.url.blank? %>
               <li class="mt-2 mr-2">
                 <%= link_to social.full_url, target: "_blank" do %>
-                  <%= image_tag "icons/#{social.kind}.svg", class: "h-5" %>
+                  <%= image_tag "icons/#{social.kind}.svg", class: "h-5", alt: social.kind %>
                 <% end %>
               </li>
             <% end %>

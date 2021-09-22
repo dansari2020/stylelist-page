@@ -8,22 +8,22 @@
     <div class="flex flex-row items-center w-full mb-4">
       <%= link_to wizard_path(:specialties), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm", data: { "turbo-frame": "_top" } do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/speciality.svg", class: "h-5" %>
+          <%= image_tag "icons/speciality.svg", class: "h-5", alt: "" %>
           <% if @user.has_specialties? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Your specialties
       <% end %>
       <%= link_to wizard_path(:services), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm", data: { "turbo-frame": "_top"} do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/services.svg", class: "h-5" %>
+          <%= image_tag "icons/services.svg", class: "h-5", alt: "" %>
           <% if @user.has_services? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Services you offer
@@ -32,22 +32,22 @@
     <div class="flex flex-row items-center w-full mb-4">
       <%= link_to wizard_path(:bio), data: { "turbo-frame": "_top" }, class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/bio.svg", class: "h-5" %>
+          <%= image_tag "icons/bio.svg", class: "h-5", alt: "" %>
           <% if @user.has_bio? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Your biography
       <% end %>
       <%= link_to wizard_path(:education), data: { "turbo-frame": "_top" }, class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/education.svg", class: "h-5" %>
+          <%= image_tag "icons/education.svg", class: "h-5", alt: "" %>
           <% if @user.has_education? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Your education
@@ -56,22 +56,22 @@
     <div class="flex flex-row items-center w-full mb-4">
       <%= link_to wizard_path(:experience), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 mr-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/calendar.svg", class: "h-5" %>
+          <%= image_tag "icons/calendar.svg", class: "h-5", alt: "" %>
           <% if @user.has_started_at? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Years of Experience
       <% end %>
       <%= link_to wizard_path(:social_media), class: "w-1/2 border border-gray-200 hover:border-blue-500 p-2 ml-2 roboto-font font-light text-sm" do %>
         <div class="flex justify-between mb-6">
-          <%= image_tag "icons/social.svg", class: "h-5" %>
+          <%= image_tag "icons/social.svg", class: "h-5", alt: "" %>
           <% if @user.has_social_media? %>
-            <%= image_tag "icons/checked-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/checked-checkbox.svg", class: "h-5", alt: "" %>
           <% else %>
-            <%= image_tag "icons/empty-checkbox.svg", class: "h-5" %>
+            <%= image_tag "icons/empty-checkbox.svg", class: "h-5", alt: "" %>
           <% end %>
         </div>
         Social Media
