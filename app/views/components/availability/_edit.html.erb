@@ -28,7 +28,7 @@
       <%= render "devise/shared/error_messages", resource: user %>
       <div class="w-full">
         <% availabilities = [] %>
-        <% 0.upto(6) do |day_number| %>
+        <% Availability.days.keys.each do |day_number| %>
           <% availabilities << user.availabilities.find_or_initialize_by(day: day_number) %>
         <% end %>
         <div class="w-full" style="max-width: 330px">
