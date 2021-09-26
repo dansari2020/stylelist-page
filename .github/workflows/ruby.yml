@@ -53,16 +53,16 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      # - uses: actions/cache@v1
-      #   with:
-      #     path: vendor/bundle
-      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gems-
-
       - name: Install PostgreSQL Client
         run: |
           sudo apt-get -yqq install libpq-dev
+
+      - name: Gem cache
+        id: cache-bundle
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: bundle-${{ hashFiles('**/Gemfile.lock') }}
 
       - name: Run bundle install
         env:
@@ -70,6 +70,21 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+
+      # NOTE: Yarn cache doesn't seem to be working quite yet
+      - name: Get yarn cache dir
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Yarn cache
+        id: cache-yarn
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install yarn
+        run: npm install -g yarn
 
       - name: setup databases
         env:
@@ -80,6 +95,6 @@ jobs:
           cp config/database.yml.sample config/database.yml
           bundle exec rake db:setup
 
-      - name: Rspec
+      - name: Run tests
         run: |
           bundle exec rspec
