@@ -14,7 +14,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
@@ -31,6 +31,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    strategy:
+      matrix:
+        ruby-version: ['2.7.2']
+
     steps:
       - uses: actions/checkout@v2
 
@@ -44,7 +48,7 @@ jobs:
       - name: Set up Ruby 2.7.2
         uses: ruby/setup-ruby@v1.30.1
         with:
-          ruby-version: 2.7.2
+          ruby-version: ${{ matrix.ruby-version }}
 
       - name: Install PostgreSQL Client
         run: |
