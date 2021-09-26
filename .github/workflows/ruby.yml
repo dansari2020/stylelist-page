@@ -14,7 +14,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     services:
@@ -31,26 +31,40 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    strategy:
-      matrix:
-        ruby-version: ['2.7.2']
-
     steps:
       - uses: actions/checkout@v2
-      - name: Install library for postgres
-        run: sudo apt-get install libpq-dev
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+
+      - uses: actions/cache@v1
         with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Setup Database
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Set up Ruby 2.7.2
+        uses: ruby/setup-ruby@v1.30.1
+        with:
+          ruby-version: 2.7.2
+
+      - name: Install PostgreSQL Client
         run: |
-          cp config/database.yml.sample config/database.yml
-          bundle exec rails db:setup
+          sudo apt-get -yqq install libpq-dev
+
+      - name: Run bundle install
         env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
           RAILS_ENV: test
-      - name: Run tests
-        run: bundle exec rspec
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Build and test with rspec
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          RUBYOPT: '-W:no-deprecated -W:no-experimental'
+        run: |
+          bundle exec rake db:setup
+          bundle exec rspec
