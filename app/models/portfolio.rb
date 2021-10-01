@@ -29,7 +29,7 @@ class Portfolio < ApplicationRecord
   end
 
   def url
-    [user.url, "porfolios", id].join("/")
+    [user.url, "porfolios", id].join("/").gsub("https://https://", "https://")
   end
 
   def self.prefer_service_types

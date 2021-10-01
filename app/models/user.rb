@@ -75,7 +75,7 @@ class User < ApplicationRecord
 
   def default_url
     if Rails.env.production?
-      "https://stylistpage.com/"
+      "https://www.stylistpage.com/"
     else
       "http://localhost:3000/"
     end
