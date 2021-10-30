@@ -24,7 +24,7 @@ FriendlyId.defaults do |config|
     customerstories api stylistpage client stylists stylist salons salon barber
     barbers hair influencers hairinfluencers pricing pricingplan partnerships blog
     blogs socialmedia mediakit media mediainquiries overview resources usecase
-    industryresearch webinars training search searchfeed feed discovery filter
+    industryresearch webinars training search searchfeed feed discovery filter error
     stylistsearch stylistfeed stylistdiscovery stylistfilter closeaccount register
     support ourmission mission subscribe brandassets academy news news_events events
     findastylist findasalon mobile ios android app salongrow security roadmap forgot_password

@@ -2,7 +2,7 @@ class Users::AfterRegisterController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
   before_action :user, only: %i[show update]
-  steps :job, :handle, :final, :bio, :specialties, :services, :education,
+  steps :job, :handle, :information, :bio, :specialties, :services, :education,
     :experience, :social_media
   layout "register_steps"
 
@@ -15,7 +15,8 @@ class Users::AfterRegisterController < ApplicationController
   end
 
   def update
-    if step == :final
+    @user.next_step(step)
+    if step == :information
       @user.skip_confirmation! if ["true", true, "1"].include?(ENV.fetch("USER_SKIP_CONFIRMATION", true))
       @user.activated!
       @user.save
@@ -24,7 +25,7 @@ class Users::AfterRegisterController < ApplicationController
     else
       respond_to do |format|
         if @user.update(user_params) && %i[bio specialties services education experience social_media].include?(step)
-          jump_to(:final)
+          jump_to(:information)
         end
         format.html do
           render_wizard @user

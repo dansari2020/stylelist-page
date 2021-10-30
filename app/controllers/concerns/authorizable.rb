@@ -4,7 +4,7 @@ module Authorizable
   def after_login_path_for(resource)
     if !current_user.admin?
       if resource.pending?
-        after_register_path(:job)
+        after_register_path(resource.register_step || :job)
       elsif resource.deactivated?
         reactivation_path
       elsif resource.activated? && !resource.confirmed?

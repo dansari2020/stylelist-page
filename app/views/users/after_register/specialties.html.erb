@@ -22,7 +22,7 @@
                 <p class="my-2 text-sm text-gray-500">Seperate skills with a comma</p>
               </div>
               <template x-if="tags.length === 0">
-              <div class="flex-1 text-center flex justify-center items-center text-sm text-gray-500 py-10">You haven’t added any specialities</div>
+                <div class="flex-1 text-center flex justify-center items-center text-sm text-gray-500 py-10">You haven’t added any specialities</div>
               </template>
               <!-- selections -->
               <template x-for="(tag, index) in tags">
@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="w-full text-right actions">
-    <%= link_to "Cancel", wizard_path(:final), class: "text-black text-gray-500 px-4 py-2 rounded-md md:text-sm  text-xs font-medium" %>
+    <%= link_to "Cancel", wizard_path(:information), class: "text-black text-gray-500 px-4 py-2 rounded-md md:text-sm  text-xs font-medium" %>
     <%= f.submit "Save", class: "text-black text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium" %>
   </div>
 <% end %>

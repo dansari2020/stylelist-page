@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   enum role: %i[client hair_stylist barber admin]
   enum status: %i[pending activated deactivated disabled]
+  enum register_step: %i[job handle information completed]
   enum phone_type: %i[mobile salon]
   enum phone_method: %i[text_or_calls text calls]
   enum deactivate_reason: {"Select a reason (optional)": 0,
@@ -26,6 +27,7 @@ class User < ApplicationRecord
     if: lambda { |user| user.encrypted_password_changed? }
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validate :required_handle, if: :register_step_changed?
   validate :check_started_at
 
   has_one_attached :avatar
@@ -54,6 +56,12 @@ class User < ApplicationRecord
     if @errors[:friendly_id].present?
       errors.add(:handle, "is reserved. Please choose something else.")
       @errors.messages.delete(:friendly_id)
+    end
+  end
+
+  def required_handle
+    if information? && !username.present? 
+      errors.add(:handle, "is required.")
     end
   end
 
@@ -194,6 +202,14 @@ class User < ApplicationRecord
 
   def update_flags_count
     update(flags_count: flags.count)
+  end
+
+  def next_step(step_name)
+    if step_name == :completed
+      self.register_step = step_name
+    else
+      self.register_step = (step_name == :job ? "handle" : "information")
+    end
   end
 
   protected
