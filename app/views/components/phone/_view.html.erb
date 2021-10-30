@@ -5,7 +5,7 @@
         <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Phone</h2>
         <p class="leading-2 roboto-font font-light text-sm sub-title-color">
           <% if user.has_phone? %>
-            <%= user.phone %>
+            <a href="tel:<%= user.phone %>"><%= user.phone %></a>
           <% else %>
             What number can clients contact you at?
           <% end %>

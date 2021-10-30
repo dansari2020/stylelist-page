@@ -11,7 +11,9 @@
         <p class="text-center md:text-left leading-2 roboto-font font-light text-sm sub-title-color">
           Describe who you are
         </p>
-        <%= link_to "Add Bio", profile_edit_path(frame, "bio"), class: "text-blue-500 text-sm md:hidden text-center block" %>
+        <% if local_assigns[:editable].present? %>
+          <%= link_to "Add Bio", profile_edit_path(frame, "bio"), class: "text-blue-500 text-sm md:hidden text-center block" %>
+        <% end %>
       <% end %>
     </div>
     <div class="absolute top-0 md:top-auto right-0 md:right-auto md:relative mt-2 mr-3 md:flex md:items-start md:mr-0 md:mt-0 <%= " hidden" if !user.has_bio? %>">
