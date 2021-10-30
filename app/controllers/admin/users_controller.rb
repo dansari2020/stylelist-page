@@ -38,7 +38,7 @@ module Admin
     # actions.
     #
     def find_resource(param)
-      User.find_by!(username: param)
+      User.where(username: param).or(User.where(id: param)).take!
     end
 
     # The result of this lookup will be available as `requested_resource`
