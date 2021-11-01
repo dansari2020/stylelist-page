@@ -1,24 +1,21 @@
 <%= content_for(:head) do %>
-<% @avatar = Rails.application.routes.url_helpers.rails_blob_url(@user.avatar) if @user.avatar.attached? %>
-<% set_meta_tags title: "StylistPage",
+  <% @avatar = Rails.application.routes.url_helpers.rails_blob_url(@user.avatar) if @user.avatar.attached? %>
+  <% set_meta_tags title: "StylistPage",
                  description: "#{@user.full_name} - #{@user.job} - StylistPage",
                  keywords: "Hairstyle, barbershop" %>
-<meta content="tylistPage" property="og:site_name">
-<meta property="og:url"                content="<%= @user.url %>" />
-<meta property="og:type"               content="website" />
-<meta property="og:title"              content="<%= @user.full_name %> - <%= @user.job %> - StylistPage" />
-<meta property="og:description"        content="<%= @user.bio %>" />
-<meta property="og:image"              content="<%= @avatar %>" />
-
-<meta name="twitter:title" content="<%= @user.full_name %> - <%= @user.job %> - StylistPage">
-<meta name="twitter:description" content="<%= @user.bio %>">
-<meta name="twitter:image" content="<%= @avatar %>">
-<meta name="twitter:card" content="summary_large_image">
-
-<meta property="og:site_name" content="StylistPage">
-<meta name="twitter:image:alt" content="StylistPage">
-
-<meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
-<meta name="twitter:site" content="<%= ENV["TWITTER_SITE_NAME"] %>">
+  <meta content="StylistPage" property="og:site_name">
+  <meta property="og:url"                content="<%= @user.url %>" />
+  <meta property="og:type"               content="website" />
+  <meta property="og:title"              content="<%= @user.full_name %> - <%= @user.job %> - StylistPage" />
+  <meta property="og:description"        content="<%= @user.bio %>" />
+  <meta property="og:image"              content="<%= @avatar %>" />
+  <meta name="twitter:title" content="<%= @user.full_name %> - <%= @user.job %> - StylistPage">
+  <meta name="twitter:description" content="<%= @user.bio %>">
+  <meta name="twitter:image" content="<%= @avatar %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="StylistPage">
+  <meta name="twitter:image:alt" content="StylistPage">
+  <meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
+  <meta name="twitter:site" content="<%= ENV["TWITTER_SITE_NAME"] %>">
 <% end %>
 <%= render partial: "shared/handle", locals: {user: @user, editable: @editable} %>
