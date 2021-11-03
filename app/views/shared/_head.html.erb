@@ -1,4 +1,4 @@
-<title><%= yield(:page_title) %> StylistPage</title>
+<title><%= content_for?(:page_title) ? yield(:page_title) : "StylistPage" %></title>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,7 @@
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 <%
 =begin%>
- <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <%
 =end%>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,13 +31,12 @@
 <meta name="referrer" content="no-referrer-when-downgrade">
 <meta name="robots" content="index">
 <% #= stimulus_include_tags %>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYZHJTJR0Y"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
+  
   gtag('config', 'G-JYZHJTJR0Y');
 </script>

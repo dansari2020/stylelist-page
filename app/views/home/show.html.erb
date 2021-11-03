@@ -1,3 +1,6 @@
+<%= content_for(:page_title) do %>
+  <%= "#{@user.full_name} - StylistPage - #{@user.job}" %>
+<% end %>
 <%= content_for(:head) do %>
   <% @avatar = Rails.application.routes.url_helpers.rails_blob_url(@user.avatar) if @user.avatar.attached? %>
   <% set_meta_tags title: "StylistPage",
