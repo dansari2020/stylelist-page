@@ -14,9 +14,9 @@ class User < ApplicationRecord
   enum deactivate_reason: {"Select a reason (optional)": 0,
                            "This is temporary. I'll be back": 1,
                            "My account was hacked": 2,
-                           "I don't find StylistPage useful": 3,
+                           "I don't find Salon House useful": 3,
                            "I have privacy concerns": 4,
-                           "I don't understand how to use StylistPage": 5,
+                           "I don't understand how to use Salon House": 5,
                            "I don't do hair anymore": 6}
   validates :username, uniqueness: {allow_blank: true, case_sensitive: false},
     length: {minimum: 5},
@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   def default_url
     if Rails.env.production?
-      "https://www.stylistpage.com/"
+      "https://www.salonhouse.herokuapp.com/"
     else
       "http://localhost:3000/"
     end

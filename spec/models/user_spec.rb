@@ -90,5 +90,5 @@ RSpec.describe User, regressor: true do
   it { is_expected.to define_enum_for(:status).with_values(["pending", "activated", "deactivated", "disabled"]) }
   it { is_expected.to define_enum_for(:phone_type).with_values(["mobile", "salon"]) }
   it { is_expected.to define_enum_for(:phone_method).with_values(["text_or_calls", "text", "calls"]) }
-  it { is_expected.to define_enum_for(:deactivate_reason).with_values(["Select a reason (optional)", "This is temporary. I'll be back", "My account was hacked", "I don't find StylistPage useful", "I have privacy concerns", "I don't understand how to use StylistPage", "I don't do hair anymore"]) }
+  it { is_expected.to define_enum_for(:deactivate_reason).with_values(["Select a reason (optional)", "This is temporary. I'll be back", "My account was hacked", "I don't find Salon House useful", "I have privacy concerns", "I don't understand how to use Salon House", "I don't do hair anymore"]) }
 end

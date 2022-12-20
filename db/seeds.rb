@@ -1,6 +1,6 @@
 ActiveRecord::Migration.say_with_time "Admin" do
-  if !User.admin.exists?(email: "admin@stylistpage.com")
-    user = User.create(email: "admin@stylistpage.com", first_name: "Admin", last_name: "Admin", 
+  if !User.admin.exists?(email: "admin@salonhouse.herokuapp.com")
+    user = User.create(email: "admin@salonhouse.herokuapp.com", first_name: "Admin", last_name: "Admin", 
       username: "stylistpageadmin", role: "admin", password: "Stylist1")
     user.skip_confirmation!
     user.activated!

@@ -8,7 +8,7 @@ CanonicalRails.setup do |config|
 
   # This is the main host, not just the TLD, omit slashes and protocol. If you have more than one, pick the one you want to rank in search results.
 
-  config.host = ENV.fetch("WEBSITE_URL") { "https://www.stylistpage.com/" }.gsub(/http:\/\/|https:\/\//, "")
+  config.host = ENV.fetch("WEBSITE_URL") { "https://www.salonhouse.herokuapp.com/" }.gsub(/http:\/\/|https:\/\//, "")
   config.port# = '3000'
 
   # http://en.wikipedia.org/wiki/URL_normalization

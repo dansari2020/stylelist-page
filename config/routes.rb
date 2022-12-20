@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }
+  default_url_options host: ENV.fetch("DEFAULT_URL") { "salonhouse.herokuapp.com" }
   namespace :admin do
     resources :users
     resources :portfolios

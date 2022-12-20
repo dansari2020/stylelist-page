@@ -118,9 +118,9 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   # Config Mailgun
-  config.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }}
-  config.action_mailer.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "stylistpage.com" }}
-  config.action_mailer.asset_host = ENV.fetch("DEFAULT_URL") { "stylistpage.com" }
+  config.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "salonhouse.herokuapp.com" }}
+  config.action_mailer.default_url_options = {host: ENV.fetch("DEFAULT_URL") { "salonhouse.herokuapp.com" }}
+  config.action_mailer.asset_host = ENV.fetch("DEFAULT_URL") { "salonhouse.herokuapp.com" }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: ENV["MAILGUN_API_KEY"],

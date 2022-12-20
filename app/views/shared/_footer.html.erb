@@ -1,9 +1,9 @@
 <footer>
   <div class="max-w-screen-2xl flex flex-col-reverse md:flex-row items-center space-y-2 space-y-reverse md:space-y-0 md:justify-between roboto-font py-8 font-light px-4" style="font-size: 11px;">
-    <div>© 2021 StylistPage, Inc</div>
+    <div>© 2021 Salon House, Inc</div>
     <ul class="flex space-x-3">
       <li>
-        <%= link_to "Contact", "mailto:#{ENV.fetch("CONTACT_EMAIL", "hello@stylistpage.com")}", class: "" %>
+        <%= link_to "Contact", "mailto:#{ENV.fetch("CONTACT_EMAIL", "hello@salonhouse.herokuapp.com")}", class: "" %>
       </li>
       <li>
         <%= link_to "Privacy Policy", privacy_policy_path, class: "" %>

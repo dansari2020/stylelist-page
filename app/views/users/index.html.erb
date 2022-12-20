@@ -30,7 +30,7 @@
         </li>
       </ul>
     </div>
-    <%= link_to "Got Feedback", "mailto:#{ENV.fetch("FEEDBACK_MAIL", "StylistPage <hello@stylistpage.com>")}", target: "_blank", class: "flex items-center justify-center w-full px-4 py-2 mb-20 text-black bg-transparent rounded-xl whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light" %>
+    <%= link_to "Got Feedback", "mailto:#{ENV.fetch("FEEDBACK_MAIL", "Salon House <hello@salonhouse.herokuapp.com>")}", target: "_blank", class: "flex items-center justify-center w-full px-4 py-2 mb-20 text-black bg-transparent rounded-xl whitespace-nowrap hover:bg-yellow-500 hover:shadow-lg bg-yellow-light" %>
   </div>
   <div class="px-2 pt-12 border-r md:overflow-y-scroll md:w-3/12 md:flex lg:w-1/5" style="min-width: 240px" :class="{'hidden' : submenu !== '' || !submenuSelected && !tabSelected && tab === 'profile'}">
     <a href="#" class="w-full flex content-center justify-between md:hidden" @click.prevent="tab = 'profile'; tabSelected = !tabSelected; submenu = ''">

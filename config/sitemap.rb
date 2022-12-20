@@ -1,5 +1,5 @@
-SitemapGenerator::Sitemap.default_host = "https://stylistpage.com"
-SitemapGenerator::Sitemap.ping_search_engines("https://stylistpage.com/sitemap.xml.gz")
+SitemapGenerator::Sitemap.default_host = "https://salonhouse.herokuapp.com"
+SitemapGenerator::Sitemap.ping_search_engines("https://salonhouse.herokuapp.com/sitemap.xml.gz")
 SitemapGenerator::Sitemap.create_index = true
 SitemapGenerator::Sitemap.create do
   add "/auth/sign_in"

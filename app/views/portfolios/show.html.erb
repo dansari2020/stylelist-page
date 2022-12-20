@@ -2,17 +2,17 @@
 <% @picture = Rails.application.routes.url_helpers.rails_blob_url(@portfolio.picture) if @portfolio.pictures.attached? %>
 <meta property="og:url"                content="<%= @portfolio.url %>" />
 <meta property="og:type"               content="website" />
-<meta property="og:title"              content="StylistPage - <%= @portfolio.user_first_name %>" />
+<meta property="og:title"              content="Salon House - <%= @portfolio.user_first_name %>" />
 <meta property="og:description"        content="<%= @portfolio.description %>" />
 <meta property="og:image"              content="<%= @picture %>" />
 
-<meta name="twitter:title" content="StylistPage - <%= @portfolio.user_first_name %>">
+<meta name="twitter:title" content="Salon House - <%= @portfolio.user_first_name %>">
 <meta name="twitter:description" content="<%= @portfolio.description %>">
 <meta name="twitter:image" content="<%= @picture %>">
 <meta name="twitter:card" content="summary_large_image">
 
-<meta property="og:site_name" content="StylistPage">
-<meta name="twitter:image:alt" content="StylistPage">
+<meta property="og:site_name" content="Salon House">
+<meta name="twitter:image:alt" content="Salon House">
 
 <meta property="fb:app_id" content="<%= ENV["FB_APP_ID"] %>" />
 <meta name="twitter:site" content="<%= ENV["TWITTER_SITE_NAME"] %>">
