@@ -1,7 +1,6 @@
 import Rails from "@rails/ujs";
 import "@hotwired/turbo-rails";
 import * as ActiveStorage from "@rails/activestorage";
-// require("jquery")
 ActiveStorage.start();
 Rails.start();
 
