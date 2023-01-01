@@ -18,5 +18,5 @@ require("stylesheets/admin.scss");
 Rails.start();
 ActiveStorage.start();
 
-import "controllers";
-import "libs";
+import "./controllers";
+import "./libs";
