@@ -1,5 +1,4 @@
 module.exports = {
-  purge: ["./app/**/*.html", "./app/**/*.erb", "./app/**/*.jsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -33,5 +32,10 @@ module.exports = {
     extend: {},
     display: ["responsive", "group-hover", "group-focus"],
   },
-  plugins: [],
+  content: [
+    './app/views/**/*.html.erb',
+    './app/helpers/**/*.rb',
+    './app/assets/stylesheets/**/*.css',
+    './app/javascript/**/*.js'
+  ]
 };

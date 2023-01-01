@@ -1,12 +1,12 @@
 <ul class="mb-20 space-y-3 list-none md:space-y-0" x-show="tab === 'profile'">
   <li class="hidden p-2 border-r border-l border-t border-b border-gray-200 rounded-md md:rounded-none md:block md:py-4 md:mt-3 md:border-l-0 md:border-r-0">
-    <div class="flex justify-center w-full" x-data="{ edit : false }">
+    <div class="w-full" x-data="{ edit : false }">
       <%= turbo_stream_from "bio" %>
       <%= render partial: "components/bio/view", locals: {user: user, editable: editable} %>
     </div>
   </li>
   <li class="p-2 border-r border-l border-t border-b border-gray-200 rounded-md md:rounded-none md:py-4 md:mt-3 md:border-l-0 md:border-r-0 md:border-t-0">
-    <div class="flex justify-center w-full">
+    <div class="w-full">
       <%= turbo_stream_from "specialty" %>
       <%= turbo_stream_from :specialties %>
       <%= render partial: "components/specialty/view", locals: {user: user, editable: editable} %>

@@ -4,7 +4,7 @@
 <% frame = address.new_record? ? "#{user}_address" : dom_id(address) %>
 <%= turbo_stream_from model %>
 <%= turbo_frame_tag frame do %>
-  <div class="flex justify-center w-full">
+  <div class="w-full">
     <div id="view_address" class="flex justify-between w-full">
       <div class="flex-1">
         <h2 class="pb-2 leading-3 roboto-font font-medium text-xs">Address</h2>
