@@ -6,7 +6,7 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :username
 
-  enum role: %i[client hair_stylist barber admin]
+  enum role: %i[client hair_stylist barber admin demo]
   enum status: %i[pending activated deactivated disabled]
   enum register_step: %i[job handle information completed]
   enum phone_type: %i[mobile salon]

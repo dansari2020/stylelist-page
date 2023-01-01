@@ -34,4 +34,24 @@ ActiveRecord::Migration.say_with_time "Languages" do
     language.primary = common.present? ? common[:primary] : false
     language.save
   end
+
+  ActiveRecord::Migration.say_with_time "Demo Account" do
+    unless User.exists?(role: :demo)
+      User.create(
+        role: :demo,
+        first_name: "Patty",
+        last_name: "Moore",
+        username: "pattymoore",
+        email: "pattymoore@mail.com",
+        password: "demo1234",
+        confirmed_at: Time.now,
+        status: "activated",
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+        started_at: "Tue, 01 Jan 2019",
+        education: "Brio Academy of Cosmetology",
+        pronoun: "She/Her",
+        register_step: "information"
+      )
+    end
+  end
 end
