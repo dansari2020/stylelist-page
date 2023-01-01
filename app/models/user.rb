@@ -60,7 +60,7 @@ class User < ApplicationRecord
   end
 
   def required_handle
-    if information? && !username.present? 
+    if information? && !username.present?
       errors.add(:handle, "is required.")
     end
   end

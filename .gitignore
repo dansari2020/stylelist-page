@@ -38,3 +38,7 @@ coverage
 # public/sitemap.xml.gz
 config/database.yml
 .idea/
+.DS_Store
+app/.DS_Store
+app/*/.DS_Store
+app/*/*/.DS_Store
