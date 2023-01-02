@@ -142,7 +142,7 @@ class User < ApplicationRecord
     end
   end
 
-  def backgroun_medium
+  def background_medium
     return unless background.attached?
 
     if background.attachment.blob.variable?

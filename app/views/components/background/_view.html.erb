@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "background", data: { turbo: true } do %>
   <% background = if user.background.attached?
-                    user.backgroun_medium
+                    user.background_medium
                   elsif user.static_background_url.present?
                     asset_url(user.static_background_url)
                   end
