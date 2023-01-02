@@ -2,12 +2,16 @@ module.exports = {
   content: [
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
+    './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
   ],
   theme: {
     extend: {
       fontSize: {
         "2xs": "0.625rem"
+      },
+      border: {
+        0.5: "0.5px",
       },
       width: {
         15: "3.75rem",
@@ -33,4 +37,5 @@ module.exports = {
     extend: {},
     display: ["responsive", "group-hover", "group-focus"],
   },
+  plugins: [],
 };
