@@ -54,6 +54,7 @@
   <%= form_for(:portfolio_pictures, url: destroy_pictures_portfolios_path, html: {method: :delete, id: id}) do |f| %>
     <div class="grid grid-cols-2 gap-px mb-20 md:gap-1.5 md:grid-cols-3 lg:grid-cols-4">
       <% user.portfolios.published.order(created_at: :desc).each do |portfolio| %>
+          <% if portfolio.image_url_type == "file" %>
           <%= check_box_tag "pictures_ids[]", portfolio.picture.id, false, id: dom_id(portfolio.picture), class: "hidden checkbox", ":disabled": "!manage" %>
           <label for="<%= dom_id(portfolio.picture) %>" :class="{ 'ediable' : manage}">
             <span></span>
@@ -61,6 +62,15 @@
                 <%= image_tag thumb_url(portfolio.picture), class: "md:rounded object-cover w-full border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-60' : manage }", alt: "" %>
             <% end %>
           </label>
+          <% else %>
+          <%= check_box_tag "portfolio_ids[]", portfolio.id, false, id: dom_id(portfolio), class: "hidden checkbox", ":disabled": "!manage" %>
+          <label for="<%= dom_id(portfolio) %>" :class="{ 'ediable' : manage}">
+            <span></span>
+            <%= link_to portfolio_path(portfolio), remote: true, "@click": "dispatchFunction($dispatch, manage, '#{portfolio_path(portfolio)}')", class: "cursor-pointer popup-target w-full" do %>
+              <%= image_tag portfolio.static_image_url, class: "md:rounded object-cover w-full border", style: "border-color: #e0e0e0" ,":class": "{ 'filter brightness-60' : manage }", alt: "" %>
+            <% end %>
+          </label>
+          <% end %>
       <% end %>
     </div>
   <% end %>

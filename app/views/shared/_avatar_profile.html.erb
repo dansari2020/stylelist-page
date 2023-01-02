@@ -7,6 +7,8 @@
           <div class="relative">
             <% if user.avatar.attached? %>
               <%= image_tag user.avatar_thumb || default_avatar, class: "md rounded-full h-20 w-20 md:h-28 md:w-28 relative", alt: user.full_name %>
+            <% elsif current_user.static_avatar_url.present? %>
+              <%= image_tag user.static_avatar_url, class: "md rounded-full h-20 w-20 md:h-28 md:w-28 relative", alt: user.full_name %>
             <% else %>
               <%= image_tag "icons/avatar.svg", class: "md rounded-full h-20 w-20 md:h-28 md:w-28 relative", alt: "" %>
             <% end %>

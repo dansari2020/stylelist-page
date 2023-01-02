@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_01_121638) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_02_132345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,6 +123,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_01_121638) do
     t.integer "hair_length"
     t.integer "hair_type"
     t.integer "flags_count", default: 0, null: false
+    t.integer "image_url_type", default: 0
+    t.string "static_image_url"
     t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
@@ -190,6 +192,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_01_121638) do
     t.integer "portfolios_count", default: 0, null: false
     t.integer "flags_count", default: 0, null: false
     t.integer "register_step", default: 0
+    t.integer "image_url_type", default: 0
+    t.string "static_avatar_url"
+    t.string "static_background_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

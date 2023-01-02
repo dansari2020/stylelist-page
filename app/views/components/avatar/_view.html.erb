@@ -8,6 +8,8 @@
               <div class="relative">
                 <% if user.avatar.attached? %>
                   <%= image_tag user.avatar_thumb || default_avatar, alt: user.full_name, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+                <% elsif user.static_avatar_url.present? %>
+                  <%= image_tag user.static_avatar_url, alt: user.full_name, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
                 <% else %>
                   <%= image_tag "icons/avatar.svg", alt: "Avatar", class: "md rounded-full h-17 w-17 md:h-27 md:w-27 relative" %>
                 <% end %>
@@ -26,6 +28,8 @@
           <div class="relative">
             <% if user.avatar.attached? %>
               <%= image_tag user.avatar_thumb || default_avatar, alt: user.full_name, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
+            <% elsif user.static_avatar_url.present? %>
+              <%= image_tag user.static_avatar_url, alt: user.full_name, class: "rounded-full h-17 w-17 md:h-27 md:w-27 relative border-2", style: "background-color: #acacac; border-color: #E0E0E0" %>
             <% else %>
               <%= image_tag "icons/avatar.svg", alt: "Avatar", class: "md rounded-full h-17 w-17 md:h-27 md:w-27 relative" %>
             <% end %>

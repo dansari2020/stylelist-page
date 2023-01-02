@@ -15,6 +15,8 @@
     <div class="flex items-center w-full px-4 pb-2">
       <% if user.avatar.attached? %>
         <%= image_tag user.avatar_thumb || default_avatar, class: "h-12 w-12 rounded-full", alt: user.full_name %>
+      <% elsif current_user.static_avatar_url.present? %>
+        <%= image_tag user.static_avatar_url, class: "h-12 w-12 rounded-full", alt: user.full_name %>
       <% else %>
         <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
           <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">

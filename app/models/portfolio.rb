@@ -2,6 +2,7 @@ class Portfolio < ApplicationRecord
   enum status: %i[draft published]
   enum hair_length: %i[clipper ear chin shoulder armpit mid_back taillbone]
   enum hair_type: %i[straight wavy curly afro]
+  enum image_url_type: %i[file url]
 
   belongs_to :user
   has_many :flags, dependent: :destroy

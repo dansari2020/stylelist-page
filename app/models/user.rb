@@ -6,6 +6,7 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :username
 
+  enum image_url_type: %i[file url]
   enum role: %i[client hair_stylist barber admin demo]
   enum status: %i[pending activated deactivated disabled]
   enum register_step: %i[job handle information completed]
@@ -41,9 +42,9 @@ class User < ApplicationRecord
   has_many :portfolios, dependent: :destroy # , -> { where (status: :published) }
   has_many :flags, through: :portfolios
   has_many :pictures, through: :portfolios, source: :pictures_attachments
-  accepts_nested_attributes_for :specialties, :address, :services,
-    :availabilities, :social_media, allow_destroy: true
   has_and_belongs_to_many :languages, dependent: :destroy
+  accepts_nested_attributes_for :specialties, :address, :services,
+    :availabilities, :social_media, :languages, :portfolios, allow_destroy: true
 
   after_update :rename_upload_filename
   after_update :send_confirmation_instructions, if: :should_send_confirmation

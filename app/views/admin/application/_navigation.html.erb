@@ -67,6 +67,8 @@ as defined by the routes in the `admin/` namespace
       <div class="relative w-24 h-24">
         <% if current_user.avatar.attached? %>
           <%= image_tag current_user.avatar_thumb, alt: current_user.full_name, class: "w-full h-full rounded-full" %>
+        <% elsif current_user.static_avatar_url.present? %>
+          <%= image_tag current_user.static_avatar_url, alt: current_user.full_name, class: "w-full h-full rounded-full" %>
         <% else %>
           <%= image_tag "icons/avatar.svg", alt: "Avatar", class: "w-full h-full rounded-full" %>
         <% end %>
